@@ -14,10 +14,10 @@ import { useForm } from "react-hook-form";
 
 // const loginSchema =
 
-const LoginForm = () => {
+const EmailForm = () => {
   const form = useForm({
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
     },
   });
@@ -27,12 +27,12 @@ const LoginForm = () => {
       <form className="space-y-4">
         <FormField
           control={form.control}
-          name="username"
+          name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username:</FormLabel>
+              <FormLabel>Email:</FormLabel>
               <FormControl>
-                <Input type="text" placeholder="doe" {...field} />
+                <Input type="text" placeholder="jonte" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -61,4 +61,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default EmailForm;

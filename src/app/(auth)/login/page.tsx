@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Card,
   CardContent,
@@ -9,7 +10,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import LoginForm from "../components/login-form";
+
+import EmailForm from "../components/email-form";
+import UsernameForm from "../components/username-form";
 
 const LoginPage = () => {
   return (
@@ -26,7 +29,18 @@ const LoginPage = () => {
       </CardHeader>
 
       <CardContent>
-        <LoginForm />
+        <Tabs defaultValue="username">
+          <TabsList className="grid grid-cols-2 w-full">
+            <TabsTrigger value="username">Username</TabsTrigger>
+            <TabsTrigger value="email">Email</TabsTrigger>
+          </TabsList>
+          <TabsContent value="username">
+            <UsernameForm />
+          </TabsContent>
+          <TabsContent value="email">
+            <EmailForm />
+          </TabsContent>
+        </Tabs>
       </CardContent>
 
       <Separator />
