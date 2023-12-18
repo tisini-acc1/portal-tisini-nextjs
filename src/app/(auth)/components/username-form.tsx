@@ -1,6 +1,9 @@
 "use client";
 
+import { z } from "zod";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -12,20 +15,39 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { useRouter } from "next/navigation";
 
-// const loginSchema =
+const loginSchema = z.object({
+  username: z
+    .string()
+    .min(3, { message: "Username must be above 3 characters" }),
+  password: z.string().min(6, { message: "Please provide a valid password" }),
+});
 
 const UsernameForm = () => {
-  const form = useForm({
+  const router = useRouter();
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       username: "",
       password: "",
     },
   });
 
+  const onSubmit = async (data: z.infer<typeof loginSchema>) => {
+    const res = await signIn("credentials", {
+      username_or_email: data.username,
+      password: data.password,
+      redirect: false,
+    });
+
+    console.log(res);
+    router.push("/home");
+  };
+
   return (
     <Form {...form}>
-      <form className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name="username"
