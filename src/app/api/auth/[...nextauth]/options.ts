@@ -37,7 +37,7 @@ export const authOptions: AuthOptions = {
         password: {},
       },
       async authorize(credentials, req) {
-        const url = process.env.DJANGO_BASE_URL + "/auth/login/";
+        const url = process.env.NEXT_PUBLIC_DJANGO_BASE_URL + "/auth/login/";
 
         try {
           const res = await fetch(url, {

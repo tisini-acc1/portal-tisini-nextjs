@@ -39,6 +39,7 @@ const UsernameForm = () => {
       username_or_email: data.username,
       password: data.password,
       redirect: false,
+      // callbackUrl: props.callbackUrl || '/home'
     });
 
     if (res?.ok) {
