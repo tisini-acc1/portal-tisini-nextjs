@@ -21,7 +21,10 @@ const LoginPage = () => {
         <CardTitle>Welcome Back</CardTitle>
         <CardDescription>
           Don&apos;t have an account?
-          <Link href="/register" className="text-ring text-sm hover:underline">
+          <Link
+            href="/auth/register"
+            className="text-ring text-sm hover:underline"
+          >
             {" "}
             get started
           </Link>

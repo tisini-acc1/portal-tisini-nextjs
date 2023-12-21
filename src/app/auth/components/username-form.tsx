@@ -41,8 +41,12 @@ const UsernameForm = () => {
       redirect: false,
     });
 
+    if (res?.ok) {
+      console.log(res);
+      router.push("/home");
+    }
+
     console.log(res);
-    router.push("/home");
   };
 
   return (

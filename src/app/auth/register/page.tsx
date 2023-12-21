@@ -27,7 +27,10 @@ const RegisterPage = () => {
       <CardFooter className="p-3 flex items-center justify-center">
         <CardDescription>
           Already have an account?
-          <Link href="/login" className="text-ring text-sm hover:underline">
+          <Link
+            href="/auth/login"
+            className="text-ring text-sm hover:underline"
+          >
             {" "}
             Login
           </Link>
