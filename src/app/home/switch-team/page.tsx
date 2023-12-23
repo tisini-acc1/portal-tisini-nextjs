@@ -1,5 +1,6 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Header from "../components/header";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import MyTeams from "./components/my-teams";
 
 const SwitchTeamPage = () => {
   return (
@@ -12,7 +13,9 @@ const SwitchTeamPage = () => {
             <TabsTrigger value="myTeams">Teams</TabsTrigger>
             <TabsTrigger value="addTeam">Add Team</TabsTrigger>
           </TabsList>
-          <TabsContent value="myTeams">Teams</TabsContent>
+          <TabsContent value="myTeams">
+            <MyTeams />
+          </TabsContent>
           <TabsContent value="addTeam">Add Teams</TabsContent>
         </Tabs>
 
