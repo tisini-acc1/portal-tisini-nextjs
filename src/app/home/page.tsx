@@ -1,8 +1,6 @@
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "../api/auth/[...nextauth]/options";
-import LogOut from "./sign-out";
-import GetTeams from "./getTeams";
 
 const getMyTeams = async () => {
   const session = await getServerSession(authOptions);
@@ -24,13 +22,7 @@ const HomePage = async () => {
 
   // console.log(teams);
   console.log(session);
-  return (
-    <div>
-      HomePage
-      <LogOut />
-      <GetTeams />
-    </div>
-  );
+  return <div>HomePage</div>;
 };
 
 export default HomePage;

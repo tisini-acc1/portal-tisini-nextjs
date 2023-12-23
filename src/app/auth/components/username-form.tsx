@@ -16,6 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 const loginSchema = z.object({
   username: z
@@ -26,6 +27,8 @@ const loginSchema = z.object({
 
 const UsernameForm = () => {
   const router = useRouter();
+  const { toast } = useToast();
+
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -45,9 +48,21 @@ const UsernameForm = () => {
     if (res?.ok) {
       console.log(res);
       router.push("/home");
+    } else if (res?.status === 401) {
+      console.log(res);
+      toast({
+        title: "Error",
+        description: "Invalid credentials provided",
+        variant: "destructive",
+      });
     }
 
     console.log(res);
+    toast({
+      title: "Error",
+      description: "Unable to sign-in, check your internet connection.",
+      variant: "destructive",
+    });
   };
 
   return (
