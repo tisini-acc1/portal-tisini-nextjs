@@ -2,6 +2,7 @@ import Header from "../components/header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import MyTeams from "./components/my-teams";
 import AddTeamForm from "./components/add-team-form";
+import Competitions from "./components/competitions";
 
 const SwitchTeamPage = () => {
   return (
@@ -33,7 +34,9 @@ const SwitchTeamPage = () => {
             <TabsTrigger value="competitions">Competitions</TabsTrigger>
             <TabsTrigger value="enter">Enter Competition</TabsTrigger>
           </TabsList>
-          <TabsContent value="competitions">Teams</TabsContent>
+          <TabsContent value="competitions">
+            <Competitions />
+          </TabsContent>
           <TabsContent value="enter">Add Teams</TabsContent>
         </Tabs>
       </div>

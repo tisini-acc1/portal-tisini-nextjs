@@ -1,6 +1,7 @@
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { getMyTeams } from "@/lib/fetch-data/teams";
 import Image from "next/image";
+
+import { getMyTeams } from "@/lib/fetch-data/teams";
+import { Card, CardContent } from "@/components/ui/card";
 
 const MyTeams = async () => {
   const teamsData: Promise<Team[]> = getMyTeams();

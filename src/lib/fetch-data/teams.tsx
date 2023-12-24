@@ -8,6 +8,8 @@ const getSession = async () => {
   return session;
 };
 
+export default getSession;
+
 export const getMyTeams = async () => {
   const session = await getSession();
   const url = BASE_URL + "/users/teams/";
