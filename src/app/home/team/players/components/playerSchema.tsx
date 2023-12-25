@@ -9,7 +9,7 @@ export const playerSchema = z.object({
     .max(10, { message: "Phone number is required" }),
   firstName: z.string().min(3, { message: "Enter a valid firstname" }),
   lastName: z.string().min(3, { message: "Enter a valid lastname" }),
-  middleName: z.string(),
+  //   middleName: z.string(),
   dob: z.date(),
   nationality: z.string().min(3, { message: "Enter a valid nationality" }),
   licenseNo: z
