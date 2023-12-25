@@ -9,7 +9,7 @@ const HeaderButton = ({ title, url }: { url: string; title: string }) => {
   const router = useRouter();
 
   return (
-    <Button onClick={() => router.push(`${url}`)}>
+    <Button size="sm" onClick={() => router.push(`${url}`)}>
       <UserPlus className="mr-2 w-4 h-4" />
       {title}
     </Button>

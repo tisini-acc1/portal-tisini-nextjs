@@ -1,12 +1,22 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/options";
-import { getServerSession } from "next-auth";
+import { getAllStaffs } from "@/lib/fetch-data/staffs";
+import Header from "../../components/header";
+import { StaffsTable } from "./components/staffs-table";
+import { columns } from "./components/columns";
 
 const StaffsPage = async () => {
-  const session = await getServerSession(authOptions);
+  const staffsData: Promise<Staff[]> = getAllStaffs();
+  const staffs = await staffsData;
 
-  console.log(session);
+  // console.log(staffs);
+  return (
+    <main className="space-y-2">
+      <Header title="Staff" url="/home/team/staffs/add-new" />
 
-  return <div>StaffsPage</div>;
+      <section>
+        <StaffsTable columns={columns} data={staffs} />
+      </section>
+    </main>
+  );
 };
 
 export default StaffsPage;

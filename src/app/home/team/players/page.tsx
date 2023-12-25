@@ -12,10 +12,10 @@ const PlayersPage = async () => {
   // console.log(players);
 
   return (
-    <main>
+    <main className="space-y-2">
       <Header title="player" url="/home/team/players/add-new" />
 
-      <section className="py-2">
+      <section className="">
         <PlayersTable columns={columns} data={players} />
       </section>
     </main>

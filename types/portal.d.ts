@@ -41,3 +41,9 @@ type Player = {
   expiry_date: string;
   status: boolean;
 };
+
+type Staff = {
+  id: number;
+  user: User;
+  position: null;
+};
