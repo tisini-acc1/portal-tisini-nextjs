@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import MyTeams from "./components/my-teams";
 import AddTeamForm from "./components/add-team-form";
 import Competitions from "./components/competitions";
+import RegisterComp from "./components/register-comp";
 
 const SwitchTeamPage = () => {
   return (
@@ -37,7 +38,9 @@ const SwitchTeamPage = () => {
           <TabsContent value="competitions">
             <Competitions />
           </TabsContent>
-          <TabsContent value="enter">Add Teams</TabsContent>
+          <TabsContent value="enter">
+            <RegisterComp />
+          </TabsContent>
         </Tabs>
       </div>
     </main>
