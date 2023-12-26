@@ -10,6 +10,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
+import useAxiosAuth from "@/lib/hooks/use-axios-auth";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -23,7 +27,12 @@ const staffSchema = z.object({
 });
 
 const CreateStaffForm = () => {
+  const axiosAuth = useAxiosAuth();
+  const { toast } = useToast();
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof staffSchema>>({
+    resolver: zodResolver(staffSchema),
     defaultValues: {
       username: "",
       email: "",
@@ -34,9 +43,45 @@ const CreateStaffForm = () => {
     },
   });
 
+  const onSubmit = async (data: z.infer<typeof staffSchema>) => {
+    const staff = {
+      user: {
+        username: data.username,
+        email: data.email,
+        phone_number: data.phoneNo,
+        first_name: data.firstName,
+        last_name: data.lastName,
+      },
+      position: data.position,
+    };
+
+    try {
+      const res = await axiosAuth.post("/users/team_staffs/", staff);
+
+      console.log(res);
+      toast({ title: "Success", description: "Staff created" });
+      router.push("/home/team/staffs");
+    } catch (err: any) {
+      console.log(err.response);
+      if (!err.response) {
+        toast({
+          variant: "destructive",
+          description: "No response! try again",
+        });
+      } else if (err.response) {
+        if (err.response.status === 500) {
+          toast({
+            description: err.response.statusText,
+            variant: "destructive",
+          });
+        }
+      }
+    }
+  };
+
   return (
     <Form {...form}>
-      <form className="space-y-3">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
         <FormField
           name="firstName"
           control={form.control}

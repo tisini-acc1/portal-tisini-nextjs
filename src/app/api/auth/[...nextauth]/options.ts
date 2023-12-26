@@ -13,7 +13,7 @@ async function refreshAccessToken(token: JWT): Promise<JWT | null> {
         body: JSON.stringify({ refresh_token: token.refresh_token }),
       }
     );
-
+    console.log("called");
     const refreshedToken: RefreshedToken = await res.json();
 
     if (res.status !== 200) throw refreshedToken;
