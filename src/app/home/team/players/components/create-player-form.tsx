@@ -9,6 +9,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import {
@@ -19,12 +20,21 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import useAxiosAuth from "@/lib/hooks/use-axios-auth";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 const date: Date = new Date();
 const postions = ["Goalkeeper", "Defender", "Midfielder", "Forward"];
 
 const CreatePlayerForm = () => {
+  const axiosAuth = useAxiosAuth();
+  const { toast } = useToast();
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof playerSchema>>({
+    resolver: zodResolver(playerSchema),
     defaultValues: {
       firstName: "",
       lastName: "",
@@ -33,18 +43,61 @@ const CreatePlayerForm = () => {
       nationality: "",
       email: "",
       phoneNo: "",
-      dob: date,
+      dob: "",
       licenseNo: "",
-      jerseyNo: 0,
+      jerseyNo: "",
       position: "Goalkeeper",
-      signedDate: date,
-      expiryDate: date,
+      signedDate: "",
+      expiryDate: "",
     },
   });
 
+  const onSubmit = async (data: z.infer<typeof playerSchema>) => {
+    const player = {
+      player: {
+        user: {
+          username: data.username,
+          email: data.email,
+          phone_number: data.phoneNo,
+          first_name: data.phoneNo,
+          last_name: data.lastName,
+          password: "player",
+          is_tisini_staff: false,
+          is_team_staff: false,
+          is_player: true,
+          is_referee: false,
+          is_agent: false,
+        },
+        middle_name: "",
+        dob: data.dob,
+        nationality: data.nationality,
+        profile_picture: null,
+        license_no: data.licenseNo,
+      },
+      current_jersey_no: data.jerseyNo,
+      current_position: data.position,
+      signed_date: data.signedDate,
+      expiry_date: data.expiryDate,
+      status: false,
+    };
+
+    try {
+      const res = await axiosAuth.post(
+        `/users/teams/0efeb67f-cfdf-4f1d-b3b0-56177b19b9c8/players/`,
+        player
+      );
+
+      console.log(res);
+      toast({ title: "Success", description: "Player created" });
+      router.push("/home/team/players");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Form {...form}>
-      <form className="space-y-3">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
         <FormField
           name="firstName"
           control={form.control}
@@ -54,6 +107,7 @@ const CreatePlayerForm = () => {
               <FormControl>
                 <Input type="text" placeholder="John" {...field} />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -66,6 +120,7 @@ const CreatePlayerForm = () => {
               <FormControl>
                 <Input type="text" placeholder="doe" {...field} />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -79,6 +134,7 @@ const CreatePlayerForm = () => {
               <FormControl>
                 <Input type="text" placeholder="Johnte" {...field} />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -92,6 +148,7 @@ const CreatePlayerForm = () => {
               <FormControl>
                 <Input type="text" placeholder="kenyan" {...field} />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -105,6 +162,7 @@ const CreatePlayerForm = () => {
               <FormControl>
                 <Input type="email" placeholder="doe@gmail.com" {...field} />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -118,6 +176,7 @@ const CreatePlayerForm = () => {
               <FormControl>
                 <Input type="text" placeholder="0700000000" {...field} />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -131,6 +190,7 @@ const CreatePlayerForm = () => {
               <FormControl>
                 <Input type="date" placeholder="1990-3-3" {...field} />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -144,6 +204,7 @@ const CreatePlayerForm = () => {
               <FormControl>
                 <Input type="number" placeholder="FKF7000" {...field} />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -167,6 +228,7 @@ const CreatePlayerForm = () => {
                   ))}
                 </SelectContent>
               </Select>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -180,6 +242,7 @@ const CreatePlayerForm = () => {
               <FormControl>
                 <Input type="number" placeholder="10" {...field} />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -193,6 +256,7 @@ const CreatePlayerForm = () => {
               <FormControl>
                 <Input type="date" placeholder="1990-3-3" {...field} />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -204,8 +268,18 @@ const CreatePlayerForm = () => {
             <FormItem>
               <FormLabel>Contract Ends</FormLabel>
               <FormControl>
-                <Input type="date" placeholder="1990-3-3" {...field} />
+                <Input
+                  type="date"
+                  placeholder="1990-3-3"
+                  {...field}
+                  // value={
+                  //   field.value instanceof Date
+                  //     ? field.value.toISOString().split("T")[0]
+                  //     : field.value
+                  // }
+                />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
