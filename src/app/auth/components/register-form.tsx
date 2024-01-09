@@ -95,31 +95,41 @@ const RegisterForm = () => {
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password:</FormLabel>
-              <FormControl>
-                <Input type="password" placeholder="your password" {...field} />
-              </FormControl>
-            </FormItem>
-          )}
-        />
+        <div className="flex gap-2 flex-col md:flex-row">
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password:</FormLabel>
+                <FormControl>
+                  <Input
+                    type="password"
+                    placeholder="your password"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="cfmPassword"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Confirm Password:</FormLabel>
-              <FormControl>
-                <Input type="password" placeholder="your password" {...field} />
-              </FormControl>
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="cfmPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Confirm Password:</FormLabel>
+                <FormControl>
+                  <Input
+                    type="password"
+                    placeholder="your password"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+        </div>
 
         <Button type="submit" className="w-full">
           Register
