@@ -1,6 +1,16 @@
 "use client";
 
+import { z } from "zod";
+import validator from "validator";
+import { RotateCw } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import axios from "@/lib/axios";
+import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
 import {
   Form,
   FormControl,
@@ -9,15 +19,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
-import axios from "@/lib/axios";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { RotateCw } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import validator from "validator";
-import { z } from "zod";
 
 const regSchema = z
   .object({
@@ -83,7 +84,7 @@ const RegisterForm = () => {
 
       if (res.status === 201) {
         router.push("/auth/login");
-        console.log(res);
+        // console.log(res);
       }
     } catch (error: any) {
       // console.log(error?.message);

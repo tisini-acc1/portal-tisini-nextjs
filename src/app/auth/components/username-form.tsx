@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
+import { RotateCw } from "lucide-react";
 
 const loginSchema = z.object({
   username: z
@@ -96,8 +97,15 @@ const UsernameForm = () => {
           )}
         />
 
-        <Button type="submit" className="w-full">
+        <Button
+          type="submit"
+          className="w-full items-center"
+          disabled={form.formState.isSubmitting}
+        >
           Login
+          {form.formState.isSubmitting && (
+            <RotateCw className="ml-2 w-4 h-4 animate-spin" />
+          )}
         </Button>
       </form>
     </Form>
