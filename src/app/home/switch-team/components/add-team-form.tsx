@@ -18,30 +18,46 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useToast } from "@/components/ui/use-toast";
+import useAxiosAuth from "@/lib/hooks/use-axios-auth";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const TEAMTYPES = ["Rugby", "Football"] as const;
 
 const teamSchema = z.object({
-  teamName: z.string().min(3, { message: "Team name is required" }),
-  teamType: z.enum(TEAMTYPES),
+  team_name: z.string().min(3, { message: "Team name is required" }),
+  team_type: z.enum(TEAMTYPES),
   description: z.string(),
 });
 
 const AddTeamForm = () => {
+  const axiosAuth = useAxiosAuth();
+  const { toast } = useToast();
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof teamSchema>>({
     resolver: zodResolver(teamSchema),
     defaultValues: {
-      teamName: "",
-      teamType: "Rugby",
+      team_name: "",
+      team_type: "Rugby",
       description: "",
     },
   });
 
   const onSubmit = async (data: z.infer<typeof teamSchema>) => {
-    console.log(data);
+    try {
+      const res = await axiosAuth.post("/users/teams/", data);
+
+      if (res.status === 201) {
+        toast({ description: "Created" });
+        router.refresh();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -50,7 +66,7 @@ const AddTeamForm = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
-              name="teamName"
+              name="team_name"
               control={form.control}
               render={({ field }) => (
                 <FormItem>
@@ -64,7 +80,7 @@ const AddTeamForm = () => {
             />
 
             <FormField
-              name="teamType"
+              name="team_type"
               control={form.control}
               render={({ field }) => (
                 <FormItem>

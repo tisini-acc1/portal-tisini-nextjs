@@ -1,7 +1,7 @@
 "use client";
 
-import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useForm } from "react-hook-form";
 import { playerSchema } from "./playerSchema";
 import {
   Form,
@@ -28,7 +28,7 @@ import { useRouter } from "next/navigation";
 const date: Date = new Date();
 const postions = ["Goalkeeper", "Defender", "Midfielder", "Forward"];
 
-const CreatePlayerForm = () => {
+const CreatePlayerForm = ({ team }: { team: Team[] }) => {
   const axiosAuth = useAxiosAuth();
   const { toast } = useToast();
   const router = useRouter();

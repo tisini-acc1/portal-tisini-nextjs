@@ -7,8 +7,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import CreatePlayerForm from "../components/create-player-form";
+import { getMyTeams } from "@/lib/fetch-data/teams";
 
-const AddPlayerPage = () => {
+const AddPlayerPage = async () => {
+  const teamsData: Promise<Team[]> = getMyTeams();
+  const team = await teamsData;
+
   return (
     <main className="space-y-3">
       {/* <Header /> */}
@@ -22,7 +26,7 @@ const AddPlayerPage = () => {
         </CardHeader>
 
         <CardContent>
-          <CreatePlayerForm />
+          <CreatePlayerForm team={team} />
         </CardContent>
       </Card>
     </main>
