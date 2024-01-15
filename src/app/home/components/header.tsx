@@ -3,12 +3,9 @@ import HeaderButton from "./header-button";
 import { getMyTeams } from "@/lib/fetch-data/teams";
 import React from "react";
 
-type Props = {
-  modal?: React.ReactNode;
-};
+type Props = { url?: string; title?: string; modal?: React.ReactNode };
 
-// const Header = async ({ title, url }: { url?: string; title?: string }) => {
-const Header: React.FC<Props> = async ({ modal }) => {
+const Header: React.FC<Props> = async ({ title, url, modal }) => {
   const teamsData: Promise<Team[]> = getMyTeams();
   const teams = await teamsData;
 
@@ -34,7 +31,7 @@ const Header: React.FC<Props> = async ({ modal }) => {
 
       {/* modal button to add new objects */}
       <div className="flex flex-col justify-end">
-        {/* {title && url && <HeaderButton title={title} url={url} />} */}
+        {title && url && <HeaderButton title={title} url={url} />}
         {modal && <div>{modal}</div>}
       </div>
     </div>

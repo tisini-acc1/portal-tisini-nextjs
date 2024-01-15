@@ -1,50 +1,53 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { getAllComps } from "@/lib/fetch-data/competitions";
-import Image from "next/image";
+"use client";
 
-// {
-//     id: '754963d5-37ac-496a-91c9-0014891d4f64',
-//     competition_type: 'Tournament',
-//     competition_name: 'Rausha Kipaji',
-//     created_at: '2023-11-24',
-//     start_period: '2023-11-01',
-//     end_period: '2023-11-30',
-//     teams: []
-//   }
+import { Button } from "@/components/ui/button";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { useRouter } from "next/navigation";
 
-const Competitions = async () => {
-  const compsData: Promise<Competition[]> = getAllComps();
-  const competitions = await compsData;
-
-  //   console.log(competitions);
+const Competitions = ({ comps }: { comps: Competition[] }) => {
+  const router = useRouter();
 
   return (
-    <Card className="">
-      <div className="flex items-center justify-between p-2">
-        <h1>Competition</h1>
-        <h1>Season</h1>
-        <h1>Teams</h1>
-      </div>
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Competition</TableHead>
+          <TableHead>Type</TableHead>
+          <TableHead>Period</TableHead>
+          <TableHead>Teams</TableHead>
+          <TableHead></TableHead>
+        </TableRow>
+      </TableHeader>
 
-      <CardContent className="p-0 space-y-2 m-2">
-        {competitions.map((comp) => (
-          <div
-            key={comp.id}
-            className="flex justify-between items-center gap-2 p-2 border rounded-md"
-          >
-            <div className="flex items-center gap-1">
-              <Image src="/afc-logo.png" alt="" width={45} height={45} />
-              <div className="flex flex-col">
-                <h1>{comp.competition_name}</h1>
-                <p>{comp.competition_type}</p>
-              </div>
-            </div>
-            <div>23/23</div>
-            <div>{comp.teams.length}</div>
-          </div>
+      <TableBody>
+        {comps.map((comp) => (
+          <TableRow key={comp.id}>
+            <TableCell>{comp.competition_name}</TableCell>
+            <TableCell>{comp.competition_type}</TableCell>
+            <TableCell>
+              {comp.start_period} to {comp.end_period}
+            </TableCell>
+            <TableCell>{comp.teams.length}</TableCell>
+            <TableCell>
+              <Button
+                onClick={() =>
+                  router.push(`/home/admin-area/competitions/${comp.id}`)
+                }
+              >
+                Enter
+              </Button>
+            </TableCell>
+          </TableRow>
         ))}
-      </CardContent>
-    </Card>
+      </TableBody>
+    </Table>
   );
 };
 
