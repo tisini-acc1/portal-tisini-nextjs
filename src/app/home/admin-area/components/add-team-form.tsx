@@ -33,7 +33,7 @@ const teamSchema = z.object({
   description: z.string(),
 });
 
-const AddTeamForm = () => {
+const AddTeamForm = ({ teamId }: { teamId: string }) => {
   const axiosAuth = useAxiosAuth();
   const { toast } = useToast();
   const router = useRouter();
@@ -48,8 +48,18 @@ const AddTeamForm = () => {
   });
 
   const onSubmit = async (data: z.infer<typeof teamSchema>) => {
+    const team = {
+      team: {
+        team_name: data.team_name,
+        team_type: data.team_type,
+        description: data.description,
+        parent: teamId,
+      },
+      position: "",
+    };
+
     try {
-      const res = await axiosAuth.post("/users/teams/", data);
+      const res = await axiosAuth.post("/users/register_team/", team);
 
       if (res.status === 201) {
         toast({ description: "Created" });
@@ -85,7 +95,10 @@ const AddTeamForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Team Type</FormLabel>
-                  <Select>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Rugby" />
                     </SelectTrigger>

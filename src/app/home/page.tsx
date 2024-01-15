@@ -21,7 +21,7 @@ const HomePage = async () => {
   const teamsData: Promise<Team[]> = getMyTeams();
   const teams = await teamsData;
 
-  console.log(teams.length);
+  // console.log(teams.length);
   // console.log(session);
 
   if (teams.length === 0) return <CreateTeamCard />;

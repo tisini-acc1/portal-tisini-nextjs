@@ -1,30 +1,16 @@
 "use client";
 
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import useAxiosAuth from "@/lib/hooks/use-axios-auth";
-import { useToast } from "@/components/ui/use-toast";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
+  Form,
+  FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormControl,
   FormMessage,
-  Form,
-  FormDescription,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -32,27 +18,43 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useToast } from "@/components/ui/use-toast";
+import useAxiosAuth from "@/lib/hooks/use-axios-auth";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { useState } from "react";
 
 const TEAMTYPES = ["Rugby", "Football"] as const;
 
 const teamSchema = z.object({
   team_name: z.string().min(3, { message: "Team name is required" }),
   team_type: z.enum(TEAMTYPES),
-  position: z.string().min(3, "Position is required").max(50),
   description: z.string(),
 });
 
-const CreateTeamCard = () => {
+const AddTeamModal = ({ teamId }: { teamId: string }) => {
   const axiosAuth = useAxiosAuth();
   const { toast } = useToast();
   const router = useRouter();
+  const [open, setOpen] = useState(false);
 
   const form = useForm<z.infer<typeof teamSchema>>({
     resolver: zodResolver(teamSchema),
     defaultValues: {
       team_name: "",
       team_type: "Rugby",
-      position: "",
       description: "",
     },
   });
@@ -63,9 +65,9 @@ const CreateTeamCard = () => {
         team_name: data.team_name,
         team_type: data.team_type,
         description: data.description,
-        parent: null,
+        parent: teamId,
       },
-      position: data.description,
+      position: "",
     };
 
     try {
@@ -73,6 +75,7 @@ const CreateTeamCard = () => {
 
       if (res.status === 201) {
         toast({ description: "Created" });
+        setOpen(false);
         router.refresh();
       }
     } catch (error) {
@@ -80,13 +83,21 @@ const CreateTeamCard = () => {
     }
   };
 
-  return (
-    <Card className="w-[350px] m-auto">
-      <CardHeader>
-        <CardTitle>Start by creating your team</CardTitle>
-      </CardHeader>
+  const onOpenChange = (value: boolean) => {
+    setOpen(value);
+  };
 
-      <CardContent>
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogTrigger asChild>
+        <Button>Add team subset</Button>
+      </DialogTrigger>
+
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Create a subset team under your parent team</DialogTitle>
+        </DialogHeader>
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
@@ -130,25 +141,6 @@ const CreateTeamCard = () => {
             />
 
             <FormField
-              name="position"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Position</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="text"
-                      placeholder="director, tm, coach ..."
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>Your position in the team</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
               name="description"
               control={form.control}
               render={({ field }) => (
@@ -162,20 +154,22 @@ const CreateTeamCard = () => {
               )}
             />
 
-            <CardFooter className="p-0 pt-3">
-              <Button
-                type="submit"
-                onClick={form.handleSubmit(onSubmit)}
-                className="w-full"
-              >
-                Create
-              </Button>
-            </CardFooter>
+            <DialogFooter className="p-0 pt-3">
+              <DialogClose asChild>
+                <Button
+                  type="submit"
+                  onClick={form.handleSubmit(onSubmit)}
+                  className="w-full"
+                >
+                  Create
+                </Button>
+              </DialogClose>
+            </DialogFooter>
           </form>
         </Form>
-      </CardContent>
-    </Card>
+      </DialogContent>
+    </Dialog>
   );
 };
 
-export default CreateTeamCard;
+export default AddTeamModal;

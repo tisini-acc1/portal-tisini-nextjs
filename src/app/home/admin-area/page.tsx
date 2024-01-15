@@ -4,8 +4,14 @@ import MyTeams from "./components/my-teams";
 import AddTeamForm from "./components/add-team-form";
 import Competitions from "./components/competitions";
 import RegisterComp from "./components/register-comp";
+import { getMyTeams } from "@/lib/fetch-data/teams";
 
-const SwitchTeamPage = () => {
+const SwitchTeamPage = async () => {
+  const teamsData: Promise<Team[]> = getMyTeams();
+  const teams = await teamsData;
+
+  const teamId = teams[0].id;
+
   return (
     <main className="space-y-3">
       <Header />
@@ -17,13 +23,13 @@ const SwitchTeamPage = () => {
         >
           <TabsList className="w-full grid grid-cols-2">
             <TabsTrigger value="myTeams">Teams</TabsTrigger>
-            <TabsTrigger value="addTeam">Add Team</TabsTrigger>
+            <TabsTrigger value="addTeam">Add Team Sub-sets</TabsTrigger>
           </TabsList>
           <TabsContent value="myTeams">
             <MyTeams />
           </TabsContent>
           <TabsContent value="addTeam">
-            <AddTeamForm />
+            <AddTeamForm teamId={teamId} />
           </TabsContent>
         </Tabs>
 
