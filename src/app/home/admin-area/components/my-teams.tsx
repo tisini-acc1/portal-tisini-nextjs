@@ -20,7 +20,12 @@ const MyTeams = async () => {
             className="p-0 hover:bg-accent hover:cursor-pointer"
           >
             <CardContent className="flex items-center gap-2 p-2">
-              <Image src="/afc-logo.png" alt="" width={70} height={70} />
+              <Image
+                src="/logo-placeholder.png"
+                alt=""
+                width={70}
+                height={70}
+              />
               <div className="flex flex-col">
                 <h1>{team.team_name}</h1>
                 <p>{team.team_type}</p>
