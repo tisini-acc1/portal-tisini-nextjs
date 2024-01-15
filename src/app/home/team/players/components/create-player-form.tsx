@@ -33,6 +33,8 @@ const CreatePlayerForm = ({ team }: { team: Team[] }) => {
   const { toast } = useToast();
   const router = useRouter();
 
+  const teamId = team[0].id;
+
   const form = useForm<z.infer<typeof playerSchema>>({
     resolver: zodResolver(playerSchema),
     defaultValues: {
@@ -59,7 +61,7 @@ const CreatePlayerForm = ({ team }: { team: Team[] }) => {
           username: data.username,
           email: data.email,
           phone_number: data.phoneNo,
-          first_name: data.phoneNo,
+          first_name: data.firstName,
           last_name: data.lastName,
           password: "player",
           is_tisini_staff: false,
@@ -83,7 +85,7 @@ const CreatePlayerForm = ({ team }: { team: Team[] }) => {
 
     try {
       const res = await axiosAuth.post(
-        `/users/teams/0efeb67f-cfdf-4f1d-b3b0-56177b19b9c8/players/`,
+        `/users/teams/${teamId}/players/`,
         player
       );
 

@@ -9,8 +9,8 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <Icon icon="lucide:home" width="24" height="24" />,
   },
   {
-    title: "Switch Team",
-    path: "/home/switch-team",
+    title: "Admin",
+    path: "/home/admin-area",
     icon: <Icon icon="lucide:users" width="24" height="24" />,
   },
   {
