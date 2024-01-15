@@ -56,14 +56,14 @@ const EmailForm = () => {
         description: "Invalid credentials provided",
         variant: "destructive",
       });
+    } else {
+      console.log(res);
+      toast({
+        title: "Error",
+        description: "Unable to sign-in, check your internet connection.",
+        variant: "destructive",
+      });
     }
-
-    console.log(res);
-    toast({
-      title: "Error",
-      description: "Unable to sign-in, check your internet connection.",
-      variant: "destructive",
-    });
   };
 
   return (
