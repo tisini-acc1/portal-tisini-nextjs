@@ -1,5 +1,5 @@
 import { getAllStaffs } from "@/lib/fetch-data/staffs";
-import Header from "../../components/header";
+import Header from "../../../components/header";
 import { StaffsTable } from "./components/staffs-table";
 import { columns } from "./components/columns";
 

@@ -1,18 +1,14 @@
 import Image from "next/image";
-import HeaderButton from "./header-button";
-import { getMyTeams } from "@/lib/fetch-data/teams";
+import HeaderButton from "../../components/header-button";
 
-type HeaderProps = {
+type Props = {
   url?: string;
-  title?: string;
   team: Team;
+  title?: string;
   modal?: React.ReactNode;
 };
 
-const Header = async ({ title, url, modal }: HeaderProps) => {
-  const teamsData: Promise<Team[]> = getMyTeams();
-  const teams = await teamsData;
-
+const TeamsHeader: React.FC<Props> = async ({ title, team, url, modal }) => {
   return (
     <div className="flex justify-between p-2 gap-3 border-b">
       <div className="flex gap-3">
@@ -26,10 +22,8 @@ const Header = async ({ title, url, modal }: HeaderProps) => {
           />
         </div>
         <div className="flex justify-center flex-col">
-          <h1 className="text-xl font-bold">{teams[0].team_name}</h1>
-          <h4 className="text-sm text-muted-foreground">
-            {teams[0].team_type}
-          </h4>
+          <h1 className="text-xl font-bold">{team.team_name}</h1>
+          <h4 className="text-sm text-muted-foreground">{team.team_type}</h4>
         </div>
       </div>
 
@@ -42,4 +36,4 @@ const Header = async ({ title, url, modal }: HeaderProps) => {
   );
 };
 
-export default Header;
+export default TeamsHeader;

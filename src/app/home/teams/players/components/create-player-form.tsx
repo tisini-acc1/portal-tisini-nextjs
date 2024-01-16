@@ -217,7 +217,7 @@ const CreatePlayerForm = ({ team }: { team: Team[] }) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Position</FormLabel>
-              <Select>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <SelectTrigger>
                   <SelectValue placeholder="Goalkeeper" />
                 </SelectTrigger>

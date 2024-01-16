@@ -41,13 +41,13 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
   },
   {
     title: "Team",
-    path: "/home/team",
+    path: "/home/teams",
     icon: <Icon icon="lucide:users" width="24" height="24" />,
     submenu: true,
     subMenuItems: [
       // { title: "All", path: "/home/properties" },
-      { title: "Players", path: "/home/team/players" },
-      { title: "Staffs", path: "/home/team/staffs" },
+      { title: "Players", path: "/home/teams/players" },
+      { title: "Staffs", path: "/home/teams/staffs" },
     ],
   },
 ];

@@ -23,3 +23,17 @@ export const getMyTeams = async () => {
 
   return res.json();
 };
+
+export const getTeam = async (id: string) => {
+  const session = await getServerSession(authOptions);
+  const url = BASE_URL + `/users/teams/${id}`;
+
+  const res = await fetch(url, {
+    method: "GET",
+    headers: { Authorization: `JWT ${session?.access_token}` },
+  });
+
+  if (!res.ok) throw new Error("Failed to fetch team data");
+
+  return res.json();
+};

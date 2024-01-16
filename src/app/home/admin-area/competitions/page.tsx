@@ -6,7 +6,7 @@ const CompetitionsPage = async () => {
   const compsData: Promise<Competition[]> = getAllComps();
   const competitions = await compsData;
 
-  console.log(competitions);
+  // console.log(competitions);
 
   return (
     <main>
