@@ -1,21 +1,21 @@
-import { getAllStaffs } from "@/lib/fetch-data/staffs";
-import Header from "../../../components/header";
-import { StaffsTable } from "./components/staffs-table";
-import { columns } from "./components/columns";
+import { getMyTeams } from "@/lib/fetch-data/teams";
+import TeamsNavigation from "../components/teams-navigation";
+import SelectTeam from "../components/select-team";
 
 const StaffsPage = async () => {
-  const staffsData: Promise<Staff[]> = getAllStaffs();
-  const staffs = await staffsData;
+  const teamsData: Promise<Staff[]> = getMyTeams();
+  const teams = await teamsData;
 
-  // console.log(staffs);
+  const teamId = teams.length === 1 && teams[0].id;
+
   return (
-    <main className="space-y-2">
-      <Header title="Staff" url="/home/team/staffs/add-new" />
-
-      <section>
-        <StaffsTable columns={columns} data={staffs} />
-      </section>
-    </main>
+    <>
+      {teams.length === 1 ? (
+        <TeamsNavigation teamId={teamId as any} />
+      ) : (
+        <SelectTeam path="/home/teams/staffs" />
+      )}
+    </>
   );
 };
 

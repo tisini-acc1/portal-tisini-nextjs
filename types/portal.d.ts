@@ -44,6 +44,10 @@ type Player = {
 
 type Staff = {
   id: number;
-  user: User;
-  position: null;
+  staff: { first_name: string; last_name: string };
+  team: {
+    id: string;
+    team_name: string;
+  };
+  position: string;
 };

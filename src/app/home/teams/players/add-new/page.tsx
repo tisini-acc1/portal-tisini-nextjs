@@ -6,8 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import CreatePlayerForm from "../components/create-player-form";
 import { getMyTeams } from "@/lib/fetch-data/teams";
+import CreatePlayerForm from "../components/create-player-form";
 
 const AddPlayerPage = async () => {
   const teamsData: Promise<Team[]> = getMyTeams();

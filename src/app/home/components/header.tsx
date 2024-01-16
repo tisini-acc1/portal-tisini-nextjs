@@ -5,7 +5,6 @@ import { getMyTeams } from "@/lib/fetch-data/teams";
 type HeaderProps = {
   url?: string;
   title?: string;
-  team: Team;
   modal?: React.ReactNode;
 };
 

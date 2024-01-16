@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import CreateStaffForm from "../components/create-staff-form";
+import CreateStaffForm from "../../components/create-staff-form";
 
 const AddStaffPage = () => {
   return (

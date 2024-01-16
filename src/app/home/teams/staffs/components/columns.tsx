@@ -5,6 +5,16 @@ import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
+// {
+//     id: 23,
+//     staff: { first_name: 'Jomo', last_name: 'Kenyatta' },
+//     team: {
+//       id: 'fff76cb8-cfcc-4712-8b85-247b6f627fbb',
+//       team_name: 'Puzzle FC U21'
+//     },
+//     position: ''
+//   }
+
 export const columns: ColumnDef<Staff>[] = [
   {
     accessorKey: "staff",
@@ -21,7 +31,7 @@ export const columns: ColumnDef<Staff>[] = [
     },
     cell: ({ row }) => {
       const staff = row.original;
-      const name = `${staff.user.first_name} ${staff.user.last_name}`;
+      const name = `${staff.staff.first_name} ${staff.staff.last_name}`;
 
       return <div className="">{name}</div>;
     },
@@ -41,7 +51,7 @@ export const columns: ColumnDef<Staff>[] = [
     cell: ({ row }) => {
       const staff = row.original;
 
-      return <div>{staff.user.email}</div>;
+      return <div>{"email"}</div>;
     },
   },
   {
@@ -50,7 +60,7 @@ export const columns: ColumnDef<Staff>[] = [
     cell: ({ row }) => {
       const staff = row.original;
 
-      return <div>{staff.user.phone_number}</div>;
+      return <div>{"phone"}</div>;
     },
   },
 ];
