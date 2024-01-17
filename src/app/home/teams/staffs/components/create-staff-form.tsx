@@ -26,7 +26,7 @@ const staffSchema = z.object({
   position: z.string().min(3, { message: "Enter a valid position" }),
 });
 
-const CreateStaffForm = () => {
+const CreateStaffForm = ({ teamId }: { teamId: string }) => {
   const axiosAuth = useAxiosAuth();
   const { toast } = useToast();
   const router = useRouter();
@@ -45,22 +45,32 @@ const CreateStaffForm = () => {
 
   const onSubmit = async (data: z.infer<typeof staffSchema>) => {
     const staff = {
-      user: {
-        username: data.username,
-        email: data.email,
-        phone_number: data.phoneNo,
-        first_name: data.firstName,
-        last_name: data.lastName,
+      staff: {
+        user: {
+          username: data.username,
+          email: data.email,
+          phone_number: data.phoneNo,
+          first_name: data.firstName,
+          last_name: data.lastName,
+          password: "manager",
+          is_tisini_staff: false,
+          is_competition_owner: false,
+          is_team_staff: true,
+          is_player: false,
+          is_referee: false,
+          is_agent: false,
+        },
+        middle_name: "",
       },
       position: data.position,
     };
 
     try {
-      const res = await axiosAuth.post("/users/team_staffs/", staff);
+      const res = await axiosAuth.post(`/users/teams/${teamId}/staffs/`, staff);
 
       console.log(res);
       toast({ title: "Success", description: "Staff created" });
-      router.push("/home/team/staffs");
+      router.push(`/home/teams/staffs/${teamId}`);
     } catch (err: any) {
       console.log(err.response);
       if (!err.response) {
@@ -81,48 +91,66 @@ const CreateStaffForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-        <FormField
-          name="firstName"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Firstname</FormLabel>
-              <FormControl>
-                <Input type="text" placeholder="John" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <div className="flex flex-col md:flex-row gap-3">
+          <FormField
+            name="firstName"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Firstname</FormLabel>
+                <FormControl>
+                  <Input type="text" placeholder="John" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          name="lastName"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>lastName</FormLabel>
-              <FormControl>
-                <Input type="text" placeholder="doe" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            name="lastName"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>lastName</FormLabel>
+                <FormControl>
+                  <Input type="text" placeholder="doe" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
-        <FormField
-          name="username"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input type="text" placeholder="Johnte" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="flex flex-col md:flex-row gap-3">
+          <FormField
+            name="username"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Username</FormLabel>
+                <FormControl>
+                  <Input type="text" placeholder="Johnte" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            name="position"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Position</FormLabel>
+                <FormControl>
+                  <Input type="text" placeholder="team manager" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
         <FormField
           name="email"
@@ -146,19 +174,6 @@ const CreateStaffForm = () => {
               <FormLabel>Phone Number</FormLabel>
               <FormControl>
                 <Input type="text" placeholder="0700000000" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          name="position"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Position</FormLabel>
-              <FormControl>
-                <Input type="text" placeholder="team manager" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
