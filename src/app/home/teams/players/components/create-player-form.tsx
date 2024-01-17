@@ -90,8 +90,30 @@ const CreatePlayerForm = ({ teamId }: { teamId: string }) => {
       console.log(res);
       toast({ title: "Success", description: "Player created" });
       router.push(`/home/teams/players/${teamId}`);
-    } catch (err) {
+    } catch (err: any) {
       console.log(err);
+      if (!err.response) {
+        toast({
+          description: "Network Error! Check yoyr internet connection",
+          variant: "destructive",
+        });
+      } else if (err.response.data) {
+        if (err.response.status === 400) {
+          console.log(err.response.data?.player.license_no[0]);
+          toast({
+            description: err.response.data?.player.license_no[0],
+            variant: "destructive",
+          });
+          toast({
+            description: err.response.data?.player.user.phone_number[0],
+            variant: "destructive",
+          });
+          toast({
+            description: err.response.data?.player.user.username[0],
+            variant: "destructive",
+          });
+        }
+      }
     }
   };
 
