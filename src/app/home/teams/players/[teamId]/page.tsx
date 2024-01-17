@@ -22,7 +22,7 @@ const TeamPlayersPage = async ({ params: { teamId } }: ParamsProps) => {
       <TeamsHeader
         title="player"
         team={team}
-        url="/home/teams/players/add-new"
+        url={`/home/teams/players/${teamId}/add-new`}
       />
 
       <section className="">

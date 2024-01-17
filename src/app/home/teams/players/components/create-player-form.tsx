@@ -28,12 +28,10 @@ import { useRouter } from "next/navigation";
 const date: Date = new Date();
 const postions = ["Goalkeeper", "Defender", "Midfielder", "Forward"];
 
-const CreatePlayerForm = ({ team }: { team: Team[] }) => {
+const CreatePlayerForm = ({ teamId }: { teamId: string }) => {
   const axiosAuth = useAxiosAuth();
   const { toast } = useToast();
   const router = useRouter();
-
-  const teamId = team[0].id;
 
   const form = useForm<z.infer<typeof playerSchema>>({
     resolver: zodResolver(playerSchema),
@@ -91,7 +89,7 @@ const CreatePlayerForm = ({ team }: { team: Team[] }) => {
 
       console.log(res);
       toast({ title: "Success", description: "Player created" });
-      router.push("/home/team/players");
+      router.push(`/home/teams/players/${teamId}`);
     } catch (err) {
       console.log(err);
     }
@@ -99,192 +97,194 @@ const CreatePlayerForm = ({ team }: { team: Team[] }) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-        <FormField
-          name="firstName"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>FirstName</FormLabel>
-              <FormControl>
-                <Input type="text" placeholder="John" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          name="lastName"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>lastName</FormLabel>
-              <FormControl>
-                <Input type="text" placeholder="doe" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <div className="flex flex-col md:flex-row gap-3">
+          <FormField
+            name="firstName"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>FirstName</FormLabel>
+                <FormControl>
+                  <Input type="text" placeholder="John" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            name="lastName"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>lastName</FormLabel>
+                <FormControl>
+                  <Input type="text" placeholder="doe" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          name="username"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input type="text" placeholder="Johnte" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            name="username"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Username</FormLabel>
+                <FormControl>
+                  <Input type="text" placeholder="Johnte" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
-        <FormField
-          name="nationality"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Nationality</FormLabel>
-              <FormControl>
-                <Input type="text" placeholder="kenyan" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="flex flex-col md:flex-row gap-3">
+          <FormField
+            name="nationality"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nationality</FormLabel>
+                <FormControl>
+                  <Input type="text" placeholder="kenyan" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          name="email"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input type="email" placeholder="doe@gmail.com" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            name="email"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input type="email" placeholder="doe@gmail.com" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          name="phoneNo"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Phone Number</FormLabel>
-              <FormControl>
-                <Input type="text" placeholder="0700000000" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            name="phoneNo"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone Number</FormLabel>
+                <FormControl>
+                  <Input type="text" placeholder="0700000000" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
-        <FormField
-          name="dob"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Date of birth</FormLabel>
-              <FormControl>
-                <Input type="date" placeholder="1990-3-3" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="flex flex-col md:flex-row justify-between gap-3">
+          <FormField
+            name="dob"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Date of birth</FormLabel>
+                <FormControl>
+                  <Input type="date" placeholder="1990-3-3" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          name="licenseNo"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>License Number</FormLabel>
-              <FormControl>
-                <Input type="number" placeholder="FKF7000" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            name="licenseNo"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>License Number</FormLabel>
+                <FormControl>
+                  <Input type="number" placeholder="FKF7000" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          name="position"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Position</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Goalkeeper" />
-                </SelectTrigger>
+          <FormField
+            name="jerseyNo"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Jersey Number</FormLabel>
+                <FormControl>
+                  <Input type="number" placeholder="10" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
-                <SelectContent>
-                  {postions.map((pos, idx) => (
-                    <SelectItem key={idx} value={pos}>
-                      {pos}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="flex flex-col md:flex-row justify-between gap-3">
+          <FormField
+            name="position"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Position</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Goalkeeper" />
+                  </SelectTrigger>
 
-        <FormField
-          name="jerseyNo"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Jersey Number</FormLabel>
-              <FormControl>
-                <Input type="number" placeholder="10" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                  <SelectContent>
+                    {postions.map((pos, idx) => (
+                      <SelectItem key={idx} value={pos}>
+                        {pos}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          name="signedDate"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Contract Starts</FormLabel>
-              <FormControl>
-                <Input type="date" placeholder="1990-3-3" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            name="signedDate"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Contract Starts</FormLabel>
+                <FormControl>
+                  <Input type="date" placeholder="1990-3-3" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          name="expiryDate"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Contract Ends</FormLabel>
-              <FormControl>
-                <Input
-                  type="date"
-                  placeholder="1990-3-3"
-                  {...field}
-                  // value={
-                  //   field.value instanceof Date
-                  //     ? field.value.toISOString().split("T")[0]
-                  //     : field.value
-                  // }
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            name="expiryDate"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Contract Ends</FormLabel>
+                <FormControl>
+                  <Input type="date" placeholder="1990-3-3" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
         <Button type="submit">Create</Button>
       </form>
