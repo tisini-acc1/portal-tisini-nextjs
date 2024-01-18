@@ -1,7 +1,6 @@
 "use client";
 
 import { z } from "zod";
-import validator from "validator";
 import { RotateCw } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -9,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import axios from "@/lib/axios";
+import { regSchema } from "./auth-schema";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import {
@@ -20,36 +20,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-const regSchema = z
-  .object({
-    username: z
-      .string()
-      .min(3, "Should be greater than 3 characters long")
-      .max(15, "Username should be less than 12 characters long"),
-    // .regex(new RegExp("^[a-zA-Z]+$", "No special characters allowed!")),
-    email: z.string().email(),
-    phone_number: z
-      .string()
-      .refine(validator.isMobilePhone, "Please enter a valid phone number"),
-    first_name: z
-      .string()
-      .min(3, "Provide a valid firstname")
-      .max(15, "Provide a valid firstname"),
-    last_name: z
-      .string()
-      .min(3, "Provide a valid lastname")
-      .max(15, "Provide a valid lastname"),
-    password: z.string().min(6).max(15),
-    cfmPassword: z.string().min(6).max(15),
-  })
-  .refine((data) => data.password === data.cfmPassword, {
-    message: "Confirm password should match password",
-    path: ["cfmPassword"],
-  });
-
 type inputType = z.infer<typeof regSchema>;
 
-const RegisterForm = () => {
+const RegisterForm = ({ role }: { role: string }) => {
   const { toast } = useToast();
   const router = useRouter();
 
@@ -66,17 +39,30 @@ const RegisterForm = () => {
     },
   });
 
-  const role = {
+  const userRole = {
     is_tisini_staff: false,
-    is_team_staff: true,
+    is_competition_owner: false,
+    is_team_staff: false,
     is_player: false,
     is_referee: false,
     is_agent: false,
   };
 
+  if (role === "team-owner") {
+    userRole.is_team_staff = true;
+  } else if (role === "player") {
+    userRole.is_player = true;
+  } else if (role === "tournament-owner") {
+    userRole.is_competition_owner = true;
+  } else if (role === "referee") {
+    userRole.is_referee = true;
+  } else if (role === "agent") {
+    userRole.is_agent = true;
+  }
+
   const onSubmit = async (data: inputType) => {
     const { cfmPassword, ...user } = data;
-    const newUser = { ...user, ...role };
+    const newUser = { ...user, ...userRole };
     // console.log(newUser);
 
     try {

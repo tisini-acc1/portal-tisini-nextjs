@@ -51,3 +51,9 @@ type Staff = {
   };
   position: string;
 };
+
+type Role = {
+  id: number;
+  role: string;
+  img: string;
+};
