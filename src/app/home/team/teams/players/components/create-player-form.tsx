@@ -89,7 +89,7 @@ const CreatePlayerForm = ({ teamId }: { teamId: string }) => {
 
       console.log(res);
       toast({ title: "Success", description: "Player created" });
-      router.push(`/home/teams/players/${teamId}`);
+      router.push(`/home/team/teams/players/${teamId}`);
     } catch (err: any) {
       console.log(err);
       if (!err.response) {

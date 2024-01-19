@@ -70,7 +70,7 @@ const CreateStaffForm = ({ teamId }: { teamId: string }) => {
 
       console.log(res);
       toast({ title: "Success", description: "Staff created" });
-      router.push(`/home/teams/staffs/${teamId}`);
+      router.push(`/home/team/teams/staffs/${teamId}`);
     } catch (err: any) {
       console.log(err.response);
       if (!err.response) {

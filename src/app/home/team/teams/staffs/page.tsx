@@ -13,7 +13,7 @@ const StaffsPage = async () => {
       {teams.length === 1 ? (
         <TeamsNavigation teamId={teamId as any} />
       ) : (
-        <SelectTeam path="/home/teams/staffs" />
+        <SelectTeam path="/home/team/teams/staffs" />
       )}
     </>
   );

@@ -38,7 +38,7 @@ const Competitions = ({ comps }: { comps: Competition[] }) => {
             <TableCell>
               <Button
                 onClick={() =>
-                  router.push(`/home/admin-area/competitions/${comp.id}`)
+                  router.push(`/home/team/admin-area/competitions/${comp.id}`)
                 }
               >
                 Enter
