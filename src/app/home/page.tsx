@@ -10,20 +10,20 @@ const HomePage = async () => {
   if (session && session.user) {
     // destructure user_role
     const {
-      user: { user_role },
+      user: { userRole },
     } = session;
 
-    if (user_role === "is_competition_owner") {
+    if (userRole === "is_competition_owner") {
       return <NavigationCard url={"/competition"} />;
-    } else if (user_role === "is_team_staff") {
+    } else if (userRole === "is_team_staff") {
       return <NavigationCard url={"/team"} />;
-    } else if (user_role === "is_tisini_staff") {
+    } else if (userRole === "is_tisini_staff") {
       return <NavigationCard url={"/tisini"} />;
-    } else if (user_role === "is_player") {
+    } else if (userRole === "is_player") {
       return <NavigationCard url={"/player"} />;
-    } else if (user_role === "is_referee") {
+    } else if (userRole === "is_referee") {
       return <NavigationCard url={"/referee"} />;
-    } else if (user_role === "is_agent") {
+    } else if (userRole === "is_agent") {
       return <NavigationCard url={"/agent"} />;
     }
   }

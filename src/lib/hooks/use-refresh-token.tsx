@@ -8,10 +8,10 @@ const useRefreshToken = () => {
 
   const refreshToken = async () => {
     const res: any = await axios.post("/auth/refresh_token/", {
-      refresh_token: session?.refresh_token,
+      refresh_token: session?.refreshToken,
     });
     console.log("refresh called");
-    if (session) session.access_token === res.data.access_token;
+    if (session) session.accessToken === res.data.access_token;
   };
 
   return refreshToken;

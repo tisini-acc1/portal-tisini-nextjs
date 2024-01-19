@@ -16,7 +16,7 @@ export const getMyTeams = async () => {
 
   const res = await fetch(url, {
     method: "GET",
-    headers: { Authorization: `JWT ${session?.access_token}` },
+    headers: { Authorization: `JWT ${session?.accessToken}` },
   });
 
   if (!res.ok) throw new Error("Failed to fetch teams data");
@@ -30,7 +30,7 @@ export const getTeam = async (id: string) => {
 
   const res = await fetch(url, {
     method: "GET",
-    headers: { Authorization: `JWT ${session?.access_token}` },
+    headers: { Authorization: `JWT ${session?.accessToken}` },
   });
 
   if (!res.ok) throw new Error("Failed to fetch team data");

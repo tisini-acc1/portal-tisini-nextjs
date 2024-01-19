@@ -1,7 +1,7 @@
 import { getMyTeams } from "@/lib/fetch-data/teams";
-import Header from "../../team/components/header";
 import AddTeamModal from "../components/add-team-modal";
 import MyTeams from "../components/my-teams";
+import Header from "../../components/header";
 
 const MyTeamsPage = async () => {
   const teamsData: Promise<Team[]> = getMyTeams();

@@ -5,10 +5,10 @@ declare module "next-auth" {
   interface Session {
     user: {
       username: string;
-      user_role: string;
+      userRole: string;
     };
-    refresh_token: string;
-    access_token: string;
+    refreshToken: string;
+    accessToken: string;
     expiresIn: string;
   }
 }

@@ -93,11 +93,11 @@ export const authOptions: NextAuthOptions = {
         // Assign user data from the token to the session
         session.user = {
           username: token.username as string,
-          user_role: token.user_role as string,
+          userRole: token.user_role as string,
         };
 
-        session.access_token = token.access_token as string;
-        session.refresh_token = token.refresh_token as string;
+        session.accessToken = token.access_token as string;
+        session.refreshToken = token.refresh_token as string;
         session.expiresIn = token.expiresIn;
       }
 

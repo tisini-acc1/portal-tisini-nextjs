@@ -8,7 +8,7 @@ export const getAllComps = async () => {
 
   const res = await fetch(url, {
     method: "GET",
-    headers: { Authorization: `JWT ${session?.access_token}` },
+    headers: { Authorization: `JWT ${session?.accessToken}` },
   });
 
   if (!res.ok) throw new Error("Failed to fetch competitions data");
@@ -22,7 +22,7 @@ export const getComp = async (compId: string) => {
 
   const res = await fetch(url, {
     method: "GET",
-    headers: { Authorization: `JWT ${session?.access_token}` },
+    headers: { Authorization: `JWT ${session?.accessToken}` },
   });
 
   if (!res.ok) throw new Error("Failed to fetch competition");

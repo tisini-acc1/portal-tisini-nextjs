@@ -14,7 +14,7 @@ const useAxiosAuth = () => {
     const requestIntercept = axiosAuth.interceptors.request.use(
       (config) => {
         if (!config.headers["Authorization"]) {
-          config.headers["Authorization"] = `JWT ${session?.access_token}`;
+          config.headers["Authorization"] = `JWT ${session?.accessToken}`;
         }
 
         return config;
@@ -23,25 +23,25 @@ const useAxiosAuth = () => {
       (error) => Promise.reject(error)
     );
 
-    const responseIntercept = axiosAuth.interceptors.response.use(
-      (response) => response,
-      async (error) => {
-        const prevRequest = error.config;
-        if (error.response.status === 401 && !prevRequest.sent) {
-          prevRequest.sent = true;
-          await refreshToken();
-          prevRequest.headers["Authorization"] = `JWT ${session?.access_token}`;
+    // const responseIntercept = axiosAuth.interceptors.response.use(
+    //   (response) => response,
+    //   async (error) => {
+    //     const prevRequest = error.config;
+    //     if (error.response.status === 401 && !prevRequest.sent) {
+    //       prevRequest.sent = true;
+    //       await refreshToken();
+    //       prevRequest.headers["Authorization"] = `JWT ${session?.accessToken}`;
 
-          return axiosAuth(prevRequest);
-        }
+    //       return axiosAuth(prevRequest);
+    //     }
 
-        return Promise.reject(error);
-      }
-    );
+    //     return Promise.reject(error);
+    //   }
+    // );
 
     return () => {
       axiosAuth.interceptors.request.eject(requestIntercept);
-      axiosAuth.interceptors.response.eject(responseIntercept);
+      // axiosAuth.interceptors.response.eject(responseIntercept);
     };
   }, [session, refreshToken]);
 
