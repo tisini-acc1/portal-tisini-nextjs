@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { navigation } from "./constants";
-import { ArrowRight, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Menu, X } from "lucide-react";
+
 import NavMobile from "./nav-mobile";
+import { navigation } from "./constants";
+import SigninButton from "./signin-button";
 
 const Header = () => {
   const [bg, setBg] = useState(false);
@@ -41,13 +43,7 @@ const Header = () => {
               ))}
             </ul>
 
-            <button className="ml-8 p-2 px-4 flex items-center text-sm border rounded-sm hover:bg-purple-800">
-              <Link href="/auth/login">Log In</Link>
-            </button>
-
-            <button className="ml-4 p-2 px-4 flex items-center text-sm bg-purple-600 rounded-sm hover:bg-purple-800">
-              <Link href="/auth/register">Get Started</Link>
-            </button>
+            <SigninButton />
           </nav>
 
           <div

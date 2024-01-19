@@ -1,4 +1,4 @@
-import Header from "@/app/home/components/header";
+import Header from "@/app/home/team/components/header";
 import {
   Card,
   CardContent,

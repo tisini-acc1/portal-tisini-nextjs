@@ -1,5 +1,5 @@
 import Image from "next/image";
-import HeaderButton from "../../components/header-button";
+import HeaderButton from "../../team/components/header-button";
 
 type Props = {
   url?: string;

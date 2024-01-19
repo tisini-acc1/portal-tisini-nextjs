@@ -1,5 +1,5 @@
 import { getMyTeams } from "@/lib/fetch-data/teams";
-import Header from "../../components/header";
+import Header from "../../team/components/header";
 import AddTeamModal from "../components/add-team-modal";
 import MyTeams from "../components/my-teams";
 
