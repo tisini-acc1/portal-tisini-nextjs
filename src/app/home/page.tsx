@@ -14,7 +14,7 @@ const HomePage = async () => {
     } = session;
 
     if (userRole === "is_competition_owner") {
-      return <NavigationCard url={"/competition"} />;
+      return <NavigationCard url={"/competitions"} />;
     } else if (userRole === "is_team_staff") {
       return <NavigationCard url={"/team"} />;
     } else if (userRole === "is_tisini_staff") {

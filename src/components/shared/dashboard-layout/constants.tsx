@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react";
 
 import { SideNavItem } from "./types";
 
-export const SIDENAV_ITEMS: SideNavItem[] = [
+export const TEAMS_ITEMS: SideNavItem[] = [
   {
     title: "Home",
     path: "/home/team",
@@ -49,5 +49,37 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
       { title: "Players", path: "/home/team/teams/players" },
       { title: "Staffs", path: "/home/team/teams/staffs" },
     ],
+  },
+];
+
+export const COMPS_ITEMS: SideNavItem[] = [
+  {
+    title: "Home",
+    path: "/home/competitions",
+    icon: <Icon icon="lucide:home" width="24" height="24" />,
+  },
+  {
+    title: "Competitions",
+    path: "/home/competitions/my-competitions",
+    icon: <Icon icon="lucide:users" width="24" height="24" />,
+    // submenu: true,
+    // subMenuItems: [
+    //   { title: "My Teams", path: "/home/competitions/admin-area/my-teams" },
+    //   {
+    //     title: "Competitons",
+    //     path: "/home/competitions/admin-area/competitions",
+    //   },
+    // ],
+  },
+  {
+    title: "Teams",
+    path: "/home/competitions/teams",
+    icon: <Icon icon="lucide:users" width="24" height="24" />,
+    // submenu: true,
+    // subMenuItems: [
+    //   // { title: "All", path: "/home/properties" },
+    //   { title: "Players", path: "/home/competitions/competitionss/players" },
+    //   { title: "Staffs", path: "/home/competitions/competitionss/staffs" },
+    // ],
   },
 ];

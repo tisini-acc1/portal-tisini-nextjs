@@ -3,7 +3,7 @@
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useCycle } from "framer-motion";
-import { SIDENAV_ITEMS } from "./constants";
+import { TEAMS_ITEMS } from "./constants";
 import Link from "next/link";
 import { MenuItemWithSubMenuProps, SideNavItem } from "./types";
 import { Icon } from "@iconify/react";
@@ -13,6 +13,8 @@ const HeaderMobile = () => {
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
   const [isOpen, toggleOpen] = useCycle(false, true);
+
+  const sideNavItems = TEAMS_ITEMS;
 
   return (
     <motion.nav
@@ -32,8 +34,8 @@ const HeaderMobile = () => {
         variants={variants}
         className="absolute grid w-full gap-3 px-10 py-16"
       >
-        {SIDENAV_ITEMS.map((item, idx) => {
-          const isLastItem = idx === SIDENAV_ITEMS.length - 1;
+        {sideNavItems.map((item, idx) => {
+          const isLastItem = idx === sideNavItems.length - 1;
 
           return (
             <div key={idx}>

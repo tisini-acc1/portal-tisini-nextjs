@@ -1,14 +1,29 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import { usePathname } from "next/navigation";
 
 import { SideNavItem } from "./types";
-import { SIDENAV_ITEMS } from "./constants";
+import { COMPS_ITEMS, TEAMS_ITEMS } from "./constants";
+import { useSession } from "next-auth/react";
 
 const SideNav = () => {
+  const { data: session } = useSession();
+  const [sideNavItems, setSideNavItems] = useState<SideNavItem[]>([]);
+
+  useEffect(() => {
+    if (session && session.user) {
+      const {
+        user: { userRole },
+      } = session;
+
+      if (userRole === "is_competition_owner") setSideNavItems(COMPS_ITEMS);
+      else if (userRole === "is_team_staff") setSideNavItems(TEAMS_ITEMS);
+    }
+  }, [session]);
+
   return (
     <div className="md:w-60 bg-gray-900 h-screen flex-1 fixed border-r border-b-gray-700 hidden md:flex">
       <div className="flex flex-col space-y-6 w-full">
@@ -23,7 +38,7 @@ const SideNav = () => {
         </Link>
 
         <div className="flex flex-col space-y-2 md:px-6">
-          {SIDENAV_ITEMS.map((item, idx) => (
+          {sideNavItems.map((item, idx) => (
             <MenuItem key={idx} item={item} />
           ))}
         </div>
