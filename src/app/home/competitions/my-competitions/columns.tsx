@@ -1,8 +1,8 @@
 "use client";
 
+import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
 
 export const columns: ColumnDef<Competition>[] = [
   {
@@ -33,7 +33,7 @@ export const columns: ColumnDef<Competition>[] = [
   },
   {
     accessorKey: "teams",
-    header: "Teams",
+    header: "Reg Teams",
     cell: ({ row }) => {
       const teams = row.original;
 

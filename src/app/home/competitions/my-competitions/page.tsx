@@ -1,17 +1,19 @@
 import { columns } from "./columns";
 import { getAllComps } from "@/lib/fetch-data/competitions";
 import { CompsTable } from "../components/my-comps/comps-table";
-import MyCompsHeader from "../components/my-comps/my-comps-header";
+import CreateTournamentDialog from "../components/my-comps/create-tournament-dialog";
 
 const CompetitionsPage = async () => {
   const compsData: Promise<Competition[]> = getAllComps();
   const competitions = await compsData;
 
-  console.log(competitions);
-
   return (
     <main className="space-y-4">
-      <MyCompsHeader />
+      <header className="border-b p-3 h-16">
+        <div className="float-right">
+          <CreateTournamentDialog />
+        </div>
+      </header>
 
       <CompsTable data={competitions} columns={columns} />
     </main>

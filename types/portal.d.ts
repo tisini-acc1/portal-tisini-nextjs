@@ -5,6 +5,14 @@ type Team = {
   description: string | null;
 };
 
+type NewTeam = {
+  id: string;
+  team: {
+    id: string;
+    team_name: string;
+  };
+};
+
 type Competition = {
   id: string;
   competition_type: string;
@@ -12,7 +20,7 @@ type Competition = {
   created_at: string;
   start_period: string;
   end_period: string;
-  teams: Team[];
+  teams: NewTeam[];
 };
 
 type User = {
