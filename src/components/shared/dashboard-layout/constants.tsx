@@ -59,8 +59,8 @@ export const COMPS_ITEMS: SideNavItem[] = [
     icon: <Icon icon="lucide:home" width="24" height="24" />,
   },
   {
-    title: "Competitions",
-    path: "/home/competitions/my-competitions",
+    title: "Admin",
+    path: "/home/competitions/admin",
     icon: <Icon icon="lucide:users" width="24" height="24" />,
     // submenu: true,
     // subMenuItems: [
@@ -72,8 +72,8 @@ export const COMPS_ITEMS: SideNavItem[] = [
     // ],
   },
   {
-    title: "Teams",
-    path: "/home/competitions/teams",
+    title: "Competitions",
+    path: "/home/competitions/competitions",
     icon: <Icon icon="lucide:users" width="24" height="24" />,
     // submenu: true,
     // subMenuItems: [

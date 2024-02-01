@@ -21,6 +21,7 @@ type Competition = {
   start_period: string;
   end_period: string;
   teams: NewTeam[];
+  children: Competition[];
 };
 
 type User = {

@@ -95,9 +95,7 @@ export function CompsTable<TData, TValue>({
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                   onClick={() => {
-                    router.push(
-                      `/home/competitions/my-competitions/${row.original.id}`
-                    );
+                    router.push(`/home/competitions/admin/${row.original.id}`);
                   }}
                   className="cursor-pointer"
                 >

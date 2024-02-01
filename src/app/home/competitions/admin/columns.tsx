@@ -13,7 +13,7 @@ export const columns: ColumnDef<Competition>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Email
+          Competition
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -32,12 +32,21 @@ export const columns: ColumnDef<Competition>[] = [
     header: "Ends",
   },
   {
-    accessorKey: "teams",
-    header: "Reg Teams",
+    accessorKey: "children",
+    header: "Categories",
     cell: ({ row }) => {
       const teams = row.original;
 
-      return <div>{teams.teams.length}</div>;
+      return <div>{teams.children.length}</div>;
     },
   },
+  // {
+  //   accessorKey: "teams",
+  //   header: "Reg Teams",
+  //   cell: ({ row }) => {
+  //     const teams = row.original;
+
+  //     return <div>{teams.teams.length}</div>;
+  //   },
+  // },
 ];

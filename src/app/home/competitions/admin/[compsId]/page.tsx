@@ -1,5 +1,5 @@
 import { getComp } from "@/lib/fetch-data/competitions";
-import CompsHeader from "../../components/my-comps/comps-header";
+import CompsHeader from "../../components/admin/comps-header";
 
 type Props = {
   params: {

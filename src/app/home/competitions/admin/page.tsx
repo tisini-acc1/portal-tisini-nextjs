@@ -1,7 +1,7 @@
 import { columns } from "./columns";
 import { getAllComps } from "@/lib/fetch-data/competitions";
-import { CompsTable } from "../components/my-comps/comps-table";
-import CreateTournamentDialog from "../components/my-comps/create-tournament-dialog";
+import { CompsTable } from "../components/admin/comps-table";
+import CreateTournamentDialog from "../components/admin/create-tournament-dialog";
 
 const CompetitionsPage = async () => {
   const compsData: Promise<Competition[]> = getAllComps();

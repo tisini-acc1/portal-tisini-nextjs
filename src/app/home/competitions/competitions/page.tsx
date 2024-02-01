@@ -1,5 +1,5 @@
 import { getAllComps } from "@/lib/fetch-data/competitions";
-import CompetionTeams from "../components/teams/competion-teams";
+import CompetionTeams from "../components/competitions/competion-teams";
 
 const TeamsCompsPage = async () => {
   const compsData: Promise<Competition[]> = getAllComps();
