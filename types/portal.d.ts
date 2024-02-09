@@ -66,3 +66,19 @@ type Role = {
   role: string;
   img: string;
 };
+
+type Fixture = {
+  "id": number,
+  "fixtures": {
+      "id": number,
+      "team_a": NewTeam,
+      "team_b": NewTeam,
+      "date_created": string,
+      "game_date": string,
+      "field": string | null,
+      "game_status": string,
+      "score_team_a": string | null,
+      "score_team_b": string | null,
+      "fixture_type": string
+  }
+}

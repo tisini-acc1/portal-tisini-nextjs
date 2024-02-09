@@ -6,7 +6,7 @@ type CompProps = {
 
 const TournamentTeams = ({competition}: CompProps) => {
 
-    if (competition.teams.length <= 0) {
+    if (competition?.teams.length <= 0) {
         return <div className="flex items-center justify-center mt-8">Ooops, no teams have registered yet!</div>
     }
     

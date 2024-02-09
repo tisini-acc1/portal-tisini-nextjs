@@ -7,6 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SelectCompetition from "@/app/home/components/competitions/select-competition";
 import TournamentTeams from "@/app/home/components/competitions/tournament-teams";
+import CompetitionFixtures from "@/app/home/components/competitions/comp-fixtures";
 
 const CompetionTeams = ({ competitions }: { competitions: Competition[] }) => {
   const [id, setId] = useState(competitions[0]?.id);
@@ -22,7 +23,7 @@ const CompetionTeams = ({ competitions }: { competitions: Competition[] }) => {
     setCategoryId(value)
   }
 
-  const categoryComp = competition.children.find((comp) => comp.id === categoryId)
+  const categoryComp = competition.children.length > 0 ? competition.children.find((comp) => comp.id === categoryId) : competition
 
   return (
     <div className="space-y-4">
@@ -49,12 +50,22 @@ const CompetionTeams = ({ competitions }: { competitions: Competition[] }) => {
           <TabsContent value="teams">
             <TournamentTeams competition={categoryComp as Competition} />
           </TabsContent>
-          <TabsContent value="fixtures">Fixtures</TabsContent>
+          <TabsContent value="fixtures">
+            <CompetitionFixtures comp={categoryComp as Competition} />
+          </TabsContent>
           <TabsContent value="results">Results</TabsContent>
           <TabsContent value="standings">Standings</TabsContent>
         </Tabs>
         </div>
-        {/* <h1 className="text-xl text-center">
+       
+      </div>
+    </div>
+  );
+};
+
+export default CompetionTeams;
+
+ {/* <h1 className="text-xl text-center">
 
         Tournament sub-categories under {competition?.competition_name}
         </h1>
@@ -74,9 +85,3 @@ const CompetionTeams = ({ competitions }: { competitions: Competition[] }) => {
           </AccordionItem>
           ))}
           </Accordion> */}
-      </div>
-    </div>
-  );
-};
-
-export default CompetionTeams;
