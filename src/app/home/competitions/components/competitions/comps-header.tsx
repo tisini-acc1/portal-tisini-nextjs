@@ -7,6 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import CreateCompCategoryModal from "@/app/home/components/competitions/create-comps-categories-modal";
 
 type HeaderProps = {
   allComps: Competition[];
@@ -49,7 +50,7 @@ const CompetionsHeader = ({ allComps, onChange, competition }: HeaderProps) => {
       </div>
 
       <div className="flex items-end justify-end">
-        <p>Categories: 3</p>
+        <CreateCompCategoryModal competition={competition} />
       </div>
     </header>
   );

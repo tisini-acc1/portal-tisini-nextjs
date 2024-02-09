@@ -21,7 +21,9 @@ const CompetionTeams = ({ competitions }: { competitions: Competition[] }) => {
         competition={competition}
       />
 
-      <div className="space-y-2 border"></div>
+      <div className="space-y-2 border">
+        categories
+      </div>
     </div>
   );
 };
