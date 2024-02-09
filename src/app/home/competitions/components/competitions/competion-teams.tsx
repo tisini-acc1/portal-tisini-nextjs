@@ -5,8 +5,8 @@ import { useState } from "react";
 import CompetionsHeader from "./comps-header";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
 import SelectCompetition from "@/app/home/components/competitions/select-competition";
+import TournamentTeams from "@/app/home/components/competitions/tournament-teams";
 
 const CompetionTeams = ({ competitions }: { competitions: Competition[] }) => {
   const [id, setId] = useState(competitions[0]?.id);
@@ -21,6 +21,8 @@ const CompetionTeams = ({ competitions }: { competitions: Competition[] }) => {
   const onCategoryChange = (value:string) => {
     setCategoryId(value)
   }
+
+  const categoryComp = competition.children.find((comp) => comp.id === categoryId)
 
   return (
     <div className="space-y-4">
@@ -44,7 +46,9 @@ const CompetionTeams = ({ competitions }: { competitions: Competition[] }) => {
             <TabsTrigger value="standings">Standings</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="teams">Teams</TabsContent>
+          <TabsContent value="teams">
+            <TournamentTeams competition={categoryComp as Competition} />
+          </TabsContent>
           <TabsContent value="fixtures">Fixtures</TabsContent>
           <TabsContent value="results">Results</TabsContent>
           <TabsContent value="standings">Standings</TabsContent>
