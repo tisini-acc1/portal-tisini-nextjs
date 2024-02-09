@@ -5,7 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 async function refreshToken(token: JWT): Promise<JWT> {
   const response = await fetch(
-    `${process.env.DJANGO_BASE_URL}/auth/refresh_token/`,
+    `${process.env.NEXT_PUBLIC_DJANGO_BASE_URL}/auth/refresh_token/`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
