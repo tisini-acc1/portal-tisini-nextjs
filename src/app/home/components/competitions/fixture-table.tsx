@@ -4,6 +4,9 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getPaginationRowModel,
+  getFilteredRowModel,
+  ColumnFiltersState,
   useReactTable,
 } from "@tanstack/react-table"
 
@@ -15,23 +18,50 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { Button } from "@/components/ui/button"
+import { useState } from "react"
+import { Input } from "@/components/ui/input"
+import CreateFixtureModal from "../create-fixture-modal"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  comp: Competition
 }
 
 export function FixtureTable<TData, TValue>({
+  comp,
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
+    state: { columnFilters },
   })
 
   return (
+    <div>
+      <div className="flex items-center justify-between py-4">
+        {/* <Input
+          placeholder="Filter emails..."
+          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn("email")?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm"
+        /> */}
+
+        <CreateFixtureModal comp={comp} />
+      </div>
+
+
     <div className="rounded-md border">
       <Table>
         <TableHeader>
@@ -75,6 +105,26 @@ export function FixtureTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
+    </div>
+
+    <div className="flex items-center justify-end space-x-2 py-4">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          Previous
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          Next
+        </Button>
+      </div>
     </div>
   )
 }

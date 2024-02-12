@@ -20,7 +20,7 @@ const CompetitionFixtures = ({comp}: {comp:Competition}) => {
 
   return (
     <div className="container mx-auto py-10">
-      <FixtureTable columns={fixtureColumns} data={fixtures} />
+      <FixtureTable columns={fixtureColumns} data={fixtures} comp={comp} />
     </div>
   )
 }
