@@ -1,5 +1,6 @@
 "use client";
 
+import AddTeamToComp from "@/app/home/components/teams/add-team-to-comp-modal";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -36,6 +37,7 @@ const Competitions = ({ comps }: { comps: Competition[] }) => {
             </TableCell>
             <TableCell>{comp.teams.length}</TableCell>
             <TableCell>
+              {/* <AddTeamToComp compId={comp.id} /> */}
               <Button
                 onClick={() =>
                   router.push(`/home/team/admin-area/competitions/${comp.id}`)

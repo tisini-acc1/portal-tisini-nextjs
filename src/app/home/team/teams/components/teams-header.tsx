@@ -8,7 +8,7 @@ type Props = {
   modal?: React.ReactNode;
 };
 
-const TeamsHeader: React.FC<Props> = async ({ title, team, url, modal }) => {
+const TeamsHeader: React.FC<Props> = ({ title, team, url, modal }) => {
   return (
     <div className="flex justify-between p-2 gap-3 border-b">
       <div className="flex gap-3">
