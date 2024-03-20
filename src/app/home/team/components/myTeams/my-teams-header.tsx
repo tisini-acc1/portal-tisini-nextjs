@@ -6,11 +6,11 @@ import SelectTeam from "../shared/select-team";
 import HeaderButton from "../shared/header-button";
 
 type HeaderProps = {
+  teams: Team[];
   url?: string;
   title?: string;
   modal?: React.ReactNode;
   onChange: (v: string) => void;
-  teams: Team[];
 };
 
 const MyTeamsHeader = ({ title, url, modal, teams, onChange }: HeaderProps) => {

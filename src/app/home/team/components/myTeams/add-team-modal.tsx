@@ -1,6 +1,7 @@
 "use client";
 
 import { z } from "zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,7 +25,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
 import {
   Dialog,
   DialogClose,
@@ -34,7 +34,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useState } from "react";
 
 const TEAMTYPES = ["Rugby", "Football"] as const;
 
@@ -44,7 +43,7 @@ const teamSchema = z.object({
   description: z.string(),
 });
 
-const AddTeamModal = ({ teamId }: { teamId: string }) => {
+const AddTeamModal = ({ team }: { team: Team }) => {
   const axiosAuth = useAxiosAuth();
   const { toast } = useToast();
   const router = useRouter();
@@ -58,6 +57,8 @@ const AddTeamModal = ({ teamId }: { teamId: string }) => {
       description: "",
     },
   });
+
+  const teamId = team?.id;
 
   const onSubmit = async (data: z.infer<typeof teamSchema>) => {
     const team = {
@@ -90,12 +91,12 @@ const AddTeamModal = ({ teamId }: { teamId: string }) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>
-        <Button>Add team subset</Button>
+        <Button>Add subset team</Button>
       </DialogTrigger>
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create a subset team under your parent team</DialogTitle>
+          <DialogTitle>Create a subset team under {team.team_name}</DialogTitle>
         </DialogHeader>
 
         <Form {...form}>

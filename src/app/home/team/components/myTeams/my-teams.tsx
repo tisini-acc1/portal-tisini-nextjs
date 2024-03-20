@@ -16,7 +16,11 @@ const MyTeams = ({ teams }: { teams: Team[] }) => {
 
   return (
     <main>
-      <MyTeamsHeader teams={teams} onChange={onChange} />
+      <MyTeamsHeader
+        teams={teams}
+        onChange={onChange}
+        modal={<AddTeamModal team={team} />}
+      />
 
       <section className="m-2 mt-4">
         <h2 className="font-semibold">Subset teams under {team.team_name}</h2>
