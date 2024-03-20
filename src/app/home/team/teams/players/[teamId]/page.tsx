@@ -1,8 +1,8 @@
 import { getTeam } from "@/lib/fetch-data/teams";
-import { columns } from "../../components/players/columns";
-import { PlayersTable } from "../../components/players/players-table";
+import { columns } from "../../../components/players/columns";
+import { PlayersTable } from "../../../components/players/players-table";
 import { getAllPlayers } from "@/lib/fetch-data/players";
-import TeamsHeader from "../../components/teams-header";
+import TeamsHeader from "../../../components/teams-header";
 
 type ParamsProps = {
   params: {

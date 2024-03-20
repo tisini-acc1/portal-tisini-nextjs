@@ -3,6 +3,7 @@ type Team = {
   team_name: string;
   team_type: string;
   description: string | null;
+  children: Team[];
 };
 
 type NewTeam = {

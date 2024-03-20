@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { getMyTeams, getTeam } from "@/lib/fetch-data/teams";
-import CreatePlayerForm from "../../../components/players/create-player-form";
+import CreatePlayerForm from "../../../../components/players/create-player-form";
 
 type ParamsProps = {
   params: {

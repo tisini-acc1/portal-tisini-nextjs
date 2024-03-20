@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import CreateCompCategoryModal from "@/app/home/components/competitions/create-comps-categories-modal";
+import CreateCompCategoryModal from "@/app/home/components/create-comps-categories-modal";
 
 type HeaderProps = {
   allComps: Competition[];

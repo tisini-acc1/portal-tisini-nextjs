@@ -1,22 +1,13 @@
+import ParentTeams from "@/lib/parent-teams";
 import { getMyTeams } from "@/lib/fetch-data/teams";
-import TeamsNavigation from "../components/teams-navigation";
-import SelectTeam from "../components/select-team";
+import TeamStaffs from "../../components/staffs/team-staffs";
 
 const StaffsPage = async () => {
-  const teamsData: Promise<Staff[]> = getMyTeams();
+  const teamsData: Promise<Team[]> = getMyTeams();
   const teams = await teamsData;
+  const parentTeams = ParentTeams(teams);
 
-  const teamId = teams.length === 1 && teams[0].id;
-
-  return (
-    <>
-      {teams.length === 1 ? (
-        <TeamsNavigation teamId={teamId as any} />
-      ) : (
-        <SelectTeam path="/home/team/teams/staffs" />
-      )}
-    </>
-  );
+  return <TeamStaffs teams={parentTeams} />;
 };
 
 export default StaffsPage;
