@@ -1,28 +1,13 @@
+import ParentTeams from "@/lib/parent-teams";
 import { getMyTeams } from "@/lib/fetch-data/teams";
-import AddTeamModal from "../components/add-team-modal";
-import MyTeams from "../components/my-teams";
-import Header from "../../components/header";
+import MyTeams from "../../components/myTeams/my-teams";
 
 const MyTeamsPage = async () => {
   const teamsData: Promise<Team[]> = getMyTeams();
   const teams = await teamsData;
+  const parentTeams = ParentTeams(teams);
 
-  const teamId = teams[0].id;
-
-  return (
-    <main>
-      <Header modal={<AddTeamModal teamId={teamId} />} />
-
-      {/* display subsets below */}
-      <section className="m-2 mt-4">
-        <h2 className="font-semibold">
-          Subset teams under {teams[0].team_name}
-        </h2>
-
-        <MyTeams />
-      </section>
-    </main>
-  );
+  return <MyTeams teams={parentTeams} />;
 };
 
 export default MyTeamsPage;

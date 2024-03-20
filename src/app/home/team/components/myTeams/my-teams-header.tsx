@@ -1,17 +1,19 @@
+"use client";
+
 import Image from "next/image";
-import HeaderButton from "./header-button";
-import { getMyTeams } from "@/lib/fetch-data/teams";
+
+import SelectTeam from "../shared/select-team";
+import HeaderButton from "../shared/header-button";
 
 type HeaderProps = {
   url?: string;
   title?: string;
   modal?: React.ReactNode;
+  onChange: (v: string) => void;
+  teams: Team[];
 };
 
-const Header = async ({ title, url, modal }: HeaderProps) => {
-  const teamsData: Promise<Team[]> = getMyTeams();
-  const teams = await teamsData;
-
+const MyTeamsHeader = ({ title, url, modal, teams, onChange }: HeaderProps) => {
   return (
     <div className="flex justify-between p-2 gap-3 border-b">
       <div className="flex gap-3">
@@ -24,8 +26,9 @@ const Header = async ({ title, url, modal }: HeaderProps) => {
             priority
           />
         </div>
-        <div className="flex justify-center flex-col">
-          <h1 className="text-xl font-bold">{teams[0].team_name}</h1>
+        <div className="flex justify-center flex-col gap-2">
+          <SelectTeam teams={teams} onChange={onChange} />
+
           <h4 className="text-sm text-muted-foreground">
             {teams[0].team_type}
           </h4>
@@ -41,4 +44,4 @@ const Header = async ({ title, url, modal }: HeaderProps) => {
   );
 };
 
-export default Header;
+export default MyTeamsHeader;

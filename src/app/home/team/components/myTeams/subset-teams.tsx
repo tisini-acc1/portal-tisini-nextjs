@@ -1,20 +1,14 @@
 import Image from "next/image";
 
-import { getMyTeams } from "@/lib/fetch-data/teams";
 import { Card, CardContent } from "@/components/ui/card";
 
-const MyTeams = async () => {
-  const teamsData: Promise<Team[]> = getMyTeams();
-  const teams = await teamsData;
-
-  console.log(teams);
-
-  if (teams.length === 0) return <div>No teams available</div>;
+const SubsetTeams = ({ subsetTeams }: { subsetTeams: Team[] }) => {
+  if (subsetTeams.length === 0) return <div>No teams available</div>;
 
   return (
     <div className="mt-4 p-2">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        {teams.map((team) => (
+        {subsetTeams.map((team) => (
           <Card
             key={team.id}
             className="p-0 hover:bg-accent hover:cursor-pointer"
@@ -38,4 +32,4 @@ const MyTeams = async () => {
   );
 };
 
-export default MyTeams;
+export default SubsetTeams;

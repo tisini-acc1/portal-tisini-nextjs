@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { columns } from "./columns";
 import { PlayersTable } from "./players-table";
 import TeamsHeader from "../shared/teams-header";
-import HeaderButton from "../header-button";
+import HeaderButton from "../shared/header-button";
 
 const TeamPlayers = ({ teams }: { teams: Team[] }) => {
   const [id, setId] = useState(teams?.[0]?.id);
@@ -34,7 +34,7 @@ const TeamPlayers = ({ teams }: { teams: Team[] }) => {
 
     if (parentId) getPlayers();
   }, [id, teamId]);
-  console.log(players);
+
   return (
     <main className="space-y-2">
       <TeamsHeader
