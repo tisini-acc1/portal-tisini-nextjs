@@ -18,11 +18,28 @@ export const TEAMS_ITEMS: SideNavItem[] = [
       { title: "Competitons", path: "/home/team/admin-area/competitions" },
     ],
   },
-  // {
-  //   title: "Match Reports",
-  //   path: "/home/team/match-reports",
-  //   icon: <Icon icon="lucide:bitcoin" width="24" height="24" />,
-  // },
+  {
+    title: "Team",
+    path: "/home/team/teams",
+    icon: <Icon icon="lucide:users" width="24" height="24" />,
+    submenu: true,
+    subMenuItems: [
+      // { title: "All", path: "/home/properties" },
+      { title: "Players", path: "/home/team/teams/players" },
+      { title: "Staffs", path: "/home/team/teams/staffs" },
+    ],
+  },
+  {
+    title: "Stats",
+    path: "/home/team/stats",
+    icon: <Icon icon="lucide:area-chart" width="24" height="24" />,
+    submenu: true,
+    subMenuItems: [
+      { title: "Visulaization", path: "/home/team/settings/account" },
+      { title: "Team Stats", path: "/home/team/stats/team" },
+      { title: "Player Stats", path: "/home/team/stats/player" },
+    ],
+  },
   // {
   //   title: "Schedule",
   //   path: "/home/team/match-reports",
@@ -39,17 +56,6 @@ export const TEAMS_ITEMS: SideNavItem[] = [
   //     { title: "Player Stats", path: "/home/team/settings/privacy" },
   //   ],
   // },
-  {
-    title: "Team",
-    path: "/home/team/teams",
-    icon: <Icon icon="lucide:users" width="24" height="24" />,
-    submenu: true,
-    subMenuItems: [
-      // { title: "All", path: "/home/properties" },
-      { title: "Players", path: "/home/team/teams/players" },
-      { title: "Staffs", path: "/home/team/teams/staffs" },
-    ],
-  },
 ];
 
 export const COMPS_ITEMS: SideNavItem[] = [

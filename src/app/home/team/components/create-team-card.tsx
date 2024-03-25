@@ -69,7 +69,7 @@ const CreateTeamCard = () => {
     };
 
     try {
-      const res = await axiosAuth.post("/users/register_team/", team);
+      const res = await axiosAuth.post("/api/register_team/", team);
 
       if (res.status === 201) {
         toast({ description: "Created" });

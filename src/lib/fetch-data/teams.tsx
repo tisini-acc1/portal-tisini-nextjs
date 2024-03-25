@@ -12,7 +12,7 @@ export default getSession;
 
 export const getMyTeams = async () => {
   const session = await getSession();
-  const url = BASE_URL + "/users/teams/";
+  const url = BASE_URL + "/api/teams/";
 
   const res = await fetch(url, {
     method: "GET",
@@ -26,7 +26,7 @@ export const getMyTeams = async () => {
 
 export const getTeam = async (id: string) => {
   const session = await getServerSession(authOptions);
-  const url = BASE_URL + `/users/teams/${id}`;
+  const url = BASE_URL + `/api/teams/${id}`;
 
   const res = await fetch(url, {
     method: "GET",

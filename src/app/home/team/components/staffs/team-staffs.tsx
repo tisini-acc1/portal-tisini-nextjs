@@ -27,7 +27,6 @@ const TeamStaffs = ({ teams }: { teams: Team[] }) => {
     const fetchStaffs = async () => {
       const res = await fetch(`/api/staffs/${parentId}`);
       const data = await res.json();
-      console.log(data);
       setStaffs(data);
     };
 
