@@ -1,7 +1,7 @@
-import React from "react";
+import { PlayerStats } from "@/components/teams/player-stats/player-stats";
 
-const PlayerStats = () => {
-  return <div>PlayerStats</div>;
+const PlayerStatsPage = () => {
+  return <PlayerStats />;
 };
 
-export default PlayerStats;
+export default PlayerStatsPage;

@@ -2,65 +2,45 @@ import { Card } from "@/components/ui/card";
 
 const GeneralStats = () => {
   return (
-    <div className="">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <Card className="space-y-8 md:w-[440px] md:mx-auto p-2">
         <StatRow hStat={1} title="Assists" aStat={2} />
 
         <StatRow hStat={1} title="Key Passes" aStat={2} />
+      </Card>
 
-        <div>
-          <h4 className="text-center bg-secondary">Attemps</h4>
-          <StatRow hStat={2} title={"On Target"} aStat={4} />
-          <StatRow hStat={3} title={"Off Target"} aStat={2} />
-          <StatRow hStat={1} title={"Blocked"} aStat={0} />
-        </div>
-
-        <div>
-          <h4 className="text-center bg-secondary">Crosses</h4>
-          <StatRow hStat={2} title={"In-swinger"} aStat={4} />
-          <StatRow hStat={3} title={"Out-swinger"} aStat={2} />
-          <StatRow hStat={1} title={"Blocked"} aStat={0} />
-        </div>
-
-        <div>
-          <h4 className="text-center bg-secondary">Corner Kicks</h4>
-          <StatRow hStat={2} title={"On Target"} aStat={4} />
-          <StatRow hStat={3} title={"Off Target"} aStat={2} />
-          <StatRow hStat={1} title={"Blocked"} aStat={0} />
-        </div>
-
-        <div>
-          <h4 className="text-center bg-secondary">Dribbles</h4>
-          <StatRow hStat={2} title={"Complete"} aStat={4} />
-          <StatRow hStat={3} title={"In-complete"} aStat={2} />
-        </div>
-
+      <Card className="space-y-8 md:w-[440px] md:mx-auto p-2">
         <StatRow hStat={1} title="Throw-in" aStat={2} />
 
         <StatRow hStat={1} title="Offsides" aStat={2} />
       </Card>
 
-      {/* <Card className="space-y-4 md:w-[440px] p-2">
-        <div>
-          <h4 className="text-center bg-secondary">Crosses</h4>
-          <StatRow hStat={2} title={"In-swinger"} aStat={4} />
-          <StatRow hStat={3} title={"Out-swinger"} aStat={2} />
-          <StatRow hStat={1} title={"Blocked"} aStat={0} />
-        </div>
+      <Card className="space-y-4 md:w-[440px] md:mx-auto p-2">
+        <h4 className="text-center bg-secondary">Attemps</h4>
+        <StatRow hStat={2} title={"On Target"} aStat={4} />
+        <StatRow hStat={3} title={"Off Target"} aStat={2} />
+        <StatRow hStat={1} title={"Blocked"} aStat={0} />
+      </Card>
 
-        <div>
-          <h4 className="text-center bg-secondary">Corner Kicks</h4>
-          <StatRow hStat={2} title={"On Target"} aStat={4} />
-          <StatRow hStat={3} title={"Off Target"} aStat={2} />
-          <StatRow hStat={1} title={"Blocked"} aStat={0} />
-        </div>
+      <Card className="space-y-4 md:w-[440px] md:mx-auto p-2">
+        <h4 className="text-center bg-secondary">Crosses</h4>
+        <StatRow hStat={2} title={"In-swinger"} aStat={4} />
+        <StatRow hStat={3} title={"Out-swinger"} aStat={2} />
+        <StatRow hStat={1} title={"Blocked"} aStat={0} />
+      </Card>
 
-        <div>
-          <h4 className="text-center bg-secondary">Dribbles</h4>
-          <StatRow hStat={2} title={"Complete"} aStat={4} />
-          <StatRow hStat={3} title={"In-complete"} aStat={2} />
-        </div>
-      </Card> */}
+      <Card className="space-y-4 md:w-[440px] md:mx-auto p-2">
+        <h4 className="text-center bg-secondary">Corner Kicks</h4>
+        <StatRow hStat={2} title={"On Target"} aStat={4} />
+        <StatRow hStat={3} title={"Off Target"} aStat={2} />
+        <StatRow hStat={1} title={"Blocked"} aStat={0} />
+      </Card>
+
+      <Card className="space-y-4 md:w-[440px] md:mx-auto p-2">
+        <h4 className="text-center bg-secondary">Dribbles</h4>
+        <StatRow hStat={2} title={"Complete"} aStat={4} />
+        <StatRow hStat={3} title={"In-complete"} aStat={2} />
+      </Card>
     </div>
   );
 };
