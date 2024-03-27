@@ -4,6 +4,9 @@ import { PreviousMatch } from "@/components/teams/home/previous-match";
 import { SeasonSnapshot } from "@/components/teams/home/season-snapshot";
 import { UpcomingMatch } from "@/components/teams/home/upcoming-match";
 import { CurrentForm } from "@/components/teams/home/current-form";
+import { RecentPayments } from "@/components/teams/home/recent-payments";
+import { TopGoals } from "@/components/teams/home/top-goals";
+import { TopPassers } from "@/components/teams/home/top-passers";
 
 const HomePage = async () => {
   const teamsData: Promise<Team[]> = getMyTeams();
@@ -19,7 +22,12 @@ const HomePage = async () => {
         <SeasonSnapshot />
         <UpcomingMatch />
       </div>
-      <div>Team stats</div>
+
+      <div className="grid gap-4 md:grid-cols-3">
+        <RecentPayments />
+        <TopGoals />
+        <TopPassers />
+      </div>
     </main>
   );
 };
