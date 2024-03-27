@@ -6,6 +6,7 @@ import { columns } from "./columns";
 import { PlayersTable } from "./players-table";
 import TeamsHeader from "../shared/teams-header";
 import HeaderButton from "../shared/header-button";
+import CreatePlayerModal from "./create-player-modal";
 
 const TeamPlayers = ({ teams }: { teams: Team[] }) => {
   const [id, setId] = useState(teams?.[0]?.id);
@@ -42,12 +43,7 @@ const TeamPlayers = ({ teams }: { teams: Team[] }) => {
         onChange={onChange}
         id={id}
         onTeamChange={onTeamChange}
-        modal={
-          <HeaderButton
-            title={"player"}
-            url={`/home/team/teams/players/${team?.id}/add-new`}
-          />
-        }
+        modal={<CreatePlayerModal teamId={id} />}
       />
 
       <section className="flex-grow">

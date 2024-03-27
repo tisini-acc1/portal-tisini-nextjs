@@ -4,7 +4,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_DJANGO_BASE_URL;
 
 export const getAllComps = async () => {
   const session = await getSession();
-  const url = BASE_URL + "/users/competitions/";
+  const url = BASE_URL + "/api/competitions/";
 
   const res = await fetch(url, {
     method: "GET",
@@ -18,7 +18,7 @@ export const getAllComps = async () => {
 
 export const getComp = async (compId: string) => {
   const session = await getSession();
-  const url = BASE_URL + `/users/competitions/${compId}/`;
+  const url = BASE_URL + `/api/competitions/${compId}/`;
 
   const res = await fetch(url, {
     method: "GET",

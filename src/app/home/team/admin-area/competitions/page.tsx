@@ -14,7 +14,7 @@ const CompetitionsPage = async () => {
 
       {/* fetch competitions and display them */}
       <section className="mt-4">
-        <Competitions comps={competitions} />
+        <Competitions comps={competitions.data} />
       </section>
     </main>
   );

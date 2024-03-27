@@ -4,7 +4,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_DJANGO_BASE_URL;
 
 export const getAllStaffs = async (id: string) => {
   const session = await getSession();
-  const url = BASE_URL + `/users/teams/${id}/staffs/`;
+  const url = BASE_URL + `/api/teams/${id}/staffs/`;
 
   const res = await fetch(url, {
     method: "GET",

@@ -26,6 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useState } from "react";
 
 const staffSchema = z.object({
   username: z.string().min(3, { message: "Enter a valid username" }),
@@ -38,6 +39,7 @@ const staffSchema = z.object({
 });
 
 const CreateStaffModal = ({ team }: { team: Team }) => {
+  const [open, setOpen] = useState(false);
   const axiosAuth = useAxiosAuth();
   const { toast } = useToast();
   const router = useRouter();
@@ -81,11 +83,16 @@ const CreateStaffModal = ({ team }: { team: Team }) => {
     };
 
     try {
-      const res = await axiosAuth.post(`/users/teams/${teamId}/staffs/`, staff);
+      const res = await axiosAuth.post(
+        `/api/teams/${data.team}/staffs/`,
+        staff
+      );
 
-      console.log(res);
-      toast({ title: "Success", description: "Staff created" });
-      router.push(`/home/team/teams/staffs/${teamId}`);
+      if (res.status === 201) {
+        console.log(res);
+        toast({ title: "Success", description: "Staff created" });
+        router.refresh();
+      }
     } catch (err: any) {
       console.log(err.response);
       if (!err.response) {
@@ -104,8 +111,12 @@ const CreateStaffModal = ({ team }: { team: Team }) => {
     }
   };
 
+  const openChangeWrapper = (value: boolean) => {
+    setOpen(value);
+  };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={openChangeWrapper}>
       <DialogTrigger asChild>
         <Button size="sm">
           <UserPlus className="mr-2 w-4 h-4" />

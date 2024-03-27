@@ -1,6 +1,5 @@
 "use client";
 
-import AddTeamToComp from "@/app/home/components/teams/add-team-to-comp-modal";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -14,7 +13,7 @@ import { useRouter } from "next/navigation";
 
 const Competitions = ({ comps }: { comps: Competition[] }) => {
   const router = useRouter();
-
+  console.log(comps);
   return (
     <Table>
       <TableHeader>
