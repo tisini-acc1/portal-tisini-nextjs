@@ -12,11 +12,13 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SelectCompetition from "@/app/home/components/select-competition";
 import TournamentTeams from "@/app/home/components/tournament-teams";
-import CompetitionFixtures from "@/app/home/components/competitions/comp-fixtures";
+import CompetitionFixtures from "@/app/home/components/comp-fixtures";
 
 const CompetionTeams = ({ competitions }: { competitions: Competition[] }) => {
   const [id, setId] = useState(competitions[0]?.id);
-  const [categoryId, setCategoryId] = useState(competitions[0]?.children[0].id);
+  const [categoryId, setCategoryId] = useState(
+    competitions[0]?.children[0]?.id
+  );
 
   const competition = competitions.find(
     (comp) => comp.id === id

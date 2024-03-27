@@ -5,7 +5,7 @@ import NavigationCard from "@/components/home/navigation-card";
 
 const HomePage = async () => {
   const session = await getServerSession(authOptions);
-  // console.log(session?.user);
+  console.log(session);
 
   if (session && session.user) {
     // destructure user_role
@@ -13,7 +13,7 @@ const HomePage = async () => {
       user: { userRole },
     } = session;
 
-    if (userRole === "is_competition_owner") {
+    if (userRole === "is_competition_staff") {
       return <NavigationCard url={"/competitions"} />;
     } else if (userRole === "is_team_staff") {
       return <NavigationCard url={"/team"} />;

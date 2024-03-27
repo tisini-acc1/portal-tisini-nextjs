@@ -19,7 +19,7 @@ const SideNav = () => {
         user: { userRole },
       } = session;
 
-      if (userRole === "is_competition_owner") setSideNavItems(COMPS_ITEMS);
+      if (userRole === "is_competition_staff") setSideNavItems(COMPS_ITEMS);
       else if (userRole === "is_team_staff") setSideNavItems(TEAMS_ITEMS);
     }
   }, [session]);

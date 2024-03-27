@@ -41,7 +41,7 @@ const RegisterForm = ({ role }: { role: string }) => {
 
   const userRole = {
     is_tisini_staff: false,
-    is_competition_owner: false,
+    is_competition_staff: false,
     is_team_staff: false,
     is_player: false,
     is_referee: false,
@@ -53,7 +53,7 @@ const RegisterForm = ({ role }: { role: string }) => {
   } else if (role === "player") {
     userRole.is_player = true;
   } else if (role === "tournament-owner") {
-    userRole.is_competition_owner = true;
+    userRole.is_competition_staff = true;
   } else if (role === "referee") {
     userRole.is_referee = true;
   } else if (role === "agent") {

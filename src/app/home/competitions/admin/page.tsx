@@ -15,7 +15,7 @@ const CompetitionsPage = async () => {
         </div>
       </header>
 
-      <CompsTable data={competitions} columns={columns} />
+      <CompsTable data={competitions.data} columns={columns} />
     </main>
   );
 };
