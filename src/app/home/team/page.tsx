@@ -1,5 +1,9 @@
 import { getMyTeams } from "@/lib/fetch-data/teams";
 import CreateTeamCard from "./components/create-team-card";
+import { PreviousMatch } from "@/components/teams/home/previous-match";
+import { SeasonSnapshot } from "@/components/teams/home/season-snapshot";
+import { UpcomingMatch } from "@/components/teams/home/upcoming-match";
+import { CurrentForm } from "@/components/teams/home/current-form";
 
 const HomePage = async () => {
   const teamsData: Promise<Team[]> = getMyTeams();
@@ -9,7 +13,21 @@ const HomePage = async () => {
 
   return (
     <main className="space-y-6">
-      <p>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <PreviousMatch />
+        <CurrentForm />
+        <SeasonSnapshot />
+        <UpcomingMatch />
+      </div>
+      <div>Team stats</div>
+    </main>
+  );
+};
+
+export default HomePage;
+
+{
+  /* <p>
         Hi and welcome to Tisini Portal -- Home of stats, and congratulation on
         creating your team.
       </p>
@@ -35,9 +53,5 @@ const HomePage = async () => {
         On the sidebar, click Team then select either Players or Staffs. If you
         have subset teams you will first be prompted to select team before
         seeing the forms.
-      </p>
-    </main>
-  );
-};
-
-export default HomePage;
+      </p> */
+}
