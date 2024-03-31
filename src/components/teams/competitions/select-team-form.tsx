@@ -21,7 +21,7 @@ type Props = {
 };
 
 const teamSchema = z.object({
-  team: z.string().min(36, "Please select team"),
+  team: z.string().min(3, "Please select team"),
 });
 
 type inputType = z.infer<typeof teamSchema>;
@@ -33,7 +33,7 @@ const SelectTeamForm = ({ teams, compId }: Props) => {
 
   const form = useForm<inputType>({
     defaultValues: {
-      team: teams[0].id,
+      team: teams[0]?.id,
     },
   });
 

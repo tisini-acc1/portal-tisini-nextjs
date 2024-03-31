@@ -42,7 +42,7 @@ const TeamStaffs = ({ teams }: { teams: Team[] }) => {
         onChange={onChange}
         id={id}
         onTeamChange={onTeamChange}
-        modal={<CreateStaffModal team={team} />}
+        // modal={<CreateStaffModal team={team} />}
       />
 
       <section className="flex-grow">

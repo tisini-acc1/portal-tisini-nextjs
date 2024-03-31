@@ -1,14 +1,21 @@
 import Image from "next/image";
 
+import { getMyTeams } from "@/lib/fetch-data/teams";
 import { Card, CardContent } from "@/components/ui/card";
+import AddTeamModal from "@/components/teams/my-teams/add-team-modal";
 
-const SubsetTeams = ({ subsetTeams }: { subsetTeams: Team[] }) => {
-  if (subsetTeams.length === 0) return <div>No teams available</div>;
+const MyTeamsPage = async () => {
+  const teamsData: Promise<Team[]> = getMyTeams();
+  const teams = await teamsData;
 
   return (
-    <div className="mt-4 p-2">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        {subsetTeams.map((team) => (
+    <main>
+      <div className="flex justify-between p-2 gap-3 border-b h-16">
+        <AddTeamModal />
+      </div>
+
+      <section className="grid grid-cols-3 gap-4 p-2">
+        {teams.map((team) => (
           <Card
             key={team.id}
             className="p-0 hover:bg-accent hover:cursor-pointer"
@@ -27,9 +34,9 @@ const SubsetTeams = ({ subsetTeams }: { subsetTeams: Team[] }) => {
             </CardContent>
           </Card>
         ))}
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 
-export default SubsetTeams;
+export default MyTeamsPage;

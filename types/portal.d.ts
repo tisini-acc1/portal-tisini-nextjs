@@ -2,6 +2,7 @@ type Team = {
   id: string;
   team_name: string;
   team_type: string;
+  team_logo: string | null;
   description: string | null;
   children: Team[];
 };
@@ -14,15 +15,31 @@ type NewTeam = {
   };
 };
 
-type Competition = {
+type Meta = {
+  totalDocs: number;
+  totalPages: number;
+  page: number;
+  limit: number;
+  hasNextPage: boolean | null;
+  hasPrevPage: boolean | null;
+  nextPage: boolean | null;
+  prevPage: boolean | null;
+};
+
+type Comp = {
   id: string;
-  competition_type: string;
   competition_name: string;
-  created_at: string;
-  start_period: string;
-  end_period: string;
+  competition_type: string;
+  season: string;
   teams: NewTeam[];
+  fixtures: [];
+  created_at: string;
   children: Competition[];
+};
+
+type Competition = {
+  meta: Meta;
+  data: Comp[];
 };
 
 type User = {
@@ -69,17 +86,17 @@ type Role = {
 };
 
 type Fixture = {
-  "id": number,
-  "fixtures": {
-      "id": number,
-      "team_a": NewTeam,
-      "team_b": NewTeam,
-      "date_created": string,
-      "game_date": string,
-      "field": string | null,
-      "game_status": string,
-      "score_team_a": string | null,
-      "score_team_b": string | null,
-      "fixture_type": string
+  id: number,
+  fixtures: {
+      id: number;
+      team_a: NewTeam;
+      team_b: NewTeam;
+      date_created: string;
+      game_date: string;
+      field: string | null;
+      game_status: string;
+      score_team_a: string | null;
+      score_team_b: string | null;
+      fixture_type: string;
   }
 }

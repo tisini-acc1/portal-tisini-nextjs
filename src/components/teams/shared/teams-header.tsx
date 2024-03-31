@@ -41,9 +41,9 @@ const TeamsHeader = ({
           </div>
           <div className="flex justify-center flex-col">
             <h1 className="text-xl font-bold">{team.team_name}</h1>
-            {subTeams?.length > 0 && (
+            {/* {subTeams?.length > 0 && (
               <SelectSubteams subteams={subTeams} onChange={onTeamChange} />
-            )}
+            )} */}
           </div>
         </div>
 

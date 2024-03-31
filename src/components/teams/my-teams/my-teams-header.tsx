@@ -27,7 +27,7 @@ const MyTeamsHeader = ({ title, url, modal, teams, onChange }: HeaderProps) => {
           />
         </div>
         <div className="flex justify-center flex-col gap-2">
-          <SelectTeam teams={teams} onChange={onChange} />
+          {/* <SelectTeam teams={teams} onChange={onChange} /> */}
 
           <h4 className="text-sm text-muted-foreground">
             {teams[0].team_type}

@@ -1,13 +1,11 @@
-import ParentTeams from "@/lib/parent-teams";
 import { getMyTeams } from "@/lib/fetch-data/teams";
-import TeamStaffs from "../../components/staffs/team-staffs";
+import TeamStaffs from "@/components/teams/staffs/team-staffs";
 
 const StaffsPage = async () => {
   const teamsData: Promise<Team[]> = getMyTeams();
   const teams = await teamsData;
-  const parentTeams = ParentTeams(teams);
 
-  return <TeamStaffs teams={parentTeams} />;
+  return <TeamStaffs teams={teams} />;
 };
 
 export default StaffsPage;

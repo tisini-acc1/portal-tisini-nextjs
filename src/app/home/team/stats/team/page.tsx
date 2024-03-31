@@ -1,4 +1,4 @@
-import TeamStats from "../../components/team-stats/team-stats";
+import TeamStats from "@/components/teams/team-stats/team-stats";
 
 const TeamStatsPage = () => {
   return <TeamStats />;

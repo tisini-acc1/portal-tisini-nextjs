@@ -9,14 +9,14 @@ export const TEAMS_ITEMS: SideNavItem[] = [
     icon: <Icon icon="lucide:home" width="24" height="24" />,
   },
   {
-    title: "Admin",
-    path: "/home/team/admin-area",
+    title: "My Teams",
+    path: "/home/team/my-teams",
     icon: <Icon icon="lucide:users" width="24" height="24" />,
-    submenu: true,
-    subMenuItems: [
-      { title: "My Teams", path: "/home/team/admin-area/my-teams" },
-      { title: "Competitons", path: "/home/team/admin-area/competitions" },
-    ],
+  },
+  {
+    title: "Competitions",
+    path: "/home/team/competitions",
+    icon: <Icon icon="lucide:users" width="24" height="24" />,
   },
   {
     title: "Team",

@@ -1,5 +1,5 @@
 import { getMyTeams } from "@/lib/fetch-data/teams";
-import CreateTeamCard from "./components/create-team-card";
+import CreateTeamCard from "../../../components/teams/create-team-card";
 import { PreviousMatch } from "@/components/teams/home/previous-match";
 import { SeasonSnapshot } from "@/components/teams/home/season-snapshot";
 import { UpcomingMatch } from "@/components/teams/home/upcoming-match";

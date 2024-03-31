@@ -43,7 +43,7 @@ const teamSchema = z.object({
   description: z.string(),
 });
 
-const AddTeamModal = ({ team }: { team: Team }) => {
+const AddTeamModal = () => {
   const axiosAuth = useAxiosAuth();
   const { toast } = useToast();
   const router = useRouter();
@@ -58,15 +58,12 @@ const AddTeamModal = ({ team }: { team: Team }) => {
     },
   });
 
-  const teamId = team?.id;
-
   const onSubmit = async (data: z.infer<typeof teamSchema>) => {
     const team = {
       team: {
         team_name: data.team_name,
         team_type: data.team_type,
         description: data.description,
-        parent: teamId,
       },
       position: "",
     };
@@ -91,12 +88,12 @@ const AddTeamModal = ({ team }: { team: Team }) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>
-        <Button>Add subset team</Button>
+        <Button>Add team</Button>
       </DialogTrigger>
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create a subset team under {team.team_name}</DialogTitle>
+          <DialogTitle>Create a new team</DialogTitle>
         </DialogHeader>
 
         <Form {...form}>
