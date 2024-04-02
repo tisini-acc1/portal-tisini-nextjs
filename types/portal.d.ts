@@ -85,18 +85,37 @@ type Role = {
   img: string;
 };
 
+type FixtureTeam = {
+  id: number;
+  team: {
+      id: string;
+      team_name: string;
+  },
+  travelling_squad: [];
+}
+
 type Fixture = {
-  id: number,
+  id: number;
   fixtures: {
       id: number;
-      team_a: NewTeam;
-      team_b: NewTeam;
-      date_created: string;
-      game_date: string;
-      field: string | null;
-      game_status: string;
-      score_team_a: string | null;
-      score_team_b: string | null;
-      fixture_type: string;
+      fixture_data: {
+          id: number;
+          game_date: string;
+          matchday: string;
+          game_status: string;
+          score_home_team: null | number;
+          score_away_team: null | number;
+          field: {
+              id: number;
+              name: string;
+          },
+          fixture_type: string;
+          referees: [];
+      },
+      teams: {
+          id: number;
+          home_team: FixtureTeam;
+          away_team: FixtureTeam;
+      }
   }
 }

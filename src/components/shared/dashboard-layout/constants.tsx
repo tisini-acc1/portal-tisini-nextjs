@@ -14,6 +14,11 @@ export const TEAMS_ITEMS: SideNavItem[] = [
     icon: <Icon icon="lucide:users" width="24" height="24" />,
   },
   {
+    title: "Fixtures",
+    path: "/home/team/fixtures",
+    icon: <Icon icon="lucide:users" width="24" height="24" />,
+  },
+  {
     title: "Competitions",
     path: "/home/team/competitions",
     icon: <Icon icon="lucide:users" width="24" height="24" />,
