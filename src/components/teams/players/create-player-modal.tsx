@@ -1,8 +1,18 @@
 "use client";
 
 import { z } from "zod";
+import { useState } from "react";
+import { UserPlus } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import { playerSchema } from "./playerSchema";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
+import useAxiosAuth from "@/lib/hooks/use-axios-auth";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -11,7 +21,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -19,14 +28,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
-import { zodResolver } from "@hookform/resolvers/zod";
-import useAxiosAuth from "@/lib/hooks/use-axios-auth";
-import { useToast } from "@/components/ui/use-toast";
-import { useRouter } from "next/navigation";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { UserPlus } from "lucide-react";
-import { useState } from "react";
 
 const date: Date = new Date();
 const postions = ["Goalkeeper", "Defender", "Midfielder", "Forward"];
@@ -125,7 +126,7 @@ const CreatePlayerModal = ({ teamId }: { teamId: string }) => {
 
   return (
     <Dialog open={open} onOpenChange={openChangeWrapper}>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         <Button size="sm">
           <UserPlus className="mr-2 w-4 h-4" />
           Player

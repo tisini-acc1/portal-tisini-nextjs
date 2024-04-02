@@ -1,6 +1,7 @@
 "use client";
 
 import { z } from "zod";
+import { useState } from "react";
 import { UserPlus } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -10,7 +11,13 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import useAxiosAuth from "@/lib/hooks/use-axios-auth";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -19,14 +26,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { useState } from "react";
 
 const staffSchema = z.object({
   username: z.string().min(3, { message: "Enter a valid username" }),
@@ -56,9 +55,6 @@ const CreateStaffModal = ({ team }: { team: Team }) => {
       team: "",
     },
   });
-
-  const teams = team?.children;
-  const subteams = [...teams, team];
 
   const onSubmit = async (data: z.infer<typeof staffSchema>) => {
     const staff = {
@@ -125,37 +121,14 @@ const CreateStaffModal = ({ team }: { team: Team }) => {
       </DialogTrigger>
 
       <DialogContent>
+        <DialogHeader>
+          <DialogDescription>
+            Add team staff to {team.team_name}
+          </DialogDescription>
+        </DialogHeader>
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="team"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Select Team</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select team" />
-                      </SelectTrigger>
-                    </FormControl>
-
-                    <SelectContent>
-                      {subteams.map((team) => (
-                        <SelectItem value={team.id} key={team.id}>
-                          {team.team_name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
             <div className="flex flex-col md:flex-row gap-3">
               <FormField
                 name="firstName"

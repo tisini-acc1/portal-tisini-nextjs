@@ -9,29 +9,21 @@ import CreateStaffModal from "./create-staff-modal";
 
 const TeamStaffs = ({ teams }: { teams: Team[] }) => {
   const [id, setId] = useState(teams[0]?.id);
-  const [teamId, setTeamId] = useState("");
   const [staffs, setStaffs] = useState([]);
 
   const onChange = (value: string) => {
     setId(value);
-    setTeamId("");
-  };
-
-  const onTeamChange = (value: string) => {
-    setTeamId(value);
   };
 
   useEffect(() => {
-    const parentId = teamId != "" ? teamId : id;
-
     const fetchStaffs = async () => {
-      const res = await fetch(`/api/staffs/${parentId}`);
+      const res = await fetch(`/api/staffs/${id}`);
       const data = await res.json();
       setStaffs(data);
     };
 
-    if (parentId) fetchStaffs();
-  }, [id, teamId]);
+    fetchStaffs();
+  }, [id]);
 
   const team = teams.find((team) => team.id === id) as Team;
 
@@ -41,8 +33,7 @@ const TeamStaffs = ({ teams }: { teams: Team[] }) => {
         teams={teams}
         onChange={onChange}
         id={id}
-        onTeamChange={onTeamChange}
-        // modal={<CreateStaffModal team={team} />}
+        modal={<CreateStaffModal team={team} />}
       />
 
       <section className="flex-grow">
