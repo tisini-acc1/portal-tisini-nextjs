@@ -9,7 +9,7 @@ const CompetitionFixtures = ({ comp }: { comp: Competition }) => {
 
   useEffect(() => {
     const getFixtures = async () => {
-      const res = await fetch(`/api/competitions/${comp.id}`);
+      const res = await fetch(`/api/competitions/56`);
       const data = await res.json();
       setFixtures(data);
     };
