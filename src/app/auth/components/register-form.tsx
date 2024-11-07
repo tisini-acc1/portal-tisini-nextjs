@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import axios from "@/lib/axios";
 import { regSchema } from "./auth-schema";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
@@ -19,6 +18,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import apiService from "@/app/services/api-service";
 
 type inputType = z.infer<typeof regSchema>;
 
@@ -39,58 +39,42 @@ const RegisterForm = ({ role }: { role: string }) => {
     },
   });
 
-  const userRole = {
-    is_tisini_staff: false,
-    is_competition_staff: false,
-    is_team_staff: false,
-    is_player: false,
-    is_referee: false,
-    is_agent: false,
-  };
+  let userRole = 1;
 
   if (role === "team-owner") {
-    userRole.is_team_staff = true;
+    userRole = 2;
   } else if (role === "player") {
-    userRole.is_player = true;
+    userRole = 5;
   } else if (role === "tournament-owner") {
-    userRole.is_competition_staff = true;
+    userRole = 6;
   } else if (role === "referee") {
-    userRole.is_referee = true;
+    userRole = 9;
   } else if (role === "agent") {
-    userRole.is_agent = true;
+    userRole = 1;
   }
 
   const onSubmit = async (data: inputType) => {
     const { cfmPassword, ...user } = data;
-    const newUser = { ...user, ...userRole };
+    const newUser = {
+      action: "registeruser",
+      id_no: "",
+      email: user.email,
+      phone_number: user.phone_number,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      other_name: "",
+      password: user.password,
+      role: userRole,
+    };
     // console.log(newUser);
 
-    try {
-      const res = await axios.post("/auth/register/", newUser);
+    const res = await apiService.post(JSON.stringify(newUser));
 
-      if (res.status === 201) {
-        router.push("/auth/login");
-        // console.log(res);
-      }
-    } catch (error: any) {
-      // console.log(error?.message);
-      if (!error.response) {
-        toast({ description: `${error?.message}`, variant: "destructive" });
-      } else if (error.response.data) {
-        if (error.response.status === 400) {
-          for (let value of Object.values(
-            error.response.data
-          ) as Array<string>) {
-            toast({ description: `${value[0]}`, variant: "destructive" });
-            // console.log(value[0]);
-          }
-        } else {
-          toast({
-            description: `Error: ${error.response.status}`,
-            variant: "destructive",
-          });
-        }
-      }
+    if (res.error === "0") {
+      toast({ description: `${res.message}` });
+      router.push("/auth/login");
+    } else {
+      toast({ description: `${res.message}`, variant: "destructive" });
     }
   };
 

@@ -7,22 +7,25 @@ import { usePathname } from "next/navigation";
 
 import { SideNavItem } from "./types";
 import { COMPS_ITEMS, TEAMS_ITEMS } from "./constants";
-import { useSession } from "next-auth/react";
+import { getUserRole } from "@/app/actions/actions";
 
 const SideNav = () => {
-  const { data: session } = useSession();
   const [sideNavItems, setSideNavItems] = useState<SideNavItem[]>([]);
+  const [userRole, setUserRole] = useState<string | null>(null);
 
   useEffect(() => {
-    if (session && session.user) {
-      const {
-        user: { userRole },
-      } = session;
+    const fetchUserRole = async () => {
+      const role = await getUserRole();
+      setUserRole(role);
+    };
 
-      if (userRole === "is_competition_staff") setSideNavItems(COMPS_ITEMS);
-      else if (userRole === "is_team_staff") setSideNavItems(TEAMS_ITEMS);
-    }
-  }, [session]);
+    fetchUserRole();
+  }, []);
+
+  useEffect(() => {
+    if (userRole === "6") setSideNavItems(COMPS_ITEMS);
+    else if (userRole === "2") setSideNavItems(TEAMS_ITEMS);
+  }, [userRole]);
 
   return (
     <div className="md:w-60 bg-gray-900 h-screen flex-1 fixed border-r border-b-gray-700 hidden md:flex">

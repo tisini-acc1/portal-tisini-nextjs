@@ -20,8 +20,8 @@ export const regSchema = z
       .string()
       .min(3, "Provide a valid lastname")
       .max(15, "Provide a valid lastname"),
-    password: z.string().min(6).max(15),
-    cfmPassword: z.string().min(6).max(15),
+    password: z.string().min(4).max(15),
+    cfmPassword: z.string().min(4).max(15),
   })
   .refine((data) => data.password === data.cfmPassword, {
     message: "Confirm password should match password",

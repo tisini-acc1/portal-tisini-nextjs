@@ -1,9 +1,11 @@
 "use client";
 
 import { z } from "zod";
+import axios from "axios";
+import { RotateCw } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -15,15 +17,14 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
-import { RotateCw } from "lucide-react";
+import { handleLogin } from "@/app/actions/actions";
 
 const loginSchema = z.object({
   username: z
     .string()
     .min(3, { message: "Username must be above 3 characters" }),
-  password: z.string().min(6, { message: "Please provide a valid password" }),
+  password: z.string().min(4, { message: "Please provide a valid password" }),
 });
 
 const UsernameForm = () => {
@@ -39,25 +40,37 @@ const UsernameForm = () => {
   });
 
   const onSubmit = async (data: z.infer<typeof loginSchema>) => {
-    const res = await signIn("credentials", {
-      username_or_email: data.username,
+    const user = {
+      loginnisave: "login",
+      username: data.username,
       password: data.password,
-      redirect: false,
-      // callbackUrl: props.callbackUrl || '/home'
-    });
+      // usertype: "Agent",
+    };
 
-    if (res?.ok) {
-      console.log(res);
-      router.push("/home");
-    } else if (res?.status === 401) {
-      console.log(res);
-      toast({
-        title: "Error",
-        description: "Invalid credentials provided",
-        variant: "destructive",
-      });
-    } else {
-      console.log(res);
+    try {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_HOST}`, user);
+
+      if (res.data.success === "1") {
+        const role = res.data.role;
+        handleLogin(res.data.userid, res.data.userKey, role);
+
+        if (role === "1") {
+          router.push("/home/agents");
+        } else if (role === "2") {
+          router.push("/home/teams");
+        } else if (role === "5") {
+          router.push("/home/players");
+        } else if (role === "6") {
+          router.push("/home/tournaments");
+        }
+      } else if (res.data.error) {
+        toast({
+          title: "Error",
+          description: res.data.message,
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
       toast({
         title: "Error",
         description: "Unable to sign-in, check your internet connection.",
