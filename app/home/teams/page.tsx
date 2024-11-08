@@ -1,11 +1,10 @@
-import { CurrentForm } from "@/components/teams/home/current-form";
-import { PreviousMatch } from "@/components/teams/home/previous-match";
-import { RecentPayments } from "@/components/teams/home/recent-payments";
-import { SeasonSnapshot } from "@/components/teams/home/season-snapshot";
-import { TopGoals } from "@/components/teams/home/top-goals";
-import { TopPassers } from "@/components/teams/home/top-passers";
-import { UpcomingMatch } from "@/components/teams/home/upcoming-match";
-import React from "react";
+import { TopGoals } from "@/components/teams/top-goals";
+import { TopPassers } from "@/components/teams/top-passers";
+import { CurrentForm } from "@/components/teams/current-form";
+import { PreviousMatch } from "@/components/teams/previous-match";
+import { UpcomingMatch } from "@/components/teams/upcoming-match";
+import { RecentPayments } from "@/components/teams/recent-payments";
+import { SeasonSnapshot } from "@/components/teams/season-snapshot";
 
 const TeamsPage = () => {
   return (
