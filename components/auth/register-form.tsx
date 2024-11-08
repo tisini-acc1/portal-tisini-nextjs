@@ -54,7 +54,7 @@ const RegisterForm = ({ role }: { role: string }) => {
   }
 
   const onSubmit = async (data: inputType) => {
-    const { cfmPassword, ...user } = data;
+    const { ...user } = data;
     const newUser = {
       action: "registeruser",
       id_no: "",

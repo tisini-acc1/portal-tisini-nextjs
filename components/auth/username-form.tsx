@@ -71,6 +71,7 @@ const UsernameForm = () => {
         });
       }
     } catch (error) {
+      console.log(error);
       toast({
         title: "Error",
         description: "Unable to sign-in, check your internet connection.",
@@ -87,9 +88,9 @@ const UsernameForm = () => {
           name="username"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username:</FormLabel>
+              <FormLabel>Phone number:</FormLabel>
               <FormControl>
-                <Input type="text" placeholder="jonte" {...field} />
+                <Input type="text" placeholder="0700000000" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

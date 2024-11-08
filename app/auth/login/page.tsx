@@ -34,15 +34,15 @@ const LoginPage = () => {
       <CardContent>
         <Tabs defaultValue="username">
           <TabsList className="grid grid-cols-2 w-full">
-            <TabsTrigger value="username">Username</TabsTrigger>
-            <TabsTrigger value="email">Email</TabsTrigger>
+            <TabsTrigger value="username">Phone number</TabsTrigger>
+            {/* <TabsTrigger value="email">Email</TabsTrigger> */}
           </TabsList>
           <TabsContent value="username">
             <UsernameForm />
           </TabsContent>
-          <TabsContent value="email">
+          {/* <TabsContent value="email">
             <EmailForm />
-          </TabsContent>
+          </TabsContent> */}
         </Tabs>
       </CardContent>
 
