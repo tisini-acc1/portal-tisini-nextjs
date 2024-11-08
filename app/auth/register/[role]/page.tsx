@@ -9,6 +9,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import RegisterForm from "../../../../components/auth/register-form";
+import React from "react";
 
 type RegProps = {
   params: {
@@ -16,7 +17,7 @@ type RegProps = {
   };
 };
 
-const RegisterPage = ({ params: { role } }: RegProps) => {
+const RegisterPage: React.FC<RegProps> = async ({ params: { role } }) => {
   return (
     <Card className="w-[350px] md:w-[400px] mb-3">
       <CardHeader>
