@@ -9,14 +9,12 @@ import { navigation } from "./constants";
 import SigninButton from "./signin-button";
 
 const Header = () => {
-  const [bg, setBg] = useState(false);
+  // const [bg, setBg] = useState(false);
   const [mobileNav, setMobileNav] = useState(false);
 
   return (
     <header
-      className={`${
-        bg ? "bg-black" : "bg-none"
-      } fixed left-0 w-full z-20 transition-all duration-200`}
+      className={`${"bg-black"} fixed left-0 w-full z-20 transition-all duration-200`}
     >
       <div className="max-w-[1200px] mx-auto p-3">
         <div className="flex items-center justify-between">
