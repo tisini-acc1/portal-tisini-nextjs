@@ -12,12 +12,12 @@ import RegisterForm from "../../../../components/auth/register-form";
 import React from "react";
 
 type RegProps = {
-  params: {
-    role: string;
-  };
+  params: Promise<{ role: string }>;
 };
 
-const RegisterPage: React.FC<RegProps> = async ({ params: { role } }) => {
+export default async function RegisterPage({ params }: RegProps) {
+  const { role } = await params;
+
   return (
     <Card className="w-[350px] md:w-[400px] mb-3">
       <CardHeader>
@@ -45,6 +45,4 @@ const RegisterPage: React.FC<RegProps> = async ({ params: { role } }) => {
       </CardFooter>
     </Card>
   );
-};
-
-export default RegisterPage;
+}
