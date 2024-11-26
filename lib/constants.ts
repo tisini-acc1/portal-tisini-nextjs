@@ -1,12 +1,17 @@
 import {
+  BookText,
+  Calendar,
   Calendar1,
-  Command,
+  // Command,
+  File,
   Gamepad,
   Home,
-  LifeBuoy,
-  Map,
+  // LifeBuoy,
+  // Map,
+  PersonStanding,
   PieChart,
-  Send,
+  // PlaySquare,
+  // Send,
   ShieldHalf,
 } from "lucide-react";
 
@@ -83,13 +88,23 @@ export const COMPS_ITEMS = [
     isActive: true,
   },
   {
-    title: "Admin",
-    url: "#",
-    icon: Map,
+    title: "Competitions",
+    url: "/home/competitions/leagues",
+    icon: BookText,
   },
   {
-    title: "Competitions",
-    url: "#",
-    icon: Send,
+    title: "Teams",
+    url: "/home/competitions/teams",
+    icon: File,
+  },
+  {
+    title: "Fixtures",
+    url: "/home/competitions/fixtures",
+    icon: Calendar,
+  },
+  {
+    title: "Players",
+    url: "/home/competitions/players",
+    icon: PersonStanding,
   },
 ];
