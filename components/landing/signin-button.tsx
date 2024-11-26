@@ -26,7 +26,7 @@ const SigninButton = () => {
 
   return (
     <div className="flex gap-4 ml-auto items-center">
-      <button className="ml-8 p-2 px-4 flex items-center text-sm border rounded-sm hover:bg-purple-800">
+      <button className="ml-8 p-2 px-4 flex items-center text-white text-sm border rounded-sm hover:bg-purple-800">
         <Link href="/auth/login">Log In</Link>
       </button>
 

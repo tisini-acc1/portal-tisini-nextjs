@@ -7,6 +7,7 @@ import { Menu, X } from "lucide-react";
 import NavMobile from "./nav-mobile";
 import { navigation } from "./constants";
 import SigninButton from "./signin-button";
+import Image from "next/image";
 
 const Header = () => {
   // const [bg, setBg] = useState(false);
@@ -14,11 +15,13 @@ const Header = () => {
 
   return (
     <header
-      className={`${"bg-black"} fixed left-0 w-full z-20 transition-all duration-200`}
+      className={`${"bg-black/10"} fixed left-0 w-full z-20 transition-all duration-200`}
     >
       <div className="max-w-[1200px] mx-auto p-3">
         <div className="flex items-center justify-between">
-          <Link href="/">Tisini</Link>
+          <Link href="/">
+            <Image src={"/Tisini.png"} alt="Tisini" width={100} height={100} />
+          </Link>
 
           <div
             onClick={() => setMobileNav(!mobileNav)}

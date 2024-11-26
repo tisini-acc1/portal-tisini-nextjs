@@ -88,34 +88,60 @@ type Role = {
 type FixtureTeam = {
   id: number;
   team: {
-      id: string;
-      team_name: string;
-  },
+    id: string;
+    team_name: string;
+  };
   travelling_squad: [];
-}
+};
 
 type Fixture = {
   id: number;
   fixtures: {
+    id: number;
+    fixture_data: {
       id: number;
-      fixture_data: {
-          id: number;
-          game_date: string;
-          matchday: string;
-          game_status: string;
-          score_home_team: null | number;
-          score_away_team: null | number;
-          field: {
-              id: number;
-              name: string;
-          },
-          fixture_type: string;
-          referees: [];
-      },
-      teams: {
-          id: number;
-          home_team: FixtureTeam;
-          away_team: FixtureTeam;
-      }
-  }
-}
+      game_date: string;
+      matchday: string;
+      game_status: string;
+      score_home_team: null | number;
+      score_away_team: null | number;
+      field: {
+        id: number;
+        name: string;
+      };
+      fixture_type: string;
+      referees: [];
+    };
+    teams: {
+      id: number;
+      home_team: FixtureTeam;
+      away_team: FixtureTeam;
+    };
+  };
+};
+
+type NavItem = {
+  title: string;
+  url: string;
+  icon: React.ForwardRefExoticComponent<
+    Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
+  >;
+  isActive?: boolean;
+};
+
+type SidebarData = {
+  user: {
+    name: string;
+    email: string;
+    avatar: string;
+  };
+  navMain: NavItem[];
+  navSecondary: NavItem[];
+  projects: {
+    name: string;
+    url: string;
+    icon: React.ForwardRefExoticComponent<
+      Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
+    >;
+  }[];
+};

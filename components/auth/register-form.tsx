@@ -72,7 +72,7 @@ const RegisterForm = ({ role }: { role: string }) => {
 
     if (res.error === "0") {
       toast({ description: `${res.message}` });
-      router.push("/auth/login");
+      router.push("/auth/verify");
     } else {
       toast({ description: `${res.message}`, variant: "destructive" });
     }

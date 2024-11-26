@@ -1,24 +1,24 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
   BookOpen,
-  Bot,
-  Command,
   Frame,
   LifeBuoy,
+  LucideProps,
   Map,
   PieChart,
   Send,
-  Settings2,
-  SquareTerminal,
 } from "lucide-react";
 
+import { getUserRole } from "@/actions/actions";
 import { NavMain } from "@/components/sidebar/nav-main";
-// import { NavProjects } from "@/components/nav-projects";
-import { NavSecondary } from "@/components/sidebar/nav-secondary";
 import { NavUser } from "@/components/sidebar/nav-user";
+// import { NavProjects } from "@/components/nav-projects";
+import { COMPS_ITEMS, TEAMS_ITEMS } from "@/lib/constants";
+import { NavSecondary } from "@/components/sidebar/nav-secondary";
 import {
   Sidebar,
   SidebarContent,
@@ -28,103 +28,25 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { getUserRole } from "@/actions/actions";
 
-const data = {
+interface NavItem {
+  title: string;
+  url: string;
+  icon: React.ForwardRefExoticComponent<
+    Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
+  >;
+  isActive: boolean;
+}
+
+const data: SidebarData = {
   user: {
     name: "McMaina",
     email: "m@example.com",
     avatar: "/shadcn.jpg",
   },
-  navMain: [
-    {
-      title: "Home",
-      url: "#",
-      icon: SquareTerminal,
-      isActive: true,
-      // items: [
-      //   {
-      //     title: "History",
-      //     url: "#",
-      //   },
-      //   {
-      //     title: "Starred",
-      //     url: "#",
-      //   },
-      //   {
-      //     title: "Settings",
-      //     url: "#",
-      //   },
-      // ],
-    },
-    {
-      title: "Tournaments",
-      url: "#",
-      icon: Bot,
-      // items: [
-      //   {
-      //     title: "Genesis",
-      //     url: "#",
-      //   },
-      //   {
-      //     title: "Explorer",
-      //     url: "#",
-      //   },
-      //   {
-      //     title: "Quantum",
-      //     url: "#",
-      //   },
-      // ],
-    },
-    {
-      title: "Admin",
-      url: "#",
-      icon: BookOpen,
-      // items: [
-      //   {
-      //     title: "Introduction",
-      //     url: "#",
-      //   },
-      //   {
-      //     title: "Get Started",
-      //     url: "#",
-      //   },
-      //   {
-      //     title: "Tutorials",
-      //     url: "#",
-      //   },
-      //   {
-      //     title: "Changelog",
-      //     url: "#",
-      //   },
-      // ],
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
-  ],
+  navMain: [],
   navSecondary: [
-    { title: "Documentation", url: "#", icon: BookOpen },
+    { title: "Definitions", url: "#", icon: BookOpen },
     {
       title: "Support",
       url: "#",
@@ -166,7 +88,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
     fetchUserRole();
   }, []);
-  console.log(userRole);
+
+  data.navMain =
+    userRole === "2" ? TEAMS_ITEMS : userRole === "6" ? COMPS_ITEMS : [];
+
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
@@ -174,8 +99,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <a href="#">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <Command className="size-4" />
+                <div className="flex aspect-square size-10 items-center justify-center rounded-lg bg-sidebar-border text-sidebar-primary-foreground">
+                  <Image
+                    src={"/Tisini.png"}
+                    alt="Tisini"
+                    width={70}
+                    height={70}
+                  />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">Tisini</span>

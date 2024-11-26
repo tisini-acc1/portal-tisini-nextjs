@@ -61,7 +61,7 @@ const UsernameForm = () => {
         } else if (role === "5") {
           router.push("/home/players");
         } else if (role === "6") {
-          router.push("/home/tournaments");
+          router.push("/home/competitions");
         }
       } else if (res.data.error) {
         toast({
