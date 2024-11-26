@@ -7,7 +7,7 @@ import {
   BookOpen,
   Frame,
   LifeBuoy,
-  LucideProps,
+  // LucideProps,
   Map,
   PieChart,
   Send,
@@ -29,14 +29,14 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-interface NavItem {
-  title: string;
-  url: string;
-  icon: React.ForwardRefExoticComponent<
-    Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
-  >;
-  isActive: boolean;
-}
+// interface NavItem {
+//   title: string;
+//   url: string;
+//   icon: React.ForwardRefExoticComponent<
+//     Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
+//   >;
+//   isActive: boolean;
+// }
 
 const data: SidebarData = {
   user: {
