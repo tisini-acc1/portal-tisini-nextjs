@@ -52,3 +52,10 @@ export async function getUserRole() {
   const role = cookieStore.get("session_role")?.value;
   return role ? role : null;
 }
+
+export async function getToken() {
+  const cookieStore = await cookies();
+
+  const token = cookieStore.get("session_access_token")?.value;
+  return token ? token : null;
+}

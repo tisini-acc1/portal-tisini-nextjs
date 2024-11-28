@@ -1,6 +1,6 @@
 import { getToken } from "@/actions/actions";
 
-const apiService = {
+const apiPHP = {
   get: async function (url?: string, base?: boolean): Promise<any> {
     const baseUrl = base
       ? process.env.NEXT_PUBLIC_DJANGO_BASE_URL || ""
@@ -27,20 +27,18 @@ const apiService = {
     });
   },
 
-  post: async function (data: any, url?: string, base?: boolean): Promise<any> {
+  post: async function (data: any): Promise<any> {
     const token = await getToken();
 
-    const baseUrl = base
-      ? process.env.NEXT_PUBLIC_DJANGO_BASE_URL || ""
-      : process.env.NEXT_PUBLIC_API_HOST || "";
-    const path = url ? `${baseUrl}${url}` : baseUrl;
+    const baseUrl = process.env.NEXT_PUBLIC_API_HOST || "";
+    const path = baseUrl ? `${baseUrl}?gettoken=${token}` : baseUrl;
 
     console.log("post", path, data);
 
     return new Promise((resolve, reject) => {
       fetch(path, {
         method: "POST",
-        body: data,
+        body: JSON.stringify(data),
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -59,4 +57,4 @@ const apiService = {
   },
 };
 
-export default apiService;
+export default apiPHP;

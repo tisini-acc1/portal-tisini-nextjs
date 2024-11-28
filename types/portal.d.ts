@@ -1,3 +1,16 @@
+type Competition = {
+  tournament_id: string;
+  date_created: string;
+  date_updated: string;
+  created_by: string;
+  position: string;
+  status: string;
+};
+
+//
+// OLD API
+//
+
 type Team = {
   id: string;
   team_name: string;

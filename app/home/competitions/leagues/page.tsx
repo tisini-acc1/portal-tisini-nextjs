@@ -1,6 +1,10 @@
-import React from "react";
+import tournamentService from "@/services/tournament.service";
 
-const CompetitionsPage = () => {
+const CompetitionsPage = async () => {
+  const tournaments = await tournamentService.getTournaments();
+
+  console.log("tourn", tournaments.data);
+
   return <div>CompetitionsPage</div>;
 };
 
