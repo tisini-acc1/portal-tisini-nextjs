@@ -50,7 +50,7 @@ const SelectTournament = () => {
           {value
             ? tournaments.find(
                 (tournament) => tournament.tournament_id === value
-              )?.tournament_id
+              )?.tournament
             : "Select tournament..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
@@ -70,11 +70,11 @@ const SelectTournament = () => {
                     setOpen(false);
                   }}
                 >
-                  {tournament.tournament_id}
+                  {tournament.tournament}
                   <Check
                     className={cn(
                       "ml-auto",
-                      value === tournament.tournament_id
+                      value === tournament.tournament
                         ? "opacity-100"
                         : "opacity-0"
                     )}
