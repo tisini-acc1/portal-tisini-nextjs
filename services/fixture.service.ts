@@ -3,7 +3,7 @@ import apiPHP from "./api-php";
 class FixtureService {
   async getFixtures(): Promise<Fixture[]> {
     try {
-      const res = await apiPHP.post({ action: "fixtures", tournament: 1 });
+      const res = await apiPHP.post({ action: "fixtures", tournament: 31 });
 
       return res;
     } catch (error: any) {

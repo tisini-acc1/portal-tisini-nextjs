@@ -1,5 +1,7 @@
 import tournamentService from "@/services/tournament.service";
 
+export const dynamic = "force-dynamic";
+
 const CompetitionsPage = async () => {
   const tournaments = await tournamentService.getTournaments();
 
