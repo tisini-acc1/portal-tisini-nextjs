@@ -4,6 +4,23 @@ type Role = {
   img: string;
 };
 
+type SidebarData = {
+  user: {
+    name: string;
+    email: string;
+    avatar: string;
+  };
+  navMain: NavItem[];
+  navSecondary: NavItem[];
+  projects: {
+    name: string;
+    url: string;
+    icon: React.ForwardRefExoticComponent<
+      Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
+    >;
+  }[];
+};
+
 type Competition = {
   tournament_id: string;
   tournament: string;
@@ -179,21 +196,4 @@ type Fixture = {
 //     Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
 //   >;
 //   isActive?: boolean;
-// };
-
-// type SidebarData = {
-//   user: {
-//     name: string;
-//     email: string;
-//     avatar: string;
-//   };
-//   navMain: NavItem[];
-//   navSecondary: NavItem[];
-//   projects: {
-//     name: string;
-//     url: string;
-//     icon: React.ForwardRefExoticComponent<
-//       Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
-//     >;
-//   }[];
 // };
