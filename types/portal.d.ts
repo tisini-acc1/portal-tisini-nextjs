@@ -1,3 +1,9 @@
+type Role = {
+  id: number;
+  role: string;
+  img: string;
+};
+
 type Competition = {
   tournament_id: string;
   tournament: string;
@@ -129,12 +135,6 @@ type Fixture = {
 //     team_name: string;
 //   };
 //   position: string;
-// };
-
-// type Role = {
-//   id: number;
-//   role: string;
-//   img: string;
 // };
 
 // type FixtureTeam = {
