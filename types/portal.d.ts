@@ -8,6 +8,25 @@ type Competition = {
   status: string;
 };
 
+type CompTeam = {
+  id: string;
+  name: string;
+  date_created: string;
+};
+
+type Serie = {
+  id: string;
+  name: string;
+  ranker: string;
+  tournament: string;
+  date_created: string;
+  date_updated: string;
+  created_by: string;
+  date_from: string | null;
+  date_to: null | string;
+  status: string;
+};
+
 type Fixture = {
   id: string;
   team1_id: string;

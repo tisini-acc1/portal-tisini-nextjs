@@ -1,10 +1,8 @@
 import { getToken } from "@/actions/actions";
 
 const apiService = {
-  get: async function (url?: string, base?: boolean): Promise<any> {
-    const baseUrl = base
-      ? process.env.NEXT_PUBLIC_DJANGO_BASE_URL || ""
-      : process.env.NEXT_PUBLIC_API_HOST || "";
+  get: async function (url?: string): Promise<any> {
+    const baseUrl = process.env.NEXT_PUBLIC_DJANGO_BASE_URL || "";
     console.log("get", url);
 
     return new Promise((resolve, reject) => {

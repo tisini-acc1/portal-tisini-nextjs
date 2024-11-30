@@ -32,7 +32,7 @@ const apiPHP = {
 
     const baseUrl = process.env.NEXT_PUBLIC_API_HOST || "";
     const path = baseUrl ? `${baseUrl}?gettoken=${token}` : baseUrl;
-
+    console.log(token);
     console.log("post", path, data);
 
     return new Promise((resolve, reject) => {
