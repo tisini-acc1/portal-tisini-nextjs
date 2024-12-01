@@ -16,6 +16,8 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { cookies } from "next/headers";
+import SelectTournament from "@/components/sidebar/select-tournament";
+import tournamentService from "@/services/tournament.service";
 
 export const metadata: Metadata = {
   title: "Tisini portal",
@@ -30,11 +32,13 @@ export default async function DashboardLayout({
   const cookieStore = await cookies();
   const defaultOpen = cookieStore.get("sidebar:state")?.value === "true";
 
+  const tournaments = await tournamentService.getTournaments();
+
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2">
+        <header className="flex h-16 shrink-0 items-center justify-between gap-2">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
@@ -50,6 +54,8 @@ export default async function DashboardLayout({
               </BreadcrumbList>
             </Breadcrumb>
           </div>
+
+          <SelectTournament tournaments={tournaments} />
         </header>
 
         <div className="p-4 pt-0">{children}</div>

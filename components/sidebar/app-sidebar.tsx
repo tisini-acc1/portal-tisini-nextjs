@@ -28,7 +28,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import SelectTournament from "./select-tournament";
+// import SelectTournament from "./select-tournament";
 
 // interface NavItem {
 //   title: string;
@@ -119,7 +119,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarMenuItem>
         </SidebarMenu>
 
-        {userRole === "6" && <SelectTournament />}
+        {/* {userRole === "6" && <SelectTournament />} */}
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
