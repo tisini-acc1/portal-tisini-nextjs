@@ -1,5 +1,5 @@
 import { PlayersTable } from "@/components/tournaments/players/players-table";
-import { getPlayers, getTournamentTeams } from "@/lib/actions/django.actions";
+import { getPlayers, getTournamentTeams } from "@/actions/django-actions";
 import { columns } from "./columns";
 import FilterTournTeams from "@/components/tournaments/filter-tourn-teams";
 

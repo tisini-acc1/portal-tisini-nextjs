@@ -9,7 +9,7 @@ import {
 import {
   getTournamentSeries,
   getTournamentTeams,
-} from "@/lib/actions/django.actions";
+} from "@/actions/django-actions";
 
 const TeamsPage = async () => {
   const teamData = getTournamentTeams(1, 14);
