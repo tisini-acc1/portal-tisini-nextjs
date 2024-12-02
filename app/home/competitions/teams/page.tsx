@@ -1,5 +1,3 @@
-import { getToken } from "@/actions/actions";
-import apiService from "@/services/api-service";
 import {
   Select,
   SelectContent,
@@ -8,17 +6,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  getTournamentSeries,
+  getTournamentTeams,
+} from "@/lib/actions/django.actions";
 
 const TeamsPage = async () => {
-  const token = await getToken();
-  const data: Promise<CompTeam[]> = apiService.get(
-    `/tournaments/${token}/1/series/14/teams/`
-  );
-  const seriesData: Promise<Serie[]> = apiService.get(
-    `/tournaments/${token}/1/series/`
-  );
+  const teamData = getTournamentTeams(1, 14);
+  const seriesData = getTournamentSeries(1);
 
-  const teams = await data;
+  const teams = await teamData;
   const series = await seriesData;
 
   return (

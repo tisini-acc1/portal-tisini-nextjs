@@ -1,13 +1,17 @@
 import { PlayersTable } from "@/components/tournaments/players/players-table";
-import { getPlayers } from "@/lib/actions/django.actions";
+import { getPlayers, getTournamentTeams } from "@/lib/actions/django.actions";
 import { columns } from "./columns";
+import FilterTournTeams from "@/components/tournaments/filter-tourn-teams";
 
 const PlayersPage = async () => {
-  const data: Promise<Player[]> = getPlayers(1);
-  const players = await data;
+  const players = await getPlayers(1);
+  const teams = await getTournamentTeams(1, 14);
 
   return (
     <main>
+      <div className="flex justify-end">
+        <FilterTournTeams teams={teams} />
+      </div>
       <PlayersTable columns={columns} data={players} />
     </main>
   );
