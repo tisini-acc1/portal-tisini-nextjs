@@ -1,32 +1,15 @@
-import { getToken } from "@/actions/actions";
-import axios from "axios";
-import React from "react";
+import { PlayersTable } from "@/components/tournaments/players/players-table";
+import { getPlayers } from "@/lib/actions/django.actions";
+import { columns } from "./columns";
 
 const PlayersPage = async () => {
-  const token = await getToken();
-
-  const getTournaments = async () => {
-    try {
-      const res = await axios.get(
-        `https://backend.tisini.co.ke/api/tournaments/${token}/`
-      );
-
-      return res.data;
-      // console.log("server", res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const data: Promise<CompTeam[]> = getTournaments();
-  const tournaments = await data;
+  const data: Promise<Player[]> = getPlayers(1);
+  const players = await data;
 
   return (
-    <>
-      {tournaments.map((item) => (
-        <div key={item.id}>{item.name}</div>
-      ))}
-    </>
+    <main>
+      <PlayersTable columns={columns} data={players} />
+    </main>
   );
 };
 

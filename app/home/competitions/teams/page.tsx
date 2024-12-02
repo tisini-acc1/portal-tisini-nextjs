@@ -20,7 +20,7 @@ const TeamsPage = async () => {
 
   const teams = await data;
   const series = await seriesData;
-  console.log("teams", teams);
+
   return (
     <main>
       <header className="flex justify-end mb-4">

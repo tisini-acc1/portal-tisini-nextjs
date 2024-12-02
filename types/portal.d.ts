@@ -69,6 +69,19 @@ type Fixture = {
   matchtime: string;
 };
 
+type Player = {
+  id: string;
+  player_id: string;
+  pname: string;
+  dob: string;
+  nationality: string;
+  id_no: null | string;
+  team_id: string;
+  current_jersey_no: string;
+  signed_date: string;
+  status: string;
+};
+
 //
 // OLD API
 //
