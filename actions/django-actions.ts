@@ -11,7 +11,7 @@ export const getPlayers = async (teamId: number): Promise<Player[]> => {
   console.log(`${baseURL}/teams/${token}/${teamId}/players/`);
   try {
     const res = await axios.get(`${baseURL}/teams/${token}/${teamId}/players/`);
-
+    console.log(res);
     if (res.status === 200) {
       console.log("server", res.data);
       return res.data;
