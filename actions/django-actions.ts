@@ -8,9 +8,11 @@ import { getToken } from "@/actions/actions";
 export const getPlayers = async (teamId: number): Promise<Player[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_DJANGO_BASE_URL;
-  console.log(`${baseURL}/teams/${token}/${teamId}/players/`);
+
   try {
-    const res = await axios.get(`${baseURL}/teams/${token}/${teamId}/players/`);
+    const res = await axios.get(
+      `${baseURL}/api/teams/${token}/${teamId}/players/`
+    );
     console.log(res);
     if (res.status === 200) {
       console.log("server", res.data);
@@ -33,12 +35,10 @@ export const getTournamentTeams = async (
 ): Promise<CompTeam[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_DJANGO_BASE_URL;
-  console.log(
-    `${baseURL}/tournaments/${token}/${tourna}/series/${serie}/teams/`
-  );
+
   try {
     const res = await axios.get(
-      `${baseURL}/tournaments/${token}/${tourna}/series/${serie}/teams/`
+      `${baseURL}/api/tournaments/${token}/${tourna}/series/${serie}/teams/`
     );
 
     if (res.status === 200) {
@@ -62,7 +62,7 @@ export const getTournamentSeries = async (tourna: number): Promise<Serie[]> => {
 
   try {
     const res = await axios.get(
-      `${baseURL}/tournaments/${token}/${tourna}/series/`
+      `${baseURL}/api/tournaments/${token}/${tourna}/series/`
     );
 
     if (res.status === 200) {
