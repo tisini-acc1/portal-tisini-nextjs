@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 // Define the routes that are protected and public
 const protectedRoutes = ["/home"];
-const publicRoutes = ["/auth/login", "/auth/register"];
+const publicRoutes = ["/auth/login", "/auth/register", "/"];
 
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
