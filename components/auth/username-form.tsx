@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/form";
 import { handleLogin } from "@/actions/actions";
 import { useToast } from "@/hooks/use-toast";
+import { useStore } from "@/lib/store";
 
 const loginSchema = z.object({
   username: z
@@ -30,6 +31,8 @@ const loginSchema = z.object({
 const UsernameForm = () => {
   const router = useRouter();
   const { toast } = useToast();
+
+  const { updateRole } = useStore((state) => state);
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -53,6 +56,7 @@ const UsernameForm = () => {
       if (res.data.success === "1") {
         const role = res.data.role;
         handleLogin(res.data.userid, res.data.userKey, role);
+        updateRole(role);
 
         if (role === "1") {
           router.push("/home/agents");
