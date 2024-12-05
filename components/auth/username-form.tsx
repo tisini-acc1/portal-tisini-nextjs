@@ -58,15 +58,7 @@ const UsernameForm = () => {
         handleLogin(res.data.userid, res.data.userKey, role);
         updateRole(role);
 
-        if (role === "1") {
-          router.replace("/home/agents");
-        } else if (role === "2") {
-          router.replace("/home/teams");
-        } else if (role === "5") {
-          router.replace("/home/players");
-        } else if (role === "6") {
-          router.replace("/home/competitions");
-        }
+        router.push("/home");
       } else if (res.data.error) {
         toast({
           title: "Error",
