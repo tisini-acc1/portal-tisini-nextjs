@@ -13,11 +13,12 @@ export const getPlayers = async (teamId: number): Promise<Player[]> => {
     const res = await axios.get(
       `${baseURL}/api/teams/${token}/${teamId}/players/`
     );
-    console.log(res);
+
     if (res.status === 200) {
       console.log("server", res.data);
       return res.data;
     } else {
+      console.log(res);
       throw new Error(`Failed to fetch players: ${res.status}`);
     }
   } catch (error: any) {
@@ -30,7 +31,7 @@ export const getPlayers = async (teamId: number): Promise<Player[]> => {
 
 // Get Team Players
 export const getTournamentTeams = async (
-  tourna: number,
+  tourna: string,
   serie: number
 ): Promise<CompTeam[]> => {
   const token = await getToken();
@@ -56,7 +57,7 @@ export const getTournamentTeams = async (
 };
 
 // Get Team Players
-export const getTournamentSeries = async (tourna: number): Promise<Serie[]> => {
+export const getTournamentSeries = async (tourna: string): Promise<Serie[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_DJANGO_BASE_URL;
 

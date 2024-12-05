@@ -16,8 +16,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { cookies } from "next/headers";
-import SelectTournament from "@/components/sidebar/select-tournament";
-import tournamentService from "@/services/tournament.service";
+import HomeOptions from "@/components/home/home-options";
 
 export const metadata: Metadata = {
   title: "Tisini portal",
@@ -31,9 +30,8 @@ export default async function DashboardLayout({
 }) {
   const cookieStore = await cookies();
   const defaultOpen = cookieStore.get("sidebar:state")?.value === "true";
-
-  const tournaments = await tournamentService.getTournaments();
-
+  const userRole = cookieStore.get("session_role")?.value;
+  console.log(userRole);
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
       <AppSidebar />
@@ -55,7 +53,7 @@ export default async function DashboardLayout({
             </Breadcrumb>
           </div>
 
-          <SelectTournament tournaments={tournaments} />
+          {userRole === "6" && <HomeOptions />}
         </header>
 
         <div className="p-4 pt-0">{children}</div>

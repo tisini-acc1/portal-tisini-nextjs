@@ -16,16 +16,23 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
+import { useStore } from "@/lib/store";
 
 const SelectTournament = ({ tournaments }: { tournaments: Competition[] }) => {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
-  console.log(tournaments);
+
+  const { updateTournament } = useStore((state) => state);
+
   useEffect(() => {
     if (tournaments && tournaments.length >= 1) {
       setValue(tournaments[0].tournament_id);
     }
   }, [tournaments]);
+
+  useEffect(() => {
+    updateTournament(value);
+  }, [value, tournaments]);
 
   return (
     <div className="pr-4">

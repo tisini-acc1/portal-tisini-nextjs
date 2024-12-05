@@ -12,8 +12,8 @@ import {
 } from "@/actions/django-actions";
 
 const TeamsPage = async () => {
-  const teamData = getTournamentTeams(1, 14);
-  const seriesData = getTournamentSeries(1);
+  const teamData = getTournamentTeams("1", 14);
+  const seriesData = getTournamentSeries("1");
 
   const teams = await teamData;
   const series = await seriesData;
