@@ -59,13 +59,13 @@ const UsernameForm = () => {
         updateRole(role);
 
         if (role === "1") {
-          router.push("/home/agents");
+          router.replace("/home/agents");
         } else if (role === "2") {
-          router.push("/home/teams");
+          router.replace("/home/teams");
         } else if (role === "5") {
-          router.push("/home/players");
+          router.replace("/home/players");
         } else if (role === "6") {
-          router.push("/home/competitions");
+          router.replace("/home/competitions");
         }
       } else if (res.data.error) {
         toast({
