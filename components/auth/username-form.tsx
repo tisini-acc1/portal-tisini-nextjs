@@ -58,7 +58,20 @@ const UsernameForm = () => {
         handleLogin(res.data.userid, res.data.userKey, role);
         updateRole(role);
 
-        router.push("/home");
+        // Route the user based on their role
+        let redirectUrl = "/home"; // Default fallback URL
+        if (role === "1") {
+          redirectUrl = "/home/agents";
+        } else if (role === "2") {
+          redirectUrl = "/home/teams";
+        } else if (role === "5") {
+          redirectUrl = "/home/players";
+        } else if (role === "6") {
+          redirectUrl = "/home/competitions";
+        }
+
+        // Ensure the router replaces current history entry to prevent going back to login
+        router.replace(redirectUrl);
       } else if (res.data.error) {
         toast({
           title: "Error",
