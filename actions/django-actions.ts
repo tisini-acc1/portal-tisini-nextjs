@@ -29,6 +29,29 @@ export const getPlayers = async (teamId: number): Promise<Player[]> => {
   }
 };
 
+// Get Tournaments
+export const getTournaments = async (): Promise<Tournament[]> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_DJANGO_BASE_URL;
+
+  try {
+    const res = await axios.get(`${baseURL}/api/tournaments/${token}/`);
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      console.log(res);
+      throw new Error(`Failed to fetch tournaments: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while fetching tournaments."
+    );
+  }
+};
+
 // Get Team Players
 export const getTournamentTeams = async (
   tourna: string,

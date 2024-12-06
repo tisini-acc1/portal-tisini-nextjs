@@ -40,7 +40,7 @@ export const useStore = create<State & Actions>()(
       updateTournament: (id: string) =>
         set((state) => ({ user: { ...state.user, tournament: id } })),
       updateSeries: (serie: string) =>
-        set((state) => ({ user: { ...state.user, sereis: serie } })),
+        set((state) => ({ user: { ...state.user, series: serie } })),
       updateTeam: (team: string) =>
         set((state) => ({ user: { ...state.user, team: team } })),
     }),

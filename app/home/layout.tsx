@@ -16,7 +16,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { cookies } from "next/headers";
-import HomeOptions from "@/components/home/home-options";
+import Filter from "@/components/home/filter";
 
 export const metadata: Metadata = {
   title: "Tisini portal",
@@ -30,8 +30,7 @@ export default async function DashboardLayout({
 }) {
   const cookieStore = await cookies();
   const defaultOpen = cookieStore.get("sidebar:state")?.value === "true";
-  const userRole = cookieStore.get("session_role")?.value;
-  console.log(userRole);
+
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
       <AppSidebar />
@@ -53,7 +52,7 @@ export default async function DashboardLayout({
             </Breadcrumb>
           </div>
 
-          {userRole === "6" && <HomeOptions />}
+          <Filter />
         </header>
 
         <div className="p-4 pt-0">{children}</div>

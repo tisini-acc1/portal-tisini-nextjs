@@ -31,6 +31,19 @@ type Competition = {
   status: string;
 };
 
+type Tournament = {
+  id: string;
+  name: string;
+  date_created: string;
+  date_updated: string;
+  fixture_type: string | null;
+  created_by: string;
+  date_from: string | null;
+  date_to: string | null;
+  status: string;
+  series: Serie[];
+};
+
 type CompTeam = {
   id: string;
   name: string;

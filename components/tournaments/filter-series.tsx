@@ -12,35 +12,13 @@ import {
   CommandItem,
 } from "cmdk";
 import { ChevronsUpDown, Command, Check } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
-import { getTournamentSeries } from "@/actions/django-actions";
 import { useStore } from "@/lib/store";
 
-const FilterSeries = () => {
+const FilterSeries = ({ series }: { series: Serie[] }) => {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
 
-  const { user, updateSeries } = useStore((state) => state);
-
-  const {
-    data: series,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["series", user?.tournament], // Safely access `user.tournament`
-    queryFn: () => {
-      // Check if `user?.tournament` is available
-      if (!user?.tournament) {
-        return []; // Return an empty array if the tournament is not available
-      }
-      return getTournamentSeries(user.tournament); // Fetch series based on user.tournament
-    },
-    enabled: !!user?.tournament, // Only run the query if user.tournament is available
-  });
-
-  // Log user and series for debugging
-  console.log("user:", user);
-  console.log("series:", series);
+  const { updateSeries } = useStore((state) => state);
 
   useEffect(() => {
     if (value) {
@@ -48,16 +26,6 @@ const FilterSeries = () => {
     }
   }, [value, updateSeries]);
 
-  // Handle loading and error states
-  if (isLoading) {
-    return <div>Loading series...</div>;
-  }
-
-  if (isError) {
-    return <div>Error loading series</div>;
-  }
-
-  console.log(series);
   return (
     <div className="pr-4">
       <Popover open={open} onOpenChange={setOpen}>
