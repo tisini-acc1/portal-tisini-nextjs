@@ -1,27 +1,35 @@
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  getTournamentSeries,
-  getTournamentTeams,
-} from "@/actions/django-actions";
+"use client";
 
-const TeamsPage = async () => {
-  const teamData = getTournamentTeams("1", 14);
-  const seriesData = getTournamentSeries("1");
+import { useQuery } from "@tanstack/react-query";
 
-  const teams = await teamData;
-  const series = await seriesData;
+import { useStore } from "@/lib/store";
+import { getTournamentTeams } from "@/actions/django-actions";
+
+const TeamsPage = () => {
+  const { user } = useStore((state) => state);
+
+  const tourna = user.tournament as string;
+  const serie = user.series;
+
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["teams", tourna, serie],
+    queryFn: () => getTournamentTeams(tourna, serie),
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>;
+  }
+
+  const teams = data ? data : [];
 
   return (
     <main>
       <header className="flex justify-end mb-4">
-        <Select>
+        {/* <Select>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Filter season" />
           </SelectTrigger>
@@ -34,7 +42,7 @@ const TeamsPage = async () => {
               ))}
             </SelectGroup>
           </SelectContent>
-        </Select>
+        </Select> */}
       </header>
 
       <section className="space-y-4">

@@ -29,6 +29,20 @@ export async function handleLogin(
     maxAge: 60 * 60 * 24 * 7, // One week
     path: "/",
   });
+
+  // Return redirect URL based on role
+  switch (role) {
+    case "1":
+      return "/home/agents";
+    case "2":
+      return "/home/teams";
+    case "5":
+      return "/home/players";
+    case "6":
+      return "/home/competitions";
+    default:
+      return "/home";
+  }
 }
 
 export async function resetAuthCookies() {

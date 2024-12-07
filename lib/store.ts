@@ -5,7 +5,7 @@ export type Store = {
   user: string | null;
   role: string | null;
   tournament: string | null;
-  series: string | null;
+  series: string;
   team: string | null;
 };
 
@@ -25,7 +25,7 @@ const initialState = {
   user: null,
   role: null,
   tournament: null,
-  series: null,
+  series: "",
   team: null,
 };
 

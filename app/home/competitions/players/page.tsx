@@ -5,7 +5,7 @@ import FilterTournTeams from "@/components/tournaments/filter-tourn-teams";
 
 const PlayersPage = async () => {
   const players = await getPlayers(1);
-  const teams = await getTournamentTeams("1", 14);
+  const teams = await getTournamentTeams("1", "14");
 
   return (
     <main>

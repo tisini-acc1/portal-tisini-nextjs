@@ -2,13 +2,16 @@
 
 import { z } from "zod";
 import axios from "axios";
+import { useState } from "react";
 import { RotateCw } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { handleLogin } from "@/actions/actions";
 import {
   Form,
   FormControl,
@@ -17,8 +20,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { handleLogin } from "@/actions/actions";
-import { useToast } from "@/hooks/use-toast";
 
 const loginSchema = z.object({
   username: z
@@ -30,6 +31,8 @@ const loginSchema = z.object({
 const UsernameForm = () => {
   const router = useRouter();
   const { toast } = useToast();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -47,26 +50,18 @@ const UsernameForm = () => {
       // usertype: "Agent",
     };
 
+    setIsLoading(true);
+
     try {
       const res = await axios.post(`${process.env.NEXT_PUBLIC_API_HOST}`, user);
 
       if (res.data.success === "1") {
-        const role = res.data.role;
-        handleLogin(res.data.userid, res.data.userKey, role);
+        const redirectUrl = await handleLogin(
+          res.data.userid,
+          res.data.userKey,
+          res.data.role
+        );
 
-        // Route the user based on their role
-        let redirectUrl = "/home"; // Default fallback URL
-        if (role === "1") {
-          redirectUrl = "/home/agents";
-        } else if (role === "2") {
-          redirectUrl = "/home/teams";
-        } else if (role === "5") {
-          redirectUrl = "/home/players";
-        } else if (role === "6") {
-          redirectUrl = "/home/competitions";
-        }
-
-        // Ensure the router replaces current history entry to prevent going back to login
         router.replace(redirectUrl);
       } else if (res.data.error) {
         toast({
@@ -82,6 +77,8 @@ const UsernameForm = () => {
         description: "Unable to sign-in, check your internet connection.",
         variant: "destructive",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -122,7 +119,7 @@ const UsernameForm = () => {
           disabled={form.formState.isSubmitting}
         >
           Login
-          {form.formState.isSubmitting && (
+          {(form.formState.isSubmitting || isLoading) && (
             <RotateCw className="ml-2 w-4 h-4 animate-spin" />
           )}
         </Button>
