@@ -1,7 +1,7 @@
 import OverviewCards from "@/components/tournaments/overview-cards";
 // import TestApp from "./test";
 
-const TournamentsPage = () => {
+const TournamentsPage = async () => {
   return (
     <main>
       <OverviewCards />

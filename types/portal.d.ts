@@ -61,6 +61,10 @@ type Serie = {
   date_from: string | null;
   date_to: null | string;
   status: string;
+  number_of_teams: number;
+  total_players: number;
+  duration: string;
+  matches_played: number;
 };
 
 type Fixture = {

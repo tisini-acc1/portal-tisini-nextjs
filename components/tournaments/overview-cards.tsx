@@ -1,12 +1,49 @@
+"use client";
+
+import { getTournamentOverview } from "@/actions/django-actions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useStore } from "@/lib/store";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 
 const OverviewCards = () => {
+  const [overview, setOverview] = useState<Serie | undefined>();
+  const [subsets, setSubsets] = useState<number>(0);
+
+  const { user } = useStore((state) => state);
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["overview"],
+    queryFn: () => getTournamentOverview(),
+  });
+
+  useEffect(() => {
+    if (data && user.tournament && user.series) {
+      const tourn = data.find(
+        (tournament) => tournament.id === user.tournament
+      );
+      setSubsets(tourn?.series.length || 0);
+      if (tourn) {
+        const serie = tourn.series.find((serie) => serie.id === user.series);
+        setOverview(serie);
+      }
+    }
+  }, [user.tournament, user.series, data]);
+
+  if (isLoading) {
+    return <span>Loading...</span>;
+  }
+
+  if (isError) {
+    return <span>Error!</span>;
+  }
+
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">
-            Tournament Subsets
+            Tournament Seasons
           </CardTitle>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +59,7 @@ const OverviewCards = () => {
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">7</div>
+          <div className="text-2xl font-bold">{subsets}</div>
           {/* <p className="text-xs text-muted-foreground">
             +20.1% from last month
           </p> */}
@@ -49,7 +86,7 @@ const OverviewCards = () => {
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">4 days</div>
+          <div className="text-2xl font-bold">{overview?.duration}</div>
           {/* <p className="text-xs text-muted-foreground">+19% from last month</p> */}
         </CardContent>
       </Card>
@@ -73,7 +110,7 @@ const OverviewCards = () => {
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">5,231</div>
+          <div className="text-2xl font-bold">{overview?.number_of_teams}</div>
           <p className="text-xs text-muted-foreground">
             +201 from last tournament
           </p>
@@ -101,7 +138,7 @@ const OverviewCards = () => {
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">19,503</div>
+          <div className="text-2xl font-bold">{overview?.total_players}</div>
           <p className="text-xs text-muted-foreground">
             +180.1% from last tournament
           </p>
