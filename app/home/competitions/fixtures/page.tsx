@@ -1,13 +1,33 @@
-import fixtureService from "@/services/fixture.service";
+"use client";
+
 import { FixturesTable } from "./fixtures-table";
 import { columns } from "./columns";
 import CreateFixtureModal from "@/components/fixtures/create-fixture-modal";
+import { useQuery } from "@tanstack/react-query";
+import { getTournFixtures } from "@/actions/php-actions";
+import { useEffect, useState } from "react";
+import { useStore } from "@/lib/store";
 
-const FixturesPage = async () => {
-  const data = await fixtureService.getFixtures();
+const FixturesPage = () => {
+  // const data = await fixtureService.getFixtures();
 
-  const fixtures = data.filter((fixture) => fixture.series === "14").reverse();
-  console.log(fixtures[0]);
+  // const fixtures = data.filter((fixture) => fixture.series === "14").reverse();
+  const [fixtures, setFixtures] = useState<Fixture[]>([]);
+
+  const { user } = useStore((state) => state);
+
+  const { data } = useQuery({
+    queryKey: ["fixtures", user.series],
+    queryFn: () => getTournFixtures(parseInt(user.series)),
+  });
+
+  useEffect(() => {
+    if (data) {
+      setFixtures(data);
+    }
+  }, [data]);
+
+  console.log("fixtures: ", user.series);
 
   return (
     <main>

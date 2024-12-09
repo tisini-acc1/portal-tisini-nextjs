@@ -91,20 +91,11 @@ export const COMPS_ITEMS = [
     title: "Competitions",
     url: "/home/competitions/leagues",
     icon: BookText,
-  },
-  {
-    title: "Teams",
-    url: "/home/competitions/teams",
-    icon: File,
-  },
-  {
-    title: "Fixtures",
-    url: "/home/competitions/fixtures",
-    icon: Calendar,
-  },
-  {
-    title: "Players",
-    url: "/home/competitions/players",
-    icon: PersonStanding,
+    items: [
+      { title: "league", url: "/home/competitions/leagues" },
+      { title: "Teams", url: "/home/competitions/teams" },
+      { title: "Fixtures", url: "/home/competitions/fixtures" },
+      { title: "Players", url: "/home/competitions/players" },
+    ],
   },
 ];
