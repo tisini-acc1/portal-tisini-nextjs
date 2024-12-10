@@ -4,9 +4,9 @@ import { persist } from "zustand/middleware";
 export type Store = {
   user: string | null;
   role: string | null;
-  tournament: string | null;
+  tournament: string;
   series: string;
-  team: string | null;
+  team: string;
 };
 
 export type State = {
@@ -24,9 +24,9 @@ export type Actions = {
 const initialState = {
   user: null,
   role: null,
-  tournament: null,
+  tournament: "",
   series: "",
-  team: null,
+  team: "",
 };
 
 export const useStore = create<State & Actions>()(

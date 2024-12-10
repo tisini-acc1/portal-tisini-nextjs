@@ -5,7 +5,7 @@ import axios from "axios";
 import { getToken } from "@/actions/actions";
 
 // Get Team Players
-export const getPlayers = async (teamId: number): Promise<Player[]> => {
+export const getPlayers = async (teamId: string): Promise<Player[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_DJANGO_BASE_URL;
 

@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect } from "react";
-// import { useQuery } from "@tanstack/react-query";
+import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Check, ChevronsUpDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -16,16 +16,44 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
+import { getTournamentTeams } from "@/actions/django-actions";
+import { useStore } from "@/lib/store";
 
-const FilterTournTeams = ({ teams }: { teams: CompTeam[] }) => {
+const FilterTournTeams = () => {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
 
+  const [teams, setTeams] = useState<CompTeam[]>([]);
+
+  const { user, updateTeam } = useStore((state) => state);
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["tournamentTeams", user.tournament, user.series],
+    queryFn: () => getTournamentTeams(user.tournament, user.series),
+  });
+
   useEffect(() => {
-    if (teams && teams.length >= 1) {
-      setValue(teams[0].id);
+    if (data) {
+      setTeams(data);
+      if (data && data.length >= 1) {
+        setValue(data[0].id);
+      }
     }
-  }, [teams]);
+  }, [data]);
+
+  useEffect(() => {
+    if (value) {
+      updateTeam(value);
+    }
+  }, [updateTeam, value]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>No teams for this season</div>;
+  }
 
   return (
     <div className="">
