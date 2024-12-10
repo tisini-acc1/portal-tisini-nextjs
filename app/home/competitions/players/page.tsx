@@ -13,7 +13,7 @@ const PlayersPage = () => {
 
   const { user } = useStore((state) => state);
 
-  const { data, isLoading, isError } = useQuery({
+  const { data } = useQuery({
     queryKey: ["teamPlayers", user.team],
     queryFn: () => getPlayers(user.team),
   });
@@ -24,13 +24,13 @@ const PlayersPage = () => {
     }
   }, [data]);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
 
-  if (isError) {
-    return <div>No Players for selected team</div>;
-  }
+  // if (isError) {
+  //   return <div>No Players for selected team</div>;
+  // }
 
   return (
     <main>
