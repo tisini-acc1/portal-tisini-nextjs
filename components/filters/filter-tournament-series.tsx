@@ -43,7 +43,7 @@ const FilterTournamentSeries = ({
 
   useEffect(() => {
     updateTournament(value);
-  }, [value, tournaments]);
+  }, [updateTournament, value, tournaments]);
 
   useEffect(() => {
     if (value) {
@@ -66,7 +66,7 @@ const FilterTournamentSeries = ({
     if (serieVal) {
       updateSeries(serieVal);
     }
-  }, [serieVal]);
+  }, [updateSeries, serieVal]);
 
   const handleValueChange = (value: string) => {
     setSerieVal(value);

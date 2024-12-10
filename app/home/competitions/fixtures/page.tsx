@@ -23,11 +23,10 @@ const FixturesPage = () => {
 
   useEffect(() => {
     if (data) {
+      // const fix = data.filter((item) => item.league === user.tournament);
       setFixtures(data);
     }
   }, [data]);
-
-  console.log("fixtures: ", user.series);
 
   return (
     <main>
