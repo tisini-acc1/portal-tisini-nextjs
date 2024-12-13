@@ -20,11 +20,12 @@ const PlayersPage = () => {
 
   useEffect(() => {
     if (data) {
-      setPlayers(data);
+      const playersData = data.filter((item) => item.status === "1");
+      setPlayers(playersData);
     }
   }, [data]);
 
-  // if (isLoading) {
+  // if (!data && isLoading) {
   //   return <div>Loading...</div>;
   // }
 

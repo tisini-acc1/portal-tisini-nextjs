@@ -2,6 +2,8 @@
 
 import axios from "axios";
 import { getToken } from "./actions";
+import { z } from "zod";
+import { fixtureSchema } from "@/components/fixtures/create-fixture-modal";
 
 // Get Team Players
 export const getTournaments = async (): Promise<Competition[]> => {
@@ -74,6 +76,28 @@ export const getSeriesTeams = async (tourn: string, serie: string) => {
     console.log(error);
     throw new Error(
       error.message || "An error occurred while fetching tournament teams."
+    );
+  }
+};
+
+// Create Fixtures
+export const createFixture = async (data: CreateFix) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}?gettoken=${token}`, data);
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to create fixture: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while creating fixture."
     );
   }
 };

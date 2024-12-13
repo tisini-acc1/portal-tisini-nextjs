@@ -22,15 +22,15 @@ const OverviewCards = () => {
       const tourn = data.find(
         (tournament) => tournament.id === user.tournament
       );
-      setSubsets(tourn?.series.length || 0);
       if (tourn) {
+        setSubsets(tourn?.series.length || 0);
         const serie = tourn.series.find((serie) => serie.id === user.series);
         setOverview(serie);
       }
     }
   }, [user.tournament, user.series, data]);
 
-  if (isLoading) {
+  if (isLoading && !data) {
     return <span>Loading...</span>;
   }
 

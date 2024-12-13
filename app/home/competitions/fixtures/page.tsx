@@ -23,10 +23,10 @@ const FixturesPage = () => {
 
   useEffect(() => {
     if (data) {
-      // const fix = data.filter((item) => item.league === user.tournament);
-      setFixtures(data);
+      const fix = data.filter((item) => item.league === user.tournament);
+      setFixtures(fix.reverse());
     }
-  }, [data]);
+  }, [user.tournament, data]);
 
   return (
     <main>

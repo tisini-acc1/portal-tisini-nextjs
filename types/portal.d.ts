@@ -86,6 +86,25 @@ type Fixture = {
   matchtime: string;
 };
 
+type CreateFix = {
+  action: string;
+  team1: string;
+  team2: string;
+  gamedate: string;
+  tournamentid: string;
+  matchday: string;
+  fixturetype: string;
+  live: string;
+  teamview: string;
+  series: string;
+  hybrid: string;
+  category: string;
+  group: string;
+  gametime: string;
+  pitch: string;
+  playeradd: string;
+};
+
 type Player = {
   id: string;
   player_id: string;
