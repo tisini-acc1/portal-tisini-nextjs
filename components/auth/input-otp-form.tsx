@@ -37,6 +37,8 @@ export function InputOTPForm() {
 
   const router = useRouter();
 
+  // {"action":"activate","password":"33333" ,"username":"0701737377","accesscode":364774}
+
   function onSubmit(data: z.infer<typeof FormSchema>) {
     toast({
       title: "You submitted the following values:",

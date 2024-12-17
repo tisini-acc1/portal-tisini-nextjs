@@ -5,8 +5,12 @@ import { PreviousMatch } from "@/components/teams/previous-match";
 import { UpcomingMatch } from "@/components/teams/upcoming-match";
 import { RecentPayments } from "@/components/teams/recent-payments";
 import { SeasonSnapshot } from "@/components/teams/season-snapshot";
+import { getUserTeams } from "@/actions/php-actions";
 
-const TeamsPage = () => {
+const TeamsPage = async () => {
+  const teams = await getUserTeams();
+  console.log(teams.length);
+
   return (
     <main className="space-y-6">
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

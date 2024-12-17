@@ -50,6 +50,14 @@ type CompTeam = {
   date_created: string;
 };
 
+type Team = {
+  team_id: string;
+  teamname: string;
+  date_created: string;
+  date_updated: string;
+  status: string;
+};
+
 type Serie = {
   id: string;
   name: string;

@@ -86,7 +86,10 @@ export const createFixture = async (data: CreateFix) => {
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
 
   try {
-    const res = await axios.post(`${baseURL}?gettoken=${token}`, data);
+    const res = await axios.post(`${baseURL}`, {
+      ...data,
+      gettoken: token,
+    });
 
     if (res.status === 200) {
       console.log("server", res.data);
@@ -101,3 +104,45 @@ export const createFixture = async (data: CreateFix) => {
     );
   }
 };
+
+// Create Fixtures
+export const getUserTeams = async (): Promise<Team[]> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}?gettoken=${token}`, {
+      action: "userteam",
+    });
+    console.log(`${baseURL}?gettoken=${token}`);
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fetch user teams: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error.message || "An error occurred while fetching teams.");
+  }
+};
+
+// get all teamplayers {"action":"teamplayers","teamid":"1"}
+// get single teamplayer  {"action":"teamplayers","teamplayerid":1}
+
+// get single team {"action":"teams","teamid":1}
+
+// get single fixture {"action":"fixtures","fixtureid":1}
+
+// get all fixture per team {"action":"fixtures","teamid":1}
+
+// get user Teams{"action":"userteam"}
+
+// players per team per season
+// tournaments per team - nest tournament series
+// fixtures per team per season per tournament
+
+// create,update player for my team
+// create, update team
+// create, update organization

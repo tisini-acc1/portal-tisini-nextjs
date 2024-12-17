@@ -92,7 +92,7 @@ const CreateFixtureModal = () => {
   async function onSubmit(values: z.infer<typeof fixtureSchema>) {
     const date = format(values.gameDate, "yyyy-M-d");
     const fixture = {
-      action: "createfixture",
+      action: "createfix",
       team1: values.home,
       team2: values.away,
       gamedate: date,
@@ -108,29 +108,27 @@ const CreateFixtureModal = () => {
       gametime: values.gameTime,
       pitch: "1",
       playeradd: "0",
+      // gettoken: "1cb86587c54b4736a4ec6388f32af060",
     };
 
-    // createFixture(fixture);
-    console.log(fixture);
-    const baseURL = process.env.NEXT_PUBLIC_API_HOST;
-    try {
-      const res = await axios.post(
-        `${baseURL}?gettoken=c3f29063c205091eb9d8c1c79d76e3eb`,
-        data
-      );
-      console.log(res);
-      if (res.status === 200) {
-        console.log("server", res.data);
-        return res.data;
-      } else {
-        throw new Error(`Failed to create fixture: ${res.status}`);
-      }
-    } catch (error: any) {
-      console.log(error);
-      throw new Error(
-        error.message || "An error occurred while creating fixture."
-      );
-    }
+    createFixture(fixture);
+    // console.log(fixture);
+    // const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+    // try {
+    //   const res = await axios.post(`${baseURL}`, fixture);
+    //   console.log(res);
+    //   if (res.status === 200) {
+    //     console.log("server", res.data);
+    //     return res.data;
+    //   } else {
+    //     throw new Error(`Failed to create fixture: ${res.status}`);
+    //   }
+    // } catch (error: any) {
+    //   console.log(error);
+    //   throw new Error(
+    //     error.message || "An error occurred while creating fixture."
+    //   );
+    // }
   }
 
   return (
