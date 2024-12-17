@@ -36,7 +36,7 @@ const TeamFilter = () => {
     if (team) {
       updateTeam(team.team_id);
     }
-  }, [team]);
+  }, [team, updateTeam]);
 
   if (isLoading) {
     return <div>Loading...</div>;

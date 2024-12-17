@@ -32,7 +32,7 @@ export const TEAMS_ITEMS = [
     url: "#",
     icon: ShieldHalf,
     items: [
-      { title: "Players", url: "#" },
+      { title: "Players", url: "/home/teams/players" },
       { title: "Staffs", url: "#" },
     ],
   },
@@ -51,7 +51,7 @@ export const TEAMS_ITEMS = [
     url: "#",
     icon: Calendar1,
     items: [
-      { title: "Fixtures", url: "#" },
+      { title: "Fixtures", url: "/home/teams/fixtures" },
       { title: "Results", url: "#" },
     ],
   },

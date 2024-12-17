@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 import { format } from "date-fns";
 import {
   Dialog,
-  DialogClose,
+  // DialogClose,
   DialogContent,
   DialogFooter,
   DialogHeader,
@@ -34,13 +34,11 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Calendar } from "../ui/calendar";
 import { cn } from "@/lib/utils";
-import { Checkbox } from "../ui/checkbox";
 import { useStore } from "@/lib/store";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getTournamentTeams } from "@/actions/django-actions";
 import { createFixture } from "@/actions/php-actions";
-import axios from "axios";
 
 export const fixtureSchema = z.object({
   home: z.string().min(1, { message: "Home team is required" }),
@@ -112,23 +110,6 @@ const CreateFixtureModal = () => {
     };
 
     createFixture(fixture);
-    // console.log(fixture);
-    // const baseURL = process.env.NEXT_PUBLIC_API_HOST;
-    // try {
-    //   const res = await axios.post(`${baseURL}`, fixture);
-    //   console.log(res);
-    //   if (res.status === 200) {
-    //     console.log("server", res.data);
-    //     return res.data;
-    //   } else {
-    //     throw new Error(`Failed to create fixture: ${res.status}`);
-    //   }
-    // } catch (error: any) {
-    //   console.log(error);
-    //   throw new Error(
-    //     error.message || "An error occurred while creating fixture."
-    //   );
-    // }
   }
 
   return (

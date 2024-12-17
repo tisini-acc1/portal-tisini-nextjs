@@ -1,10 +1,10 @@
-import { getUserTeams } from "@/actions/php-actions";
+import { getTeamTournaments } from "@/actions/php-actions";
+import TeamPlayers from "@/components/teams/players/team-players";
 
 const TeamPlayersPage = async () => {
-  const teams = await getUserTeams();
-  console.log(teams);
+  const data = await getTeamTournaments();
 
-  return <div>TeamPlayersPage</div>;
+  return <TeamPlayers data={data} />;
 };
 
 export default TeamPlayersPage;
