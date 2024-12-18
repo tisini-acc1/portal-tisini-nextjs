@@ -129,14 +129,16 @@ export const getUserTeams = async (): Promise<Team[]> => {
 };
 
 // Create Fixtures
-export const getTeamTournaments = async (): Promise<TeamTournament[]> => {
+export const getTeamTournaments = async (
+  teamId: string
+): Promise<TeamTournament[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
 
   try {
     const res = await axios.post(`${baseURL}`, {
       action: "teamtournamentseries",
-      teamid: "76",
+      teamid: teamId,
       gettoken: token,
     });
 
@@ -150,6 +152,38 @@ export const getTeamTournaments = async (): Promise<TeamTournament[]> => {
     console.log(error);
     throw new Error(
       error.message || "An error occurred while fetching tournament teams."
+    );
+  }
+};
+
+// Create Fixtures
+export const getTeamPlayers = async (
+  tournId: string,
+  serieId: string,
+  teamId: string
+): Promise<TeamPlayer[]> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "teamplayerseries",
+      tournamentid: tournId,
+      seriesid: serieId,
+      teamid: teamId,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fetch players for team: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while fetching team players."
     );
   }
 };

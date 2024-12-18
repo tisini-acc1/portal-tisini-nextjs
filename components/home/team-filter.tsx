@@ -36,7 +36,14 @@ const TeamFilter = () => {
     if (team) {
       updateTeam(team.team_id);
     }
-  }, [team, updateTeam]);
+  }, [team]);
+
+  const handleTeamChange = (teamId: string) => {
+    const selectedTeam = teams.find((t) => t.team_id === teamId);
+    if (selectedTeam) {
+      setTeam(selectedTeam);
+    }
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -49,7 +56,7 @@ const TeamFilter = () => {
   return (
     <div className="pr-4">
       {teams.length > 1 && (
-        <Select>
+        <Select onValueChange={handleTeamChange}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder={team?.teamname || "Select team"} />
           </SelectTrigger>

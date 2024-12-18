@@ -28,6 +28,15 @@ export const TEAMS_ITEMS = [
     icon: Gamepad,
   },
   {
+    title: "Schedule",
+    url: "/home/teams/fixtures",
+    icon: Calendar1,
+    // items: [
+    //   { title: "Fixtures", url:  },
+    //   { title: "Results", url: "#" },
+    // ],
+  },
+  {
     title: "Team",
     url: "#",
     icon: ShieldHalf,
@@ -46,15 +55,7 @@ export const TEAMS_ITEMS = [
       { title: "Player Stats", url: "#" },
     ],
   },
-  {
-    title: "Schedule",
-    url: "#",
-    icon: Calendar1,
-    items: [
-      { title: "Fixtures", url: "/home/teams/fixtures" },
-      { title: "Results", url: "#" },
-    ],
-  },
+
   // {
   //   title: "Settings",
   //   url: "#",

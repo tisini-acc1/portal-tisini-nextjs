@@ -27,3 +27,12 @@ type TeamFixture = {
   game_status: string;
   total: number;
 };
+
+type TeamPlayer = {
+  id: string;
+  pname: string;
+  dob: string;
+  id_no: string;
+  current_jersey_no: string;
+  signed_date: string;
+};
