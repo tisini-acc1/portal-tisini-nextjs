@@ -6,11 +6,11 @@ import { UpcomingMatch } from "@/components/teams/overview/upcoming-match";
 import { RecentPayments } from "@/components/teams/overview/recent-payments";
 import { SeasonSnapshot } from "@/components/teams/overview/season-snapshot";
 // import { getUserTeams } from "@/actions/php-actions";
-import { getTeamOverview } from "@/actions/django-actions";
+// import { getTeamOverview } from "@/actions/django-actions";
 
 const TeamsPage = async () => {
   // const teams = await getTeamOverview();
-
+  // console.log(teams);
   return (
     <main className="space-y-6">
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

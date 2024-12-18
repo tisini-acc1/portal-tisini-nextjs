@@ -131,7 +131,7 @@ export const getTeamOverview = async () => {
   const baseURL = process.env.NEXT_PUBLIC_DJANGO_BASE_URL;
 
   try {
-    const res = await axios.get(`${baseURL}/api/tournament_overview/${token}/`);
+    const res = await axios.get(`${baseURL}/api/team/${token}/`);
 
     if (res.status === 200) {
       console.log("server", res.data);

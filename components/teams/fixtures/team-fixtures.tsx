@@ -2,19 +2,11 @@
 
 import { useEffect, useState } from "react";
 import FixturesCalendar from "./fixtures-calendar";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { useStore } from "@/lib/store";
 import { useQuery } from "@tanstack/react-query";
-import { getTeamTournaments } from "@/actions/php-actions";
 import TeamSelectHeader from "../team-select-header";
+import { getTeamTournaments } from "@/actions/php-actions";
 
 const TeamFixtures = () => {
   const [series, setSeries] = useState<TeamSeason[]>([]);

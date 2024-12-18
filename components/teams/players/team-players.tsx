@@ -1,21 +1,13 @@
 "use client";
 
-import { getTeamPlayers, getTeamTournaments } from "@/actions/php-actions";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { useStore } from "@/lib/store";
-import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { TeamPlayersTable } from "./team-players-table";
+import { useQuery } from "@tanstack/react-query";
+
 import { columns } from "./columns";
+import { useStore } from "@/lib/store";
 import TeamSelectHeader from "../team-select-header";
+import { TeamPlayersTable } from "./team-players-table";
+import { getTeamPlayers, getTeamTournaments } from "@/actions/php-actions";
 
 const TeamPlayers = () => {
   const [series, setSeries] = useState<TeamSeason[]>([]);
