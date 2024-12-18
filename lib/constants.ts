@@ -37,6 +37,11 @@ export const TEAMS_ITEMS = [
     // ],
   },
   {
+    title: "Results",
+    url: "/home/teams/results",
+    icon: Gamepad,
+  },
+  {
     title: "Team",
     url: "#",
     icon: ShieldHalf,
@@ -46,13 +51,12 @@ export const TEAMS_ITEMS = [
     ],
   },
   {
-    title: "Stats",
+    title: "Visulaization",
     url: "#",
     icon: PieChart,
     items: [
-      { title: "Visulaization", url: "#" },
-      { title: "Team Stats", url: "#" },
-      { title: "Player Stats", url: "#" },
+      { title: "Team", url: "#" },
+      { title: "Player", url: "#" },
     ],
   },
 

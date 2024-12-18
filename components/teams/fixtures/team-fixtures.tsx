@@ -14,14 +14,13 @@ import {
 import { useStore } from "@/lib/store";
 import { useQuery } from "@tanstack/react-query";
 import { getTeamTournaments } from "@/actions/php-actions";
+import TeamSelectHeader from "../team-select-header";
 
 const TeamFixtures = () => {
   const [series, setSeries] = useState<TeamSeason[]>([]);
   const [fixtures, setFixtures] = useState<TeamFixture[]>([]);
-  const [seasonId, setSeasonId] = useState<string | null>(null);
-  const [tournamentId, setTournamentId] = useState<string | null>(null);
 
-  const { user } = useStore((state) => state);
+  const { user, updateSeries, updateTournament } = useStore((state) => state);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["teamTournaments", user.team],
@@ -31,34 +30,28 @@ const TeamFixtures = () => {
   useEffect(() => {
     if (data) {
       setSeries(data[0].season);
-      setSeasonId(data[0].season[0]?.id || null); // Set the default selected season
-      setFixtures(data[0]?.season[0]?.fixture.reverse() || []); // Set default fixtures for the first season
+      updateSeries(data[0].season[0]?.id);
+      updateTournament(data[0].tournamentid);
+      setFixtures(data[0]?.season[0]?.fixture.reverse() || []);
     }
   }, [data]);
 
   useEffect(() => {
-    if (seasonId && data) {
-      const selectedSeason = data[0].season.find(
-        (season) => season.id === seasonId
+    if (data && user.tournament && user.series) {
+      const tournament = data.find(
+        (tournament) => tournament.tournamentid === user.tournament
       );
-      if (selectedSeason) {
-        setFixtures(selectedSeason.fixture.reverse());
-      }
-    }
-  }, [seasonId, data]);
 
-  useEffect(() => {
-    if (tournamentId && data) {
-      const selectedTournament = data.find(
-        (tournament) => tournament.tournamentid === tournamentId
-      );
-      if (selectedTournament) {
-        setSeries(selectedTournament.season);
-        setSeasonId(selectedTournament.season[0]?.id || null); // Set default season for the selected tournament
-        setFixtures(selectedTournament.season[0]?.fixture.reverse() || []);
+      if (tournament) {
+        const season = tournament.season.find(
+          (season) => season.id === user.series
+        );
+        if (season && season.fixture !== fixtures) {
+          setFixtures(season.fixture);
+        }
       }
     }
-  }, [tournamentId, data]);
+  }, [data, fixtures, user.tournament, user.series]);
 
   // Handle loading and error states
   if (isLoading) {
@@ -71,42 +64,10 @@ const TeamFixtures = () => {
 
   return (
     <main className="space-y-8">
-      <header className="flex gap-4">
-        <Select value={tournamentId || ""} onValueChange={setTournamentId}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Select league" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>Leagues</SelectLabel>
-              {data?.map((tournament) => (
-                <SelectItem
-                  key={tournament.tournamentid}
-                  value={tournament.tournamentid}
-                >
-                  {tournament.tournamentname}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-
-        <Select value={seasonId || ""} onValueChange={setSeasonId}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Select season" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>Seasons</SelectLabel>
-              {series.map((serie) => (
-                <SelectItem key={serie.id} value={serie.id}>
-                  {serie.name}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </header>
+      <TeamSelectHeader
+        tournamentsData={data as TeamTournament[]}
+        seriesData={series}
+      />
 
       <section>
         <FixturesCalendar fixtures={fixtures} />

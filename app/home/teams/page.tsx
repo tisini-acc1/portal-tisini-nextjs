@@ -1,15 +1,15 @@
-import { TopGoals } from "@/components/teams/top-goals";
-import { TopPassers } from "@/components/teams/top-passers";
-import { CurrentForm } from "@/components/teams/current-form";
-import { PreviousMatch } from "@/components/teams/previous-match";
-import { UpcomingMatch } from "@/components/teams/upcoming-match";
-import { RecentPayments } from "@/components/teams/recent-payments";
-import { SeasonSnapshot } from "@/components/teams/season-snapshot";
-import { getUserTeams } from "@/actions/php-actions";
+import { TopGoals } from "@/components/teams/overview/top-goals";
+import { TopPassers } from "@/components/teams/overview/top-passers";
+import { CurrentForm } from "@/components/teams/overview/current-form";
+import { PreviousMatch } from "@/components/teams/overview/previous-match";
+import { UpcomingMatch } from "@/components/teams/overview/upcoming-match";
+import { RecentPayments } from "@/components/teams/overview/recent-payments";
+import { SeasonSnapshot } from "@/components/teams/overview/season-snapshot";
+// import { getUserTeams } from "@/actions/php-actions";
+import { getTeamOverview } from "@/actions/django-actions";
 
 const TeamsPage = async () => {
-  const teams = await getUserTeams();
-  console.log(teams.length);
+  // const teams = await getTeamOverview();
 
   return (
     <main className="space-y-6">
