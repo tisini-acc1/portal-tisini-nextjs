@@ -20,3 +20,29 @@ export function calculateYearsOld(dateString: string): number {
   // Return the difference in full years (rounded down)
   return Math.floor(yearsDifference);
 }
+
+// export const getEvent = (arry: Stats, eventId: string) => {
+//   const value = Object.values(arry).filter((item) => item.event_id === eventId);
+
+//   return parseInt(value[0].total);
+// };
+
+// export const getSubEvent = (
+//   array: Stats,
+//   eventId: string,
+//   subEventId: string
+// ) => {
+//   const event = Object.values(array).filter(
+//     (item) => item.event_id === eventId
+//   );
+
+//   const stat = event[0]["sub-event"].filter(
+//     (item) => item.subeventid === subEventId
+//   );
+
+//   return parseInt(stat[0].totalsubevent);
+// };
+
+export function calculatePossession() {
+  return {};
+}

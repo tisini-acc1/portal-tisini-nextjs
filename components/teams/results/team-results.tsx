@@ -4,13 +4,11 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { useStore } from "@/lib/store";
-import TeamSelectHeader from "../team-select-header";
+import PlayerStats from "./player-stats";
+import ResultsHeader from "./results-header";
 import { getTeamTournaments } from "@/actions/php-actions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ResultsHeader from "./results-header";
-import StatsTabs from "../team-stats/stats-tabs";
 import TeamStats from "./team-stats";
-import PlayerStats from "./player-stats";
 
 const TeamResults = () => {
   const [series, setSeries] = useState<TeamSeason[]>([]);

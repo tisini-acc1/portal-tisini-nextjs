@@ -2,8 +2,6 @@
 
 import axios from "axios";
 import { getToken } from "./actions";
-import { z } from "zod";
-import { fixtureSchema } from "@/components/fixtures/create-fixture-modal";
 
 // Get Team Players
 export const getTournaments = async (): Promise<Competition[]> => {
@@ -188,6 +186,31 @@ export const getTeamPlayers = async (
   }
 };
 
+// Create Fixtures
+export const getFixtureStats = async (
+  fixId: string
+): Promise<SingleFixtureStats> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.get(
+      `https://apis.tisini.co.ke/apiagent7.php?event=${fixId}`
+    );
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fixture stats: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while fetching fixture stats."
+    );
+  }
+};
 // get all teamplayers {"action":"teamplayers","teamid":"1"}
 // get single teamplayer  {"action":"teamplayers","teamplayerid":1}
 

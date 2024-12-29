@@ -28,7 +28,7 @@ const ResultsHeader: FC<TeamProps> = ({
 
   console.log(fixtureData);
   return (
-    <header className="flex justify-between">
+    <header className="flex flex-col-reverse md:flex-row gap-4 justify-between">
       <Select value={user.fixture} onValueChange={updateFixture}>
         <SelectTrigger className="w-[280px]">
           <SelectValue placeholder="Select fixture" />
@@ -44,7 +44,7 @@ const ResultsHeader: FC<TeamProps> = ({
         </SelectContent>
       </Select>
 
-      <div className="flex-1 flex gap-4">
+      <div className="flex gap-4">
         <Select value={user.tournament} onValueChange={updateTournament}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Select league" />
@@ -65,7 +65,7 @@ const ResultsHeader: FC<TeamProps> = ({
         </Select>
 
         <Select value={user.series} onValueChange={updateSeries}>
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-[140px]">
             <SelectValue placeholder="Select season" />
           </SelectTrigger>
           <SelectContent>

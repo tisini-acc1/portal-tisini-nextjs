@@ -9,7 +9,7 @@ const RugbyTeamDefense = () => {
         <CardTitle>Defense</CardTitle>
       </CardHeader>
 
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-6">
         <StatsRow hValue={"19"} aValue={"70"} stat={"negative tackles"} />
         <StatsRow hValue={"27"} aValue={"20"} stat={"positive tackles"} />
         <RoundedBar
