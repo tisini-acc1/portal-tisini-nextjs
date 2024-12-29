@@ -6,7 +6,7 @@ type RowProps = {
 
 const StatsRow = ({ hValue, stat, aValue }: RowProps) => {
   return (
-    <div className="w-full flex justify-center items-center bg-gray-50 font-mono">
+    <div className="w-full flex justify-center items-center bg-gray-100 font-mono">
       <div className="bg-[#3498db] px-3 py-1 text-xs font-semibold text-white rounded-sm">
         {hValue}
       </div>
