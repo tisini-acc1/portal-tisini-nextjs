@@ -6,9 +6,9 @@ type PieChartProps = {
 const PieChart = ({ value1, value2 }: PieChartProps) => {
   const radius = 40; // Radius of the pie chart
   const strokeWidth = 20; // Width of the pie chart's stroke (this creates the pie chart look)
-  const circleLength = 2 * Math.PI * radius; // Circumference of the circle
-  const offset1 = (circleLength * value1) / 100; // Length of the first segment
-  const offset2 = (circleLength * value2) / 100; // Length of the second segment
+  // const circleLength = 2 * Math.PI * radius;
+  // const offset1 = (circleLength * value1) / 100;
+  // const offset2 = (circleLength * value2) / 100;
 
   // Create the arc for the first value (this is the 'slice' of the pie for value1)
   const arc1 = `M ${radius} ${strokeWidth / 2} 

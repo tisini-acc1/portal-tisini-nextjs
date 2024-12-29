@@ -10,7 +10,7 @@ const RugbyTeamSetPiece = () => {
         <CardTitle>Set Pieces</CardTitle>
       </CardHeader>
 
-      <CardContent className="space-y-7">
+      <CardContent className="space-y-8">
         <StatsRow hValue={"13"} aValue={"18"} stat={"set pieces won"} />
         <RoundedBar
           hValue={4}

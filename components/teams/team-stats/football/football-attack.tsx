@@ -9,7 +9,7 @@ const FootballTeamAttack = () => {
         <CardTitle>Attack</CardTitle>
       </CardHeader>
 
-      <CardContent className="space-y-5">
+      <CardContent className="space-y-6">
         <RoundedBar
           hValue={8}
           aValue={13}

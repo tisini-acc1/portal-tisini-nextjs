@@ -9,7 +9,7 @@ const FootballTeamPasses = () => {
         <CardTitle>Passing</CardTitle>
       </CardHeader>
 
-      <CardContent className="space-y-7">
+      <CardContent className="space-y-6">
         <RoundedBar
           hValue={65}
           aValue={45}
@@ -25,11 +25,13 @@ const FootballTeamPasses = () => {
           stat={"Progressive pass"}
         />
 
-        <StatsRow hValue={"23"} aValue={"18"} stat={"Throw-in"} />
-
         <StatsRow hValue={"23"} aValue={"18"} stat={"Ball won"} />
 
         <StatsRow hValue={"23"} aValue={"18"} stat={"Ball lost"} />
+
+        <StatsRow hValue={"23"} aValue={"18"} stat={"Throw-in"} />
+
+        <StatsRow hValue={"23"} aValue={"18"} stat={"Long Throw-in"} />
 
         <RoundedBar
           hValue={65}

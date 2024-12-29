@@ -1,15 +1,7 @@
-import PyramidStats from "@/components/shared/charts/pyramid";
 import HorizontalBar from "@/components/shared/horizontal-bar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const RugbyTeamZone = () => {
-  const statsData = {
-    own22: { home: 45, away: 30 },
-    opp22: { home: 36, away: 25 },
-    own50: { home: 36, away: 12 },
-    opp50: { home: 12, away: 34 },
-  };
-
   return (
     <Card className="">
       <CardHeader>

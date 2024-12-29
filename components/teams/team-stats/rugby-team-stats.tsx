@@ -16,7 +16,7 @@ const RugbyTeamStats = ({ data }: { data: SingleFixtureStats }) => {
   return (
     <section className="grid gap-4">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="space-y-4">
+        <div className="space-y-2">
           <TeamStatsHeader scores={scores} details={details} rugby={true} />
           <RugbyTeamDefense />
         </div>

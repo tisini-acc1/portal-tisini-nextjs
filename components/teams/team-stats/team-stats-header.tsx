@@ -12,20 +12,25 @@ type HeaderProps = {
 const TeamStatsHeader = ({ scores, details, rugby }: HeaderProps) => {
   return (
     <Card>
-      <CardContent className="flex flex-col space-y-4">
-        <div className="w-full  flex justify-evenly items-center pt-3 gap-4">
+      <CardContent className="flex flex-col pt-2 space-y-6">
+        <div className="flex justify-between gap-2 text-xs font-mono overflow-hidden whitespace-nowrap">
+          <p className="w-3/4">{details.league}</p>
+          <p className="w-1/4">Round: {details.matchday}</p>
+        </div>
+
+        <div className="w-full  flex justify-evenly items-center gap-4">
           <div className="w-1/3 flex flex-col items-center gap-1">
-            <Image src={"/afc-logo.png"} width={50} height={100} alt="" />
+            <Image src={"/afc-logo.png"} width={45} height={100} alt="" />
             <p className="text-xs text-center w-full font-medium overflow-hidden text-ellipsis whitespace-nowrap">
               {details.team1_name}
             </p>
           </div>
-          <div className="text-1xl font-semibold">
+          <div className="text-2xl font-semibold">
             {scores.Home} : {scores.Away}
           </div>
 
           <div className="w-1/3 flex flex-col items-center gap-1">
-            <Image src={"/afc-logo.png"} width={50} height={100} alt="" />
+            <Image src={"/afc-logo.png"} width={45} height={100} alt="" />
             <p className="text-xs text-center w-full font-medium overflow-hidden text-ellipsis whitespace-nowrap">
               {details.team2_name}
             </p>

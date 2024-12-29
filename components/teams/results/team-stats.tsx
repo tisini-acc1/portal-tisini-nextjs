@@ -3,9 +3,9 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { useStore } from "@/lib/store";
+// import { rugbyData } from "@/actions/fix-data";
 import { getFixtureStats } from "@/actions/php-actions";
 import RugbyTeamStats from "../team-stats/rugby-team-stats";
-import { rugbyData } from "@/actions/fix-data";
 import FootballTeamStats from "../team-stats/football-team-stats";
 
 const TeamStats = () => {
@@ -26,7 +26,7 @@ const TeamStats = () => {
 
   const fixType = data && data["fixture"][0].fixture_type;
 
-  const rugby = rugbyData(data as SingleFixtureStats);
+  // const rugby = rugbyData(data as SingleFixtureStats);
 
   return (
     <>

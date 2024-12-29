@@ -10,7 +10,7 @@ const FootballTeamDefense = () => {
         <CardTitle>Defense</CardTitle>
       </CardHeader>
 
-      <CardContent className="space-y-7">
+      <CardContent className="space-y-8">
         <RoundedBar
           hValue={5}
           aValue={6}
@@ -26,6 +26,8 @@ const FootballTeamDefense = () => {
         <StatsRow hValue={"1"} stat={"Interceptions own half"} aValue={"2"} />
 
         <StatsRow hValue={"1"} stat={"Interceptions opp half"} aValue={"2"} />
+
+        <StatsRow hValue={"1"} aValue={"2"} stat={"Foul won"} />
       </CardContent>
     </Card>
   );

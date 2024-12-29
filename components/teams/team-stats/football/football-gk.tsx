@@ -31,6 +31,14 @@ const FootballTeamGK = () => {
         <RoundedBar
           hValue={5}
           aValue={6}
+          hPercent={67}
+          aPercent={50}
+          stat={"kick-outs"}
+        />
+
+        <RoundedBar
+          hValue={5}
+          aValue={6}
           hPercent={37}
           aPercent={13}
           stat={"Throw-outs"}
