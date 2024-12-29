@@ -20,7 +20,7 @@ const TeamStatsHeader = ({ scores, details, rugby }: HeaderProps) => {
 
         <div className="w-full  flex justify-evenly items-center gap-4">
           <div className="w-1/3 flex flex-col items-center gap-1">
-            <Image src={"/afc-logo.png"} width={45} height={100} alt="" />
+            <Image src={"/homeLogo.png"} width={45} height={100} alt="" />
             <p className="text-xs text-center w-full font-medium overflow-hidden text-ellipsis whitespace-nowrap">
               {details.team1_name}
             </p>
@@ -30,7 +30,7 @@ const TeamStatsHeader = ({ scores, details, rugby }: HeaderProps) => {
           </div>
 
           <div className="w-1/3 flex flex-col items-center gap-1">
-            <Image src={"/afc-logo.png"} width={45} height={100} alt="" />
+            <Image src={"/awayLogo.png"} width={45} height={100} alt="" />
             <p className="text-xs text-center w-full font-medium overflow-hidden text-ellipsis whitespace-nowrap">
               {details.team2_name}
             </p>
