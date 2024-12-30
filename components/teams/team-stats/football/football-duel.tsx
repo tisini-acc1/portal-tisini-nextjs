@@ -14,7 +14,9 @@ const FootballTeamDuel = () => {
           aValue={6}
           hPercent={30}
           aPercent={23}
-          stat={"Ariel Duels"}
+          stat={"Ariel Duels won"}
+          hTotal={11}
+          aTotal={9}
         />
 
         <RoundedBar
@@ -22,7 +24,9 @@ const FootballTeamDuel = () => {
           aValue={6}
           hPercent={30}
           aPercent={23}
-          stat={"Ground Duels"}
+          stat={"Ground Duels won"}
+          hTotal={13}
+          aTotal={7}
         />
       </CardContent>
     </Card>

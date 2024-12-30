@@ -1,5 +1,5 @@
 import RoundedBar from "@/components/shared/rounded-bar";
-import StatsRow from "@/components/shared/stats-row";
+import HorizontalBar from "@/components/shared/horizontal-bar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const FootballTeamPasses = () => {
@@ -16,39 +16,47 @@ const FootballTeamPasses = () => {
           hPercent={56}
           aPercent={87}
           stat={"Complete Pass"}
+          hTotal={70}
+          aTotal={60}
         />
         <RoundedBar
           hValue={65}
           aValue={45}
           hPercent={56}
           aPercent={87}
-          stat={"Progressive pass"}
+          stat={"complete Prog pass"}
+          hTotal={70}
+          aTotal={60}
         />
 
-        <StatsRow hValue={"23"} aValue={"18"} stat={"Ball won"} />
+        <HorizontalBar hValue={"23"} aValue={"18"} stat={"Ball won"} />
 
-        <StatsRow hValue={"23"} aValue={"18"} stat={"Ball lost"} />
+        <HorizontalBar hValue={"23"} aValue={"38"} stat={"Ball lost"} />
 
-        <StatsRow hValue={"23"} aValue={"18"} stat={"Throw-in"} />
+        <HorizontalBar hValue={"23"} aValue={"24"} stat={"Throw-in"} />
 
-        <StatsRow hValue={"23"} aValue={"18"} stat={"Long Throw-in"} />
+        <HorizontalBar hValue={"23"} aValue={"16"} stat={"Long Throw-in"} />
 
         <RoundedBar
           hValue={65}
           aValue={45}
           hPercent={56}
           aPercent={87}
-          stat={"Cross Right"}
+          stat={"complete Cross Right"}
+          hTotal={70}
+          aTotal={60}
         />
         <RoundedBar
           hValue={65}
           aValue={45}
           hPercent={56}
           aPercent={87}
-          stat={"Cross Left"}
+          stat={"complete Cross Left"}
+          hTotal={70}
+          aTotal={60}
         />
 
-        <StatsRow hValue={"23"} aValue={"18"} stat={"Cornerkick"} />
+        <HorizontalBar hValue={"23"} aValue={"16"} stat={"Cornerkicks"} />
       </CardContent>
     </Card>
   );

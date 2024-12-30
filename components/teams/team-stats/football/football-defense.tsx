@@ -1,7 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-import StatsRow from "@/components/shared/stats-row";
 import RoundedBar from "@/components/shared/rounded-bar";
+import HorizontalBar from "@/components/shared/horizontal-bar";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const FootballTeamDefense = () => {
   return (
@@ -16,18 +15,28 @@ const FootballTeamDefense = () => {
           aValue={6}
           hPercent={67}
           aPercent={50}
-          stat={"Tackle won"}
+          stat={"Tackle made"}
+          hTotal={7}
+          aTotal={6}
         />
 
-        <StatsRow hValue={"1"} aValue={"2"} stat={"Clearances"} />
+        <HorizontalBar hValue={"1"} aValue={"2"} stat={"Clearances"} />
 
-        <StatsRow hValue={"1"} stat={"Blocks"} aValue={"2"} />
+        <HorizontalBar hValue={"11"} aValue={"22"} stat={"Blocks"} />
 
-        <StatsRow hValue={"1"} stat={"Interceptions own half"} aValue={"2"} />
+        <HorizontalBar
+          hValue={"21"}
+          aValue={"6"}
+          stat={"Interceptions own half"}
+        />
 
-        <StatsRow hValue={"1"} stat={"Interceptions opp half"} aValue={"2"} />
+        <HorizontalBar
+          hValue={"13"}
+          aValue={"9"}
+          stat={"Interceptions opp half"}
+        />
 
-        <StatsRow hValue={"1"} aValue={"2"} stat={"Foul won"} />
+        <HorizontalBar hValue={"10"} aValue={"2"} stat={"Foul won"} />
       </CardContent>
     </Card>
   );

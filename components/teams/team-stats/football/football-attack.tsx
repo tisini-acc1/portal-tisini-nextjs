@@ -1,5 +1,5 @@
 import RoundedBar from "@/components/shared/rounded-bar";
-import StatsRow from "@/components/shared/stats-row";
+import HorizontalBar from "@/components/shared/horizontal-bar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const FootballTeamAttack = () => {
@@ -16,6 +16,8 @@ const FootballTeamAttack = () => {
           hPercent={43}
           aPercent={57}
           stat={"Attemps inside box"}
+          hTotal={16}
+          aTotal={21}
         />
 
         <RoundedBar
@@ -24,19 +26,21 @@ const FootballTeamAttack = () => {
           hPercent={43}
           aPercent={57}
           stat={"Attemps outside box"}
+          hTotal={16}
+          aTotal={21}
         />
 
-        <StatsRow hValue={"3"} aValue={"2"} stat={"Key Passes"} />
+        <HorizontalBar hValue={"3"} aValue={"2"} stat={"Key Pass"} />
 
-        <StatsRow hValue={"3"} aValue={"2"} stat={"Set-piece chances"} />
+        <HorizontalBar hValue={"3"} aValue={"2"} stat={"Set-piece chance"} />
 
-        <StatsRow hValue={"3"} aValue={"2"} stat={"Freekick 1/3"} />
+        <HorizontalBar hValue={"3"} aValue={"2"} stat={"Freekick 1/3"} />
 
-        <StatsRow hValue={"3"} aValue={"2"} stat={"Touches in opp box"} />
+        <HorizontalBar hValue={"3"} aValue={"2"} stat={"Touch in opp box"} />
 
-        <StatsRow hValue={"3"} aValue={"2"} stat={"Carries in opp box"} />
+        <HorizontalBar hValue={"3"} aValue={"2"} stat={"Carry in opp box"} />
 
-        <StatsRow hValue={"3"} aValue={"2"} stat={"Offsides"} />
+        <HorizontalBar hValue={"3"} aValue={"2"} stat={"Offside"} />
       </CardContent>
     </Card>
   );

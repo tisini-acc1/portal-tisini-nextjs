@@ -19,7 +19,7 @@ const FootballTeamStats = ({ data }: { data: SingleFixtureStats }) => {
           <FootballDisciplineStats />
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-5">
           <FootballTeamPasses />
           <FootballTeamDuel />
         </div>

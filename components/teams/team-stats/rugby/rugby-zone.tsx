@@ -8,7 +8,7 @@ const RugbyTeamZone = () => {
         <CardTitle>Zones of Play</CardTitle>
       </CardHeader>
 
-      <CardContent className="space-y-8">
+      <CardContent className="space-y-3">
         <HorizontalBar hValue={"1"} aValue={"1"} stat={"own 22"} />
         <HorizontalBar hValue={"23"} aValue={"15"} stat={"own 50"} />
         <HorizontalBar hValue={"44"} aValue={"16"} stat={"opp 50"} />

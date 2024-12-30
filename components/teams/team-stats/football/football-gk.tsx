@@ -1,5 +1,5 @@
-import StatsRow from "@/components/shared/stats-row";
 import RoundedBar from "@/components/shared/rounded-bar";
+import HorizontalBar from "@/components/shared/horizontal-bar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const FootballTeamGK = () => {
@@ -10,14 +10,18 @@ const FootballTeamGK = () => {
       </CardHeader>
 
       <CardContent className="space-y-6">
-        <StatsRow hValue={"1"} stat={"Saves"} aValue={"2"} />
+        <HorizontalBar hValue={"2"} aValue={"3"} stat={"Saves"} />
+
+        <HorizontalBar hValue={"2"} aValue={"3"} stat={"Run-outs"} />
 
         <RoundedBar
           hValue={5}
           aValue={6}
           hPercent={67}
-          aPercent={50}
-          stat={"Run-outs"}
+          aPercent={73}
+          stat={"successful claims"}
+          hTotal={8}
+          aTotal={9}
         />
 
         <RoundedBar
@@ -25,24 +29,13 @@ const FootballTeamGK = () => {
           aValue={6}
           hPercent={67}
           aPercent={73}
-          stat={"Claims"}
+          stat={"short Goal kicks"}
+          hTotal={8}
+          aTotal={9}
         />
 
-        <RoundedBar
-          hValue={5}
-          aValue={6}
-          hPercent={67}
-          aPercent={50}
-          stat={"kick-outs"}
-        />
-
-        <RoundedBar
-          hValue={5}
-          aValue={6}
-          hPercent={37}
-          aPercent={13}
-          stat={"Throw-outs"}
-        />
+        <HorizontalBar hValue={"7"} aValue={"3"} stat={"kick-outs"} />
+        <HorizontalBar hValue={"7"} aValue={"3"} stat={"Throw-outs"} />
       </CardContent>
     </Card>
   );

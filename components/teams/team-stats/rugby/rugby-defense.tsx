@@ -1,5 +1,5 @@
-import StatsRow from "@/components/shared/stats-row";
 import RoundedBar from "@/components/shared/rounded-bar";
+import HorizontalBar from "@/components/shared/horizontal-bar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const RugbyTeamDefense = () => {
@@ -10,17 +10,20 @@ const RugbyTeamDefense = () => {
       </CardHeader>
 
       <CardContent className="space-y-5">
-        <StatsRow hValue={"19"} aValue={"70"} stat={"negative tackles"} />
-        <StatsRow hValue={"27"} aValue={"20"} stat={"positive tackles"} />
+        <HorizontalBar hValue={"19"} aValue={"70"} stat={"negative tackles"} />
+        <HorizontalBar hValue={"27"} aValue={"20"} stat={"positive tackles"} />
+
         <RoundedBar
           hValue={46}
           aValue={48}
           hPercent={87}
           aPercent={88}
           stat={"successful tackles"}
+          hTotal={50}
+          aTotal={50}
         />
-        <StatsRow hValue={"6"} aValue={"13"} stat={"missed tackles"} />
-        <StatsRow hValue={"8"} aValue={"6"} stat={"turnovers won"} />
+        <HorizontalBar hValue={"6"} aValue={"13"} stat={"missed tackles"} />
+        <HorizontalBar hValue={"8"} aValue={"6"} stat={"turnovers won"} />
       </CardContent>
     </Card>
   );

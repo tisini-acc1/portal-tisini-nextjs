@@ -1,4 +1,5 @@
 import StatsRow from "@/components/shared/stats-row";
+import HorizontalBar from "@/components/shared/horizontal-bar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const FootballDisciplineStats = () => {
@@ -9,7 +10,7 @@ const FootballDisciplineStats = () => {
       </CardHeader>
 
       <CardContent className="space-y-8">
-        <StatsRow hValue={"4"} aValue={"6"} stat={"Fouls Committed"} />
+        <HorizontalBar hValue={"4"} aValue={"6"} stat={"Fouls Committed"} />
 
         <StatsRow hValue={"4"} aValue={"6"} stat={"Yellow Cards"} />
 
