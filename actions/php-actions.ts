@@ -187,9 +187,7 @@ export const getTeamPlayers = async (
 };
 
 // Create Fixtures
-export const getFixtureStats = async (
-  fixId: string
-): Promise<SingleFixtureStats> => {
+export const getFixtureStats = async (fixId: string): Promise<FixtureData> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
 

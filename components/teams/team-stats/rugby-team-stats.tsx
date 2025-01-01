@@ -8,7 +8,7 @@ import RugbyTeamRestarts from "./rugby/rugby-restart";
 import RugbyTeamSetPiece from "./rugby/rugby-set-piece";
 import RugbyTeamDiscipline from "./rugby/rugby-discipline";
 
-const RugbyTeamStats = ({ data }: { data: SingleFixtureStats }) => {
+const RugbyTeamStats = ({ data }: { data: FixtureData }) => {
   const scores = data["scores"];
   const details = data["fixture"][0];
   // const home = data["home"];

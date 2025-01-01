@@ -6,7 +6,7 @@ import FootballTeamPasses from "./football/football-passing";
 import FootballTeamDefense from "./football/football-defense";
 import FootballDisciplineStats from "./football/football-discipline";
 
-const FootballTeamStats = ({ data }: { data: SingleFixtureStats }) => {
+const FootballTeamStats = ({ data }: { data: FixtureData }) => {
   const scores = data["scores"];
   const details = data["fixture"][0];
   console.log(data);

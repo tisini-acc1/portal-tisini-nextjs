@@ -31,9 +31,9 @@ const TeamStats = () => {
   return (
     <>
       {fixType === "rugby15" || fixType === "rugby7" ? (
-        <RugbyTeamStats data={data as SingleFixtureStats} />
+        <RugbyTeamStats data={data as FixtureData} />
       ) : (
-        <FootballTeamStats data={data as SingleFixtureStats} />
+        <FootballTeamStats data={data as FixtureData} />
       )}
     </>
   );

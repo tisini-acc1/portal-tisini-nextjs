@@ -1,4 +1,4 @@
-export const rugbyData = (data: SingleFixtureStats) => {
+export const rugbyData = (data: FixtureData) => {
   const details = data["fixture"][0];
   const scores = data["scores"];
   // const home = data["home"];

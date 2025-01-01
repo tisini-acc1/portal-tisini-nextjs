@@ -1,4 +1,3 @@
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const PreviousMatch = () => {
@@ -19,22 +18,24 @@ export const PreviousMatch = () => {
           <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
         </svg>
       </CardHeader>
-      <CardContent className="flex flex-row justify-evenly items-center">
-        <div className="flex flex-col ">
-          <Avatar>
-            <AvatarImage src="https://logos-world.net/wp-content/uploads/2020/06/Manchester-United-logo.png" />
-          </Avatar>
-          <span className="text-sm">Manchester United</span>
+      <CardContent className="space-y-4 pt-2 font-mono">
+        <div className="flex items-center gap-4">
+          <p className="text-3xl">Vs</p>
+          <div className="">
+            <p>
+              {/* {user.teamName === fixture.team1_name
+                ? fixture.team2_name
+                : fixture.team1_name} */}
+              Mumbai United
+            </p>
+            <p>
+              {/* {user.teamName === fixture.team1_name ? "Home" : "Away"} */}
+              Away
+            </p>
+          </div>
         </div>
 
-        <div>2-2</div>
-
-        <div className="items-center justify-center flex flex-col">
-          <Avatar>
-            <AvatarImage src="https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Manchester_City_FC_badge.svg/1200px-Manchester_City_FC_badge.svg.png" />
-          </Avatar>
-          <p>Manchester City</p>
-        </div>
+        <p className="text-gray-400 capitalize text-end">won 2-0</p>
       </CardContent>
     </Card>
   );
