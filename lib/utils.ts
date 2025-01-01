@@ -21,11 +21,11 @@ export function calculateYearsOld(dateString: string): number {
   return Math.floor(yearsDifference);
 }
 
-// export const getEvent = (arry: Stats, eventId: string) => {
-//   const value = Object.values(arry).filter((item) => item.event_id === eventId);
+export const getEvent = (arry: Stats, eventId: string) => {
+  const value = Object.values(arry).filter((item) => item.event_id === eventId);
 
-//   return parseInt(value[0].total);
-// };
+  return parseInt(value[0].total);
+};
 
 // export const getSubEvent = (
 //   array: Stats,

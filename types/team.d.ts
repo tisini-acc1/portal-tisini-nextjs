@@ -78,6 +78,19 @@ type FixtureDetails = {
   team2_id: string;
   team2_name: string;
   teamview: string;
+  home_score: string;
+  away_score: string;
+  winner: null | string;
+  start_app: string;
+  hybrid: string;
+  hybridhome: string | null;
+  hybridaway: string | null;
+  lite: string;
+  location_id: string;
+  category: string;
+  groupid: string;
+  matchtime: string;
+  tmvplayer: string;
 };
 
 type SubEvent = {
@@ -88,7 +101,7 @@ type SubEvent = {
   gameidid: string;
 };
 
-type Event = {
+type EventData = {
   event_id: string;
   name: string;
   total: string;
@@ -98,7 +111,7 @@ type Event = {
 };
 
 type Stats = {
-  [eventName: string]: Event;
+  [eventName: string]: EventData;
 };
 
 type Scores = {
@@ -132,6 +145,9 @@ type Lineup = {
   team_player_id: string;
   lineupposition: string;
   red: string;
+  date_created: string;
+  system_user_id: string;
+  GK: string;
 };
 
 type GameHighlights = {
@@ -153,11 +169,11 @@ type GameHighlights = {
   pname: string;
   Jersey_No: string;
   subsubevent_id: string;
-  zone_id: null;
-  tss: null;
+  zone_id: string | null;
+  tss: string | null;
 };
 
-type SingleFixtureStats = {
+type FixtureData = {
   fixture: FixtureDetails[];
   home: Stats;
   away: Stats;

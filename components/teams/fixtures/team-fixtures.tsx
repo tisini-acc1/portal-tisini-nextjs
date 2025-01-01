@@ -1,12 +1,13 @@
 "use client";
 
+import { format } from "date-fns";
 import { useEffect, useState } from "react";
-import FixturesCalendar from "./fixtures-calendar";
+import { useQuery } from "@tanstack/react-query";
 
 import { useStore } from "@/lib/store";
-import { useQuery } from "@tanstack/react-query";
 import TeamSelectHeader from "../team-select-header";
 import { getTeamTournaments } from "@/actions/php-actions";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const TeamFixtures = () => {
   const [series, setSeries] = useState<TeamSeason[]>([]);
@@ -61,11 +62,57 @@ const TeamFixtures = () => {
         seriesData={series}
       />
 
-      <section>
-        <FixturesCalendar fixtures={fixtures} />
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* <FixturesCalendar fixtures={fixtures} /> */}
+        {fixtures.map((fixture) => (
+          <Card
+            key={fixture.id}
+            className={
+              fixture.game_status === "FT" || fixture.game_status === "ended"
+                ? "text-gray-400"
+                : ""
+            }
+          >
+            <CardHeader>
+              <CardTitle>{formattedDate(fixture.game_date)}</CardTitle>
+            </CardHeader>
+
+            <CardContent className="flex flex-col space-y-4">
+              <div className="flex items-center gap-4">
+                <p className="text-3xl">Vs</p>
+                <div className="font-mono">
+                  <p>
+                    {user.teamName === fixture.team1_name
+                      ? fixture.team2_name
+                      : fixture.team1_name}
+                  </p>
+                  <p>
+                    {user.teamName === fixture.team1_name ? "Home" : "Away"}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex justify-between text-xs text-gray-500 whitespace-nowrap">
+                <p
+                  className="w-9/12 overflow-hidden text-ellipsis
+                "
+                >
+                  League
+                </p>{" "}
+                <p className="w-[20%] overflow-hidden text-ellipsis">
+                  Matchday
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
       </section>
     </main>
   );
 };
 
 export default TeamFixtures;
+
+const formattedDate = (dateString: string) => {
+  return format(new Date(dateString), "MMMM dd, yyyy");
+};

@@ -7,6 +7,7 @@ export type Store = {
   tournament: string;
   series: string;
   team: string;
+  teamName: string;
   fixture: string;
 };
 
@@ -20,6 +21,7 @@ export type Actions = {
   updateTournament: (id: string) => void;
   updateSeries: (serie: string) => void;
   updateTeam: (team: string) => void;
+  updateTeamName: (name: string) => void;
   updateFixture: (fixture: string) => void;
 };
 
@@ -29,6 +31,7 @@ const initialState = {
   tournament: "",
   series: "",
   team: "",
+  teamName: "",
   fixture: "",
 };
 
@@ -48,6 +51,8 @@ export const useStore = create<State & Actions>()(
         set((state) => ({ user: { ...state.user, team: team } })),
       updateFixture: (fixture: string) =>
         set((state) => ({ user: { ...state.user, fixture: fixture } })),
+      updateTeamName: (name: string) =>
+        set((state) => ({ user: { ...state.user, teamName: name } })),
     }),
     { name: "store" }
   )
