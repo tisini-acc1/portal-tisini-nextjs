@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { getToken } from "./actions";
+import { footballData } from "./fix-data";
 
 // Get Team Players
 export const getTournaments = async (): Promise<Competition[]> => {

@@ -2,7 +2,7 @@ import StatsRow from "@/components/shared/stats-row";
 import HorizontalBar from "@/components/shared/horizontal-bar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const FootballDisciplineStats = () => {
+const FootballDisciplineStats = ({ data }: { data: FootballDiscipline }) => {
   return (
     <Card className="">
       <CardHeader>
@@ -10,11 +10,23 @@ const FootballDisciplineStats = () => {
       </CardHeader>
 
       <CardContent className="space-y-8">
-        <HorizontalBar hValue={"4"} aValue={"6"} stat={"Fouls Committed"} />
+        <HorizontalBar
+          hValue={data.fouls.home.toString()}
+          aValue={data.fouls.away.toString()}
+          stat={"Fouls Committed"}
+        />
 
-        <StatsRow hValue={"4"} aValue={"6"} stat={"Yellow Cards"} />
+        <StatsRow
+          hValue={data.cards.Homeyellow.toString()}
+          aValue={data.cards.Awayyellow.toString()}
+          stat={"Yellow Cards"}
+        />
 
-        <StatsRow hValue={"1"} aValue={"3"} stat={"Red Cards"} />
+        <StatsRow
+          hValue={data.cards.Homered.toString()}
+          aValue={data.cards.Awayred.toString()}
+          stat={"Red Cards"}
+        />
       </CardContent>
     </Card>
   );

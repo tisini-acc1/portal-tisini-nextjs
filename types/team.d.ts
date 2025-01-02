@@ -196,6 +196,79 @@ type Details = {
   round: string;
   status: string;
   minute: string;
+  hPossession: number;
+  aPossession: number;
+};
+
+type Stat = {
+  home: number;
+  away: number;
+};
+
+type TotalStat = {
+  home: { value: number; total: number };
+  away: { value: number; total: number };
+};
+
+type FootballAttack = {
+  keyPass: Stat;
+  setPiece: Stat;
+  freekick: Stat;
+  boxTouch: Stat;
+  boxCarry: Stat;
+  offside: Stat;
+  shotInBox: TotalStat;
+  shotOutBox: TotalStat;
+};
+
+type FootballDiscipline = {
+  fouls: Stat;
+  cards: Cards;
+};
+
+type FootballPassing = {
+  corner: Stat;
+  ballLost: Stat;
+  ballWon: Stat;
+  throwIn: Stat;
+  longThrowIn: Stat;
+  pass: TotalStat;
+  progPass: TotalStat;
+  crossRight: TotalStat;
+  crossLeft: TotalStat;
+};
+
+type FootballDuels = {
+  aerial: TotalStat;
+  ground: TotalStat;
+};
+
+type FootballDefense = {
+  clearance: Stat;
+  blocks: Stat;
+  foulWon: Stat;
+  intercptOwn: Stat;
+  intercptOpp: Stat;
+  tackles: TotalStat;
+};
+
+type FootballGK = {
+  saves: Stat;
+  runOuts: Stat;
+  kickOuts: Stat;
+  throwOuts: Stat;
+  claims: TotalStat;
+  goalkick: TotalStat;
+};
+
+type FootballData = {
+  details: Details;
+  attack: FootballAttack;
+  discipline: FootballDiscipline;
+  passing: FootballPassing;
+  duels: FootballDuels;
+  defense: FootballDefense;
+  gk: FootballGK;
 };
 
 type RugbyData = {

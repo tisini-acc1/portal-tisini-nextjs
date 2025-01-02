@@ -2,7 +2,7 @@ import RoundedBar from "@/components/shared/rounded-bar";
 import HorizontalBar from "@/components/shared/horizontal-bar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const FootballTeamPasses = () => {
+const FootballTeamPasses = ({ data }: { data: FootballPassing }) => {
   return (
     <Card className="">
       <CardHeader>
@@ -11,52 +11,72 @@ const FootballTeamPasses = () => {
 
       <CardContent className="space-y-6">
         <RoundedBar
-          hValue={65}
-          aValue={45}
+          hValue={data.pass.home.value}
+          aValue={data.pass.away.value}
           hPercent={56}
           aPercent={87}
           stat={"Complete Pass"}
-          hTotal={70}
-          aTotal={60}
+          hTotal={data.pass.home.total}
+          aTotal={data.pass.away.total}
         />
         <RoundedBar
-          hValue={65}
-          aValue={45}
+          hValue={data.progPass.home.value}
+          aValue={data.progPass.away.value}
           hPercent={56}
           aPercent={87}
           stat={"complete Prog pass"}
-          hTotal={70}
-          aTotal={60}
+          hTotal={data.progPass.home.total}
+          aTotal={data.progPass.away.total}
         />
 
-        <HorizontalBar hValue={"23"} aValue={"18"} stat={"Ball won"} />
+        <HorizontalBar
+          hValue={data.ballWon.home.toString()}
+          aValue={data.ballWon.away.toString()}
+          stat={"Ball won"}
+        />
 
-        <HorizontalBar hValue={"23"} aValue={"38"} stat={"Ball lost"} />
+        <HorizontalBar
+          hValue={data.ballLost.home.toString()}
+          aValue={data.ballLost.away.toString()}
+          stat={"Ball lost"}
+        />
 
-        <HorizontalBar hValue={"23"} aValue={"24"} stat={"Throw-in"} />
+        <HorizontalBar
+          hValue={data.throwIn.home.toString()}
+          aValue={data.throwIn.away.toString()}
+          stat={"Throw-in"}
+        />
 
-        <HorizontalBar hValue={"23"} aValue={"16"} stat={"Long Throw-in"} />
+        <HorizontalBar
+          hValue={data.longThrowIn.home.toString()}
+          aValue={data.longThrowIn.away.toString()}
+          stat={"Long Throw-in"}
+        />
 
         <RoundedBar
-          hValue={65}
-          aValue={45}
+          hValue={data.crossRight.home.value}
+          aValue={data.crossRight.away.value}
           hPercent={56}
           aPercent={87}
           stat={"complete Cross Right"}
-          hTotal={70}
-          aTotal={60}
+          hTotal={data.crossRight.home.total}
+          aTotal={data.crossRight.away.total}
         />
         <RoundedBar
-          hValue={65}
-          aValue={45}
+          hValue={data.crossLeft.home.value}
+          aValue={data.crossLeft.away.value}
           hPercent={56}
           aPercent={87}
           stat={"complete Cross Left"}
-          hTotal={70}
-          aTotal={60}
+          hTotal={data.crossLeft.home.total}
+          aTotal={data.crossLeft.away.total}
         />
 
-        <HorizontalBar hValue={"23"} aValue={"16"} stat={"Cornerkicks"} />
+        <HorizontalBar
+          hValue={data.corner.home.toString()}
+          aValue={data.corner.away.toString()}
+          stat={"Cornerkicks"}
+        />
       </CardContent>
     </Card>
   );

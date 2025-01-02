@@ -16,7 +16,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Create Next App",
+  title: "Tisini Management System",
   description: "Improving African Lives Using Numbers",
 };
 

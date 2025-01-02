@@ -1,7 +1,7 @@
 import RoundedBar from "@/components/shared/rounded-bar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const FootballTeamDuel = () => {
+const FootballTeamDuel = ({ data }: { data: FootballDuels }) => {
   return (
     <Card>
       <CardHeader>
@@ -10,23 +10,23 @@ const FootballTeamDuel = () => {
 
       <CardContent className="space-y-7">
         <RoundedBar
-          hValue={5}
-          aValue={6}
+          hValue={data.aerial.home.value}
+          aValue={data.aerial.away.value}
           hPercent={30}
           aPercent={23}
           stat={"Ariel Duels won"}
-          hTotal={11}
-          aTotal={9}
+          hTotal={data.aerial.home.total}
+          aTotal={data.aerial.away.total}
         />
 
         <RoundedBar
-          hValue={5}
-          aValue={6}
+          hValue={data.ground.home.value}
+          aValue={data.ground.away.value}
           hPercent={30}
           aPercent={23}
-          stat={"Ground Duels won"}
-          hTotal={13}
-          aTotal={7}
+          stat={"Ariel Duels won"}
+          hTotal={data.ground.home.total}
+          aTotal={data.ground.away.total}
         />
       </CardContent>
     </Card>

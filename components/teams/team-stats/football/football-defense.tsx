@@ -2,7 +2,7 @@ import RoundedBar from "@/components/shared/rounded-bar";
 import HorizontalBar from "@/components/shared/horizontal-bar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const FootballTeamDefense = () => {
+const FootballTeamDefense = ({ data }: { data: FootballDefense }) => {
   return (
     <Card className="">
       <CardHeader>
@@ -11,32 +11,44 @@ const FootballTeamDefense = () => {
 
       <CardContent className="space-y-8">
         <RoundedBar
-          hValue={5}
-          aValue={6}
+          hValue={data.tackles.home.value}
+          aValue={data.tackles.away.value}
           hPercent={67}
           aPercent={50}
           stat={"Tackle made"}
-          hTotal={7}
-          aTotal={6}
+          hTotal={data.tackles.home.total}
+          aTotal={data.tackles.away.total}
         />
 
-        <HorizontalBar hValue={"1"} aValue={"2"} stat={"Clearances"} />
-
-        <HorizontalBar hValue={"11"} aValue={"22"} stat={"Blocks"} />
+        <HorizontalBar
+          hValue={data.clearance.home.toString()}
+          aValue={data.clearance.away.toString()}
+          stat={"Clearances"}
+        />
 
         <HorizontalBar
-          hValue={"21"}
-          aValue={"6"}
+          hValue={data.blocks.home.toString()}
+          aValue={data.blocks.away.toString()}
+          stat={"Blocks"}
+        />
+
+        <HorizontalBar
+          hValue={data.intercptOwn.home.toString()}
+          aValue={data.intercptOwn.away.toString()}
           stat={"Interceptions own half"}
         />
 
         <HorizontalBar
-          hValue={"13"}
-          aValue={"9"}
+          hValue={data.intercptOpp.home.toString()}
+          aValue={data.intercptOpp.away.toString()}
           stat={"Interceptions opp half"}
         />
 
-        <HorizontalBar hValue={"10"} aValue={"2"} stat={"Foul won"} />
+        <HorizontalBar
+          hValue={data.foulWon.home.toString()}
+          aValue={data.foulWon.away.toString()}
+          stat={"Foul won"}
+        />
       </CardContent>
     </Card>
   );

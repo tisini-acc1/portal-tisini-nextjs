@@ -18,6 +18,20 @@ const HorizontalBar = ({ hValue, aValue, stat }: BarProps) => {
   // Combine the two team's colors into a linear gradient for the background
   const gradientBackground = `linear-gradient(to right, #3498db ${team1Width}, #e74c3c ${team1Width} ${team2Width})`;
 
+  if (hValue === "0" && aValue === "0") {
+    return (
+      <div>
+        <p className="text-center text-xs capitalize font-mono">{stat}</p>
+        <div className="bg-gray-300 h-5 rounded-full relative">
+          <div className="flex justify-between items-center absolute inset-0 text-white w-full px-2 text-xs">
+            <p>0</p>
+            <p>0</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col w-full">
       <p className="text-center text-xs capitalize font-mono">{stat}</p>

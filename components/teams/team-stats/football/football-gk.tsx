@@ -2,7 +2,7 @@ import RoundedBar from "@/components/shared/rounded-bar";
 import HorizontalBar from "@/components/shared/horizontal-bar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const FootballTeamGK = () => {
+const FootballTeamGK = ({ data }: { data: FootballGK }) => {
   return (
     <Card>
       <CardHeader>
@@ -10,32 +10,48 @@ const FootballTeamGK = () => {
       </CardHeader>
 
       <CardContent className="space-y-6">
-        <HorizontalBar hValue={"2"} aValue={"3"} stat={"Saves"} />
+        <HorizontalBar
+          hValue={data.saves.home.toString()}
+          aValue={data.saves.away.toString()}
+          stat={"Saves"}
+        />
 
-        <HorizontalBar hValue={"2"} aValue={"3"} stat={"Run-outs"} />
+        <HorizontalBar
+          hValue={data.runOuts.home.toString()}
+          aValue={data.runOuts.away.toString()}
+          stat={"Run-outs"}
+        />
 
         <RoundedBar
-          hValue={5}
-          aValue={6}
+          hValue={data.claims.home.value}
+          aValue={data.claims.away.value}
           hPercent={67}
           aPercent={73}
           stat={"successful claims"}
-          hTotal={8}
-          aTotal={9}
+          hTotal={data.claims.home.total}
+          aTotal={data.claims.away.total}
         />
 
         <RoundedBar
-          hValue={5}
-          aValue={6}
+          hValue={data.goalkick.home.value}
+          aValue={data.goalkick.away.value}
           hPercent={67}
           aPercent={73}
-          stat={"short Goal kicks"}
-          hTotal={8}
-          aTotal={9}
+          stat={"successful goal kick"}
+          hTotal={data.goalkick.home.total}
+          aTotal={data.goalkick.away.total}
         />
 
-        <HorizontalBar hValue={"7"} aValue={"3"} stat={"kick-outs"} />
-        <HorizontalBar hValue={"7"} aValue={"3"} stat={"Throw-outs"} />
+        <HorizontalBar
+          hValue={data.kickOuts.home.toString()}
+          aValue={data.kickOuts.away.toString()}
+          stat={"kick-outs"}
+        />
+        <HorizontalBar
+          hValue={data.throwOuts.home.toString()}
+          aValue={data.throwOuts.away.toString()}
+          stat={"Throw-outs"}
+        />
       </CardContent>
     </Card>
   );

@@ -9,8 +9,20 @@ type BarProps = {
 };
 
 const RoundedBar = ({ hValue, aValue, hTotal, aTotal, stat }: BarProps) => {
-  const hPercent = Math.floor((hValue / hTotal) * 100);
-  const aPercent = Math.floor((aValue / aTotal) * 100);
+  let hPercent = 0;
+  let aPercent = 0;
+
+  if (hTotal === 0) {
+    hPercent = 0;
+  } else {
+    hPercent = Math.floor((hValue / hTotal) * 100);
+  }
+
+  if (aTotal === 0) {
+    aPercent = 0;
+  } else {
+    aPercent = Math.floor((aValue / aTotal) * 100);
+  }
 
   return (
     <div className="w-full flex items-center justify-between gap-3">
