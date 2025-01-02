@@ -2,7 +2,7 @@ import RoundedBar from "@/components/shared/rounded-bar";
 import HorizontalBar from "@/components/shared/horizontal-bar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const RugbyTeamSetPiece = () => {
+const RugbyTeamSetPiece = ({ data }: { data: RugbySetPiece }) => {
   return (
     <Card>
       <CardHeader>
@@ -10,33 +10,57 @@ const RugbyTeamSetPiece = () => {
       </CardHeader>
 
       <CardContent className="space-y-7">
-        <HorizontalBar hValue={"13"} aValue={"18"} stat={"set pieces won"} />
+        <HorizontalBar
+          hValue={data.setPieceWon.home.toString()}
+          aValue={data.setPieceWon.away.toString()}
+          stat={"set pieces won"}
+        />
 
         <RoundedBar
-          hValue={4}
-          aValue={10}
+          hValue={data.scrumRetention.home.value}
+          aValue={data.scrumRetention.away.value}
           hPercent={100}
           aPercent={100}
           stat={"scrum retention"}
-          hTotal={9}
-          aTotal={10}
+          hTotal={data.scrumRetention.home.total}
+          aTotal={data.scrumRetention.away.total}
         />
-        <HorizontalBar hValue={"1"} aValue={"0"} stat={"scrum penalties"} />
-        <HorizontalBar hValue={"1"} aValue={"0"} stat={"scrum steals"} />
+        <HorizontalBar
+          hValue={data.scrumPenalty.home.toString()}
+          aValue={data.scrumPenalty.away.toString()}
+          stat={"scrum penalties"}
+        />
+        <HorizontalBar
+          hValue={data.scrumSteal.home.toString()}
+          aValue={data.scrumSteal.away.toString()}
+          stat={"scrum steals"}
+        />
 
         <RoundedBar
-          hValue={8}
-          aValue={11}
+          hValue={data.lineoutRetention.home.value}
+          aValue={data.lineoutRetention.away.value}
           hPercent={100}
           aPercent={73}
           stat={"lineout retention"}
-          hTotal={11}
-          aTotal={15}
+          hTotal={data.lineoutRetention.home.total}
+          aTotal={data.lineoutRetention.away.total}
         />
 
-        <HorizontalBar hValue={"1"} aValue={"0"} stat={"lineout steals"} />
-        <HorizontalBar hValue={"1"} aValue={"0"} stat={"successful mauls"} />
-        <HorizontalBar hValue={"0"} aValue={"1"} stat={"unsuccessful mauls"} />
+        <HorizontalBar
+          hValue={data.lineoutSteal.home.toString()}
+          aValue={data.lineoutSteal.away.toString()}
+          stat={"lineout steals"}
+        />
+        <HorizontalBar
+          hValue={data.successfulMaul.home.toString()}
+          aValue={data.successfulMaul.away.toString()}
+          stat={"successful mauls"}
+        />
+        <HorizontalBar
+          hValue={data.unsuccessfulMaul.home.toString()}
+          aValue={data.unsuccessfulMaul.away.toString()}
+          stat={"unsuccessful mauls"}
+        />
       </CardContent>
     </Card>
   );

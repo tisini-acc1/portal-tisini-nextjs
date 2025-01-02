@@ -221,8 +221,24 @@ type FootballAttack = {
   shotOutBox: TotalStat;
 };
 
+type RugbyAttack = {
+  tries: Stat;
+  carries: Stat;
+  handlingErrors: Stat;
+  linebreaks: Stat;
+  offloads: Stat;
+  oppVisit22: Stat;
+  passAcc: TotalStat;
+  conversion: TotalStat;
+};
+
 type FootballDiscipline = {
   fouls: Stat;
+  cards: Cards;
+};
+
+type RugbyDiscipline = {
+  penalty: Stat;
   cards: Cards;
 };
 
@@ -252,6 +268,14 @@ type FootballDefense = {
   tackles: TotalStat;
 };
 
+type RugbyDefense = {
+  negTackle: Stat;
+  posTackle: Stat;
+  missedTackle: Stat;
+  turnoversWon: Stat;
+  succTackle: TotalStat;
+};
+
 type FootballGK = {
   saves: Stat;
   runOuts: Stat;
@@ -259,6 +283,29 @@ type FootballGK = {
   throwOuts: Stat;
   claims: TotalStat;
   goalkick: TotalStat;
+};
+
+type RugbySetPiece = {
+  setPieceWon: Stat;
+  scrumPenalty: Stat;
+  scrumSteal: Stat;
+  lineoutSteal: Stat;
+  successfulMaul: Stat;
+  unsuccessfulMaul: Stat;
+  lineoutRetention: TotalStat;
+  scrumRetention: TotalStat;
+};
+
+type RugbyRestarts = {
+  restarts: Stat;
+  restartsRetention: TotalStat;
+};
+
+type RugbyZones = {
+  own22: Stat;
+  own50: Stat;
+  opp50: Stat;
+  opp22: Stat;
 };
 
 type FootballData = {
@@ -273,4 +320,10 @@ type FootballData = {
 
 type RugbyData = {
   details: Details;
+  defense: RugbyDefense;
+  attack: RugbyAttack;
+  setPiece: RugbySetPiece;
+  discipline: RugbyDiscipline;
+  restarts: RugbyRestarts;
+  zones: RugbyZones;
 };

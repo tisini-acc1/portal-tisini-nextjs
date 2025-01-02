@@ -2,7 +2,7 @@ import RoundedBar from "@/components/shared/rounded-bar";
 import HorizontalBar from "@/components/shared/horizontal-bar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const RugbyTeamRestarts = () => {
+const RugbyTeamRestarts = ({ data }: { data: RugbyRestarts }) => {
   return (
     <Card>
       <CardHeader>
@@ -10,15 +10,19 @@ const RugbyTeamRestarts = () => {
       </CardHeader>
 
       <CardContent className="md:space-y-10 space-y-6 md:pt-4">
-        <HorizontalBar hValue={"10"} aValue={"2"} stat={"Restarts won"} />
+        <HorizontalBar
+          hValue={data.restarts.home.toString()}
+          aValue={data.restarts.away.toString()}
+          stat={"Restarts won"}
+        />
         <RoundedBar
-          hValue={70}
-          aValue={30}
+          hValue={data.restartsRetention.home.value}
+          aValue={data.restartsRetention.away.value}
           hPercent={73}
           aPercent={56}
           stat={"Restarts"}
-          hTotal={85}
-          aTotal={49}
+          hTotal={data.restartsRetention.home.total}
+          aTotal={data.restartsRetention.away.total}
         />
       </CardContent>
     </Card>

@@ -2,7 +2,7 @@ import RoundedBar from "@/components/shared/rounded-bar";
 import HorizontalBar from "@/components/shared/horizontal-bar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const RugbyTeamDefense = () => {
+const RugbyTeamDefense = ({ data }: { data: RugbyDefense }) => {
   return (
     <Card>
       <CardHeader>
@@ -10,20 +10,36 @@ const RugbyTeamDefense = () => {
       </CardHeader>
 
       <CardContent className="space-y-5">
-        <HorizontalBar hValue={"19"} aValue={"70"} stat={"negative tackles"} />
-        <HorizontalBar hValue={"27"} aValue={"20"} stat={"positive tackles"} />
+        <HorizontalBar
+          hValue={data.negTackle.home.toString()}
+          aValue={data.negTackle.away.toString()}
+          stat={"negative tackles"}
+        />
+        <HorizontalBar
+          hValue={data.posTackle.home.toString()}
+          aValue={data.posTackle.away.toString()}
+          stat={"positive tackles"}
+        />
 
         <RoundedBar
-          hValue={46}
-          aValue={48}
+          hValue={data.succTackle.home.value}
+          aValue={data.succTackle.away.value}
           hPercent={87}
           aPercent={88}
           stat={"successful tackles"}
-          hTotal={50}
-          aTotal={50}
+          hTotal={data.succTackle.home.total}
+          aTotal={data.succTackle.away.total}
         />
-        <HorizontalBar hValue={"6"} aValue={"13"} stat={"missed tackles"} />
-        <HorizontalBar hValue={"8"} aValue={"6"} stat={"turnovers won"} />
+        <HorizontalBar
+          hValue={data.missedTackle.home.toString()}
+          aValue={data.missedTackle.away.toString()}
+          stat={"missed tackles"}
+        />
+        <HorizontalBar
+          hValue={data.turnoversWon.home.toString()}
+          aValue={data.turnoversWon.away.toString()}
+          stat={"turnovers won"}
+        />
       </CardContent>
     </Card>
   );

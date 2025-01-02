@@ -26,7 +26,27 @@ const ResultsHeader: FC<TeamProps> = ({
     (state) => state
   );
 
-  console.log(fixtureData);
+  // const tourn = [
+  //   "27",
+  //   "58",
+  //   "37",
+  //   "35",
+  //   "62",
+  //   "80",
+  //   "79",
+  //   "90",
+  //   "105",
+  //   "98",
+  //   "107",
+  //   "109",
+  //   "125",
+  //   "123",
+  //   "21",
+  // ];
+  // const leagues = tournamentsData.filter(
+  //   (tournament) => !tourn.includes(tournament.tournamentid)
+  // );
+
   return (
     <header className="flex flex-col-reverse md:flex-row gap-4 justify-between">
       <Select value={user.fixture} onValueChange={updateFixture}>

@@ -6,34 +6,32 @@ import {
   footballDuels,
   footballGK,
   footballPassing,
+  rugbyAttack,
+  rugbyDefense,
+  rugbyDetails,
+  rugbyDiscipline,
+  rugbyRestarts,
+  rugbySetPiece,
+  rugbyZones,
 } from "@/lib/utils";
 
 export const rugbyData = (data: FixtureData) => {
   const details = data["fixture"][0];
   const scores = data["scores"];
-  // const home = data["home"];
-  // const away = data["away"];
-
-  const fixture = {} as Details;
-
-  fixture["homeId"] = details.team1_id;
-  fixture["awayId"] = details.team2_id;
-  fixture["home"] = details.team1_name;
-  fixture["away"] = details.team2_name;
-  fixture["homeScore"] = scores.Home;
-  fixture["awayScore"] = scores.Away;
-  fixture["league"] = details.league;
-  fixture["round"] = details.matchday;
-  fixture["status"] = details.game_status;
-  fixture["minute"] = details.minute;
-
-  // getEvent(home, "44");
+  const home = data["home"];
+  const away = data["away"];
+  const cards = data["cards"];
 
   const rugbyData = {} as RugbyData;
 
-  rugbyData["details"] = fixture;
+  rugbyData["details"] = rugbyDetails(home, away, details, scores);
+  rugbyData["defense"] = rugbyDefense(home, away);
+  rugbyData["attack"] = rugbyAttack(home, away);
+  rugbyData["setPiece"] = rugbySetPiece(home, away);
+  rugbyData["discipline"] = rugbyDiscipline(home, away, cards);
+  rugbyData["restarts"] = rugbyRestarts(home, away);
+  rugbyData["zones"] = rugbyZones(home, away);
 
-  // console.log(rugbyData);
   return rugbyData;
 };
 
