@@ -20,6 +20,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { useStore } from "@/lib/store";
 
 const loginSchema = z.object({
   username: z
@@ -33,6 +34,8 @@ const UsernameForm = () => {
   const { toast } = useToast();
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const { updateName, updateRole } = useStore((state) => state);
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -61,6 +64,9 @@ const UsernameForm = () => {
           res.data.userKey,
           res.data.role
         );
+
+        updateName(res.data.name);
+        updateRole(res.data.role);
 
         router.replace(redirectUrl);
       } else if (res.data.error) {

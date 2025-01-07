@@ -18,7 +18,7 @@ import { NavMain } from "@/components/sidebar/nav-main";
 import { NavUser } from "@/components/sidebar/nav-user";
 // import { NavProjects } from "@/components/nav-projects";
 import { COMPS_ITEMS, TEAMS_ITEMS } from "@/lib/constants";
-import { NavSecondary } from "@/components/sidebar/nav-secondary";
+// import { NavSecondary } from "@/components/sidebar/nav-secondary";
 import {
   Sidebar,
   SidebarContent,
@@ -124,10 +124,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <NavMain items={data.navMain} />
         {/* <NavProjects projects={data.projects} /> */}
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser />
       </SidebarFooter>
     </Sidebar>
   );
