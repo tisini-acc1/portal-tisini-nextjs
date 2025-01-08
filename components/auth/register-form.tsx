@@ -71,6 +71,10 @@ const RegisterForm = ({ role }: { role: string }) => {
     const res = await apiService.post(JSON.stringify(newUser));
 
     if (res.error === "0") {
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ password: user.password, username: user.phone_number })
+      );
       toast({ description: `${res.message}` });
       router.push("/auth/verify");
     } else {

@@ -20,6 +20,8 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import apiService from "@/services/api-service";
+import { useEffect, useState } from "react";
 
 const FormSchema = z.object({
   pin: z.string().min(6, {
@@ -28,6 +30,11 @@ const FormSchema = z.object({
 });
 
 export function InputOTPForm() {
+  const [user, setUser] = useState({
+    password: "",
+    username: "",
+  });
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -37,19 +44,30 @@ export function InputOTPForm() {
 
   const router = useRouter();
 
-  // {"action":"activate","password":"33333" ,"username":"0701737377","accesscode":364774}
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    console.log(user);
+    const res = await apiService.post(
+      JSON.stringify({
+        action: "activate",
+        password: user.password,
+        username: user.username,
+        accesscode: data.pin,
+      })
+    );
 
-    router.push("/auth/login");
+    if (res.success === "1") {
+      localStorage.clear();
+      router.push("/auth/login");
+    } else {
+      toast({ description: `${res.message}`, variant: "destructive" });
+    }
   }
 
   return (
