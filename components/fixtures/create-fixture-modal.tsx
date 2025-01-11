@@ -108,7 +108,7 @@ const CreateFixtureModal = () => {
       playeradd: "0",
       // gettoken: "1cb86587c54b4736a4ec6388f32af060",
     };
-
+    console.log(values);
     createFixture(fixture);
   }
 

@@ -113,6 +113,23 @@ type CreateFix = {
   playeradd: string;
 };
 
+type CreatePlayer = {
+  id_no: string;
+  phone_number: string;
+  first_name: string;
+  last_name: string;
+  sirname: string;
+  dob: string;
+  nationality: string;
+  position: string;
+  email: string;
+  password: string;
+  role: string;
+  teamid: string;
+  Jersey: string;
+  signed: string;
+};
+
 type Player = {
   id: string;
   player_id: string;

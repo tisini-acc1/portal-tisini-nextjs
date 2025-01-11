@@ -327,3 +327,13 @@ type RugbyData = {
   restarts: RugbyRestarts;
   zones: RugbyZones;
 };
+
+type Country = {
+  id: string;
+  alpha_2_code: string;
+  en_short_name: string;
+  nationality: string;
+  phonecode: string;
+  created_by: string;
+  date_created: string;
+};

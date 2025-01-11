@@ -29,7 +29,7 @@ const RegisterForm = ({ role }: { role: string }) => {
   const form = useForm<inputType>({
     resolver: zodResolver(regSchema),
     defaultValues: {
-      username: "",
+      middlename: "",
       email: "",
       phone_number: "",
       first_name: "",
@@ -61,19 +61,22 @@ const RegisterForm = ({ role }: { role: string }) => {
       email: user.email,
       phone_number: user.phone_number,
       first_name: user.first_name,
-      last_name: user.last_name,
-      other_name: "",
+      last_name: user.middlename,
+      sirname: user.last_name,
       password: user.password,
       role: userRole,
     };
     // console.log(newUser);
 
     const res = await apiService.post(JSON.stringify(newUser));
-
+    console.log(res.data);
     if (res.error === "0") {
       localStorage.setItem(
         "user",
-        JSON.stringify({ password: user.password, username: user.phone_number })
+        JSON.stringify({
+          password: user.password,
+          middlename: user.phone_number,
+        })
       );
       toast({ description: `${res.message}` });
       router.push("/auth/verify");
@@ -118,12 +121,12 @@ const RegisterForm = ({ role }: { role: string }) => {
         <div className="flex gap-2">
           <FormField
             control={form.control}
-            name="username"
+            name="middlename"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username:</FormLabel>
+                <FormLabel>Middlename:</FormLabel>
                 <FormControl>
-                  <Input type="text" placeholder="jonte" {...field} />
+                  <Input type="text" placeholder="doety" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

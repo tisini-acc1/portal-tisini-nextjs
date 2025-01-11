@@ -63,7 +63,7 @@ const TeamPlayers = () => {
   if (!user.tournament || !user.series) {
     return <div>Please select a league and season to view players.</div>;
   }
-
+  // console.log(playersData);
   return (
     <main className="space-y-8">
       <TeamSelectHeader

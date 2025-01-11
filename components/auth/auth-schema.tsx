@@ -3,7 +3,7 @@ import { z } from "zod";
 
 export const regSchema = z
   .object({
-    username: z
+    middlename: z
       .string()
       .min(3, "Should be greater than 3 characters long")
       .max(15, "Username should be less than 12 characters long"),
