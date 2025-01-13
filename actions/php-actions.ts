@@ -432,3 +432,58 @@ export const updateFixOfficial = async (data: FixOfficials) => {
     );
   }
 };
+
+// {"action":"", }
+export const getRefreeFixtures = async (): Promise<RefreeFix[]> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      gettoken: token,
+      action: "refereefixture",
+      refid: "396",
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fetch refree fixtures: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while refree fixtures."
+    );
+  }
+};
+
+export const getTeamLineup = async (
+  fixId: string,
+  teamId: string
+): Promise<Lineup[]> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      gettoken: token,
+      action: "fixturelineup",
+      fixture: fixId,
+      teamid: teamId,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fetch refree fixtures: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while refree fixtures."
+    );
+  }
+};

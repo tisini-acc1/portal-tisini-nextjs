@@ -40,6 +40,8 @@ export async function handleLogin(
       return "/home/players";
     case "6":
       return "/home/competitions";
+    case "9":
+      return "/home/match-officials";
     default:
       return "/home";
   }

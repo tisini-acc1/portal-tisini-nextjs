@@ -31,7 +31,7 @@ const MatchOfficialsPage = () => {
           ?.slice()
           .reverse()
           .map((official) => (
-            <Card>
+            <Card key={official.id}>
               <CardContent className="pt-2">
                 {official.first_name} {official.last_name}
               </CardContent>

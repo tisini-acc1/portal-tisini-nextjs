@@ -31,13 +31,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-const POSITIONTYPES = [
-  "Goal keeper",
-  "Defender",
-  "Midfielder",
-  "Forward",
-] as const;
-
 const regSchema = z.object({
   middlename: z
     .string()

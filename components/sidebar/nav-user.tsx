@@ -40,6 +40,8 @@ export function NavUser() {
       ? "Team Admin"
       : user.role === "6"
       ? "Tournament Admin"
+      : user.role === "6"
+      ? "Match Official"
       : "System User";
 
   return (

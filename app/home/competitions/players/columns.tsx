@@ -1,7 +1,7 @@
 "use client";
 
 import DeleteFixtureModal from "@/components/fixtures/delete-fixture-modal";
-import EditFixtureModal from "@/components/fixtures/edit-fixture-modal";
+// import EditFixtureModal from "@/components/fixtures/edit-fixture-modal";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -42,7 +42,7 @@ export const columns: ColumnDef<Player>[] = [
 
       return (
         <div className="flex gap-2">
-          <EditFixtureModal />
+          {/* <EditFixtureModal /> */}
           <DeleteFixtureModal />
         </div>
       );

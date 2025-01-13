@@ -398,3 +398,46 @@ type FixOfficials = {
   ref3: string;
   ref4: string;
 };
+
+type RefreeFix = {
+  id: string;
+  date_created: string;
+  game_date: string;
+  referee1_id: string;
+  referee2_id: string;
+  referee3_id: string;
+  referee4_id: string;
+  system_user_id: string;
+  team1_name: string;
+  team2_name: string;
+  team1_id: string;
+  team2_id: string;
+  game_status: string;
+  minute: string;
+  second: string;
+  game_moment: string;
+  league: string;
+  last_localid: string;
+  home_score: string;
+  away_score: string;
+  matchday: string;
+  fixture_type: string;
+  matchtime: string;
+};
+
+type Lineup = {
+  id: string;
+  fixture_id: string;
+  date_created: string;
+  team_player_id: string;
+  Jersey_No: string;
+  system_user_id: string;
+  player_type: string;
+  player_id: string;
+  teamId: string;
+  pname: string;
+  last_updated: string;
+  lineupposition: string;
+  red: string;
+  GK: string;
+};
