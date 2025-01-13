@@ -16,7 +16,7 @@ const FixturesPage = () => {
 
   const { user } = useStore((state) => state);
 
-  const { data } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["fixtures", user.series],
     queryFn: () => getTournFixtures(parseInt(user.series)),
   });
@@ -27,6 +27,14 @@ const FixturesPage = () => {
       setFixtures(fix.reverse());
     }
   }, [user.tournament, data]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error...</div>;
+  }
 
   return (
     <main>

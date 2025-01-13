@@ -3,7 +3,7 @@ import {
   // Calendar,
   Calendar1,
   // Command,
-  // File,
+  File,
   Gamepad,
   Home,
   // LifeBuoy,
@@ -109,5 +109,10 @@ export const COMPS_ITEMS = [
       { title: "Fixtures", url: "/home/competitions/fixtures" },
       { title: "Players", url: "/home/competitions/players" },
     ],
+  },
+  {
+    title: "Transfers",
+    url: "/home/competitions/transfers",
+    icon: File,
   },
 ];
