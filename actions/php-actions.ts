@@ -309,3 +309,26 @@ export const createPlayerTransfer = async (data: TransferPlayer) => {
     );
   }
 };
+
+export const getTeamTransfers = async (teamId: string): Promise<Transfer[]> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "teamtransfer",
+      teamid: teamId,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fetch team transfers: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error.message || "An error occurred while team transfers.");
+  }
+};

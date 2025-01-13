@@ -51,6 +51,11 @@ export const TEAMS_ITEMS = [
       // { title: "Staffs", url: "#" },
     ],
   },
+  {
+    title: "Transfers",
+    url: "/home/teams/transfers",
+    icon: Gamepad,
+  },
   // {
   //   title: "Visulaization",
   //   url: "#",

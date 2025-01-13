@@ -351,3 +351,23 @@ type TransferPlayer = {
   fees: string;
   tournament_id: string;
 };
+
+type Transfer = {
+  id: string;
+  playerid: string;
+  pname: string;
+  team1: string;
+  team1name: string;
+  team2: string;
+  team2name: string;
+  date_created: string;
+  date_updated: string;
+  created_by: string;
+  createdby: string;
+  approved_by: string | null;
+  declined_by: string | null;
+  transfer_cost: string;
+  union_cost: string;
+  tournament: string;
+  tournamentid: string;
+};
