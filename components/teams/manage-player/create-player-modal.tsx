@@ -74,7 +74,7 @@ const playerSchema = z.object({
     .max(15, "Provide a valid lastname"),
   idNumber: z
     .string()
-    .min(8, "Provide a ID number or birth cert number")
+    .min(6, "Provide a ID number or birth cert number")
     .max(15, "Provide a ID number or birth cert number"),
   dob: z.date({
     required_error: "Match date is required.",

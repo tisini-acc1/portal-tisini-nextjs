@@ -371,3 +371,22 @@ type Transfer = {
   tournament: string;
   tournamentid: string;
 };
+
+type TournaOfficial = {
+  id_no: string;
+  email: string;
+  phone_number: string;
+  first_name: string;
+  last_name: string;
+  sirname: string;
+  password: string;
+  role: string;
+};
+
+type Official = {
+  id: string;
+  first_name: string;
+  last_name: string;
+  other_name: string;
+  is_active: string;
+};

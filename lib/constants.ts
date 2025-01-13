@@ -8,7 +8,7 @@ import {
   Home,
   // LifeBuoy,
   // Map,
-  // PersonStanding,
+  PersonStanding,
   // PieChart,
   // PlaySquare,
   // Send,
@@ -114,5 +114,10 @@ export const COMPS_ITEMS = [
     title: "Transfers",
     url: "/home/competitions/transfers",
     icon: File,
+  },
+  {
+    title: "Match Officials",
+    url: "/home/competitions/officials",
+    icon: PersonStanding,
   },
 ];
