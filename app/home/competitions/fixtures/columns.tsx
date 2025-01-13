@@ -33,12 +33,11 @@ export const columns: ColumnDef<Fixture>[] = [
   {
     accessorKey: "actions",
     cell: ({ row }) => {
-      const maintenance = row.original;
-      console.log(maintenance);
+      const fixture = row.original;
 
       return (
         <div className="flex gap-2">
-          <EditFixtureModal />
+          <EditFixtureModal fixId={fixture.id} />
           <DeleteFixtureModal />
         </div>
       );

@@ -407,3 +407,28 @@ export const getOfficials = async (): Promise<Official[]> => {
     );
   }
 };
+
+export const updateFixOfficial = async (data: FixOfficials) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "updateReferee",
+      ...data,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to create match official: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while creating match official."
+    );
+  }
+};

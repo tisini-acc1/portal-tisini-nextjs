@@ -4,7 +4,7 @@ import { FixturesTable } from "./fixtures-table";
 import { columns } from "./columns";
 import CreateFixtureModal from "@/components/fixtures/create-fixture-modal";
 import { useQuery } from "@tanstack/react-query";
-import { getTournFixtures } from "@/actions/php-actions";
+import { getOfficials, getTournFixtures } from "@/actions/php-actions";
 import { useEffect, useState } from "react";
 import { useStore } from "@/lib/store";
 
@@ -14,11 +14,16 @@ const FixturesPage = () => {
   // const fixtures = data.filter((fixture) => fixture.series === "14").reverse();
   const [fixtures, setFixtures] = useState<Fixture[]>([]);
 
-  const { user } = useStore((state) => state);
+  const { user, updateOfficials } = useStore((state) => state);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["fixtures", user.series],
     queryFn: () => getTournFixtures(parseInt(user.series)),
+  });
+
+  const { data: officials } = useQuery({
+    queryKey: ["tournamentOfficials"],
+    queryFn: () => getOfficials(),
   });
 
   useEffect(() => {
@@ -27,6 +32,12 @@ const FixturesPage = () => {
       setFixtures(fix.reverse());
     }
   }, [user.tournament, data]);
+
+  useEffect(() => {
+    if (officials) {
+      updateOfficials(officials);
+    }
+  }, [officials, updateOfficials]);
 
   if (isLoading) {
     return <div>Loading...</div>;

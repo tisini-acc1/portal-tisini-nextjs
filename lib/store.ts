@@ -10,6 +10,7 @@ export type Store = {
   teamName: string;
   fixture: string;
   name: string;
+  officials: Official[];
 };
 
 export type State = {
@@ -25,6 +26,7 @@ export type Actions = {
   updateTeamName: (name: string) => void;
   updateFixture: (fixture: string) => void;
   updateName: (name: string) => void;
+  updateOfficials: (officials: Official[]) => void;
 };
 
 const initialState = {
@@ -36,6 +38,7 @@ const initialState = {
   teamName: "",
   fixture: "",
   name: "",
+  officials: [],
 };
 
 export const useStore = create<State & Actions>()(
@@ -58,6 +61,8 @@ export const useStore = create<State & Actions>()(
         set((state) => ({ user: { ...state.user, teamName: name } })),
       updateName: (name: string) =>
         set((state) => ({ user: { ...state.user, name: name } })),
+      updateOfficials: (offcials: Official[]) =>
+        set((state) => ({ user: { ...state.user, officials: offcials } })),
     }),
     { name: "store" }
   )

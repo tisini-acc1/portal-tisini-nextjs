@@ -6,12 +6,18 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
 
 const MatchOfficialsPage = () => {
-  const { data } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["tournamentOfficials"],
     queryFn: () => getOfficials(),
   });
 
-  console.log(data);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <span>Error</span>;
+  }
 
   return (
     <main className="space-y-6">

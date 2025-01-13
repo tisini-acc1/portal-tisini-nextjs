@@ -390,3 +390,11 @@ type Official = {
   other_name: string;
   is_active: string;
 };
+
+type FixOfficials = {
+  fixture: string;
+  ref1: string;
+  ref2: string;
+  ref3: string;
+  ref4: string;
+};
