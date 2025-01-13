@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+// import Image from "next/image";
 import { useState } from "react";
 import { format } from "date-fns";
 // import { useRouter } from "next/navigation";
@@ -14,7 +14,7 @@ import {
   getAllPlayers,
   getCountry,
   getTeamTournaments,
-  getUserTeams,
+  // getUserTeams,
 } from "@/actions/php-actions";
 import TransferDialog from "@/components/teams/manage-player/transfer-dialog";
 import CreatePlayerModal from "@/components/teams/manage-player/create-player-modal";
