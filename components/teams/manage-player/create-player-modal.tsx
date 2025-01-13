@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import React, { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon, Plus, RotateCcw } from "lucide-react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { cn } from "@/lib/utils";
 import { useStore } from "@/lib/store";
@@ -93,7 +93,7 @@ const CreatePlayerModal = ({ countries }: { countries: Country[] }) => {
   // const router = useRouter();
   const [open, setOpen] = useState(false);
   const { user } = useStore((state) => state);
-  // const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
   const form = useForm<z.infer<typeof playerSchema>>({
     resolver: zodResolver(playerSchema),
@@ -122,7 +122,7 @@ const CreatePlayerModal = ({ countries }: { countries: Country[] }) => {
       // console.log(data);
       if (data.error === "0") {
         setOpen(false);
-        // queryClient.invalidateQueries({ queryKey: ["allPlayers"] });
+        queryClient.invalidateQueries({ queryKey: ["allPlayers"] });
         toast({ title: "Succes", description: data.message });
       } else {
         toast({

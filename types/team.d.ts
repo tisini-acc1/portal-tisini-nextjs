@@ -35,6 +35,11 @@ type TeamPlayer = {
   id_no: string;
   current_jersey_no: string;
   signed_date: string;
+  nationality: string;
+  player_id: string;
+  status: string;
+  system_user_id: string;
+  team_id: string;
 };
 
 type Fixture = {
