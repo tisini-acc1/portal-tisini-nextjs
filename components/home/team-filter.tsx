@@ -63,7 +63,7 @@ const TeamFilter = () => {
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              {teams.map((team) => (
+              {teams?.map((team) => (
                 <SelectItem key={team.team_id} value={team.team_id}>
                   {team.teamname}
                 </SelectItem>

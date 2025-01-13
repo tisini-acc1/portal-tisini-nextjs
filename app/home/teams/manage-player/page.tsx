@@ -10,7 +10,12 @@ import { useQuery } from "@tanstack/react-query";
 import { useStore } from "@/lib/store";
 import { calculateYearsOld } from "@/lib/utils";
 // import { Button } from "@/components/ui/button";
-import { getAllPlayers, getCountry } from "@/actions/php-actions";
+import {
+  getAllPlayers,
+  getCountry,
+  getTeamTournaments,
+  getUserTeams,
+} from "@/actions/php-actions";
 import TransferDialog from "@/components/teams/manage-player/transfer-dialog";
 import CreatePlayerModal from "@/components/teams/manage-player/create-player-modal";
 import {
@@ -29,6 +34,7 @@ import {
 const ManagePlayerPage = () => {
   const { user } = useStore((state) => state);
   const [openTransfer, setOpenTransfer] = useState(false);
+  const [selectedPlayer, setSelectedPlayer] = useState<TeamPlayer | null>(null);
 
   // const router = useRouter();
 
@@ -42,7 +48,21 @@ const ManagePlayerPage = () => {
     queryFn: () => getCountry(),
   });
 
-  // console.log(countries);
+  const { data: tournaments } = useQuery({
+    queryKey: ["teamTournaments", user.team],
+    queryFn: () => getTeamTournaments(user.team),
+  });
+
+  // const {
+  //   data: teams,
+  //   isLoading,
+  //   isError,
+  // } = useQuery({
+  //   queryKey: ["myTeams"],
+  //   queryFn: () => getUserTeams(),
+  // });
+
+  // console.log(data);
   // console.log(players?.slice().reverse());
 
   return (
@@ -99,7 +119,12 @@ const ManagePlayerPage = () => {
                     </DropdownMenuTrigger>
 
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem onClick={() => setOpenTransfer(true)}>
+                      <DropdownMenuItem
+                        onClick={() => {
+                          setOpenTransfer(true);
+                          setSelectedPlayer(player);
+                        }}
+                      >
                         Transfer
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => console.log("edit")}>
@@ -129,7 +154,13 @@ const ManagePlayerPage = () => {
             </Card>
           ))}
 
-        <TransferDialog open={openTransfer} setOpen={setOpenTransfer} />
+        <TransferDialog
+          open={openTransfer}
+          setOpen={setOpenTransfer}
+          player={selectedPlayer as TeamPlayer}
+          // teams={teams as Team[]}
+          tournaments={tournaments as TeamTournament[]}
+        />
       </section>
     </main>
   );

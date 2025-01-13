@@ -284,21 +284,28 @@ export const createPlayer = async (data: CreatePlayer) => {
     );
   }
 };
-// get all teamplayers {"action":"teamplayers","teamid":"1"}
-// get single teamplayer  {"action":"teamplayers","teamplayerid":1}
 
-// get single team {"action":"teams","teamid":1}
+export const createPlayerTransfer = async (data: TransferPlayer) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
 
-// get single fixture {"action":"fixtures","fixtureid":1}
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      ...data,
+      action: "transfer",
+      gettoken: token,
+    });
 
-// get all fixture per team {"action":"fixtures","teamid":1}
-
-// get user Teams{"action":"userteam"}
-
-// players per team per season
-// tournaments per team - nest tournament series
-// fixtures per team per season per tournament
-
-// create,update player for my team
-// create, update team
-// create, update organization
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to initiate player transfer: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while initiating player transfer."
+    );
+  }
+};

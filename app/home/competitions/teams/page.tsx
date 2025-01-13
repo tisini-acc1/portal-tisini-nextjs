@@ -25,7 +25,7 @@ const TeamsPage = () => {
   }
 
   const teams = data ? data : [];
-
+  console.log(data);
   return (
     <main>
       <header className="flex justify-end mb-4">

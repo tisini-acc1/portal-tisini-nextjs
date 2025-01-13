@@ -342,3 +342,12 @@ type Country = {
   created_by: string;
   date_created: string;
 };
+
+type TransferPlayer = {
+  player: string;
+  team1: string;
+  team2: string;
+  amount: string;
+  fees: string;
+  tournament_id: string;
+};
