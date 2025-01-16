@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.729.0",
+    "@aws-sdk/s3-presigned-post": "^3.729.0",
     "@fullcalendar/core": "^6.1.15",
     "@fullcalendar/daygrid": "^6.1.15",
     "@fullcalendar/react": "^6.1.15",
@@ -39,6 +41,7 @@
     "jose": "^5.9.6",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.454.0",
+    "nanoid": "^5.0.9",
     "next": "15.0.2",
     "react": "19.0.0-rc-02c0e824-20241028",
     "react-day-picker": "8.10.1",
