@@ -1,22 +1,18 @@
 "use client";
 
 import { z } from "zod";
-import validator from "validator";
 import { format } from "date-fns";
 import { useForm } from "react-hook-form";
-// import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+// import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CalendarIcon, Plus, RotateCcw } from "lucide-react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { RotateCcw, Edit, CalendarIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { useStore } from "@/lib/store";
-import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import { createPlayer } from "@/actions/php-actions";
+import { playerSchema } from "./create-player-modal";
 import {
   Dialog,
   DialogContent,
@@ -47,6 +43,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+type EditProps = {
+  open: boolean;
+  setOpen: (v: boolean) => void;
+  player: TeamPlayer;
+  countries: Country[];
+};
+
 const POSITIONTYPES = [
   "Goal keeper",
   "Defender",
@@ -54,47 +57,7 @@ const POSITIONTYPES = [
   "Forward",
 ] as const;
 
-export const playerSchema = z.object({
-  // middlename: z
-  //   .string()
-  //   .min(3, "Should be greater than 3 characters long")
-  //   .max(15, "Username should be less than 12 characters long"),
-  // // .regex(new RegExp("^[a-zA-Z]+$", "No special characters allowed!")),
-  // email: z.string().email(),
-  phone: z
-    .string()
-    .refine(validator.isMobilePhone, "Please enter a valid phone number"),
-  firstName: z
-    .string()
-    .min(3, "Provide a valid firstname")
-    .max(15, "Provide a valid firstname"),
-  lastName: z
-    .string()
-    .min(3, "Provide a valid lastname")
-    .max(15, "Provide a valid lastname"),
-  idNumber: z
-    .string()
-    .min(6, "Provide a ID number or birth cert number")
-    .max(15, "Provide a ID number or birth cert number"),
-  dob: z.date({
-    required_error: "Match date is required.",
-  }),
-  nationality: z.string().min(1, { message: "Nationality is required" }),
-  position: z.string().min(1, { message: "Position is required" }),
-  // team: z.string().min(1, { message: "Matchday is required" }),
-  jersey: z.string().min(1, { message: "Matchday is required" }),
-  signed: z.date({
-    required_error: "Match date is required.",
-  }),
-});
-
-const CreatePlayerModal = ({ countries }: { countries: Country[] }) => {
-  const { toast } = useToast();
-  // const router = useRouter();
-  const [open, setOpen] = useState(false);
-  const { user } = useStore((state) => state);
-  const queryClient = useQueryClient();
-
+const EditPlayerModal = ({ open, setOpen, player, countries }: EditProps) => {
   const form = useForm<z.infer<typeof playerSchema>>({
     resolver: zodResolver(playerSchema),
     defaultValues: {
@@ -116,26 +79,26 @@ const CreatePlayerModal = ({ countries }: { countries: Country[] }) => {
     }
   }, [form.formState.errors]);
 
-  const mutation = useMutation({
-    mutationFn: createPlayer,
-    onSuccess: (data) => {
-      // console.log(data);
-      if (data.error === "0") {
-        setOpen(false);
-        queryClient.invalidateQueries({ queryKey: ["allPlayers"] });
-        toast({ title: "Succes", description: data.message });
-      } else {
-        toast({
-          title: "Error!",
-          variant: "destructive",
-          description: data.message,
-        });
-      }
-    },
-    onError: (error) => {
-      console.log(error);
-    },
-  });
+  // const mutation = useMutation({
+  //   mutationFn: createPlayer,
+  //   onSuccess: (data) => {
+  //     // console.log(data);
+  //     if (data.error === "0") {
+  //       setOpen(false);
+  //       queryClient.invalidateQueries({ queryKey: ["allPlayers"] });
+  //       toast({ title: "Succes", description: data.message });
+  //     } else {
+  //       toast({
+  //         title: "Error!",
+  //         variant: "destructive",
+  //         description: data.message,
+  //       });
+  //     }
+  //   },
+  //   onError: (error) => {
+  //     console.log(error);
+  //   },
+  // });
 
   const onSubmit = async (data: z.infer<typeof playerSchema>) => {
     const player = {
@@ -150,12 +113,12 @@ const CreatePlayerModal = ({ countries }: { countries: Country[] }) => {
       email: "",
       password: data.idNumber.slice(1, 5),
       role: "5",
-      teamid: user.team,
+      // teamid: user.team,
       Jersey: data.jersey,
       signed: format(data.signed, "yyyy-M-d"),
     };
 
-    mutation.mutate(player);
+    //   mutation.mutate(player);
   };
 
   const onOpenChangeWrapper = (value: boolean) => {
@@ -164,17 +127,17 @@ const CreatePlayerModal = ({ countries }: { countries: Country[] }) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChangeWrapper}>
-      <DialogTrigger asChild>
+      <DialogTrigger asChild className="hidden">
         <Button size="sm">
-          <Plus className="w-4 h-4" /> Player
+          <Edit className="w-4 h-4" /> Player
         </Button>
       </DialogTrigger>
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create Player</DialogTitle>
+          <DialogTitle>Edit Player Details</DialogTitle>
           <DialogDescription>
-            You are in the process of creating a new player for {user.teamName}.
+            You are in the process of updating {player?.pname}.
           </DialogDescription>
         </DialogHeader>
 
@@ -408,8 +371,8 @@ const CreatePlayerModal = ({ countries }: { countries: Country[] }) => {
                 onClick={form.handleSubmit(onSubmit)}
                 disabled={form.formState.isSubmitting}
               >
-                Create{" "}
-                {form.formState.isSubmitting && mutation.isPending && (
+                Edit{" "}
+                {form.formState.isSubmitting && (
                   <RotateCcw className="ml-2 h-4 w-4 animate-spin" />
                 )}
               </Button>
@@ -421,4 +384,4 @@ const CreatePlayerModal = ({ countries }: { countries: Country[] }) => {
   );
 };
 
-export default CreatePlayerModal;
+export default EditPlayerModal;

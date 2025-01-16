@@ -3,7 +3,7 @@
 // import Image from "next/image";
 import { useState } from "react";
 import { format } from "date-fns";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { MoreVerticalIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
@@ -30,13 +30,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import EditPlayerModal from "@/components/teams/manage-player/edit-player-modal";
 
 const ManagePlayerPage = () => {
   const { user } = useStore((state) => state);
   const [openTransfer, setOpenTransfer] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState<TeamPlayer | null>(null);
 
-  // const router = useRouter();
+  const router = useRouter();
 
   const { data: players } = useQuery({
     queryKey: ["allPlayers", user.team],
@@ -127,7 +129,19 @@ const ManagePlayerPage = () => {
                       >
                         Transfer
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => console.log("edit")}>
+                      <DropdownMenuItem
+                        onClick={() =>
+                          router.push(`/home/teams/manage-player/${player.id}`)
+                        }
+                      >
+                        Upload
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => {
+                          setOpenEdit(true);
+                          setSelectedPlayer(player);
+                        }}
+                      >
                         Edit
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => console.log("delete")}>
@@ -160,6 +174,13 @@ const ManagePlayerPage = () => {
           player={selectedPlayer as TeamPlayer}
           // teams={teams as Team[]}
           tournaments={tournaments as TeamTournament[]}
+        />
+
+        <EditPlayerModal
+          open={openEdit}
+          setOpen={setOpenEdit}
+          player={selectedPlayer as TeamPlayer}
+          countries={[]}
         />
       </section>
     </main>
