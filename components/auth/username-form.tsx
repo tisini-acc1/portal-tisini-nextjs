@@ -75,6 +75,10 @@ const UsernameForm = () => {
           description: res.data.message,
           variant: "destructive",
         });
+
+        if (res.data.error === "invalidverification") {
+          router.replace("/auth/verify");
+        }
       }
     } catch (error) {
       console.log(error);
