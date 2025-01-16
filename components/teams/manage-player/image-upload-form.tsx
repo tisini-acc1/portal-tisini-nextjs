@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import Image from "next/image";
-import React from "react";
+
+import { Input } from "@/components/ui/input";
+import { uploadImage } from "@/actions/upload";
+import { Button } from "@/components/ui/button";
 
 const ImageUploadForm = () => {
   return (
@@ -21,8 +21,8 @@ const ImageUploadForm = () => {
         No Image
       </div> */}
 
-      <form className="flex w-full items-center space-x-2">
-        <Input id="picture" type="file" />
+      <form action={uploadImage} className="flex w-full items-center space-x-2">
+        <Input id="picture" type="file" name="file" />
         <Button type="submit">Upload</Button>
       </form>
     </section>

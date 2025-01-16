@@ -1,12 +1,12 @@
 "use client";
 
-// import DeleteFixtureModal from "@/components/fixtures/delete-fixture-modal";
-// import EditFixtureModal from "@/components/fixtures/edit-fixture-modal";
-// import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-// import { Button } from "@/components/ui/button";
+import DeleteFixtureModal from "@/components/fixtures/delete-fixture-modal";
+import EditFixtureModal from "@/components/fixtures/edit-fixture-modal";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export const columns: ColumnDef<RefreeFix>[] = [
   {
@@ -39,37 +39,37 @@ export const columns: ColumnDef<RefreeFix>[] = [
     accessorKey: "matchday",
     header: "Round",
   },
-  // {
-  //   accessorKey: "line ups",
-  //   cell: ({ row }) => {
-  //     const fixture = row.original;
+  {
+    accessorKey: "line ups",
+    cell: ({ row }) => {
+      const fixture = row.original;
 
-  //     const router = useRouter();
+      const router = useRouter();
 
-  //     return (
-  //       <div className="flex gap-2">
-  //         <Button
-  //           variant={"link"}
-  //           onClick={() =>
-  //             router.push(
-  //               `/home/match-officials/${fixture.id}-${fixture.team1_id}`
-  //             )
-  //           }
-  //         >
-  //           Home
-  //         </Button>
-  //         <Button
-  //           variant={"link"}
-  //           onClick={() =>
-  //             router.push(
-  //               `/home/match-officials/${fixture.id}-${fixture.team2_id}`
-  //             )
-  //           }
-  //         >
-  //           Away
-  //         </Button>
-  //       </div>
-  //     );
-  //   },
-  // },
+      return (
+        <div className="flex gap-2">
+          <Button
+            variant={"link"}
+            onClick={() =>
+              router.push(
+                `/home/match-officials/${fixture.id}-${fixture.team1_id}`
+              )
+            }
+          >
+            Home
+          </Button>
+          <Button
+            variant={"link"}
+            onClick={() =>
+              router.push(
+                `/home/match-officials/${fixture.id}-${fixture.team2_id}`
+              )
+            }
+          >
+            Away
+          </Button>
+        </div>
+      );
+    },
+  },
 ];

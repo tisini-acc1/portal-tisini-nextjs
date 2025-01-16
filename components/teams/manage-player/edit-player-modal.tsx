@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { format } from "date-fns";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 // import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RotateCcw, Edit, CalendarIcon } from "lucide-react";
@@ -101,24 +101,24 @@ const EditPlayerModal = ({ open, setOpen, player, countries }: EditProps) => {
   // });
 
   const onSubmit = async (data: z.infer<typeof playerSchema>) => {
-    const player = {
-      id_no: data.idNumber,
-      phone_number: data.phone,
-      first_name: data.firstName,
-      last_name: data.lastName,
-      sirname: "",
-      dob: format(data.dob, "yyyy-M-d"),
-      nationality: data.nationality,
-      position: data.position,
-      email: "",
-      password: data.idNumber.slice(1, 5),
-      role: "5",
-      // teamid: user.team,
-      Jersey: data.jersey,
-      signed: format(data.signed, "yyyy-M-d"),
-    };
-
+    // const player = {
+    //   id_no: data.idNumber,
+    //   phone_number: data.phone,
+    //   first_name: data.firstName,
+    //   last_name: data.lastName,
+    //   sirname: "",
+    //   dob: format(data.dob, "yyyy-M-d"),
+    //   nationality: data.nationality,
+    //   position: data.position,
+    //   email: "",
+    //   password: data.idNumber.slice(1, 5),
+    //   role: "5",
+    //   // teamid: user.team,
+    //   Jersey: data.jersey,
+    //   signed: format(data.signed, "yyyy-M-d"),
+    // };
     //   mutation.mutate(player);
+    console.log(data);
   };
 
   const onOpenChangeWrapper = (value: boolean) => {
