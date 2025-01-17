@@ -70,7 +70,9 @@ const UsernameForm = () => {
         updateUser(res.data.userid);
 
         router.replace(redirectUrl);
-      } else if (res.data.error) {
+      }
+
+      if (res.data.error) {
         if (res.data.error === "invalidverification") {
           router.replace("/auth/verify");
         }
