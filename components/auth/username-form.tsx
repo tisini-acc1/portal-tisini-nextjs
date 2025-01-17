@@ -70,19 +70,25 @@ const UsernameForm = () => {
         updateUser(res.data.userid);
 
         router.replace(redirectUrl);
-      }
-
-      if (res.data.error) {
-        if (res.data.error === "invalidverification") {
-          router.replace("/auth/verify");
-        }
-
+      } else {
         toast({
           title: "Error",
           description: res.data.message,
           variant: "destructive",
         });
       }
+
+      // if (res.data.error) {
+      //   if (res.data.error === "invalidverification") {
+      //     router.replace("/auth/verify");
+      //   }
+
+      //   toast({
+      //     title: "Error",
+      //     description: res.data.message,
+      //     variant: "destructive",
+      //   });
+      // }
     } catch (error) {
       console.log(error);
       toast({
