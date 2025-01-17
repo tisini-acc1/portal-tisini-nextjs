@@ -100,7 +100,7 @@ export function OfficialsFixTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No transfers yet.
+                  No fixtures yet.
                 </TableCell>
               </TableRow>
             )}

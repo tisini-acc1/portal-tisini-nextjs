@@ -1,5 +1,5 @@
 import { getTeamLineup } from "@/actions/php-actions";
-import Image from "next/image";
+import VerifyPlayerCard from "@/components/match-officials/verify-player-card";
 
 type LineupProps = {
   params: Promise<{ fixId: string }>;
@@ -14,7 +14,7 @@ const LineupPage = async ({ params }: LineupProps) => {
 
   const first11 = data?.filter((item) => item.player_type === "first11");
   const subs = data?.filter((item) => item.player_type === "sub");
-
+  console.log(data);
   return (
     <main>
       <header></header>
@@ -22,72 +22,18 @@ const LineupPage = async ({ params }: LineupProps) => {
       <section className="space-y-6">
         <div>
           <strong className="mb-2">First 11</strong>
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
             {first11.map((player) => (
-              <div
-                key={player.id}
-                className="flex items-center gap-4 h-20 border px-1 rounded-sm"
-              >
-                <div>
-                  <Image
-                    src={"/footballer.jpg"}
-                    alt={"name"}
-                    width={50}
-                    height={50}
-                    className={
-                      "h-full w-full object-cover rounded-sm aspect-square"
-                    }
-                  />
-                </div>
-
-                <div className="">
-                  <p className="text-xs text-gray-600 mb-1">
-                    <strong>{player.pname}</strong>{" "}
-                  </p>
-                  <p className="text-xs text-gray-600 mb-1">
-                    <strong>Jersey Number:</strong> {player.Jersey_No}
-                  </p>
-                  <p className="text-xs text-gray-600">
-                    <strong>Position:</strong> {player.lineupposition}
-                  </p>
-                </div>
-              </div>
+              <VerifyPlayerCard key={player.id} player={player} />
             ))}
           </div>
         </div>
 
         <div>
           <strong className="mb-2">Substitutes</strong>
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
             {subs.map((player) => (
-              <div
-                key={player.id}
-                className="flex items-center gap-4 h-20 border px-1 rounded-sm"
-              >
-                <div>
-                  <Image
-                    src={"/footballer.jpg"}
-                    alt={"name"}
-                    width={50}
-                    height={50}
-                    className={
-                      "h-full w-full object-cover rounded-sm aspect-square"
-                    }
-                  />
-                </div>
-
-                <div className="">
-                  <p className="text-xs text-gray-600 mb-1">
-                    <strong>{player.pname}</strong>{" "}
-                  </p>
-                  <p className="text-xs text-gray-600 mb-1">
-                    <strong>Jersey Number:</strong> {player.Jersey_No}
-                  </p>
-                  <p className="text-xs text-gray-600">
-                    <strong>Position:</strong> {player.lineupposition}
-                  </p>
-                </div>
-              </div>
+              <VerifyPlayerCard key={player.id} player={player} />
             ))}
           </div>
         </div>

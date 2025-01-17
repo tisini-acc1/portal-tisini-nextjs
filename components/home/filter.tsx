@@ -11,7 +11,7 @@ const Filter = async () => {
     return <TeamFilter />;
   }
 
-  return <div>FilterOptions</div>;
+  return <div></div>;
 };
 
 export default Filter;

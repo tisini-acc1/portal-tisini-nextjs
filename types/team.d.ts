@@ -139,20 +139,21 @@ type Fouls = {
 };
 
 type Lineup = {
-  Jersey_No: string;
-  fixture_id: string;
   id: string;
-  last_updated: string;
-  player_id: string;
-  player_type: string;
-  pname: string;
-  teamId: string;
+  fixture_id: string;
+  date_created: string;
   team_player_id: string;
+  Jersey_No: string;
+  system_user_id: string;
+  player_type: string;
+  player_id: string;
+  teamId: string;
+  pname: string;
+  last_updated: string;
   lineupposition: string;
   red: string;
-  date_created: string;
-  system_user_id: string;
   GK: string;
+  verify: string;
 };
 
 type GameHighlights = {
@@ -425,19 +426,12 @@ type RefreeFix = {
   matchtime: string;
 };
 
-type Lineup = {
+type FixtureType = {
   id: string;
-  fixture_id: string;
-  date_created: string;
-  team_player_id: string;
-  Jersey_No: string;
-  system_user_id: string;
-  player_type: string;
-  player_id: string;
-  teamId: string;
-  pname: string;
-  last_updated: string;
-  lineupposition: string;
-  red: string;
-  GK: string;
+  type_name: string;
+  type_code: string;
+  sub_type: string;
+  order_type: string;
+  no_player: string;
+  fix_time: string;
 };

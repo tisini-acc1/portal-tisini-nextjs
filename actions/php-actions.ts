@@ -434,7 +434,7 @@ export const updateFixOfficial = async (data: FixOfficials) => {
 };
 
 // {"action":"", }
-export const getRefreeFixtures = async (): Promise<RefreeFix[]> => {
+export const getRefreeFixtures = async (id: string): Promise<RefreeFix[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
 
@@ -442,7 +442,7 @@ export const getRefreeFixtures = async (): Promise<RefreeFix[]> => {
     const res = await axios.post(`${baseURL}`, {
       gettoken: token,
       action: "refereefixture",
-      refid: "396",
+      refid: id,
     });
 
     if (res.status === 200) {
@@ -484,6 +484,53 @@ export const getTeamLineup = async (
     console.log(error);
     throw new Error(
       error.message || "An error occurred while refree fixtures."
+    );
+  }
+};
+
+export const getFixType = async (): Promise<FixtureType[]> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "fixturetype",
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fetch fixture types: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error.message || "An error occurred while fixture types.");
+  }
+};
+
+export const verifyPlayer = async (id: string) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "verifylineup",
+      lineupid: id,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to verify player: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while verifying the player."
     );
   }
 };

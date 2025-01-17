@@ -35,7 +35,7 @@ const UsernameForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { updateName, updateRole } = useStore((state) => state);
+  const { updateName, updateRole, updateUser } = useStore((state) => state);
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -67,18 +67,19 @@ const UsernameForm = () => {
 
         updateName(res.data.name);
         updateRole(res.data.role);
+        updateUser(res.data.userid);
 
         router.replace(redirectUrl);
       } else if (res.data.error) {
+        if (res.data.error === "invalidverification") {
+          router.replace("/auth/verify");
+        }
+
         toast({
           title: "Error",
           description: res.data.message,
           variant: "destructive",
         });
-
-        if (res.data.error === "invalidverification") {
-          router.replace("/auth/verify");
-        }
       }
     } catch (error) {
       console.log(error);

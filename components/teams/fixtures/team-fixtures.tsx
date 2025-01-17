@@ -8,10 +8,14 @@ import { useStore } from "@/lib/store";
 import TeamSelectHeader from "../team-select-header";
 import { getTeamTournaments } from "@/actions/php-actions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { PlusCircle } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const TeamFixtures = () => {
   const [series, setSeries] = useState<TeamSeason[]>([]);
   const [fixtures, setFixtures] = useState<TeamFixture[]>([]);
+
+  const router = useRouter();
 
   const { user, updateSeries, updateTournament } = useStore((state) => state);
 
@@ -25,7 +29,7 @@ const TeamFixtures = () => {
       setSeries(data[0].season);
       updateSeries(data[0].season[0]?.id);
       updateTournament(data[0].tournamentid);
-      setFixtures(data[0]?.season[0]?.fixture.reverse() || []);
+      setFixtures(data[0]?.season[0]?.fixture.slice().reverse() || []);
     }
   }, [data]);
 
@@ -39,13 +43,17 @@ const TeamFixtures = () => {
         const season = tournament.season.find(
           (season) => season.id === user.series
         );
-        if (season && season.fixture !== fixtures) {
-          setFixtures(season.fixture);
+        if (season && season.fixture) {
+          // Compare the fixtures in a shallow way to avoid unnecessary state updates
+          const newFixtures = season.fixture.slice().reverse();
+          if (JSON.stringify(newFixtures) !== JSON.stringify(fixtures)) {
+            setFixtures(newFixtures);
+          }
         }
       }
     }
-  }, [data, fixtures, user.tournament, user.series]);
-
+  }, [data, user.tournament, user.series]);
+  console.log(data);
   // Handle loading and error states
   if (isLoading) {
     return <div>Loading...</div>;
@@ -74,7 +82,16 @@ const TeamFixtures = () => {
             }
           >
             <CardHeader>
-              <CardTitle>{formattedDate(fixture.game_date)}</CardTitle>
+              <CardTitle className="flex justify-between items-center">
+                {formattedDate(fixture.game_date)}
+
+                <PlusCircle
+                  onClick={() =>
+                    router.push(`/home/teams/fixtures/${fixture.id}`)
+                  }
+                  className="w-5 h-5 cursor-pointer hover:text-blue-500 hover:scale-100"
+                />
+              </CardTitle>
             </CardHeader>
 
             <CardContent className="flex flex-col space-y-4">
