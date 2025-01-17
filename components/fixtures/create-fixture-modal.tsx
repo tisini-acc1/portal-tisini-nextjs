@@ -1,12 +1,26 @@
 "use client";
 
-import { CalendarIcon, Plus } from "lucide-react";
-import { Button } from "../ui/button";
+import { z } from "zod";
 import { format } from "date-fns";
+import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { CalendarIcon, Plus, RotateCcw } from "lucide-react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
+import { cn } from "@/lib/utils";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { useStore } from "@/lib/store";
+import { Calendar } from "../ui/calendar";
+import { useToast } from "@/hooks/use-toast";
+import { createFixture } from "@/actions/php-actions";
+import { getTournamentTeams } from "@/actions/django-actions";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import {
   Dialog,
-  // DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -20,10 +34,6 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { Input } from "../ui/input";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import {
   Select,
   SelectContent,
@@ -31,14 +41,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { Calendar } from "../ui/calendar";
-import { cn } from "@/lib/utils";
-import { useStore } from "@/lib/store";
-import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { getTournamentTeams } from "@/actions/django-actions";
-import { createFixture } from "@/actions/php-actions";
 
 export const fixtureSchema = z.object({
   home: z.string().min(1, { message: "Home team is required" }),
@@ -56,6 +58,9 @@ const CreateFixtureModal = () => {
   const [team, setTeam] = useState<CompTeam>({} as CompTeam);
 
   const { user } = useStore((state) => state);
+  const { toast } = useToast();
+  const [open, setOpen] = useState(false);
+  const queryClient = useQueryClient();
 
   const { data } = useQuery({
     queryKey: ["teams", user.tournament, user.series],
@@ -87,6 +92,35 @@ const CreateFixtureModal = () => {
     }
   }, [form.formState.errors]);
 
+  const mutation = useMutation({
+    mutationFn: createFixture,
+    onSuccess(data) {
+      console.log(data.length);
+      setOpen(false);
+      queryClient.invalidateQueries({ queryKey: ["fixtures"] });
+      toast({ title: "Success", description: "Fixture created" });
+      // if (data.length === "1") {
+      //   setOpen(false);
+      //   queryClient.invalidateQueries({ queryKey: ["fixtures"] });
+      //   toast({ title: "Success", description: data.message });
+      // } else {
+      //   toast({
+      //     title: "Error!",
+      //     variant: "destructive",
+      //     description: data.message,
+      //   });
+      // }
+    },
+    onError: (error) => {
+      console.log(error);
+      toast({
+        title: "Error!",
+        variant: "destructive",
+        description: "An error occured while creating fixtures",
+      });
+    },
+  });
+
   async function onSubmit(values: z.infer<typeof fixtureSchema>) {
     const date = format(values.gameDate, "yyyy-M-d");
     const fixture = {
@@ -108,12 +142,16 @@ const CreateFixtureModal = () => {
       playeradd: "0",
       // gettoken: "1cb86587c54b4736a4ec6388f32af060",
     };
-    console.log(values);
-    createFixture(fixture);
+
+    mutation.mutate(fixture);
   }
 
+  const onOpenChangeWrapper = (value: boolean) => {
+    setOpen(value);
+  };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={onOpenChangeWrapper}>
       <DialogTrigger asChild>
         <Button size="sm">
           <Plus className="mr-2 w-5 h-5" /> Fixture
@@ -123,6 +161,7 @@ const CreateFixtureModal = () => {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Create Fixture</DialogTitle>
+          <DialogDescription>Fixture creation</DialogDescription>
         </DialogHeader>
 
         <Form {...form}>
@@ -313,9 +352,17 @@ const CreateFixtureModal = () => {
               )}
             /> */}
 
-            <DialogFooter>
-              {/* <DialogClose asChild></DialogClose> */}
-              <Button type="submit">Submit</Button>
+            <DialogFooter className="p-0">
+              <Button
+                className="w-full"
+                onClick={form.handleSubmit(onSubmit)}
+                disabled={form.formState.isSubmitting}
+              >
+                Create{" "}
+                {mutation.isPending && (
+                  <RotateCcw className="ml-2 h-4 w-4 animate-spin" />
+                )}
+              </Button>
             </DialogFooter>
           </form>
         </Form>

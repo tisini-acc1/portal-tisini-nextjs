@@ -123,7 +123,7 @@ const CreatePlayerModal = ({ countries }: { countries: Country[] }) => {
       if (data.error === "0") {
         setOpen(false);
         queryClient.invalidateQueries({ queryKey: ["allPlayers"] });
-        toast({ title: "Succes", description: data.message });
+        toast({ title: "Success", description: data.message });
       } else {
         toast({
           title: "Error!",
@@ -134,6 +134,11 @@ const CreatePlayerModal = ({ countries }: { countries: Country[] }) => {
     },
     onError: (error) => {
       console.log(error);
+      toast({
+        title: "Error!",
+        variant: "destructive",
+        description: "An error occured while creating player",
+      });
     },
   });
 
