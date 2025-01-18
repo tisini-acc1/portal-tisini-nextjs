@@ -54,7 +54,7 @@ const UsernameForm = () => {
     };
 
     setIsLoading(true);
-
+    console.log(process.env.NEXT_PUBLIC_API_HOST);
     try {
       const res = await axios.post(`${process.env.NEXT_PUBLIC_API_HOST}`, user);
       console.log(res);
@@ -71,24 +71,18 @@ const UsernameForm = () => {
 
         router.replace(redirectUrl);
       } else {
-        toast({
-          title: "Error",
-          description: res.data.message,
-          variant: "destructive",
-        });
+        if (res.data.error) {
+          if (res.data.error === "invalidverification") {
+            router.replace("/auth/verify");
+          }
+
+          toast({
+            title: "Error",
+            description: res.data.message,
+            variant: "destructive",
+          });
+        }
       }
-
-      // if (res.data.error) {
-      //   if (res.data.error === "invalidverification") {
-      //     router.replace("/auth/verify");
-      //   }
-
-      //   toast({
-      //     title: "Error",
-      //     description: res.data.message,
-      //     variant: "destructive",
-      //   });
-      // }
     } catch (error) {
       console.log(error);
       toast({
