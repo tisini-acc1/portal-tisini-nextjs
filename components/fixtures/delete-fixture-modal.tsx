@@ -11,7 +11,7 @@ import { Trash2 } from "lucide-react";
 const DeleteFixtureModal = () => {
   return (
     <Dialog>
-      <DialogTrigger asChild>
+      <DialogTrigger asChild className="hidden">
         <Button size="icon" variant="outline">
           <Trash2 className="w-4 h-4" color="#fa0000" />
         </Button>

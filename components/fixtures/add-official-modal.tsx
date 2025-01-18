@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PlusCircle, RotateCcw } from "lucide-react";
@@ -32,6 +31,12 @@ import {
 } from "../ui/select";
 import { z } from "zod";
 
+type AddProps = {
+  fixId: string;
+  open: boolean;
+  setOpen: (v: boolean) => void;
+};
+
 const officialSchema = z.object({
   refree: z.string().min(1, { message: "Provide center refree" }),
   assRefree1: z.string().min(1, { message: "Provide assistant refree 1" }),
@@ -39,9 +44,9 @@ const officialSchema = z.object({
   reserve: z.string().min(1, { message: "Provide reserve refree" }),
 });
 
-const AddFixtureOfficialModal = ({ fixId }: { fixId: string }) => {
+const AddFixtureOfficialModal = ({ fixId, open, setOpen }: AddProps) => {
   const { toast } = useToast();
-  const [open, setOpen] = useState(false);
+  //   const [open, setOpen] = useState(false);
   const { user } = useStore((state) => state);
 
   const form = useForm<z.infer<typeof officialSchema>>({
@@ -84,7 +89,7 @@ const AddFixtureOfficialModal = ({ fixId }: { fixId: string }) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChangeWrapper}>
-      <DialogTrigger asChild>
+      <DialogTrigger asChild className="hidden">
         <Button size="icon" variant="outline">
           <PlusCircle className="w-4 h-4" color="#25f609" />
         </Button>

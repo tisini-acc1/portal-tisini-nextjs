@@ -83,7 +83,7 @@ const EditFixtureModal = ({ fixId }: { fixId: string }) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChangeWrapper}>
-      <DialogTrigger asChild>
+      <DialogTrigger asChild className="hidden">
         <Button size="icon" variant="outline">
           <Edit className="w-4 h-4" color="#002afa" />
         </Button>
