@@ -13,7 +13,7 @@ const DeleteFixtureModal = () => {
     <Dialog>
       <DialogTrigger asChild>
         <Button size="icon" variant="outline">
-          <Trash2 className="w-4 h-4" color="#25f609" />
+          <Trash2 className="w-4 h-4" color="#fa0000" />
         </Button>
       </DialogTrigger>
 

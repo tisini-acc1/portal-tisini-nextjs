@@ -1,4 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { PlusCircle, RotateCcw } from "lucide-react";
+
+import { Button } from "../ui/button";
+import { useStore } from "@/lib/store";
+import { useToast } from "@/hooks/use-toast";
+import { updateFixOfficial } from "@/actions/php-actions";
 import {
   Dialog,
   DialogContent,
@@ -7,8 +15,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-import { Button } from "../ui/button";
-import { Edit, RotateCcw } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -17,8 +23,6 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { useForm } from "react-hook-form";
-import { useStore } from "@/lib/store";
 import {
   Select,
   SelectContent,
@@ -27,9 +31,6 @@ import {
   SelectValue,
 } from "../ui/select";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { updateFixOfficial } from "@/actions/php-actions";
-import { useToast } from "@/hooks/use-toast";
 
 const officialSchema = z.object({
   refree: z.string().min(1, { message: "Provide center refree" }),
@@ -38,7 +39,7 @@ const officialSchema = z.object({
   reserve: z.string().min(1, { message: "Provide reserve refree" }),
 });
 
-const EditFixtureModal = ({ fixId }: { fixId: string }) => {
+const AddFixtureOfficialModal = ({ fixId }: { fixId: string }) => {
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
   const { user } = useStore((state) => state);
@@ -85,14 +86,14 @@ const EditFixtureModal = ({ fixId }: { fixId: string }) => {
     <Dialog open={open} onOpenChange={onOpenChangeWrapper}>
       <DialogTrigger asChild>
         <Button size="icon" variant="outline">
-          <Edit className="w-4 h-4" color="#002afa" />
+          <PlusCircle className="w-4 h-4" color="#25f609" />
         </Button>
       </DialogTrigger>
 
       <DialogContent>
-        <DialogTitle>Update fixture</DialogTitle>
+        <DialogTitle>Update Fixture</DialogTitle>
         <DialogDescription>
-          You are about to add match officials
+          You are about to add Match Officials
         </DialogDescription>
 
         <Form {...form}>
@@ -260,4 +261,4 @@ const EditFixtureModal = ({ fixId }: { fixId: string }) => {
   );
 };
 
-export default EditFixtureModal;
+export default AddFixtureOfficialModal;

@@ -95,21 +95,17 @@ const CreateFixtureModal = () => {
   const mutation = useMutation({
     mutationFn: createFixture,
     onSuccess(data) {
-      console.log(data.length);
-      setOpen(false);
-      queryClient.invalidateQueries({ queryKey: ["fixtures"] });
-      toast({ title: "Success", description: "Fixture created" });
-      // if (data.length === "1") {
-      //   setOpen(false);
-      //   queryClient.invalidateQueries({ queryKey: ["fixtures"] });
-      //   toast({ title: "Success", description: data.message });
-      // } else {
-      //   toast({
-      //     title: "Error!",
-      //     variant: "destructive",
-      //     description: data.message,
-      //   });
-      // }
+      if (data.error === "0") {
+        setOpen(false);
+        queryClient.invalidateQueries({ queryKey: ["fixtures"] });
+        toast({ title: "Success", description: data.message });
+      } else if (data.error === "1") {
+        toast({
+          title: "Error!",
+          variant: "destructive",
+          description: data.message,
+        });
+      }
     },
     onError: (error) => {
       console.log(error);
@@ -140,7 +136,6 @@ const CreateFixtureModal = () => {
       gametime: values.gameTime,
       pitch: "1",
       playeradd: "0",
-      // gettoken: "1cb86587c54b4736a4ec6388f32af060",
     };
 
     mutation.mutate(fixture);

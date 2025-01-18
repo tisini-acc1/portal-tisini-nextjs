@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { useStore } from "@/lib/store";
 import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -20,7 +21,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useStore } from "@/lib/store";
 
 const loginSchema = z.object({
   username: z
@@ -54,10 +54,10 @@ const UsernameForm = () => {
     };
 
     setIsLoading(true);
-    console.log(process.env.NEXT_PUBLIC_API_HOST);
+
     try {
       const res = await axios.post(`${process.env.NEXT_PUBLIC_API_HOST}`, user);
-      console.log(res);
+      // console.log(res);
       if (res.data.success === "1") {
         const redirectUrl = await handleLogin(
           res.data.userid,

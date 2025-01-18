@@ -129,7 +129,7 @@ const CreateOfficialsModal = () => {
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create Player</DialogTitle>
+          <DialogTitle>Create Match Official</DialogTitle>
           <DialogDescription>
             You are in the process of creating a new Match Official.
           </DialogDescription>
