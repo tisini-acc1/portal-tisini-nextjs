@@ -560,3 +560,28 @@ export const uploadPhotoUrl = async (url: string, id: string) => {
     );
   }
 };
+
+export const createTournament = async (data: TournaCreate) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "createtournament",
+      ...data,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to create a new tournament: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while creating new tournament."
+    );
+  }
+};

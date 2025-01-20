@@ -373,6 +373,14 @@ type Transfer = {
   tournamentid: string;
 };
 
+type TournaCreate = {
+  name: string;
+  fixtype: string;
+  from: string;
+  to: string;
+  position: string;
+};
+
 type TournaOfficial = {
   id_no: string;
   email: string;

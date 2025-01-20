@@ -36,11 +36,11 @@ export function NavUser() {
   const { user } = useStore((state) => state);
 
   const role =
-    user.role === "2"
+    user.user.role === "2"
       ? "Team Admin"
-      : user.role === "6"
+      : user.user.role === "6"
       ? "Tournament Admin"
-      : user.role === "6"
+      : user.user.role === "9"
       ? "Match Official"
       : "System User";
 
@@ -54,11 +54,11 @@ export function NavUser() {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={"/shadcn.jpg"} alt={user.name} />
+                <AvatarImage src={"/shadcn.jpg"} alt={user.user.name} />
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{user.name}</span>
+                <span className="truncate font-semibold">{user.user.name}</span>
                 <span className="truncate text-xs">{role}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
@@ -73,11 +73,13 @@ export function NavUser() {
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={"/shadcn.jpg"} alt={user.name} />
+                  <AvatarImage src={"/shadcn.jpg"} alt={user.user.name} />
                   <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">{user.name}</span>
+                  <span className="truncate font-semibold">
+                    {user.user.name}
+                  </span>
                   <span className="truncate text-xs">{role}</span>
                 </div>
               </div>
