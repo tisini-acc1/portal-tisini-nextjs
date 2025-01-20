@@ -6,16 +6,14 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, RotateCcw } from "lucide-react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 // import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useStore } from "@/lib/store";
 // import { Calendar } from "@/components/ui/calendar";
 import { useToast } from "@/hooks/use-toast";
 import { createTournament } from "@/actions/php-actions";
-import { getTournamentTeams } from "@/actions/django-actions";
 // import {
 //   Popover,
 //   PopoverContent,
@@ -59,17 +57,9 @@ export const fixtureSchema = z.object({
 });
 
 const CreateTournamentModal = () => {
-  const [team, setTeam] = useState<CompTeam>({} as CompTeam);
-
-  const { user } = useStore((state) => state);
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
-
-  const { data } = useQuery({
-    queryKey: ["teams", user.tournament, user.series],
-    queryFn: () => getTournamentTeams(user.tournament, user.series),
-  });
 
   const form = useForm<z.infer<typeof fixtureSchema>>({
     resolver: zodResolver(fixtureSchema),
@@ -80,12 +70,6 @@ const CreateTournamentModal = () => {
       //   startDate: new Date(),
     },
   });
-
-  useEffect(() => {
-    if (data) {
-      setTeam(data[0]);
-    }
-  }, [data]);
 
   useEffect(() => {
     if (form.formState.errors) {

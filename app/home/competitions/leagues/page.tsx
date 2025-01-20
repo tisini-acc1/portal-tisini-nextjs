@@ -2,19 +2,18 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { MoreVertical } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
 import { useStore } from "@/lib/store";
 import { getTournaments } from "@/actions/django-actions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MoreVertical } from "lucide-react";
 import CreateTournamentModal from "@/components/tournaments/leagues/create-tournament-modal";
 
 const CompetitionsPage = () => {
   const [tournament, setTournament] = useState<Tournament | undefined>(
     undefined
   );
-  const [serie, setSerie] = useState<Serie | undefined>();
 
   const { user } = useStore((state) => state);
 
@@ -29,10 +28,6 @@ const CompetitionsPage = () => {
         (tournament) => tournament.id === user.tournament
       );
       setTournament(tourna as Tournament);
-      if (tourna) {
-        const series = tourna.series.find((serie) => serie.id === user.series);
-        setSerie(series);
-      }
     }
   }, [user.tournament, user.series, data]);
 

@@ -34,6 +34,7 @@ const ImageUploadForm = ({ playerId }: { playerId: string }) => {
         });
       }
     } catch (error) {
+      console.log(error);
       toast({
         title: "Upload Failed!",
         description: "An error occurred during the upload process",

@@ -3,7 +3,7 @@ import {
   // Calendar,
   Calendar1,
   // Command,
-  File,
+  // File,
   Gamepad,
   Home,
   // LifeBuoy,

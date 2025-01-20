@@ -1,17 +1,18 @@
 "use client";
 
-import { getRefreeFixtures } from "@/actions/php-actions";
-import { OfficialsFixTable } from "./fixtures-table";
-import { columns } from "./columns";
 import { useQuery } from "@tanstack/react-query";
+
+import { columns } from "./columns";
 import { useStore } from "@/lib/store";
+import { OfficialsFixTable } from "./fixtures-table";
+import { getRefreeFixtures } from "@/actions/php-actions";
 
 const MatchOfficialsPage = () => {
   const { user } = useStore((state) => state);
 
   const { data, isError, isLoading } = useQuery({
-    queryKey: ["refreeFixtures", user.user],
-    queryFn: () => getRefreeFixtures(user.user as string),
+    queryKey: ["refreeFixtures", user.user.id],
+    queryFn: () => getRefreeFixtures(user.user.id as string),
   });
 
   if (isLoading) {
