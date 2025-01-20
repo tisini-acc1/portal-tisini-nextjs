@@ -35,7 +35,7 @@ const UsernameForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { updateName, updateRole, updateUser } = useStore((state) => state);
+  const { updateUser } = useStore((state) => state);
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -65,9 +65,12 @@ const UsernameForm = () => {
           res.data.role
         );
 
-        updateName(res.data.name);
-        updateRole(res.data.role);
-        updateUser(res.data.userid);
+        updateUser(
+          res.data.name,
+          res.data.userid,
+          res.data.role,
+          res.data.phone
+        );
 
         router.replace(redirectUrl);
       } else {

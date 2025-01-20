@@ -534,3 +534,29 @@ export const verifyPlayer = async (id: string) => {
     );
   }
 };
+
+export const uploadPhotoUrl = async (url: string, id: string) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "passportphoto",
+      photourl: url,
+      playerid: id,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to upload player photo: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while uploading player url."
+    );
+  }
+};

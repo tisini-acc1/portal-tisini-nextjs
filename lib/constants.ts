@@ -13,6 +13,7 @@ import {
   // PlaySquare,
   // Send,
   ShieldHalf,
+  Wallet,
 } from "lucide-react";
 
 export const TEAMS_ITEMS = [
@@ -65,7 +66,11 @@ export const TEAMS_ITEMS = [
   //     { title: "Player", url: "#" },
   //   ],
   // },
-
+  {
+    title: "Wallet",
+    url: "/home/wallet",
+    icon: Wallet,
+  },
   // {
   //   title: "Settings",
   //   url: "#",
@@ -107,17 +112,31 @@ export const COMPS_ITEMS = [
       { title: "leagues", url: "/home/competitions/leagues" },
       { title: "Teams", url: "/home/competitions/teams" },
       { title: "Fixtures", url: "/home/competitions/fixtures" },
-      { title: "Players", url: "/home/competitions/players" },
+      { title: "Transfers", url: "/home/competitions/transfers" },
     ],
   },
   {
-    title: "Transfers",
-    url: "/home/competitions/transfers",
-    icon: File,
-  },
-  {
-    title: "Match Officials",
-    url: "/home/competitions/officials",
+    title: "Users",
+    url: "#",
     icon: PersonStanding,
+    items: [
+      { title: "Players", url: "/home/competitions/players" },
+      { title: "Match Officials", url: "/home/competitions/officials" },
+    ],
+  },
+  // {
+  //   title: "",
+  //   url: "",
+  //   icon: File,
+  // },
+  // {
+  //   title: "",
+  //   url: "",
+  //   icon: PersonStanding,
+  // },
+  {
+    title: "Wallet",
+    url: "/home/wallet",
+    icon: Wallet,
   },
 ];

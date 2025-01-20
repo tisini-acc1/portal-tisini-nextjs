@@ -64,7 +64,7 @@ const ManagePlayerPage = () => {
   //   queryFn: () => getUserTeams(),
   // });
 
-  // console.log(data);
+  console.log(players);
   // console.log(players?.slice().reverse());
 
   return (
@@ -131,7 +131,9 @@ const ManagePlayerPage = () => {
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() =>
-                          router.push(`/home/teams/manage-player/${player.id}`)
+                          router.push(
+                            `/home/teams/manage-player/${player.player_id}`
+                          )
                         }
                       >
                         Upload

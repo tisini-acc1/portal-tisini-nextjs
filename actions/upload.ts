@@ -3,9 +3,12 @@
 import { nanoid } from "nanoid";
 import { S3Client } from "@aws-sdk/client-s3";
 import { createPresignedPost } from "@aws-sdk/s3-presigned-post";
+import { uploadPhotoUrl } from "./php-actions";
 
 export async function uploadImage(formData: FormData) {
   try {
+    const playerId = formData.get("userId") as string;
+
     const client = new S3Client({
       region: process.env.AWS_REGION,
     });
@@ -29,18 +32,24 @@ export async function uploadImage(formData: FormData) {
     });
 
     const textResponse = await response.text();
-    const location = response.headers.get("location");
+    const location = response.headers.get("location") as string;
 
     console.log(textResponse);
     console.log(location);
 
     if (response.ok) {
-      console.log("file Uploaded");
-      //   return location;
+      const res = await uploadPhotoUrl(location, playerId);
+      console.log("file Uploaded", res);
+      return res;
     } else {
-      console.log("Some error occured during file upload!");
+      console.log("Some error occurred during file upload!");
+      return { error: "1", message: "File upload failed" };
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    return {
+      error: "1",
+      message: "An error occurred during the upload process",
+    };
   }
 }
