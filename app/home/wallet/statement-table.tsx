@@ -98,7 +98,7 @@ export function StatementTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No transfers yet.
+                  No statements yet.
                 </TableCell>
               </TableRow>
             )}
