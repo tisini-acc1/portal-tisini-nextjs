@@ -8,11 +8,11 @@ import { OfficialsFixTable } from "./fixtures-table";
 import { getRefreeFixtures } from "@/actions/php-actions";
 
 const MatchOfficialsPage = () => {
-  const { user } = useStore((state) => state);
+  const { store } = useStore((state) => state);
 
   const { data, isError, isLoading } = useQuery({
-    queryKey: ["refreeFixtures", user.user.id],
-    queryFn: () => getRefreeFixtures(user.user.id as string),
+    queryKey: ["refreeFixtures", store.user.id],
+    queryFn: () => getRefreeFixtures(store.user.id as string),
   });
 
   if (isLoading) {

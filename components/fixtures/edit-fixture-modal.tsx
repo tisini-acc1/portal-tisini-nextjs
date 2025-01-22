@@ -41,7 +41,7 @@ const officialSchema = z.object({
 const EditFixtureModal = ({ fixId }: { fixId: string }) => {
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
-  const { user } = useStore((state) => state);
+  const { store } = useStore((state) => state);
 
   const form = useForm<z.infer<typeof officialSchema>>({
     resolver: zodResolver(officialSchema),
@@ -111,16 +111,16 @@ const EditFixtureModal = ({ fixId }: { fixId: string }) => {
                       <SelectTrigger>
                         <SelectValue
                           placeholder={
-                            user.officials
-                              ? `${user.officials[0].first_name}
-                              ${user.officials[0].last_name}`
+                            store.officials
+                              ? `${store.officials[0].first_name}
+                              ${store.officials[0].last_name}`
                               : "No teams"
                           }
                         />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {user?.officials.map((official) => (
+                      {store?.officials.map((official) => (
                         <SelectItem key={official.id} value={official.id}>
                           {official.first_name} {official.last_name}
                         </SelectItem>
@@ -147,16 +147,16 @@ const EditFixtureModal = ({ fixId }: { fixId: string }) => {
                       <SelectTrigger>
                         <SelectValue
                           placeholder={
-                            user.officials
-                              ? `${user.officials[0].first_name}
-                              ${user.officials[0].last_name}`
+                            store.officials
+                              ? `${store.officials[0].first_name}
+                              ${store.officials[0].last_name}`
                               : "No teams"
                           }
                         />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {user?.officials.map((official) => (
+                      {store?.officials.map((official) => (
                         <SelectItem key={official.id} value={official.id}>
                           {official.first_name} {official.last_name}
                         </SelectItem>
@@ -183,16 +183,16 @@ const EditFixtureModal = ({ fixId }: { fixId: string }) => {
                       <SelectTrigger>
                         <SelectValue
                           placeholder={
-                            user.officials
-                              ? `${user.officials[0].first_name}
-                              ${user.officials[0].last_name}`
+                            store.officials
+                              ? `${store.officials[0].first_name}
+                              ${store.officials[0].last_name}`
                               : "No teams"
                           }
                         />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {user?.officials.map((official) => (
+                      {store?.officials.map((official) => (
                         <SelectItem key={official.id} value={official.id}>
                           {official.first_name} {official.last_name}
                         </SelectItem>
@@ -219,16 +219,16 @@ const EditFixtureModal = ({ fixId }: { fixId: string }) => {
                       <SelectTrigger>
                         <SelectValue
                           placeholder={
-                            user.officials
-                              ? `${user.officials[0].first_name}
-                              ${user.officials[0].last_name}`
+                            store.officials
+                              ? `${store.officials[0].first_name}
+                              ${store.officials[0].last_name}`
                               : "No teams"
                           }
                         />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {user?.officials.map((official) => (
+                      {store?.officials.map((official) => (
                         <SelectItem key={official.id} value={official.id}>
                           {official.first_name} {official.last_name}
                         </SelectItem>

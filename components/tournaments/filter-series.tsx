@@ -18,13 +18,13 @@ const FilterSeries = ({ series }: { series: Serie[] }) => {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
 
-  const { updateSeries } = useStore((state) => state);
+  const { updateSerie } = useStore((state) => state);
 
   useEffect(() => {
     if (value) {
-      updateSeries(value); // Update the series if value changes
+      updateSerie(value); // Update the series if value changes
     }
-  }, [value, updateSeries]);
+  }, [value, updateSerie]);
 
   return (
     <div className="pr-4">

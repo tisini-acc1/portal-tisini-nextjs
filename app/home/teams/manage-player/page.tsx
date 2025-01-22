@@ -1,15 +1,17 @@
 "use client";
 
 // import Image from "next/image";
+import Image from "next/image";
 import { useState } from "react";
 import { format } from "date-fns";
-import { useRouter } from "next/navigation";
 import { MoreVerticalIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
 import { useStore } from "@/lib/store";
-import { calculateYearsOld } from "@/lib/utils";
 // import { Button } from "@/components/ui/button";
+import { calculateYearsOld } from "@/lib/utils";
+import EditPlayerModal from "@/components/teams/manage-player/edit-player-modal";
+import UploadImagesDialog from "@/components/teams/manage-player/upload-images-dialog";
 import {
   getAllPlayers,
   getCountry,
@@ -30,9 +32,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import EditPlayerModal from "@/components/teams/manage-player/edit-player-modal";
-import Image from "next/image";
-import UploadImagesDialog from "@/components/teams/manage-player/upload-images-dialog";
 
 const ManagePlayerPage = () => {
   const { store } = useStore((state) => state);
@@ -40,8 +39,6 @@ const ManagePlayerPage = () => {
   const [openUpload, setOpenUpload] = useState(false);
   const [openTransfer, setOpenTransfer] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState<TeamPlayer | null>(null);
-
-  const router = useRouter();
 
   const { data: players } = useQuery({
     queryKey: ["allPlayers", store.team.id],

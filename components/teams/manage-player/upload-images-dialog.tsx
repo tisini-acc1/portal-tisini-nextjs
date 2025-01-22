@@ -115,8 +115,8 @@ const UploadImagesDialog = ({ open, setOpen, player }: UploadProps) => {
         <DialogHeader>
           <DialogTitle>Upload</DialogTitle>
           <DialogDescription>
-            You are about to upload a file to <strong>{player?.pname}'s</strong>{" "}
-            profile.
+            You are about to upload a file to{" "}
+            <strong>{player?.pname}&apos;s</strong> profile.
           </DialogDescription>
         </DialogHeader>
 

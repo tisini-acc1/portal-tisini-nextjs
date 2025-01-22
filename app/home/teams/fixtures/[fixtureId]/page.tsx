@@ -21,7 +21,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 const PopulateLineupPage = () => {
-  const { user } = useStore((state) => state);
+  const { store } = useStore((state) => state);
 
   const [showSubs, setShowSubs] = useState(false);
   const [open, setOpen] = useState(false);
@@ -29,8 +29,8 @@ const PopulateLineupPage = () => {
   const [selectedSubs, setSelectedSubs] = useState<Set<string>>(new Set());
 
   const { data, isError, isLoading } = useQuery({
-    queryKey: ["allPlayers", user.team],
-    queryFn: () => getAllPlayers(user.team),
+    queryKey: ["allPlayers", store.team.id],
+    queryFn: () => getAllPlayers(store.team.id),
   });
 
   const { data: fixType } = useQuery({

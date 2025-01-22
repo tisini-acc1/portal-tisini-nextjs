@@ -18,6 +18,7 @@ export type Store = {
   team: Team;
   serie: string;
   fixture: string;
+  balance: number;
   tournament: string;
   officials: Official[];
 };
@@ -33,11 +34,13 @@ export type Actions = {
   updateTournament: (id: string) => void;
   updateFixture: (fixture: string) => void;
   updateOfficials: (officials: Official[]) => void;
+  updateBalance: (balance: number) => void;
 };
 
 const initialState: Store = {
   serie: "",
   fixture: "",
+  balance: 0,
   officials: [],
   tournament: "",
   team: { id: "", name: "" },
@@ -71,6 +74,10 @@ export const useStore = create<State & Actions>()(
       updateOfficials: (officials: Official[]) =>
         set((state) => ({
           store: { ...state.store, officials: officials },
+        })),
+      updateBalance: (balance: number) =>
+        set((state) => ({
+          store: { ...state.store, balance: balance },
         })),
     }),
     { name: "store" }
