@@ -75,7 +75,7 @@ const RegisterForm = ({ role }: { role: string }) => {
         "user",
         JSON.stringify({
           password: user.password,
-          middlename: user.phone_number,
+          username: user.phone_number,
         })
       );
       toast({ description: `${res.message}` });

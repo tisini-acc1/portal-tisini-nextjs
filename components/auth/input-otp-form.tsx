@@ -3,10 +3,12 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
+import apiService from "@/services/api-service";
 import {
   Form,
   FormControl,
@@ -20,8 +22,6 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import apiService from "@/services/api-service";
-import { useEffect, useState } from "react";
 
 const FormSchema = z.object({
   pin: z.string().min(6, {
@@ -46,13 +46,13 @@ export function InputOTPForm() {
 
   useEffect(() => {
     const userData = localStorage.getItem("user");
+    console.log(userData);
     if (userData) {
       setUser(JSON.parse(userData));
     }
   }, []);
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(user);
     const res = await apiService.post(
       JSON.stringify({
         action: "activate",

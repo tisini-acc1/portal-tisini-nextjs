@@ -22,7 +22,7 @@ const ResultsHeader: FC<TeamProps> = ({
   seriesData,
   fixtureData,
 }) => {
-  const { user, updateSeries, updateTournament, updateFixture } = useStore(
+  const { store, updateSerie, updateTournament, updateFixture } = useStore(
     (state) => state
   );
 
@@ -49,7 +49,7 @@ const ResultsHeader: FC<TeamProps> = ({
 
   return (
     <header className="flex flex-col-reverse md:flex-row gap-4 justify-between">
-      <Select value={user.fixture} onValueChange={updateFixture}>
+      <Select value={store.fixture} onValueChange={updateFixture}>
         <SelectTrigger className="w-[280px]">
           <SelectValue placeholder="Select fixture" />
         </SelectTrigger>
@@ -65,7 +65,7 @@ const ResultsHeader: FC<TeamProps> = ({
       </Select>
 
       <div className="flex gap-4">
-        <Select value={user.tournament} onValueChange={updateTournament}>
+        <Select value={store.tournament} onValueChange={updateTournament}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Select league" />
           </SelectTrigger>
@@ -84,7 +84,7 @@ const ResultsHeader: FC<TeamProps> = ({
           </SelectContent>
         </Select>
 
-        <Select value={user.series} onValueChange={updateSeries}>
+        <Select value={store.serie} onValueChange={updateSerie}>
           <SelectTrigger className="w-[140px]">
             <SelectValue placeholder="Select season" />
           </SelectTrigger>

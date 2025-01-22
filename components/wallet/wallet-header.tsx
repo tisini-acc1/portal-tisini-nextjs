@@ -3,8 +3,8 @@
 import { useStore } from "@/lib/store";
 
 const WalletHeader = () => {
-  const { user } = useStore((state) => state);
-  console.log(user);
+  const { store } = useStore((state) => state);
+  console.log(store);
 
   return (
     <header className="flex flex-col items-center justify-center p-6 bg-gray-100 rounded-lg shadow-md">

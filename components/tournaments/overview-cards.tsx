@@ -10,7 +10,7 @@ const OverviewCards = () => {
   const [overview, setOverview] = useState<Serie | undefined>();
   const [subsets, setSubsets] = useState<number>(0);
 
-  const { user } = useStore((state) => state);
+  const { store } = useStore((state) => state);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["overview"],
@@ -18,17 +18,17 @@ const OverviewCards = () => {
   });
 
   useEffect(() => {
-    if (data && user.tournament && user.series) {
+    if (data && store.tournament && store.serie) {
       const tourn = data.find(
-        (tournament) => tournament.id === user.tournament
+        (tournament) => tournament.id === store.tournament
       );
       if (tourn) {
         setSubsets(tourn?.series.length || 0);
-        const serie = tourn.series.find((serie) => serie.id === user.series);
+        const serie = tourn.series.find((serie) => serie.id === store.serie);
         setOverview(serie);
       }
     }
-  }, [user.tournament, user.series, data]);
+  }, [store.tournament, store.serie, data]);
 
   if (isLoading && !data) {
     return <span>Loading...</span>;

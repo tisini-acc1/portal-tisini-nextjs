@@ -17,11 +17,11 @@ interface TeamProps {
 }
 
 const TeamSelectHeader: FC<TeamProps> = ({ tournamentsData, seriesData }) => {
-  const { user, updateSeries, updateTournament } = useStore((state) => state);
+  const { store, updateSerie, updateTournament } = useStore((state) => state);
 
   return (
     <header className="flex gap-4">
-      <Select value={user.tournament} onValueChange={updateTournament}>
+      <Select value={store.tournament} onValueChange={updateTournament}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Select league" />
         </SelectTrigger>
@@ -40,7 +40,7 @@ const TeamSelectHeader: FC<TeamProps> = ({ tournamentsData, seriesData }) => {
         </SelectContent>
       </Select>
 
-      <Select value={user.series} onValueChange={updateSeries}>
+      <Select value={store.serie} onValueChange={updateSerie}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Select season" />
         </SelectTrigger>

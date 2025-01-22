@@ -18,7 +18,7 @@ const TeamFilter = () => {
   const [teams, setTeams] = useState<Team[]>([]);
   const [team, setTeam] = useState<Team>();
 
-  const { updateTeam, updateTeamName } = useStore((state) => state);
+  const { updateTeam } = useStore((state) => state);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["myTeams"],
@@ -34,8 +34,7 @@ const TeamFilter = () => {
 
   useEffect(() => {
     if (team) {
-      updateTeam(team.team_id);
-      updateTeamName(team.teamname);
+      updateTeam({ id: team.team_id, name: team.teamname });
     }
   }, [team]);
 

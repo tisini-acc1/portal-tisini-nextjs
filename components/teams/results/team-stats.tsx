@@ -9,11 +9,11 @@ import RugbyTeamStats from "../team-stats/rugby-team-stats";
 import FootballTeamStats from "../team-stats/football-team-stats";
 
 const TeamStats = () => {
-  const { user } = useStore((state) => state);
+  const { store } = useStore((state) => state);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["fixStats", user.fixture],
-    queryFn: () => getFixtureStats(user.fixture),
+    queryKey: ["fixStats", store.fixture],
+    queryFn: () => getFixtureStats(store.fixture),
   });
 
   if (isLoading) {

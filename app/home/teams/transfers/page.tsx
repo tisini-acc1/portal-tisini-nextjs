@@ -8,11 +8,11 @@ import { TransferTable } from "./transfer-table";
 import { getTeamTransfers } from "@/actions/php-actions";
 
 const TransfersPage = () => {
-  const { user } = useStore((state) => state);
+  const { store } = useStore((state) => state);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["teamTransfers", user.team],
-    queryFn: () => getTeamTransfers(user.team),
+    queryKey: ["teamTransfers", store.team.id],
+    queryFn: () => getTeamTransfers(store.team.id),
   });
 
   if (isLoading) {

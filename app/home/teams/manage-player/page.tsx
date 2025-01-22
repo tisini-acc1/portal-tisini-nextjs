@@ -31,9 +31,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import EditPlayerModal from "@/components/teams/manage-player/edit-player-modal";
+import Image from "next/image";
 
 const ManagePlayerPage = () => {
-  const { user } = useStore((state) => state);
+  const { store } = useStore((state) => state);
   const [openTransfer, setOpenTransfer] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState<TeamPlayer | null>(null);
@@ -41,8 +42,8 @@ const ManagePlayerPage = () => {
   const router = useRouter();
 
   const { data: players } = useQuery({
-    queryKey: ["allPlayers", user.team],
-    queryFn: () => getAllPlayers(user.team),
+    queryKey: ["allPlayers", store.team.id],
+    queryFn: () => getAllPlayers(store.team.id),
   });
 
   const { data: countries } = useQuery({
@@ -51,8 +52,8 @@ const ManagePlayerPage = () => {
   });
 
   const { data: tournaments } = useQuery({
-    queryKey: ["teamTournaments", user.team],
-    queryFn: () => getTeamTournaments(user.team),
+    queryKey: ["teamTournaments", store.team.id],
+    queryFn: () => getTeamTournaments(store.team.id),
   });
 
   // const {
@@ -85,19 +86,22 @@ const ManagePlayerPage = () => {
             >
               <CardHeader className="p-1">
                 <div className="relative overflow-hidden rounded-md w-full">
-                  {/* <Image
-                    src={"/footballer.jpg"}
-                    alt={"name"}
-                    width={150}
-                    height={150}
-                    className={
-                      "h-full w-full object-cover transition-all hover:scale-105 aspect-square"
-                    }
-                  /> */}
-
-                  <div className="h-64 bg-gray-300 rounded-sm flex items-center justify-center mx-auto text-gray-600">
-                    No Image
-                  </div>
+                  {player.passportphoto === "" ||
+                  player.passportphoto === null ? (
+                    <div className="h-64 bg-gray-300 rounded-sm flex items-center justify-center mx-auto text-gray-600">
+                      No Image
+                    </div>
+                  ) : (
+                    <Image
+                      src={player.passportphoto}
+                      alt={"name"}
+                      width={150}
+                      height={150}
+                      className={
+                        "h-full w-full object-cover transition-all hover:scale-105 aspect-square"
+                      }
+                    />
+                  )}
 
                   <div className="absolute top-1 right-1 bg-gray-200 rounded-full h-7 w-7 flex justify-center items-center font-semibold">
                     {player.current_jersey_no}

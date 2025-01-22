@@ -9,6 +9,9 @@ import {
   // Sparkles,
 } from "lucide-react";
 
+import { useStore } from "@/lib/store";
+import { useRouter } from "next/navigation";
+import { resetAuthCookies } from "@/actions/actions";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -25,22 +28,26 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { resetAuthCookies } from "@/actions/actions";
-import { useRouter } from "next/navigation";
-import { useStore } from "@/lib/store";
 
 export function NavUser() {
   const { isMobile } = useSidebar();
   const router = useRouter();
 
-  const { user } = useStore((state) => state);
+  const { store } = useStore((state) => state);
+
+  const user = store.user;
+
+  const profile =
+    user.profileurl === "" || user.profileurl === null
+      ? "/avatar.webp"
+      : user.profileurl;
 
   const role =
-    user.user.role === "2"
+    user.role === "2"
       ? "Team Admin"
-      : user.user.role === "6"
+      : user.role === "6"
       ? "Tournament Admin"
-      : user.user.role === "9"
+      : user.role === "9"
       ? "Match Official"
       : "System User";
 
@@ -54,11 +61,13 @@ export function NavUser() {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={"/shadcn.jpg"} alt={user.user.name} />
+                <AvatarImage src={profile} alt={store.user.name} />
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{user.user.name}</span>
+                <span className="truncate font-semibold">
+                  {store.user.name}
+                </span>
                 <span className="truncate text-xs">{role}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
@@ -73,12 +82,12 @@ export function NavUser() {
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={"/shadcn.jpg"} alt={user.user.name} />
+                  <AvatarImage src={"/shadcn.jpg"} alt={store.user.name} />
                   <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">
-                    {user.user.name}
+                    {store.user.name}
                   </span>
                   <span className="truncate text-xs">{role}</span>
                 </div>

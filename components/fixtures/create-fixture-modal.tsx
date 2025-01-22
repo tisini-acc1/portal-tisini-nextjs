@@ -57,14 +57,14 @@ export const fixtureSchema = z.object({
 const CreateFixtureModal = () => {
   const [team, setTeam] = useState<CompTeam>({} as CompTeam);
 
-  const { user } = useStore((state) => state);
+  const { store } = useStore((state) => state);
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
 
   const { data } = useQuery({
-    queryKey: ["teams", user.tournament, user.series],
-    queryFn: () => getTournamentTeams(user.tournament, user.series),
+    queryKey: ["teams", store.tournament, store.serie],
+    queryFn: () => getTournamentTeams(store.tournament, store.serie),
   });
 
   const form = useForm<z.infer<typeof fixtureSchema>>({
@@ -124,12 +124,12 @@ const CreateFixtureModal = () => {
       team1: values.home,
       team2: values.away,
       gamedate: date,
-      tournamentid: user.tournament,
+      tournamentid: store.tournament,
       matchday: values.matchday,
       fixturetype: values.type,
       live: "0",
       teamview: "0",
-      series: user.series,
+      series: store.serie,
       hybrid: "0",
       category: "1",
       group: "1",

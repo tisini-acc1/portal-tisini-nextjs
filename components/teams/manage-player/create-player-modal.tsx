@@ -92,7 +92,7 @@ const CreatePlayerModal = ({ countries }: { countries: Country[] }) => {
   const { toast } = useToast();
   // const router = useRouter();
   const [open, setOpen] = useState(false);
-  const { user } = useStore((state) => state);
+  const { store } = useStore((state) => state);
   const queryClient = useQueryClient();
 
   const form = useForm<z.infer<typeof playerSchema>>({
@@ -155,7 +155,7 @@ const CreatePlayerModal = ({ countries }: { countries: Country[] }) => {
       email: "",
       password: data.idNumber.slice(1, 5),
       role: "5",
-      teamid: user.team,
+      teamid: store.team.id,
       Jersey: data.jersey,
       signed: format(data.signed, "yyyy-M-d"),
     };
@@ -179,7 +179,8 @@ const CreatePlayerModal = ({ countries }: { countries: Country[] }) => {
         <DialogHeader>
           <DialogTitle>Create Player</DialogTitle>
           <DialogDescription>
-            You are in the process of creating a new player for {user.teamName}.
+            You are in the process of creating a new player for{" "}
+            {store.team.name}.
           </DialogDescription>
         </DialogHeader>
 

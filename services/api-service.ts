@@ -13,7 +13,10 @@ const apiService = {
           "Content-Type": "application/json",
         },
       })
-        .then((response) => response.json())
+        .then((response) => {
+          console.log(response);
+          response.json();
+        })
         .then((json) => {
           console.log("Response: ", json);
 

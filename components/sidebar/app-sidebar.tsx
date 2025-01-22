@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import {
   BookOpen,
   Frame,
@@ -13,7 +12,7 @@ import {
   Send,
 } from "lucide-react";
 
-import { getUserRole } from "@/actions/actions";
+import { useStore } from "@/lib/store";
 import { NavMain } from "@/components/sidebar/nav-main";
 import { NavUser } from "@/components/sidebar/nav-user";
 // import { NavProjects } from "@/components/nav-projects";
@@ -79,16 +78,9 @@ const data: SidebarData = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const [userRole, setUserRole] = useState<string | null>(null);
+  const { store } = useStore((state) => state);
 
-  useEffect(() => {
-    const fetchUserRole = async () => {
-      const role = await getUserRole();
-      setUserRole(role);
-    };
-
-    fetchUserRole();
-  }, []);
+  const userRole = store.user.role;
 
   data.navMain =
     userRole === "2" ? TEAMS_ITEMS : userRole === "6" ? COMPS_ITEMS : [];

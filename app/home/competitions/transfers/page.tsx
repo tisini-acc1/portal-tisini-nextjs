@@ -7,11 +7,11 @@ import { TournamentTransferTable } from "./transfers-table";
 import { columns } from "./columns";
 
 const TournamentTransfersPage = () => {
-  const { user } = useStore((state) => state);
+  const { store } = useStore((state) => state);
 
   const { data, isError, isLoading } = useQuery({
-    queryKey: ["tournamentTransfers", user.tournament],
-    queryFn: () => getTournamentTransfers(user.tournament),
+    queryKey: ["tournamentTransfers", store.tournament],
+    queryFn: () => getTournamentTransfers(store.tournament),
   });
 
   if (isLoading) {

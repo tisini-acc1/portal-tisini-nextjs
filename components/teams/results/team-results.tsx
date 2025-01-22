@@ -14,41 +14,46 @@ const TeamResults = () => {
   const [series, setSeries] = useState<TeamSeason[]>([]);
   const [fixtures, setFixtures] = useState<TeamFixture[]>([]);
 
-  const { user, updateTournament, updateSeries, updateFixture } = useStore(
+  const { store, updateTournament, updateSerie, updateFixture } = useStore(
     (state) => state
   );
 
   const { data, isError, isLoading } = useQuery({
-    queryKey: ["teamTournaments", user.team],
-    queryFn: () => getTeamTournaments(user.team),
+    queryKey: ["teamTournaments", store.team.id],
+    queryFn: () => getTeamTournaments(store.team.id),
   });
 
   useEffect(() => {
-    if (data) {
+    if (data && data[0] && data[0].season && data[0].season.length > 0) {
       setSeries(data[0].season);
-      updateSeries(data[0].season[0]?.id);
+      updateSerie(data[0].season[0]?.id);
       updateTournament(data[0].tournamentid);
     }
-  }, [data, updateSeries, updateTournament]);
+  }, [data, updateSerie, updateTournament]);
 
   useEffect(() => {
-    if (data && user.tournament && user.series) {
+    if (data && store.tournament && store.serie) {
       const tournament = data.find(
-        (tournament) => tournament.tournamentid === user.tournament
+        (tournament) => tournament.tournamentid === store.tournament
       );
 
-      if (tournament) {
+      if (tournament && tournament.season && tournament.season.length > 0) {
         const season = tournament.season.find(
-          (season) => season.id === user.series
+          (season) => season.id === store.serie
         );
-        if (season && season.fixture !== fixtures) {
-          setFixtures(season.fixture.reverse());
-          updateFixture(season.fixture.reverse()[0].id);
+
+        if (season && season.fixture && season.fixture.length > 0) {
+          const reversedFixtures = season.fixture.reverse();
+          setFixtures(reversedFixtures);
+          updateFixture(reversedFixtures[0].id); // Safe access here
         }
       }
     }
-  }, [data, fixtures, user.tournament, user.series]);
+  }, [data, fixtures, store.tournament, store.serie]);
 
+  console.log(data);
+  console.log(fixtures);
+  console.log(store.fixture);
   if (isLoading) {
     return <div>Loading...</div>;
   }

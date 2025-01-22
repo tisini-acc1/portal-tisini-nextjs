@@ -6,10 +6,10 @@ import { useStore } from "@/lib/store";
 import { getTournamentTeams } from "@/actions/django-actions";
 
 const TeamsPage = () => {
-  const { user } = useStore((state) => state);
+  const { store } = useStore((state) => state);
 
-  const tourna = user.tournament as string;
-  const serie = user.series;
+  const tourna = store.tournament as string;
+  const serie = store.serie;
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["teams", tourna, serie],

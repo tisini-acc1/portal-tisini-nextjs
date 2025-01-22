@@ -33,7 +33,7 @@ const FilterTournamentSeries = ({
   const [serieVal, setSerieVal] = useState<string>("");
   const [series, setSeries] = useState<Serie[]>([]);
 
-  const { updateSeries, updateTournament } = useStore((state) => state);
+  const { updateSerie, updateTournament } = useStore((state) => state);
 
   useEffect(() => {
     if (tournaments && tournaments.length >= 1) {
@@ -64,9 +64,9 @@ const FilterTournamentSeries = ({
 
   useEffect(() => {
     if (serieVal) {
-      updateSeries(serieVal);
+      updateSerie(serieVal);
     }
-  }, [updateSeries, serieVal]);
+  }, [updateSerie, serieVal]);
 
   const handleValueChange = (value: string) => {
     setSerieVal(value);

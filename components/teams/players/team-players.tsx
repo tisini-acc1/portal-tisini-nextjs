@@ -12,15 +12,15 @@ import { getTeamPlayers, getTeamTournaments } from "@/actions/php-actions";
 const TeamPlayers = () => {
   const [series, setSeries] = useState<TeamSeason[]>([]);
 
-  const { user, updateTournament, updateSeries } = useStore((state) => state);
+  const { store, updateTournament, updateSerie } = useStore((state) => state);
 
   const {
     data: tournamentsData,
     isError: tournamentsError,
     isLoading: tournamentsLoading,
   } = useQuery({
-    queryKey: ["teamTournaments", user.team],
-    queryFn: () => getTeamTournaments(user.team),
+    queryKey: ["teamTournaments", store.team.id],
+    queryFn: () => getTeamTournaments(store.team.id),
   });
 
   const {
@@ -28,18 +28,18 @@ const TeamPlayers = () => {
     isError: playersError,
     isLoading: playersLoading,
   } = useQuery({
-    queryKey: ["teamPlayers", user.tournament, user.series, user.team],
-    queryFn: () => getTeamPlayers(user.tournament, user.series, user.team),
-    enabled: Boolean(user.tournament && user.series), // Only fetch players when a tournament and series are selected
+    queryKey: ["teamPlayers", store.tournament, store.serie, store.team.id],
+    queryFn: () => getTeamPlayers(store.tournament, store.serie, store.team.id),
+    enabled: Boolean(store.tournament && store.serie),
   });
 
   useEffect(() => {
     if (tournamentsData) {
       setSeries(tournamentsData[0].season);
-      updateSeries(tournamentsData[0].season[0]?.id);
+      updateSerie(tournamentsData[0].season[0]?.id);
       updateTournament(tournamentsData[0].tournamentid);
     }
-  }, [tournamentsData, updateSeries, updateTournament]);
+  }, [tournamentsData, updateSerie, updateTournament]);
 
   // Handle loading and error states for tournaments
   if (tournamentsLoading) {
@@ -60,7 +60,7 @@ const TeamPlayers = () => {
   }
 
   // Ensure there's a tournament and series selected before rendering the table
-  if (!user.tournament || !user.series) {
+  if (!store.tournament || !store.serie) {
     return <div>Please select a league and season to view players.</div>;
   }
   // console.log(playersData);

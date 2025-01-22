@@ -11,11 +11,11 @@ import { useStore } from "@/lib/store";
 const PlayersPage = () => {
   const [players, setPlayers] = useState<Player[]>([]);
 
-  const { user } = useStore((state) => state);
+  const { store } = useStore((state) => state);
 
   const { data } = useQuery({
-    queryKey: ["teamPlayers", user.team],
-    queryFn: () => getPlayers(user.team),
+    queryKey: ["teamPlayers", store.team.id],
+    queryFn: () => getPlayers(store.team.id),
   });
 
   useEffect(() => {

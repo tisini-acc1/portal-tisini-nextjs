@@ -17,31 +17,33 @@ const TeamFixtures = () => {
 
   const router = useRouter();
 
-  const { user, updateSeries, updateTournament } = useStore((state) => state);
+  const { store, updateSerie, updateTournament } = useStore((state) => state);
+
+  const teamId = store.team.id;
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["teamTournaments", user.team],
-    queryFn: () => getTeamTournaments(user.team),
+    queryKey: ["teamTournaments", teamId],
+    queryFn: () => getTeamTournaments(teamId),
   });
 
   useEffect(() => {
     if (data) {
       setSeries(data[0].season);
-      updateSeries(data[0].season[0]?.id);
+      updateSerie(data[0].season[0]?.id);
       updateTournament(data[0].tournamentid);
       setFixtures(data[0]?.season[0]?.fixture.slice().reverse() || []);
     }
   }, [data]);
 
   useEffect(() => {
-    if (data && user.tournament && user.series) {
+    if (data && store.tournament && store.serie) {
       const tournament = data.find(
-        (tournament) => tournament.tournamentid === user.tournament
+        (tournament) => tournament.tournamentid === store.tournament
       );
 
       if (tournament) {
         const season = tournament.season.find(
-          (season) => season.id === user.series
+          (season) => season.id === store.serie
         );
         if (season && season.fixture) {
           // Compare the fixtures in a shallow way to avoid unnecessary state updates
@@ -52,7 +54,7 @@ const TeamFixtures = () => {
         }
       }
     }
-  }, [data, user.tournament, user.series]);
+  }, [data, store.tournament, store.serie]);
   console.log(data);
   // Handle loading and error states
   if (isLoading) {
@@ -99,12 +101,12 @@ const TeamFixtures = () => {
                 <p className="text-3xl">Vs</p>
                 <div className="font-mono">
                   <p>
-                    {user.teamName === fixture.team1_name
+                    {store.team.name === fixture.team1_name
                       ? fixture.team2_name
                       : fixture.team1_name}
                   </p>
                   <p>
-                    {user.teamName === fixture.team1_name ? "Home" : "Away"}
+                    {store.team.name === fixture.team1_name ? "Home" : "Away"}
                   </p>
                 </div>
               </div>

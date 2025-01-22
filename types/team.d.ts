@@ -40,6 +40,7 @@ type TeamPlayer = {
   status: string;
   system_user_id: string;
   team_id: string;
+  passportphoto: string;
 };
 
 type Fixture = {

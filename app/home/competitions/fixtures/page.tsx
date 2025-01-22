@@ -14,11 +14,11 @@ const FixturesPage = () => {
   // const fixtures = data.filter((fixture) => fixture.series === "14").reverse();
   const [fixtures, setFixtures] = useState<Fixture[]>([]);
 
-  const { user, updateOfficials } = useStore((state) => state);
+  const { store, updateOfficials } = useStore((state) => state);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["fixtures", user.series],
-    queryFn: () => getTournFixtures(parseInt(user.series)),
+    queryKey: ["fixtures", store.serie],
+    queryFn: () => getTournFixtures(parseInt(store.serie)),
   });
 
   const { data: officials } = useQuery({
@@ -28,10 +28,10 @@ const FixturesPage = () => {
 
   useEffect(() => {
     if (data) {
-      const fix = data.filter((item) => item.league === user.tournament);
+      const fix = data.filter((item) => item.league === store.tournament);
       setFixtures(fix.reverse());
     }
-  }, [user.tournament, data]);
+  }, [store.tournament, data]);
 
   useEffect(() => {
     if (officials) {

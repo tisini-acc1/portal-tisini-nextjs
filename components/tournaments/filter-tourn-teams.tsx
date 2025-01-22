@@ -25,11 +25,11 @@ const FilterTournTeams = () => {
 
   const [teams, setTeams] = useState<CompTeam[]>([]);
 
-  const { user, updateTeam } = useStore((state) => state);
+  const { store, updateTeam } = useStore((state) => state);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["tournamentTeams", user.tournament, user.series],
-    queryFn: () => getTournamentTeams(user.tournament, user.series),
+    queryKey: ["tournamentTeams", store.tournament, store.serie],
+    queryFn: () => getTournamentTeams(store.tournament, store.serie),
   });
 
   useEffect(() => {
@@ -43,7 +43,8 @@ const FilterTournTeams = () => {
 
   useEffect(() => {
     if (value) {
-      updateTeam(value);
+      const team = teams.filter((t) => t.id === value);
+      updateTeam({ id: team[0].id, name: team[0].name });
     }
   }, [updateTeam, value]);
 
@@ -55,6 +56,7 @@ const FilterTournTeams = () => {
     return <div>No teams for this season</div>;
   }
 
+  // console.log(store.team);
   return (
     <div className="">
       <Popover open={open} onOpenChange={setOpen}>

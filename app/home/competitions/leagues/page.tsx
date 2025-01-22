@@ -15,7 +15,7 @@ const CompetitionsPage = () => {
     undefined
   );
 
-  const { user } = useStore((state) => state);
+  const { store } = useStore((state) => state);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["tournaments"],
@@ -23,13 +23,13 @@ const CompetitionsPage = () => {
   });
 
   useEffect(() => {
-    if (data && user.tournament && user.series) {
+    if (data && store.tournament && store.serie) {
       const tourna = data.find(
-        (tournament) => tournament.id === user.tournament
+        (tournament) => tournament.id === store.tournament
       );
       setTournament(tourna as Tournament);
     }
-  }, [user.tournament, user.series, data]);
+  }, [store.tournament, store.serie, data]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -38,7 +38,8 @@ const CompetitionsPage = () => {
   if (isError) {
     return <div>error</div>;
   }
-  console.log(data);
+  // console.log(data);
+
   return (
     <main className="space-y-4">
       <header className="border-b p-3 h-16">
