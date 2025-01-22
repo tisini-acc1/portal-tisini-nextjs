@@ -535,7 +535,13 @@ export const verifyPlayer = async (id: string) => {
   }
 };
 
-export const uploadPhotoUrl = async (url: string, id: string) => {
+export const uploadPhotoUrl = async ({
+  url,
+  id,
+}: {
+  url: string;
+  id: string;
+}): Promise<any> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
 

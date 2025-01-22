@@ -57,7 +57,7 @@ const TransferDialog = ({
   player,
   tournaments,
 }: TransferProps) => {
-  const { user } = useStore((state) => state);
+  const { store } = useStore((state) => state);
 
   const { toast } = useToast();
 
@@ -79,7 +79,7 @@ const TransferDialog = ({
   const onSubmit = async (values: z.infer<typeof transferSchema>) => {
     const transfer = {
       player: player.player_id,
-      team1: user.team,
+      team1: store.team.id,
       team2: values.team,
       amount: values.amount,
       fees: "0",

@@ -32,11 +32,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import EditPlayerModal from "@/components/teams/manage-player/edit-player-modal";
 import Image from "next/image";
+import UploadImagesDialog from "@/components/teams/manage-player/upload-images-dialog";
 
 const ManagePlayerPage = () => {
   const { store } = useStore((state) => state);
-  const [openTransfer, setOpenTransfer] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
+  const [openUpload, setOpenUpload] = useState(false);
+  const [openTransfer, setOpenTransfer] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState<TeamPlayer | null>(null);
 
   const router = useRouter();
@@ -65,7 +67,7 @@ const ManagePlayerPage = () => {
   //   queryFn: () => getUserTeams(),
   // });
 
-  console.log(players);
+  // console.log(players);
   // console.log(players?.slice().reverse());
 
   return (
@@ -134,11 +136,10 @@ const ManagePlayerPage = () => {
                         Transfer
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        onClick={() =>
-                          router.push(
-                            `/home/teams/manage-player/${player.player_id}`
-                          )
-                        }
+                        onClick={() => {
+                          setOpenUpload(true);
+                          setSelectedPlayer(player);
+                        }}
                       >
                         Upload
                       </DropdownMenuItem>
@@ -180,6 +181,12 @@ const ManagePlayerPage = () => {
           player={selectedPlayer as TeamPlayer}
           // teams={teams as Team[]}
           tournaments={tournaments as TeamTournament[]}
+        />
+
+        <UploadImagesDialog
+          open={openUpload}
+          setOpen={setOpenUpload}
+          player={selectedPlayer as TeamPlayer}
         />
 
         <EditPlayerModal
