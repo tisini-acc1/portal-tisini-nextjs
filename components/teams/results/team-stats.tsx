@@ -27,7 +27,7 @@ const TeamStats = () => {
   const fixType = data && data["fixture"][0].fixture_type;
 
   // const rugby = rugbyData(data as SingleFixtureStats);
-
+  console.log(data);
   return (
     <>
       {fixType === "rugby15" || fixType === "rugby7" ? (

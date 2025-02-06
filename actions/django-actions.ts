@@ -126,7 +126,7 @@ export const getTournamentSeries = async (tourna: string): Promise<Serie[]> => {
 };
 
 // Get Tornament overview
-export const getTeamOverview = async () => {
+export const getTeamOverview = async (): Promise<TeamOverview[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_DJANGO_BASE_URL;
 

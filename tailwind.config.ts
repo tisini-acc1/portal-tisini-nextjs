@@ -102,6 +102,8 @@ const config: Config = {
       },
       backgroundImage: {
         hero: 'url("/footballer.jpg")',
+        auth: 'url("/auth.avif")',
+        wallet: 'url("/wallet.avif")',
       },
     },
   },

@@ -6,7 +6,7 @@ export default function AuthLayout({ children }: AuthProps) {
   const date = new Date().getFullYear();
 
   return (
-    <div className="h-screen relative">
+    <div className="h-screen relative bg-auth bg-center bg-no-repeat bg-cover">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         {children}
 

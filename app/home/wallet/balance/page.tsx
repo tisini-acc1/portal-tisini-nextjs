@@ -30,8 +30,8 @@ const WalletPage = () => {
   }
 
   return (
-    <main className="space-y-4">
-      <header className="flex flex-col items-center justify-center p-6 bg-gray-100 rounded-lg shadow-md">
+    <main className="space-y-4 bg-wallet bg-cover bg-center bg-no-repeat rounded-lg p-2">
+      <header className="flex flex-col items-center justify-center p-6 rounded-lg shadow-md">
         <h1 className="text-2xl font-bold text-gray-700 mb-4">
           Wallet Balance
         </h1>

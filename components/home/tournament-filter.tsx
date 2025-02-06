@@ -18,7 +18,7 @@ const TournamentFilter = () => {
   if (isError) {
     return <div>Error</div>;
   }
-
+  console.log(data);
   return (
     <div className="flex">
       <FilterTournamentSeries tournaments={data as Tournament[]} />

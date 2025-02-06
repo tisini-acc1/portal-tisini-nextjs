@@ -1,3 +1,15 @@
+type TeamOverview = {
+  team_id: string;
+  team_name: string;
+  date_created: string;
+  date_updated: string;
+  status: string;
+  last_5_fixtures: Fixture[];
+  upcoming_fixtures: [];
+  ongoing_matches: [];
+  recent_form: string[];
+};
+
 type TeamTournament = {
   tournamentname: string;
   tournamentid: string;

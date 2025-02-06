@@ -26,7 +26,7 @@ const TeamFilter = () => {
   });
 
   useEffect(() => {
-    if (data) {
+    if (data?.length) {
       setTeams(data);
       setTeam(data[0]);
     }
@@ -36,7 +36,7 @@ const TeamFilter = () => {
     if (team) {
       updateTeam({ id: team.team_id, name: team.teamname });
     }
-  }, [team]);
+  }, [updateTeam, team]);
 
   const handleTeamChange = (teamId: string) => {
     const selectedTeam = teams.find((t) => t.team_id === teamId);

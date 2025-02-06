@@ -238,6 +238,32 @@ export const getFixtureStats = async (fixId: string): Promise<FixtureData> => {
   }
 };
 
+// Create Fixtures
+export const getFixtureStatsById = async (
+  fixId: string
+): Promise<FixtureData> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.get(
+      `https://apis.tisini.co.ke/apiagent7.php?event=${fixId}`
+    );
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fixture stats: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while fetching fixture stats."
+    );
+  }
+};
+
 export const getCountry = async (): Promise<Country[]> => {
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
 

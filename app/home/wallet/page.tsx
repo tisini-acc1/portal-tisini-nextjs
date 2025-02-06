@@ -73,7 +73,7 @@ const ValidateWalletPage = () => {
   };
 
   return (
-    <main className="flex items-center justify-center">
+    <main className="flex items-center justify-center h-screen bg-wallet bg-cover bg-center bg-no-repeat rounded-lg">
       <Card className="w-[400px]">
         <CardHeader>
           <CardTitle>Validate</CardTitle>

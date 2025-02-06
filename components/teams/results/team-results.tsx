@@ -51,9 +51,9 @@ const TeamResults = () => {
     }
   }, [data, fixtures, store.tournament, store.serie]);
 
-  console.log(data);
-  console.log(fixtures);
-  console.log(store.fixture);
+  // console.log(data);
+  // console.log(fixtures);
+  // console.log(store.fixture);
   if (isLoading) {
     return <div>Loading...</div>;
   }

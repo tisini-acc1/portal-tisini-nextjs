@@ -1,6 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useStore } from "@/lib/store";
 
-export const PreviousMatch = () => {
+export const PreviousMatch = ({ fixture }: { fixture: Fixture }) => {
+  const { store } = useStore((state) => state);
+  const teamId = store.team.id;
+
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -23,15 +27,11 @@ export const PreviousMatch = () => {
           <p className="text-3xl">Vs</p>
           <div className="">
             <p>
-              {/* {user.teamName === fixture.team1_name
+              {fixture.team1_id === teamId
                 ? fixture.team2_name
-                : fixture.team1_name} */}
-              Mumbai United
+                : fixture.team1_name}
             </p>
-            <p>
-              {/* {user.teamName === fixture.team1_name ? "Home" : "Away"} */}
-              Away
-            </p>
+            <p>{fixture.team1_id === teamId ? "Home" : "Away"}</p>
           </div>
         </div>
 

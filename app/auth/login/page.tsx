@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Card,
   CardContent,
@@ -31,18 +31,18 @@ const LoginPage = () => {
       </CardHeader>
 
       <CardContent>
-        <Tabs defaultValue="username">
+        <UsernameForm />
+        {/* <Tabs defaultValue="username">
           <TabsList className="grid grid-cols-2 w-full">
-            <TabsTrigger value="username">Phone number</TabsTrigger>
-            {/* <TabsTrigger value="email">Email</TabsTrigger> */}
+            <TabsTrigger value="username">Phone number</TabsTrigger> 
+            <TabsTrigger value="email">Email</TabsTrigger>
           </TabsList>
           <TabsContent value="username">
-            <UsernameForm />
           </TabsContent>
-          {/* <TabsContent value="email">
+           <TabsContent value="email">
             <EmailForm />
-          </TabsContent> */}
-        </Tabs>
+          </TabsContent>
+        </Tabs> */}
       </CardContent>
 
       <Separator />
