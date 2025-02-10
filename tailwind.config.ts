@@ -104,6 +104,8 @@ const config: Config = {
         hero: 'url("/footballer.jpg")',
         auth: 'url("/auth.avif")',
         wallet: 'url("/wallet.avif")',
+        football: 'url("/football-pitch.jpg")',
+        rugby: 'url("/rugby-pitch.jpg")',
       },
     },
   },

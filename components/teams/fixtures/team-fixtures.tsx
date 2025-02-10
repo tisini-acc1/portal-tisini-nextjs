@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 const TeamFixtures = () => {
   const [series, setSeries] = useState<TeamSeason[]>([]);
   const [fixtures, setFixtures] = useState<TeamFixture[]>([]);
+  const [fixType, setFixType] = useState<string>("");
 
   const router = useRouter();
 
@@ -37,6 +38,7 @@ const TeamFixtures = () => {
 
   useEffect(() => {
     if (data && store.tournament && store.serie) {
+      setFixType(data[0]?.fixture_type!);
       const tournament = data.find(
         (tournament) => tournament.tournamentid === store.tournament
       );
@@ -55,7 +57,10 @@ const TeamFixtures = () => {
       }
     }
   }, [data, store.tournament, store.serie]);
-  console.log(data);
+
+  // console.log(data);
+  // console.log(fixType);
+
   // Handle loading and error states
   if (isLoading) {
     return <div>Loading...</div>;
@@ -89,7 +94,7 @@ const TeamFixtures = () => {
 
                 <PlusCircle
                   onClick={() =>
-                    router.push(`/home/teams/fixtures/${fixture.id}`)
+                    router.push(`/home/teams/fixtures/${fixture.id}-${fixType}`)
                   }
                   className="w-5 h-5 cursor-pointer hover:text-blue-500 hover:scale-100"
                 />
