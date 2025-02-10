@@ -12,17 +12,21 @@ const RugbyPlayers = ({ data }: { data: TeamPlayer[] }) => {
   const [teamPositions, setTeamPositions] = useState<{
     [key: string]: TeamPlayer | null;
   }>({
-    goalkeeper: null,
-    leftBack: null,
-    centerBack1: null,
-    centerBack2: null,
-    rightBack: null,
-    centerAttck: null,
-    centerMid1: null,
-    centerMid2: null,
-    rightWing: null,
-    leftWing: null,
-    centerFW: null,
+    "1": null,
+    "2": null,
+    "3": null,
+    "4": null,
+    "5": null,
+    "6": null,
+    "7": null,
+    "8": null,
+    "9": null,
+    "10": null,
+    "11": null,
+    "12": null,
+    "13": null,
+    "14": null,
+    "15": null,
   });
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -81,86 +85,74 @@ const RugbyPlayers = ({ data }: { data: TeamPlayer[] }) => {
       <DndContext onDragEnd={handleDragEnd}>
         <section className="grid grid-cols-3 gap-8">
           {/* Formation Section */}
-          <div className="bg-football bg-no-repeat bg-contain bg-center h-[75vh]">
+          <div className="bg-rugby bg-no-repeat bg-contain bg-center h-[75vh]">
             <div className="h-full relative flex flex-col justify-center items-center">
               {/* Forwards (2 players) */}
-              <div className="flex items-center justify-center w-1/2 absolute top-16">
-                <SelectedPlayer
-                  positions={teamPositions}
-                  pos={"centerFW"}
-                  df={"ST"}
-                />
+              <div className="flex justify-between w-3/4 absolute top-16">
+                <SelectedPlayer positions={teamPositions} pos={"1"} df={"1"} />
+
+                <SelectedPlayer positions={teamPositions} pos={"2"} df={"2"} />
+
+                <SelectedPlayer positions={teamPositions} pos={"3"} df={"3"} />
               </div>
 
               {/* Midfielders (3 players) */}
               <div className="flex justify-between w-full px-8 absolute top-40">
-                <SelectedPlayer
-                  positions={teamPositions}
-                  pos={"leftWing"}
-                  df={"LW"}
-                />
+                <SelectedPlayer positions={teamPositions} pos={"6"} df={"6"} />
 
-                <SelectedPlayer
-                  positions={teamPositions}
-                  pos={"centerAttck"}
-                  df={"CAM"}
-                />
+                <SelectedPlayer positions={teamPositions} pos={"4"} df={"4"} />
 
-                <SelectedPlayer
-                  positions={teamPositions}
-                  pos={"rightWing"}
-                  df={"RW"}
-                />
+                <SelectedPlayer positions={teamPositions} pos={"5"} df={"5"} />
+
+                <SelectedPlayer positions={teamPositions} pos={"7"} df={"7"} />
               </div>
 
               {/* Midfielders (2 players) */}
-              <div className="flex justify-between w-1/2 absolute bottom-50">
-                <SelectedPlayer
-                  positions={teamPositions}
-                  pos={"centerMid2"}
-                  df={"CM"}
-                />
-
-                <SelectedPlayer
-                  positions={teamPositions}
-                  pos={"centerMid1"}
-                  df={"CDM"}
-                />
+              <div className="flex justify-center absolute bottom-50">
+                <SelectedPlayer positions={teamPositions} pos={"8"} df={"8"} />
               </div>
 
               {/* Defenders (4 players) */}
-              <div className="flex justify-between w-full p-4 absolute bottom-32">
+              <div className="flex justify-between w-full px-8 absolute bottom-32">
+                <SelectedPlayer positions={teamPositions} pos={"9"} df={"9"} />
+
                 <SelectedPlayer
                   positions={teamPositions}
-                  pos={"leftBack"}
-                  df={"LB"}
+                  pos={"10"}
+                  df={"10"}
                 />
 
                 <SelectedPlayer
                   positions={teamPositions}
-                  pos={"centerBack1"}
-                  df={"CBL"}
+                  pos={"12"}
+                  df={"12"}
                 />
 
                 <SelectedPlayer
                   positions={teamPositions}
-                  pos={"centerBack2"}
-                  df={"CBR"}
-                />
-
-                <SelectedPlayer
-                  positions={teamPositions}
-                  pos={"rightBack"}
-                  df={"RB"}
+                  pos={"13"}
+                  df={"13"}
                 />
               </div>
 
               {/* Goalkeeper */}
-              <div className="flex justify-center absolute bottom-8">
+              <div className="flex justify-between w-full px-8 absolute bottom-8">
                 <SelectedPlayer
                   positions={teamPositions}
-                  pos={"goalkeeper"}
-                  df={"GK"}
+                  pos={"11"}
+                  df={"11"}
+                />
+
+                <SelectedPlayer
+                  positions={teamPositions}
+                  pos={"15"}
+                  df={"15"}
+                />
+
+                <SelectedPlayer
+                  positions={teamPositions}
+                  pos={"14"}
+                  df={"14"}
                 />
               </div>
             </div>

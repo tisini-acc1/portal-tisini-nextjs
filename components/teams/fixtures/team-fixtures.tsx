@@ -38,7 +38,7 @@ const TeamFixtures = () => {
 
   useEffect(() => {
     if (data && store.tournament && store.serie) {
-      setFixType(data[0]?.fixture_type!);
+      setFixType(data[0]?.fixture_type as string);
       const tournament = data.find(
         (tournament) => tournament.tournamentid === store.tournament
       );
