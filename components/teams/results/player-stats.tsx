@@ -1,7 +1,7 @@
 import React from "react";
 
 const PlayerStats = () => {
-  return <div>PlayerStats</div>;
+  return <div>PlayerStatsstats</div>;
 };
 
 export default PlayerStats;

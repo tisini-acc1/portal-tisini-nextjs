@@ -106,6 +106,7 @@ const config: Config = {
         wallet: 'url("/wallet.avif")',
         football: 'url("/football-pitch.jpg")',
         rugby: 'url("/rugby-pitch.jpg")',
+        error: 'url("/error.avif")',
       },
     },
   },
