@@ -59,12 +59,6 @@ const UsernameForm = () => {
       const res = await axios.post(`${process.env.NEXT_PUBLIC_API_HOST}`, user);
       console.log(res);
       if (res.data.success === "1") {
-        const redirectUrl = await handleLogin(
-          res.data.userid,
-          res.data.userKey,
-          res.data.role
-        );
-
         updateUser({
           name: res.data.name,
           id: res.data.userid,
@@ -72,6 +66,12 @@ const UsernameForm = () => {
           phone: res.data.phone,
           profileurl: res.data.profileurl,
         });
+
+        const redirectUrl = await handleLogin(
+          res.data.userid,
+          res.data.userKey,
+          res.data.role
+        );
 
         router.replace(redirectUrl);
       } else {

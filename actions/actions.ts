@@ -7,30 +7,30 @@ export async function handleLogin(
   accessToken: string,
   role: string
 ) {
-  const cookieStore = await cookies();
+  const cookieStore = await cookies(); // No need for `await`
 
   cookieStore.set("session_userId", userId, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    maxAge: 60 * 60 * 24 * 7, // One week
+    maxAge: 60 * 60 * 24 * 7, // 1 week
     path: "/",
   });
 
   cookieStore.set("session_access_token", accessToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    maxAge: 60 * 60 * 24 * 7, // One week
+    maxAge: 60 * 60 * 24 * 7, // 1 week
     path: "/",
   });
 
   cookieStore.set("session_role", role, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    maxAge: 60 * 60 * 24 * 7, // One week
+    maxAge: 60 * 60 * 24 * 7, // 1 week
     path: "/",
   });
 
-  // Return redirect URL based on role
+  // Redirect URL based on role
   switch (role) {
     case "1":
       return "/home/agents";
@@ -48,30 +48,24 @@ export async function handleLogin(
 }
 
 export async function resetAuthCookies() {
-  const cookieStore = await cookies();
+  const cookieStore = await cookies(); // No need for `await`
 
-  cookieStore.set("session_userId", "");
-  cookieStore.set("session_access_token", "");
-  cookieStore.set("session_role", "");
+  cookieStore.set("session_userId", "", { path: "/", maxAge: -1 });
+  cookieStore.set("session_access_token", "", { path: "/", maxAge: -1 });
+  cookieStore.set("session_role", "", { path: "/", maxAge: -1 });
 }
 
 export async function getUserId() {
   const cookieStore = await cookies();
-
-  const userId = cookieStore.get("session_userID")?.value;
-  return userId ? userId : null;
+  return cookieStore.get("session_userId")?.value || null; // Fixed key name
 }
 
 export async function getUserRole() {
   const cookieStore = await cookies();
-
-  const role = cookieStore.get("session_role")?.value;
-  return role ? role : null;
+  return cookieStore.get("session_role")?.value || null;
 }
 
 export async function getToken() {
   const cookieStore = await cookies();
-
-  const token = cookieStore.get("session_access_token")?.value;
-  return token ? token : null;
+  return cookieStore.get("session_access_token")?.value || null;
 }
