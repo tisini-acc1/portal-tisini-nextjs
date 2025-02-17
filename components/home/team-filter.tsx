@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { useStore } from "@/lib/store";
+import FilterLoader from "./filter-loader";
 import { getUserTeams } from "@/actions/php-actions";
 import {
   Select,
@@ -18,10 +19,10 @@ const TeamFilter = () => {
   const [teams, setTeams] = useState<Team[]>([]);
   const [team, setTeam] = useState<Team>();
 
-  const { updateTeam } = useStore((state) => state);
+  const { store, updateTeam } = useStore((state) => state);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["myTeams"],
+    queryKey: ["myTeams", store.user.id],
     queryFn: () => getUserTeams(),
   });
 
@@ -46,7 +47,7 @@ const TeamFilter = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <FilterLoader />;
   }
 
   if (isError) {
