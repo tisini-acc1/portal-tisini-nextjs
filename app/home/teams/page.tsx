@@ -43,15 +43,15 @@ const TeamsPage = () => {
   }
 
   // console.log(data);
-  // console.log(overview);
+  console.log(overview);
   // console.log(store.team.id);
   return (
     <main className="space-y-6">
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <PreviousMatch fixture={overview.last_5_fixtures[0]} />
-        <CurrentForm recentForm={overview.recent_form} />
+        <PreviousMatch fixture={overview?.last_5_fixtures?.[0]} />
+        <CurrentForm recentForm={overview?.recent_form} />
         <SeasonSnapshot />
-        <UpcomingMatch fixture={overview.upcoming_fixtures[0]} />
+        <UpcomingMatch fixture={overview?.upcoming_fixtures?.[0]} />
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">

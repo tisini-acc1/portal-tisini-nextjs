@@ -34,7 +34,9 @@ export const UpcomingMatch = ({ fixture }: { fixture: Fixture }) => {
             <p className="text-gray-400 text-end">date</p>
           </>
         ) : (
-          <div className="text-center text-muted-foreground">No update!</div>
+          <div className="pt-6 text-center text-muted-foreground">
+            No fixture!
+          </div>
         )}
       </CardContent>
     </Card>
