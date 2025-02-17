@@ -6,7 +6,7 @@ const TeamsPage = async () => {
 
   console.log("overview: ", data);
 
-  return <TeamOverview />;
+  return <TeamOverview overviewData={data} />;
 };
 
 export default TeamsPage;

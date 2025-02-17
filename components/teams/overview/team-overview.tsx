@@ -5,41 +5,53 @@ import { PreviousMatch } from "./previous-match";
 import { CurrentForm } from "./current-form";
 import { SeasonSnapshot } from "./season-snapshot";
 import { UpcomingMatch } from "./upcoming-match";
-import Loading from "@/app/home/loading";
-import { getTeamOverview } from "@/actions/django-actions";
-import { useQuery } from "@tanstack/react-query";
+// import Loading from "@/app/home/loading";
+// import { getTeamOverview } from "@/actions/django-actions";
+// import { useQuery } from "@tanstack/react-query";
 import { useStore } from "@/lib/store";
 
-const TeamOverview = () => {
+const TeamOverview = ({ overviewData }: { overviewData: TeamOverview[] }) => {
   const { store, updateOverview } = useStore((state) => state);
   const teamId = store.team.id;
   const overview = store.overview;
 
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["teamOverview"],
-    queryFn: () => getTeamOverview(),
-  });
+  // const { data, isLoading, isError } = useQuery({
+  //   queryKey: ["teamOverview"],
+  //   queryFn: () => getTeamOverview(),
+  // });
 
   useEffect(() => {
-    if (data) {
+    if (overviewData) {
       if (teamId) {
-        const tData = data.filter((item) => item.team_id === store.team.id);
+        const tData = overviewData.filter(
+          (item) => item.team_id === store.team.id
+        );
         updateOverview(tData[0]);
       }
     }
-  }, [teamId, data]);
+  }, [teamId, overviewData]);
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  // useEffect(() => {
+  //   if (data) {
+  //     if (teamId) {
+  //       const tData = data.filter((item) => item.team_id === store.team.id);
+  //       updateOverview(tData[0]);
+  //     }
+  //   }
+  // }, [teamId, data]);
 
-  if (isError) {
-    return <div>Error</div>;
-  }
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
 
-  console.log(data);
-  console.log(overview);
+  // if (isError) {
+  //   return <div>Error</div>;
+  // }
+
+  // console.log(data);
+  // console.log(overview);
   // console.log(store.team.id);
+
   return (
     <main className="space-y-6">
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
