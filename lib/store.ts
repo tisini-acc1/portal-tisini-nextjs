@@ -21,6 +21,7 @@ export type Store = {
   balance: number;
   tournament: string;
   officials: Official[];
+  overview: TeamOverview;
 };
 
 export type State = {
@@ -35,6 +36,7 @@ export type Actions = {
   updateFixture: (fixture: string) => void;
   updateOfficials: (officials: Official[]) => void;
   updateBalance: (balance: number) => void;
+  updateOverview: (overview: TeamOverview) => void;
 };
 
 const initialState: Store = {
@@ -45,6 +47,17 @@ const initialState: Store = {
   tournament: "",
   team: { id: "", name: "" },
   user: { id: "", name: "", role: "", phone: "", profileurl: "" },
+  overview: {
+    team_id: "",
+    team_name: "",
+    date_created: "",
+    date_updated: "",
+    status: "",
+    last_5_fixtures: [],
+    upcoming_fixtures: [],
+    ongoing_matches: [],
+    recent_form: [],
+  },
 };
 
 export const useStore = create<State & Actions>()(
@@ -78,6 +91,10 @@ export const useStore = create<State & Actions>()(
       updateBalance: (balance: number) =>
         set((state) => ({
           store: { ...state.store, balance: balance },
+        })),
+      updateOverview: (overview: TeamOverview) =>
+        set((state) => ({
+          store: { ...state.store, overview: overview },
         })),
     }),
     { name: "store" }

@@ -1,6 +1,6 @@
+import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
 
 export const CurrentForm = ({ recentForm }: { recentForm: string[] }) => {
   return (
@@ -25,11 +25,11 @@ export const CurrentForm = ({ recentForm }: { recentForm: string[] }) => {
         <div className="grid grid-cols-2 gap-x-1">
           <div className="border p-1 flex justify-evenly">
             <span className="text-muted-foreground font-bold">GF</span>
-            <span>5</span>
+            <span>0</span>
           </div>
           <div className="border p-1 flex justify-evenly">
             <span className="text-muted-foreground font-bold">GA</span>
-            <span>15</span>
+            <span>0</span>
           </div>
         </div>
 

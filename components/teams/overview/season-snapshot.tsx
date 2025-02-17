@@ -21,9 +21,9 @@ export const SeasonSnapshot = () => {
       </CardHeader>
 
       <CardContent className="grid grid-cols-3 gap-1">
-        <SnapBox title="W" stat={5} />
-        <SnapBox title="D" stat={3} />
-        <SnapBox title="L" stat={7} />
+        <SnapBox title="W" stat={0} />
+        <SnapBox title="D" stat={0} />
+        <SnapBox title="L" stat={0} />
       </CardContent>
     </Card>
   );

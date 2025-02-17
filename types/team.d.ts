@@ -5,7 +5,7 @@ type TeamOverview = {
   date_updated: string;
   status: string;
   last_5_fixtures: Fixture[];
-  upcoming_fixtures: [];
+  upcoming_fixtures: Fixture[];
   ongoing_matches: [];
   recent_form: string[];
 };
