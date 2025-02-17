@@ -14,6 +14,7 @@ export async function handleLogin(
     secure: process.env.NODE_ENV === "production",
     maxAge: 60 * 60 * 24 * 7, // 1 week
     path: "/",
+    sameSite: "strict",
   });
 
   cookieStore.set("session_access_token", accessToken, {
@@ -21,6 +22,7 @@ export async function handleLogin(
     secure: process.env.NODE_ENV === "production",
     maxAge: 60 * 60 * 24 * 7, // 1 week
     path: "/",
+    sameSite: "strict",
   });
 
   cookieStore.set("session_role", role, {
@@ -28,6 +30,7 @@ export async function handleLogin(
     secure: process.env.NODE_ENV === "production",
     maxAge: 60 * 60 * 24 * 7, // 1 week
     path: "/",
+    sameSite: "strict",
   });
 
   // Redirect URL based on role

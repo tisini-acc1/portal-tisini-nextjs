@@ -13,8 +13,8 @@ export default async function middleware(req: NextRequest) {
   const isPublicRoute = publicRoutes.includes(path);
 
   // Get the session cookie (access token) and user role
-  const cookie = (await cookies()).get("session_access_token")?.value;
-  const userRole = (await cookies()).get("session_role")?.value;
+  const cookie = req.cookies.get("session_access_token")?.value;
+  const userRole = req.cookies.get("session_role")?.value;
 
   // 1. Redirect to /auth/login if the user is not authenticated and tries to access a protected route
   if (isProtectedRoute && !cookie) {
