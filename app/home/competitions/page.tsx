@@ -8,7 +8,7 @@ const TournamentsPage = async () => {
 
   return (
     <main>
-      <OverviewCards />
+      <OverviewCards overviewData={data} />
     </main>
   );
 };

@@ -1,14 +1,15 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { PreviousMatch } from "./previous-match";
-import { CurrentForm } from "./current-form";
-import { SeasonSnapshot } from "./season-snapshot";
-import { UpcomingMatch } from "./upcoming-match";
-// import Loading from "@/app/home/loading";
-// import { getTeamOverview } from "@/actions/django-actions";
 // import { useQuery } from "@tanstack/react-query";
+
 import { useStore } from "@/lib/store";
+// import Loading from "@/app/home/loading";
+import { CurrentForm } from "./current-form";
+import { UpcomingMatch } from "./upcoming-match";
+import { PreviousMatch } from "./previous-match";
+import { SeasonSnapshot } from "./season-snapshot";
+// import { getTeamOverview } from "@/actions/django-actions";
 
 const TeamOverview = ({ overviewData }: { overviewData: TeamOverview[] }) => {
   const { store, updateOverview } = useStore((state) => state);
@@ -55,10 +56,10 @@ const TeamOverview = ({ overviewData }: { overviewData: TeamOverview[] }) => {
   return (
     <main className="space-y-6">
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <PreviousMatch fixture={overview?.last_5_fixtures?.[0] || {}} />
+        <PreviousMatch fixture={overview?.last_5_fixtures[0] || {}} />
         <CurrentForm recentForm={overview?.recent_form || {}} />
         <SeasonSnapshot />
-        <UpcomingMatch fixture={overview?.upcoming_fixtures?.[0]} />
+        <UpcomingMatch fixture={overview?.upcoming_fixtures[0]} />
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">

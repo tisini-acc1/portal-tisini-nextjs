@@ -14,7 +14,7 @@ export const PreviousMatch = ({ fixture }: { fixture: Fixture }) => {
         <CalendarX2 />
       </CardHeader>
       <CardContent className="space-y-4 pt-2 font-mono">
-        {fixture ? (
+        {Object.keys(fixture).length > 0 ? (
           <>
             <div className="flex items-center gap-4">
               <p className="text-3xl">Vs</p>
