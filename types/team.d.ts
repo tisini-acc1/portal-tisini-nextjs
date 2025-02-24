@@ -456,3 +456,15 @@ type FixtureType = {
   no_player: string;
   fix_time: string;
 };
+
+type TeamPlayerData = {
+  home: PData[];
+  away: PData[];
+};
+
+type PData = {
+  playerid: string;
+  gameid: string;
+  pname: string;
+  pnameanddata: Stats;
+};
