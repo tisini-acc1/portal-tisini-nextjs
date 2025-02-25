@@ -1,81 +1,55 @@
 "use client";
 
 import { footballRating } from "@/lib/rating";
-import { getEvent, getSubEvent } from "@/lib/utils";
+import { playerBallStats } from "@/lib/calculations";
+
+type PlayerEvent = {
+  name: string;
+  rating: string;
+  goal: string;
+  assist: string;
+  chances: string;
+  "box-touch": string;
+  "box-carry": string;
+  shots: string;
+  crosses: string;
+  pass: string;
+  "prog-pass": string;
+  tackles: string;
+  "ball-efficiency": string;
+  interception: string;
+  clearance: string;
+  blocks: string;
+  aerial: string;
+  fouls: string;
+  cards: string;
+  claims: string;
+  distribution: string;
+  runouts: string;
+  throwouts: string;
+  saves: string;
+};
 
 const PlayerStats = ({ data }: { data: TeamPlayerData }) => {
-  const players = data.home;
-
-  const pEvent = {
-    name: "",
-    rating: "",
-    attack: {
-      goal: "",
-      assist: "",
-      chances: "",
-      "box-touch": "",
-      "box-carry": "",
-      shots: "",
-      crosses: "",
-      pass: "",
-      "prog-pass": "",
-    },
-    defense: {
-      tackles: "",
-      "ball-efficiency": "",
-      interception: "",
-      clearance: "",
-      blocks: "",
-      aerial: "",
-      fouls: "",
-      cards: "",
-    },
-    gk: { claims: "", distribution: "", runouts: "", throwouts: "", saves: "" },
-  };
+  const players = data.away;
 
   const pData: any = [];
 
   players.forEach((player) => {
-    const pEvent = {
-      name: "",
-      rating: "",
-      goal: "",
-      assist: "",
-      chances: "",
-      "box-touch": "",
-      "box-carry": "",
-      shots: "",
-      crosses: "",
-      pass: "",
-      "prog-pass": "",
-      tackles: "",
-      "ball-efficiency": "",
-      interception: "",
-      clearance: "",
-      blocks: "",
-      aerial: "",
-      fouls: "",
-      cards: "",
-      claims: "",
-      distribution: "",
-      runouts: "",
-      throwouts: "",
-      saves: "",
+    let pEvent = {};
+
+    const events = player.pnameanddata;
+
+    const pStats = playerBallStats(events);
+
+    pEvent = {
+      ...pStats,
+      name: player.pname,
+      rating: footballRating(events).toString(),
     };
-
-    const stats = player.pnameanddata;
-
-    pEvent["name"] = player.pname;
-    pEvent.rating = footballRating(stats).toString();
 
     pData.push(pEvent);
   });
-
-  // const stats = players[9].pnameanddata;
-  // console.log(stats);
-  // console.log(getEvent(stats, "19"));
-  // console.log(getSubEvent(stats, "67", "75"));
-  console.log(pData);
 
   return <div>PlayerStatsstats</div>;
 };

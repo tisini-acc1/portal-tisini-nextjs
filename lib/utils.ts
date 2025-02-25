@@ -21,6 +21,14 @@ export function calculateYearsOld(dateString: string): number {
   return Math.floor(yearsDifference);
 }
 
+export const getPercent = (total: number, stat: number) => {
+  if (total === 0) {
+    return 0;
+  }
+
+  return Math.round((stat / total) * 100);
+};
+
 export const getEvent = (arry: Stats, eventId: string) => {
   const value = Object.values(arry).filter((item) => item.event_id === eventId);
 

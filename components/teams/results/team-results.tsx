@@ -17,7 +17,7 @@ const TeamResults = () => {
         queryKey: ["fixStats", store.fixture],
         queryFn: () => getFixtureStats(store.fixture),
       },
-      { queryKey: ["teamPlayerStats"], queryFn: () => getPlayersData("6768") },
+      { queryKey: ["teamPlayerStats"], queryFn: () => getPlayersData("6785") },
     ],
   });
 

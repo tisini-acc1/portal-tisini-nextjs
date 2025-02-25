@@ -169,6 +169,8 @@ export const footballRating = (data: Stats) => {
         points -= 4;
       }
     }
+
+    // console.log(events);
   });
 
   const rating = ((points / 45.05) * 5 + 5).toFixed(1);
