@@ -46,10 +46,10 @@ export function PlayerStatsTable<TData, TValue>({
     <div>
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter transfers..."
-          value={(table.getColumn("pname")?.getFilterValue() as string) ?? ""}
+          placeholder="Filter players..."
+          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("pname")?.setFilterValue(event.target.value)
+            table.getColumn("name")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -98,7 +98,7 @@ export function PlayerStatsTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No transfers yet.
+                  No players yet.
                 </TableCell>
               </TableRow>
             )}
