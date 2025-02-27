@@ -35,39 +35,39 @@ export const playerBallStats = (data: Stats) => {
 
   const inter_opp = getSubEvent(data, "28", "404");
   const inter_own = getSubEvent(data, "28", "403");
-  const intercept = inter_opp + inter_own;
+  // const intercept = inter_opp + inter_own;
 
-  const ball = getEvent(data, "67");
+  // const ball = getEvent(data, "67");
   const ball_won = getSubEvent(data, "67", "75");
   const ball_lost = getSubEvent(data, "67", "76");
 
   const aerial = getEvent(data, "93");
   const aerial_won = getSubEvent(data, "93", "144");
-  const aerial_lost = getSubEvent(data, "93", "143");
+  // const aerial_lost = getSubEvent(data, "93", "143");
 
-  const ground = getEvent(data, "94");
-  const ground_won = getSubEvent(data, "94", "146");
-  const ground_lost = getSubEvent(data, "94", "145");
+  // const ground = getEvent(data, "94");
+  // const ground_won = getSubEvent(data, "94", "146");
+  // const ground_lost = getSubEvent(data, "94", "145");
 
   const tackle = getEvent(data, "97");
   const tackle_won = getSubEvent(data, "97", "156");
-  const tackle_lost = getSubEvent(data, "97", "157");
+  // const tackle_lost = getSubEvent(data, "97", "157");
 
   const blocks = getEvent(data, "27");
   const clearances = getEvent(data, "26");
 
-  const pos =
-    ball_won +
-    aerial_won +
-    ground_won +
-    tackle_won +
-    blocks +
-    tackle +
-    intercept;
+  // const pos =
+  //   ball_won +
+  //   aerial_won +
+  //   ground_won +
+  //   tackle_won +
+  //   blocks +
+  //   tackle +
+  //   intercept;
   const aerial_acc = getPercent(aerial, aerial_won);
-  const ground_acc = getPercent(ground, ground_won);
+  // const ground_acc = getPercent(ground, ground_won);
   const tackle_acc = getPercent(tackle, tackle_won);
-  const ball_acc = getPercent(ball, ball_won);
+  // const ball_acc = getPercent(ball, ball_won);
 
   const attempts =
     getEvent(data, "168") +

@@ -11,7 +11,7 @@ const TournamentFilter = () => {
   const { store } = useStore((state) => state);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["tournaments", store.user.id],
+    queryKey: ["overview", store.user.id],
     queryFn: () => getTournaments(),
   });
 

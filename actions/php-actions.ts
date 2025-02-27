@@ -3,6 +3,7 @@
 import axios from "axios";
 import { getToken } from "./actions";
 import { footballData } from "./fix-data";
+import { redirect } from "next/navigation";
 
 // Get Team Players
 export const getTournaments = async (): Promise<Competition[]> => {
@@ -116,7 +117,11 @@ export const getUserTeams = async (): Promise<Team[]> => {
     console.log(`${baseURL}?gettoken=${token}`);
 
     if (res.status === 200) {
-      console.log("server", res.data);
+      console.log("server 119", res.data);
+      if (res.data && res.data.error === "1") {
+        redirect("/auth/login");
+      }
+
       return res.data;
     } else {
       throw new Error(`Failed to fetch user teams: ${res.status}`);

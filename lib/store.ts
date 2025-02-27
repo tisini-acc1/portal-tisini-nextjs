@@ -7,6 +7,7 @@ type User = {
   name: string;
   phone: string;
   profileurl: string;
+  account: string;
 };
 
 type Team = { id: string; name: string };
@@ -46,7 +47,7 @@ const initialState: Store = {
   officials: [],
   tournament: "",
   team: { id: "", name: "" },
-  user: { id: "", name: "", role: "", phone: "", profileurl: "" },
+  user: { id: "", name: "", role: "", phone: "", profileurl: "", account: "" },
   overview: {
     team_id: "",
     team_name: "",

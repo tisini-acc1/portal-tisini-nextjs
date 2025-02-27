@@ -16,14 +16,16 @@ export default function Error({
 
   useEffect(() => {
     // Log the error to an error reporting service
-    console.log(error);
+    console.log("error.js: ", error);
     // console.log(
-    //   error.message === "The specified User doesn't have tournament role"
+    //   error.message.includes("The specified User doesn't have tournament role")
     // );
-    // if (error.message === "The specified User doesn't have tournament role") {
-    //   // Redirect the user to the login page
-    //   resetAuthCookies();
-    //   router.push("/auth/login"); // Adjust the path as per your application
+    // // Check if the error message matches the specific error
+    // if (
+    //   error.message.includes("The specified User doesn't have tournament role")
+    // ) {
+    //   // Redirect to the login page
+    //   router.push("/login");
     // }
   }, [error]);
 

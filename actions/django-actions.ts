@@ -134,13 +134,13 @@ export const getTeamOverview = async (): Promise<TeamOverview[]> => {
     const res = await axios.get(`${baseURL}/api/team_overview/${token}/`);
 
     if (res.status === 200) {
-      console.log("server", res.data);
+      console.log("server 137:", res.data);
       return res.data;
     } else {
       throw new Error(`Failed to fetch team overview: ${res.status}`);
     }
   } catch (error: any) {
-    console.log(error);
+    console.log(error.message);
     throw new Error(
       error.message || "An error occurred while fetching team overview."
     );

@@ -14,14 +14,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { useRouter } from "next/navigation";
 
 const TeamFilter = () => {
   const [teams, setTeams] = useState<Team[]>([]);
   const [team, setTeam] = useState<Team>();
 
+  const router = useRouter();
+
   const { store, updateTeam } = useStore((state) => state);
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ["myTeams", store.user.id],
     queryFn: () => getUserTeams(),
   });
@@ -46,13 +49,27 @@ const TeamFilter = () => {
     }
   };
 
+  useEffect(() => {
+    if (isError) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Something went wrong.";
+
+      if (errorMessage === "The specified User doesn't have tournament role") {
+        // Navigate to login page after the render phase
+        router.push("/auth/login");
+      }
+    }
+  }, [isError, error, router]);
+
   if (isLoading) {
     return <FilterLoader />;
   }
 
   if (isError) {
-    return <div></div>;
+    return <div>error</div>;
   }
+
+  // console.log(data);
 
   return (
     <div className="pr-4">

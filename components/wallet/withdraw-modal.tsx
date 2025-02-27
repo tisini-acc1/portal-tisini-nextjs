@@ -51,7 +51,7 @@ const WithdrawalModal = ({ open, setOpen }: Props) => {
       const withdraw = {
         wamount: values.amount,
         deduct: data.cost,
-        account: store.user.phone,
+        account: store.user.account,
       };
 
       const res = await makeWithdraw(withdraw);

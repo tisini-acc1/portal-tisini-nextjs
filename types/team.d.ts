@@ -468,3 +468,30 @@ type PData = {
   pname: string;
   pnameanddata: Stats;
 };
+
+type PlayerEvent = {
+  name: string;
+  rating: string;
+  goal: string;
+  assist: string;
+  chances: string;
+  "box-touch": string;
+  "box-carry": string;
+  shots: string;
+  crosses: string;
+  pass: string;
+  "prog-pass": string;
+  tackles: string;
+  "ball-efficiency": string;
+  interception: string;
+  clearance: string;
+  blocks: string;
+  aerial: string;
+  fouls: string;
+  cards: string;
+  claims: string;
+  distribution: string;
+  runouts: string;
+  throwouts: string;
+  saves: string;
+};

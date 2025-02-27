@@ -48,7 +48,7 @@ const DepositModal = ({ open, setOpen }: Props) => {
   const onSubmit = async (values: z.infer<typeof depositSchema>) => {
     const deposit = {
       phone: values.phone,
-      reference: store.user.phone,
+      reference: store.user.account,
       damount: values.amount,
     };
 

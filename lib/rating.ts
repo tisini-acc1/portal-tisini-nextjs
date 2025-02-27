@@ -159,7 +159,7 @@ export const footballRating = (data: Stats) => {
     }
 
     if (id === "31") {
-      let goalsConceded = getEvent(data, "31");
+      const goalsConceded = getEvent(data, "31");
 
       if (goalsConceded === 1) {
         points -= 1;

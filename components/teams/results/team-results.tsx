@@ -17,7 +17,10 @@ const TeamResults = () => {
         queryKey: ["fixStats", store.fixture],
         queryFn: () => getFixtureStats(store.fixture),
       },
-      { queryKey: ["teamPlayerStats"], queryFn: () => getPlayersData("6785") },
+      {
+        queryKey: ["teamPlayerStats", store.fixture],
+        queryFn: () => getPlayersData(store.fixture),
+      },
     ],
   });
 
@@ -36,6 +39,9 @@ const TeamResults = () => {
     return <div>error...</div>;
   }
 
+  const team =
+    fixtureData?.fixture[0].team1_id === store.team.id ? "home" : "away";
+
   return (
     <Tabs defaultValue="team">
       <TabsList>
@@ -47,7 +53,7 @@ const TeamResults = () => {
         <TeamStats data={fixtureData as FixtureData} />
       </TabsContent>
       <TabsContent value="player">
-        <PlayerStats data={playerData as TeamPlayerData} />
+        <PlayerStats data={playerData as TeamPlayerData} team={team} />
       </TabsContent>
     </Tabs>
   );

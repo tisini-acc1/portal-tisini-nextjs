@@ -12,7 +12,7 @@ export async function handleLogin(
   cookieStore.set("session_userId", userId, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    maxAge: 60 * 60 * 24 * 7, // 1 week
+    maxAge: 60 * 60 * 12, // 12 hours
     path: "/",
     sameSite: "strict",
   });
@@ -20,7 +20,7 @@ export async function handleLogin(
   cookieStore.set("session_access_token", accessToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    maxAge: 60 * 60 * 24 * 7, // 1 week
+    maxAge: 12 * 60 * 60, // 12 hours
     path: "/",
     sameSite: "strict",
   });
@@ -28,7 +28,7 @@ export async function handleLogin(
   cookieStore.set("session_role", role, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    maxAge: 60 * 60 * 24 * 7, // 1 week
+    maxAge: 60 * 60 * 12, // 12 hours
     path: "/",
     sameSite: "strict",
   });

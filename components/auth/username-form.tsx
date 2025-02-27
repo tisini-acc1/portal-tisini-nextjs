@@ -64,6 +64,7 @@ const UsernameForm = () => {
           id: res.data.userid,
           role: res.data.role,
           phone: res.data.phone,
+          account: res.data.account,
           profileurl: res.data.profileurl,
         });
 
