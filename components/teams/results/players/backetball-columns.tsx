@@ -13,10 +13,7 @@ export const basketballColumns: ColumnDef<BasketballPlayerStats>[] = [
     accessorKey: "point",
     header: "Points",
   },
-  {
-    accessorKey: "assist",
-    header: "Assists",
-  },
+
   {
     accessorKey: "twoPoint",
     header: "2 point",
@@ -29,6 +26,10 @@ export const basketballColumns: ColumnDef<BasketballPlayerStats>[] = [
   {
     accessorKey: "freeThrow",
     header: "Free Throw",
+  },
+  {
+    accessorKey: "assist",
+    header: "Assists",
   },
   {
     accessorKey: "rebound",

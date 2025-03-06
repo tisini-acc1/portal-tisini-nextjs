@@ -258,6 +258,7 @@ const CreateFixtureModal = () => {
                           <SelectItem value="rugby15">Rugby 15s</SelectItem>
                           <SelectItem value="rugby7">Rugby 7s</SelectItem>
                           <SelectItem value="football">Football</SelectItem>
+                          <SelectItem value="basketball">Basketball</SelectItem>
                         </SelectContent>
                       </Select>
 

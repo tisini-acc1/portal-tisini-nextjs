@@ -124,6 +124,7 @@ const CreatePlayerModal = ({ countries }: { countries: Country[] }) => {
         setOpen(false);
         queryClient.invalidateQueries({ queryKey: ["allPlayers"] });
         toast({ title: "Success", description: data.message });
+        form.reset();
       } else {
         toast({
           title: "Error!",
@@ -252,7 +253,7 @@ const CreatePlayerModal = ({ countries }: { countries: Country[] }) => {
                   <FormItem>
                     <FormLabel>Jersey Number</FormLabel>
                     <FormControl>
-                      <Input type="text" placeholder="Doe" {...field} />
+                      <Input type="text" placeholder="65" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -368,7 +369,7 @@ const CreatePlayerModal = ({ countries }: { countries: Country[] }) => {
                   name="signed"
                   render={({ field }) => (
                     <FormItem className="flex flex-col">
-                      <FormLabel className="mb-3">Fixture Date</FormLabel>
+                      <FormLabel className="mb-3">Sign Date</FormLabel>
                       <Popover>
                         <PopoverTrigger asChild>
                           <FormControl>

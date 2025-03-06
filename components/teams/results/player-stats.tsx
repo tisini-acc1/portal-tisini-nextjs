@@ -31,11 +31,15 @@ const PlayerStats = ({ data, team }: StatsProps) => {
     pData.push(pEvent);
   });
 
-  console.log(data);
+  const playerData = pData.sort(
+    (a, b) => parseFloat(b.rating) - parseFloat(a.rating)
+  );
+
+  // console.log(data);
 
   return (
     <div className="">
-      <PlayerStatsTable columns={columns} data={pData} />
+      <PlayerStatsTable columns={columns} data={playerData} />
     </div>
   );
 };
