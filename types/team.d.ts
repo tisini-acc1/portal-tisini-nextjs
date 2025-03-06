@@ -495,3 +495,17 @@ type PlayerEvent = {
   throwouts: string;
   saves: string;
 };
+
+type BasketballPlayerStats = {
+  point: number;
+  assist: number;
+  rebound: number;
+  block: number;
+  turnover: number;
+  steal: number;
+  foul: number;
+  twoPoint: string;
+  threePoint: string;
+  freeThrow: string;
+  name: string;
+};

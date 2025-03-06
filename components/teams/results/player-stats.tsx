@@ -8,10 +8,9 @@ import { columns } from "./columns";
 type StatsProps = {
   data: TeamPlayerData;
   team: string;
-  fixType: string;
 };
 
-const PlayerStats = ({ data, team, fixType }: StatsProps) => {
+const PlayerStats = ({ data, team }: StatsProps) => {
   const players = team === "home" ? data.home : data.away;
 
   const pData: PlayerEvent[] = [];
@@ -21,8 +20,7 @@ const PlayerStats = ({ data, team, fixType }: StatsProps) => {
 
     const events = player.pnameanddata;
 
-    const pStats =
-      fixType === "football" ? playerBallStats(events) : ({} as PlayerEvent);
+    const pStats = playerBallStats(events);
 
     pEvent = {
       ...pStats,

@@ -7,6 +7,7 @@ import { useStore } from "@/lib/store";
 import PlayerStats from "./player-stats";
 import { getFixtureStats, getPlayersData } from "@/actions/php-actions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import BasketballPlayerStats from "./players/basketball-player";
 
 const TeamResults = () => {
   const { store } = useStore((state) => state);
@@ -54,12 +55,19 @@ const TeamResults = () => {
       <TabsContent value="team">
         <TeamStats data={fixtureData as FixtureData} />
       </TabsContent>
+
       <TabsContent value="player">
-        <PlayerStats
-          team={team}
-          fixType={fixType as string}
-          data={playerData as TeamPlayerData}
-        />
+        {/* Content according to fixture type */}
+        {fixType === "football" ? (
+          <PlayerStats team={team} data={playerData as TeamPlayerData} />
+        ) : fixType === "basketball" ? (
+          <BasketballPlayerStats
+            team={team}
+            data={playerData as TeamPlayerData}
+          />
+        ) : (
+          <div>No Data!</div>
+        )}
       </TabsContent>
     </Tabs>
   );
