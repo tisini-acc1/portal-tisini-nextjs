@@ -41,7 +41,9 @@ const TeamResults = () => {
 
   const team =
     fixtureData?.fixture[0].team1_id === store.team.id ? "home" : "away";
+  const fixType = fixtureData && fixtureData["fixture"][0].fixture_type;
 
+  console.log(fixType);
   return (
     <Tabs defaultValue="team">
       <TabsList>
@@ -53,7 +55,11 @@ const TeamResults = () => {
         <TeamStats data={fixtureData as FixtureData} />
       </TabsContent>
       <TabsContent value="player">
-        <PlayerStats data={playerData as TeamPlayerData} team={team} />
+        <PlayerStats
+          team={team}
+          fixType={fixType as string}
+          data={playerData as TeamPlayerData}
+        />
       </TabsContent>
     </Tabs>
   );

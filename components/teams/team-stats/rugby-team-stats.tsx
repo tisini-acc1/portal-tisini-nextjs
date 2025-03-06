@@ -15,8 +15,8 @@ const RugbyTeamStats = ({ data }: { data: FixtureData }) => {
 
   const territory = calcRugbyTerritory(data["home"], data["away"]);
 
-  console.log(data);
-  console.log(rData);
+  // console.log(data);
+  // console.log(rData);
   // console.log(territory);
   return (
     <section className="grid gap-4">

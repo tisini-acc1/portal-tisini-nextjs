@@ -58,7 +58,7 @@ const TeamFixtures = () => {
     }
   }, [data, store.tournament, store.serie]);
 
-  // console.log(data);
+  console.log(data);
   // console.log(fixType);
 
   // Handle loading and error states

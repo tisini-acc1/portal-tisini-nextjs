@@ -64,7 +64,7 @@ const ManagePlayerPage = () => {
   //   queryFn: () => getUserTeams(),
   // });
 
-  console.log(players);
+  // console.log(players);
   // console.log(players?.slice().reverse());
 
   return (
