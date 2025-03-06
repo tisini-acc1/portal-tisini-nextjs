@@ -44,7 +44,7 @@ const TeamResults = () => {
     fixtureData?.fixture[0].team1_id === store.team.id ? "home" : "away";
   const fixType = fixtureData && fixtureData["fixture"][0].fixture_type;
 
-  console.log(playerData);
+  // console.log(playerData);
 
   return (
     <Tabs defaultValue="team">
