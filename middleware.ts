@@ -13,17 +13,28 @@ export default async function middleware(req: NextRequest) {
   const isPublicRoute = publicRoutes.includes(path);
 
   // Get the session cookie (access token) and user role
-  const cookie = req.cookies.get("session_access_token")?.value;
-  const userRole = req.cookies.get("session_role")?.value;
+  const sessionCookie = req.cookies.get("session")?.value || "";
 
   // 1. Redirect to /auth/login if the user is not authenticated and tries to access a protected route
-  if (isProtectedRoute && !cookie) {
+  if (isProtectedRoute && !sessionCookie) {
     console.log("User is not authenticated, redirecting to /auth/login");
     return NextResponse.redirect(new URL("/auth/login", req.nextUrl));
   }
 
+  let session;
+  if (sessionCookie) {
+    try {
+      session = JSON.parse(sessionCookie);
+    } catch (error) {
+      console.error("Error parsing session cookie:", error);
+      return NextResponse.redirect(new URL("/auth/login", req.nextUrl));
+    }
+  }
+
+  const userRole = session?.role;
+
   // 2. Redirect to /home if the user is authenticated and tries to access a public route like login/register
-  if (isPublicRoute && cookie && userRole) {
+  if (isPublicRoute && sessionCookie && userRole) {
     console.log("User is authenticated, redirecting based on role...");
     if (userRole === "1") {
       return NextResponse.redirect(new URL("/home/agents", req.nextUrl));

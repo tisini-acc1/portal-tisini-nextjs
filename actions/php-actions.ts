@@ -109,7 +109,7 @@ export const createFixture = async (data: CreateFix) => {
 export const getUserTeams = async (): Promise<Team[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
-
+  console.log(token);
   try {
     const res = await axios.post(`${baseURL}?gettoken=${token}`, {
       action: "userteam",

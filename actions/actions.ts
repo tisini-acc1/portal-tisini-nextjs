@@ -2,30 +2,15 @@
 
 import { cookies } from "next/headers";
 
-export async function handleLogin(
-  userId: string,
-  accessToken: string,
-  role: string
-) {
+export async function handleLogin(accessToken: string, role: string) {
   const cookieStore = await cookies(); // No need for `await`
 
-  cookieStore.set("session_userId", userId, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    maxAge: 60 * 60 * 12, // 12 hours
-    path: "/",
-    sameSite: "strict",
-  });
+  const sessionData = {
+    accessToken,
+    role,
+  };
 
-  cookieStore.set("session_access_token", accessToken, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    maxAge: 12 * 60 * 60, // 12 hours
-    path: "/",
-    sameSite: "strict",
-  });
-
-  cookieStore.set("session_role", role, {
+  cookieStore.set("session", JSON.stringify(sessionData), {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     maxAge: 60 * 60 * 12, // 12 hours
@@ -50,25 +35,33 @@ export async function handleLogin(
   }
 }
 
+export async function getSession() {
+  const cookieStore = await cookies();
+  const sessionCookie = cookieStore.get("session")?.value;
+
+  if (!sessionCookie) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(sessionCookie);
+  } catch (error) {
+    console.error("Failed to parse session cookie:", error);
+    return null;
+  }
+}
+
 export async function resetAuthCookies() {
-  const cookieStore = await cookies(); // No need for `await`
-
-  cookieStore.set("session_userId", "", { path: "/", maxAge: -1 });
-  cookieStore.set("session_access_token", "", { path: "/", maxAge: -1 });
-  cookieStore.set("session_role", "", { path: "/", maxAge: -1 });
-}
-
-export async function getUserId() {
   const cookieStore = await cookies();
-  return cookieStore.get("session_userId")?.value || null; // Fixed key name
-}
-
-export async function getUserRole() {
-  const cookieStore = await cookies();
-  return cookieStore.get("session_role")?.value || null;
+  cookieStore.set("session", "", { path: "/", maxAge: -1 });
 }
 
 export async function getToken() {
-  const cookieStore = await cookies();
-  return cookieStore.get("session_access_token")?.value || null;
+  const session = await getSession();
+  return session?.accessToken || null;
+}
+
+export async function getUserRole() {
+  const session = await getSession();
+  return session?.role || null;
 }

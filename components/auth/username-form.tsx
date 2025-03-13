@@ -12,7 +12,7 @@ import { useStore } from "@/lib/store";
 import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { handleLogin } from "@/actions/actions";
+import { handleLogin, resetAuthCookies } from "@/actions/actions";
 import {
   Form,
   FormControl,
@@ -56,8 +56,10 @@ const UsernameForm = () => {
     setIsLoading(true);
 
     try {
+      await resetAuthCookies();
+
       const res = await axios.post(`${process.env.NEXT_PUBLIC_API_HOST}`, user);
-      console.log(res);
+
       if (res.data.success === "1") {
         updateUser({
           name: res.data.name,
@@ -68,11 +70,7 @@ const UsernameForm = () => {
           profileurl: res.data.profileurl,
         });
 
-        const redirectUrl = await handleLogin(
-          res.data.userid,
-          res.data.userKey,
-          res.data.role
-        );
+        const redirectUrl = await handleLogin(res.data.userKey, res.data.role);
 
         router.replace(redirectUrl);
       } else {

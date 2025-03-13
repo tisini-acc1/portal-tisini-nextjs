@@ -70,6 +70,7 @@ const TeamFilter = () => {
   }
 
   // console.log(data);
+  // console.log(store);
 
   return (
     <div className="pr-4">
