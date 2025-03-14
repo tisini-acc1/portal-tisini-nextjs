@@ -1,26 +1,27 @@
 "use client";
 
 import { useEffect, useState } from "react";
-// import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { useStore } from "@/lib/store";
+import { getTournamentOverview } from "@/actions/django-actions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-// import { getTournamentOverview } from "@/actions/django-actions";
 
-const OverviewCards = ({ overviewData }: { overviewData: Tournament[] }) => {
+// { overviewData }: { overviewData: Tournament[] }
+const OverviewCards = () => {
   const [overview, setOverview] = useState<Serie | undefined>();
   const [subsets, setSubsets] = useState<number>(0);
 
   const { store } = useStore((state) => state);
 
-  // const { data, isLoading, isError } = useQuery({
-  //   queryKey: ["overview"],
-  //   queryFn: () => getTournamentOverview(),
-  // });
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["overview"],
+    queryFn: () => getTournamentOverview(),
+  });
 
   useEffect(() => {
-    if (overviewData && store.tournament && store.serie) {
-      const tourn = overviewData.find(
+    if (data && store.tournament && store.serie) {
+      const tourn = data.find(
         (tournament) => tournament.id === store.tournament
       );
       if (tourn) {
@@ -29,15 +30,15 @@ const OverviewCards = ({ overviewData }: { overviewData: Tournament[] }) => {
         setOverview(serie);
       }
     }
-  }, [store.tournament, store.serie, overviewData]);
+  }, [store.tournament, store.serie, data]);
 
-  // if (isLoading && !data) {
-  //   return <span>Loading...</span>;
-  // }
+  if (isLoading && !data) {
+    return <span>Loading...</span>;
+  }
 
-  // if (isError) {
-  //   return <span>Error!</span>;
-  // }
+  if (isError) {
+    return <span>Error!</span>;
+  }
 
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
