@@ -1,53 +1,54 @@
 "use client";
 
 import React, { useEffect } from "react";
-// import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { useStore } from "@/lib/store";
-// import Loading from "@/app/home/loading";
+import Loading from "@/app/home/loading";
 import { CurrentForm } from "./current-form";
 import { UpcomingMatch } from "./upcoming-match";
 import { PreviousMatch } from "./previous-match";
 import { SeasonSnapshot } from "./season-snapshot";
-// import { getTeamOverview } from "@/actions/django-actions";
+import { getTeamOverview } from "@/actions/django-actions";
 
-const TeamOverview = ({ overviewData }: { overviewData: TeamOverview[] }) => {
+// { overviewData }: { overviewData: TeamOverview[] }
+const TeamOverview = () => {
   const { store, updateOverview } = useStore((state) => state);
   const teamId = store.team.id;
   const overview = store.overview;
 
-  // const { data, isLoading, isError } = useQuery({
-  //   queryKey: ["teamOverview"],
-  //   queryFn: () => getTeamOverview(),
-  // });
-
-  useEffect(() => {
-    if (overviewData) {
-      if (teamId) {
-        const tData = overviewData.filter(
-          (item) => item.team_id === store.team.id
-        );
-        updateOverview(tData[0]);
-      }
-    }
-  }, [teamId, overviewData]);
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["teamOverview"],
+    queryFn: () => getTeamOverview(),
+  });
 
   // useEffect(() => {
-  //   if (data) {
+  //   if (overviewData) {
   //     if (teamId) {
-  //       const tData = data.filter((item) => item.team_id === store.team.id);
+  //       const tData = overviewData.filter(
+  //         (item) => item.team_id === store.team.id
+  //       );
   //       updateOverview(tData[0]);
   //     }
   //   }
-  // }, [teamId, data]);
+  // }, [teamId, overviewData]);
 
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
+  useEffect(() => {
+    if (data) {
+      if (teamId) {
+        const tData = data.filter((item) => item.team_id === store.team.id);
+        updateOverview(tData[0]);
+      }
+    }
+  }, [teamId, data]);
 
-  // if (isError) {
-  //   return <div>Error</div>;
-  // }
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <div>Error</div>;
+  }
 
   // console.log(data);
   // console.log(overview);

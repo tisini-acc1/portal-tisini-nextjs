@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  // BadgeCheck,
+  BadgeCheck,
   // Bell,
   ChevronsUpDown,
   // CreditCard,
@@ -16,7 +16,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  // DropdownMenuGroup,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -48,6 +48,10 @@ export function NavUser() {
       : user.role === "6"
       ? "Tournament Admin"
       : user.role === "9"
+      ? "Match Official"
+      : user.role === "5"
+      ? "Player"
+      : user.role === "9" || user.role === "17"
       ? "Match Official"
       : "System User";
 
@@ -100,25 +104,25 @@ export function NavUser() {
                 Upgrade to Pro
               </DropdownMenuItem>
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator /> */}
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => router.push("/home/profile")}>
                 <BadgeCheck />
-                Account
+                Profile
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              {/* <DropdownMenuItem>
                 <CreditCard />
                 Billing
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Bell />
                 Notifications
-              </DropdownMenuItem>
-            </DropdownMenuGroup> */}
+              </DropdownMenuItem> */}
+            </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem
-              onClick={() => {
-                resetAuthCookies();
+              onClick={async () => {
+                await resetAuthCookies();
                 router.push("/auth/login");
               }}
             >

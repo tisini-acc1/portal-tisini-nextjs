@@ -16,7 +16,12 @@ import { useStore } from "@/lib/store";
 import { NavMain } from "@/components/sidebar/nav-main";
 import { NavUser } from "@/components/sidebar/nav-user";
 // import { NavProjects } from "@/components/nav-projects";
-import { COMPS_ITEMS, TEAMS_ITEMS } from "@/lib/constants";
+import {
+  COMPS_ITEMS,
+  PLAYER_ITEMS,
+  REFREE_ITEMS,
+  TEAMS_ITEMS,
+} from "@/lib/constants";
 // import { NavSecondary } from "@/components/sidebar/nav-secondary";
 import {
   Sidebar,
@@ -83,7 +88,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const userRole = store.user.role;
 
   data.navMain =
-    userRole === "2" ? TEAMS_ITEMS : userRole === "6" ? COMPS_ITEMS : [];
+    userRole === "2"
+      ? TEAMS_ITEMS
+      : userRole === "6"
+      ? COMPS_ITEMS
+      : userRole === "5"
+      ? PLAYER_ITEMS
+      : userRole === "9" || userRole === "17"
+      ? REFREE_ITEMS
+      : [];
 
   return (
     <Sidebar variant="inset" {...props}>

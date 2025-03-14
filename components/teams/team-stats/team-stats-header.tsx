@@ -25,7 +25,7 @@ const TeamStatsHeader = ({ details, rugby, territory }: HeaderProps) => {
               {details.home}
             </p>
           </div>
-          <div className="text-2xl font-semibold">
+          <div className="text-xl font-semibold">
             {details.homeScore} : {details.awayScore}
           </div>
 

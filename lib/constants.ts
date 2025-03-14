@@ -140,3 +140,31 @@ export const COMPS_ITEMS = [
     icon: Wallet,
   },
 ];
+
+export const PLAYER_ITEMS = [
+  {
+    title: "Home",
+    url: "/home/players",
+    icon: Home,
+    isActive: true,
+  },
+  {
+    title: "Wallet",
+    url: "/home/wallet",
+    icon: Wallet,
+  },
+];
+
+export const REFREE_ITEMS = [
+  {
+    title: "Home",
+    url: "/home/match-officials",
+    icon: Home,
+    isActive: true,
+  },
+  {
+    title: "Wallet",
+    url: "/home/wallet",
+    icon: Wallet,
+  },
+];
