@@ -30,7 +30,7 @@ const ProfileBio = () => {
   };
 
   return (
-    <section className="p-4">
+    <section className="p-5">
       <Form {...form}>
         <form className="space-y-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
@@ -39,7 +39,7 @@ const ProfileBio = () => {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>LastName</FormLabel>
+                  <FormLabel>FirstName</FormLabel>
                   <FormControl>
                     <Input placeholder="john" {...field} />
                   </FormControl>

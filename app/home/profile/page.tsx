@@ -1,7 +1,9 @@
-import ProfileBio from "@/components/profile/profile-bio";
-import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
+
+import ProfileBio from "@/components/profile/profile-bio";
+import ProfileCert from "@/components/profile/profile-cert";
+import ProfileImage from "@/components/profile/profile-image";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const ProfilePage = () => {
   return (
@@ -27,8 +29,12 @@ const ProfilePage = () => {
         <TabsContent value="bio">
           <ProfileBio />
         </TabsContent>
-        <TabsContent value="img">Image</TabsContent>
-        <TabsContent value="cert">Certifications</TabsContent>
+        <TabsContent value="img">
+          <ProfileImage />
+        </TabsContent>
+        <TabsContent value="cert">
+          <ProfileCert />
+        </TabsContent>
       </Tabs>
     </main>
   );
