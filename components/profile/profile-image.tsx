@@ -1,17 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
+import Image from "next/image";
 
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
-import Image from "next/image";
 
 const ProfileImage = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);

@@ -1,7 +1,8 @@
-import Image from "next/image";
+"use client";
 
 import ProfileBio from "@/components/profile/profile-bio";
 import ProfileCert from "@/components/profile/profile-cert";
+import ImageAvatar from "@/components/profile/image-avatar";
 import ProfileImage from "@/components/profile/profile-image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -11,13 +12,7 @@ const ProfilePage = () => {
       <Tabs defaultValue="bio" className="w-full">
         <header className="h-24 bg-wallet bg-center bg-no-repeat bg-cover rounded-md relative">
           <div className="absolute top-1/4 left-0">
-            <Image
-              src={"/avatar.webp"}
-              alt="profile"
-              width={100}
-              height={100}
-              className="rounded-full"
-            />
+            <ImageAvatar />
           </div>
           <TabsList className="absolute bottom-0 right-0">
             <TabsTrigger value={"bio"}>Bio Data</TabsTrigger>

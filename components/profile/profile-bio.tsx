@@ -10,24 +10,30 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { RotateCcw } from "lucide-react";
+// import { RotateCcw } from "lucide-react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { useStore } from "@/lib/store";
 
 const ProfileBio = () => {
+  const user = useStore((state) => state.store.user);
+
+  const name = user.name.split(" ");
+
   const form = useForm({
     defaultValues: {
-      firstName: "",
-      middleName: "",
+      firstName: name[0],
+      middleName: name[1],
       lastName: "",
-      phone: "",
+      phone: user.phone,
       email: "",
     },
+    mode: "onChange",
   });
 
-  const onSubmit = () => {
-    console.log("first");
-  };
+  // const onSubmit = () => {
+  //   console.log("first");
+  // };
 
   return (
     <section className="p-5">
@@ -41,7 +47,7 @@ const ProfileBio = () => {
                 <FormItem>
                   <FormLabel>FirstName</FormLabel>
                   <FormControl>
-                    <Input placeholder="john" {...field} />
+                    <Input placeholder="" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -55,7 +61,7 @@ const ProfileBio = () => {
                 <FormItem>
                   <FormLabel>MiddleName</FormLabel>
                   <FormControl>
-                    <Input placeholder="john" {...field} />
+                    <Input placeholder="" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -69,7 +75,7 @@ const ProfileBio = () => {
                 <FormItem>
                   <FormLabel>LastName</FormLabel>
                   <FormControl>
-                    <Input placeholder="john" {...field} />
+                    <Input placeholder="" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -85,7 +91,7 @@ const ProfileBio = () => {
                 <FormItem>
                   <FormLabel>Phone No.</FormLabel>
                   <FormControl>
-                    <Input placeholder="071390972" {...field} />
+                    <Input placeholder="" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -99,7 +105,7 @@ const ProfileBio = () => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="john" {...field} />
+                    <Input placeholder="" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
