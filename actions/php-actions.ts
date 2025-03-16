@@ -2,8 +2,6 @@
 
 import axios from "axios";
 import { getToken } from "./actions";
-import { footballData } from "./fix-data";
-import { redirect } from "next/navigation";
 
 // Get Team Players
 export const getTournaments = async (): Promise<Competition[]> => {
@@ -109,7 +107,7 @@ export const createFixture = async (data: CreateFix) => {
 export const getUserTeams = async (): Promise<Team[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
-  console.log(token);
+
   try {
     const res = await axios.post(`${baseURL}?gettoken=${token}`, {
       action: "userteam",
@@ -119,7 +117,7 @@ export const getUserTeams = async (): Promise<Team[]> => {
     if (res.status === 200) {
       console.log("server 119", res.data);
       if (res.data && res.data.error === "1") {
-        redirect("/auth/login");
+        throw new Error("userNotAuthenticated");
       }
 
       return res.data;
@@ -225,14 +223,14 @@ export const getFixtureStats = async (fixId: string): Promise<FixtureData> => {
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
 
   try {
-    const res = await axios.get(
-      `https://apis.tisini.co.ke/apiagent7.php?event=${fixId}`
-    );
-    // const res = await axios.post(`${baseURL}`, {
-    //   action: "teamdata",
-    //   fixture: fixId,
-    //   gettoken: token,
-    // });
+    // const res = await axios.get(
+    //   `https://apis.tisini.co.ke/apiagent7.php?event=${fixId}`
+    // );
+    const res = await axios.post(`${baseURL}`, {
+      action: "teamdata",
+      fixture: fixId,
+      gettoken: token,
+    });
 
     if (res.status === 200) {
       console.log("server", res.data);
@@ -435,7 +433,7 @@ export const createOfficial = async (data: TournaOfficial) => {
   try {
     const res = await axios.post(`${baseURL}`, {
       ...data,
-      action: "registeruser",
+      // action: "registeruser",
       // gettoken: token,
     });
 
@@ -461,6 +459,7 @@ export const getOfficials = async (): Promise<Official[]> => {
     const res = await axios.post(`${baseURL}`, {
       gettoken: token,
       action: "refereelist",
+      fixtype: "5",
     });
 
     if (res.status === 200) {

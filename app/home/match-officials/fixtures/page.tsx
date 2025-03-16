@@ -3,11 +3,11 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { useStore } from "@/lib/store";
-import { columns } from "./fixtures/columns";
 import { getRefreeFixtures } from "@/actions/php-actions";
-import { OfficialsFixTable } from "./fixtures/fixtures-table";
+import { OfficialsFixTable } from "./fixtures-table";
+import { columns } from "./columns";
 
-const MatchOfficialsPage = () => {
+const OfficialsFixturesPage = () => {
   const { store } = useStore((state) => state);
 
   const { data, isError, isLoading } = useQuery({
@@ -23,6 +23,8 @@ const MatchOfficialsPage = () => {
     return <div>Error loading tournaments. Please try again later.</div>;
   }
 
+  console.log(data);
+
   return (
     <main>
       <section>
@@ -32,4 +34,4 @@ const MatchOfficialsPage = () => {
   );
 };
 
-export default MatchOfficialsPage;
+export default OfficialsFixturesPage;

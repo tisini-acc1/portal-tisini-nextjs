@@ -14,6 +14,7 @@ import {
   // Send,
   ShieldHalf,
   Wallet,
+  Workflow,
 } from "lucide-react";
 
 export const TEAMS_ITEMS = [
@@ -160,6 +161,12 @@ export const REFREE_ITEMS = [
     title: "Home",
     url: "/home/match-officials",
     icon: Home,
+    isActive: true,
+  },
+  {
+    title: "Fixtures",
+    url: "/home/match-officials/fixtures",
+    icon: Workflow,
     isActive: true,
   },
   {

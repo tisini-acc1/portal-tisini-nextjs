@@ -60,6 +60,8 @@ const UsernameForm = () => {
 
       const res = await axios.post(`${process.env.NEXT_PUBLIC_API_HOST}`, user);
 
+      // console.log(res);
+
       if (res.data.success === "1") {
         updateUser({
           name: res.data.name,

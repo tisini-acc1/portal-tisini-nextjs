@@ -30,6 +30,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const regSchema = z.object({
   middlename: z
@@ -53,9 +60,13 @@ const regSchema = z.object({
     .string()
     .min(6, "Provide a ID number or birth cert number")
     .max(15, "Provide a ID number or birth cert number"),
+  fix_type: z
+    .string()
+    .min(1, "Provide a valid fixture type")
+    .max(2, "Provide a valid fixture type"),
 });
 
-const CreateOfficialsModal = () => {
+const CreateOfficialsModal = ({ fixType }: { fixType: FixtureType[] }) => {
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
@@ -69,6 +80,7 @@ const CreateOfficialsModal = () => {
       first_name: "",
       last_name: "",
       id_number: "",
+      fix_type: "1",
     },
   });
 
@@ -108,8 +120,8 @@ const CreateOfficialsModal = () => {
       last_name: data.middlename,
       sirname: data.last_name,
       password: data.id_number.slice(1, 5),
+      fixtype: data.fix_type,
       role: "9",
-      fixtype: "2", // add fetch fixtype from backend
       action: "registeruser",
     };
 
@@ -198,6 +210,53 @@ const CreateOfficialsModal = () => {
               />
             </div>
 
+            <div className="flex gap-2">
+              <FormField
+                control={form.control}
+                name="id_number"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>ID number</FormLabel>
+                    <FormControl>
+                      <Input type="text" placeholder="John" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <div className="w-1/2">
+                <FormField
+                  control={form.control}
+                  name="fix_type"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Fixture Type</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Rugby 15s" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {fixType.map((fix) => (
+                            <SelectItem key={fix.id} value={fix.id}>
+                              {fix.type_name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+
             <FormField
               control={form.control}
               name="email"
@@ -210,20 +269,6 @@ const CreateOfficialsModal = () => {
                       placeholder="doe@gmail.com"
                       {...field}
                     />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="id_number"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>ID number</FormLabel>
-                  <FormControl>
-                    <Input type="text" placeholder="John" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

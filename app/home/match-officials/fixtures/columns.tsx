@@ -54,10 +54,12 @@ const NavigateButtons = ({ fixture }: { fixture: RefreeFix }) => {
       <Button
         variant={"link"}
         onClick={() =>
-          router.push(`/home/match-officials/${fixture.id}-${fixture.team1_id}`)
+          router.push(
+            `/home/match-officials/fixtures/${fixture.id}-${fixture.team1_id}-${fixture.team2_id}`
+          )
         }
       >
-        Home
+        More
       </Button>
       <Button
         variant={"link"}

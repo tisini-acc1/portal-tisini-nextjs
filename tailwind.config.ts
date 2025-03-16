@@ -107,6 +107,7 @@ const config: Config = {
         football: 'url("/football-pitch.jpg")',
         rugby: 'url("/rugby-pitch.jpg")',
         error: 'url("/error.avif")',
+        header: 'url("/header.jpg")',
       },
     },
   },

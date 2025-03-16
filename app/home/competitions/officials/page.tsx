@@ -13,26 +13,30 @@ const MatchOfficialsPage = () => {
     queryFn: () => getOfficials(),
   });
 
-  const { data: fixtype } = useQuery({
+  const {
+    data: fixtype,
+    isLoading: isTLoading,
+    isError: isTError,
+  } = useQuery({
     queryKey: ["fixtype"],
     queryFn: () => getFixType(),
   });
 
-  console.log(fixtype);
-
-  if (isLoading) {
+  if (isLoading || isTLoading) {
     return <div>Loading...</div>;
   }
 
-  if (isError) {
+  if (isError || isTError) {
     return <span>Error</span>;
   }
+
+  // console.log(fixtype);
 
   return (
     <main className="space-y-6">
       <header className="flex justify-between items-center">
         <p className="font-mono">{data?.length} Officials</p>
-        <CreateOfficialsModal />
+        <CreateOfficialsModal fixType={fixtype as FixtureType[]} />
       </header>
 
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
