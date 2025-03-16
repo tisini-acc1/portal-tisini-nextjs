@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 
-import { getOfficials } from "@/actions/php-actions";
+import { getFixType, getOfficials } from "@/actions/php-actions";
 import { Card, CardContent } from "@/components/ui/card";
 import CreateOfficialsModal from "@/components/tournaments/officials/create-officials-modal";
 import Image from "next/image";
@@ -12,6 +12,13 @@ const MatchOfficialsPage = () => {
     queryKey: ["tournamentOfficials"],
     queryFn: () => getOfficials(),
   });
+
+  const { data: fixtype } = useQuery({
+    queryKey: ["fixtype"],
+    queryFn: () => getFixType(),
+  });
+
+  console.log(fixtype);
 
   if (isLoading) {
     return <div>Loading...</div>;

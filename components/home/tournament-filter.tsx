@@ -10,7 +10,7 @@ import FilterTournamentSeries from "../filters/filter-tournament-series";
 const TournamentFilter = () => {
   const { store } = useStore((state) => state);
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ["overview", store.user.id],
     queryFn: () => getTournaments(),
   });
@@ -20,9 +20,10 @@ const TournamentFilter = () => {
   }
 
   if (isError) {
+    console.log("tourFilter: ", error);
     return <div>Error</div>;
   }
-  // console.log(data);
+
   return (
     <div className="flex">
       <FilterTournamentSeries tournaments={data as Tournament[]} />

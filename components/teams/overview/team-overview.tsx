@@ -17,7 +17,7 @@ const TeamOverview = () => {
   const teamId = store.team.id;
   const overview = store.overview;
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ["teamOverview"],
     queryFn: () => getTeamOverview(),
   });
@@ -47,11 +47,11 @@ const TeamOverview = () => {
   }
 
   if (isError) {
+    console.log("teams: ", error);
     return <div>Error</div>;
   }
 
   // console.log(data);
-  // console.log(overview);
   // console.log(store.team.id);
 
   return (

@@ -5,8 +5,17 @@ import ProfileCert from "@/components/profile/profile-cert";
 import ImageAvatar from "@/components/profile/image-avatar";
 import ProfileImage from "@/components/profile/profile-image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useQuery } from "@tanstack/react-query";
+import { getTournaments } from "@/actions/php-actions";
 
 const ProfilePage = () => {
+  const { data } = useQuery({
+    queryKey: ["usrTournaments"],
+    queryFn: () => getTournaments(),
+  });
+
+  console.log(data);
+
   return (
     <main>
       <Tabs defaultValue="bio" className="w-full">

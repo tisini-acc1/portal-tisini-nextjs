@@ -109,6 +109,7 @@ const CreateOfficialsModal = () => {
       sirname: data.last_name,
       password: data.id_number.slice(1, 5),
       role: "9",
+      fixtype: "2", // add fetch fixtype from backend
       action: "registeruser",
     };
 

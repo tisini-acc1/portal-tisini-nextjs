@@ -66,11 +66,11 @@ const TeamFilter = () => {
   }
 
   if (isError) {
+    console.log("tfilter: ", error);
     return <div>error</div>;
   }
 
   // console.log(data);
-  // console.log(store);
 
   return (
     <div className="pr-4">

@@ -14,7 +14,7 @@ const OverviewCards = () => {
 
   const { store } = useStore((state) => state);
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ["overview"],
     queryFn: () => getTournamentOverview(),
   });
@@ -37,6 +37,7 @@ const OverviewCards = () => {
   }
 
   if (isError) {
+    console.log("tournament: ", error);
     return <span>Error!</span>;
   }
 

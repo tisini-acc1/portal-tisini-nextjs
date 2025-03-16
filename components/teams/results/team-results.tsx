@@ -8,9 +8,11 @@ import PlayerStats from "./player-stats";
 import { getFixtureStats, getPlayersData } from "@/actions/php-actions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import BasketballPlayerStats from "./players/basketball-player";
+import { useToast } from "@/hooks/use-toast";
 
 const TeamResults = () => {
   const { store } = useStore((state) => state);
+  const { toast } = useToast();
 
   const results = useQueries({
     queries: [
@@ -37,6 +39,19 @@ const TeamResults = () => {
   }
 
   if (isFixtureError || isPlayerError) {
+    const tError = results[0].error as Error;
+    const pError = results[1].error as Error;
+    console.log(pError);
+
+    if (tError || pError) {
+      toast({
+        title: "Error!",
+        variant: "destructive",
+        description: "The fixture has not been paid for",
+      });
+      return <div>error...</div>;
+    }
+
     return <div>error...</div>;
   }
 
@@ -44,7 +59,7 @@ const TeamResults = () => {
     fixtureData?.fixture[0].team1_id === store.team.id ? "home" : "away";
   const fixType = fixtureData && fixtureData["fixture"][0].fixture_type;
 
-  // console.log(playerData);
+  console.log(results);
 
   return (
     <Tabs defaultValue="team">

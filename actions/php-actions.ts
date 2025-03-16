@@ -228,6 +228,11 @@ export const getFixtureStats = async (fixId: string): Promise<FixtureData> => {
     const res = await axios.get(
       `https://apis.tisini.co.ke/apiagent7.php?event=${fixId}`
     );
+    // const res = await axios.post(`${baseURL}`, {
+    //   action: "teamdata",
+    //   fixture: fixId,
+    //   gettoken: token,
+    // });
 
     if (res.status === 200) {
       console.log("server", res.data);
@@ -259,6 +264,11 @@ export const getPlayersData = async (
 
     if (res.status === 200) {
       console.log("server", res.data);
+      if (res.data.error === "1") {
+        throw new Error(
+          res.data.message || "The fixture has not been paid for"
+        );
+      }
       return res.data;
     } else {
       throw new Error(`Failed to fixture stats: ${res.status}`);

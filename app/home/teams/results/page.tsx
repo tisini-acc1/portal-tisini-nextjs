@@ -16,7 +16,7 @@ const ResultsPage = () => {
     (state) => state
   );
 
-  const { data, isError, isLoading } = useQuery({
+  const { data, isError, isLoading, error } = useQuery({
     queryKey: ["teamTournaments", store.team.id],
     queryFn: () => getTeamTournaments(store.team.id),
   });
@@ -50,13 +50,13 @@ const ResultsPage = () => {
   }, [data, store.tournament, store.serie]);
 
   // console.log(data);
-  // console.log(fixtures);
   // console.log(store.fixture);
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   if (isError) {
+    console.log("resultsError: ", error);
     return <div>Error loading tournaments</div>;
   }
 
