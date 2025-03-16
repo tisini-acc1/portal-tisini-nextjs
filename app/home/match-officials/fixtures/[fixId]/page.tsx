@@ -1,4 +1,5 @@
 import { getTeamLineup } from "@/actions/php-actions";
+import FixtureData from "@/components/match-officials/fixtures/fixture-data";
 import VerifyPlayerCard from "@/components/match-officials/verify-player-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
@@ -68,7 +69,9 @@ const LineupPage = async ({ params }: LineupProps) => {
           <Lineups data={aData} />
         </TabsContent>
 
-        <TabsContent value="data">Match Data</TabsContent>
+        <TabsContent value="data">
+          <FixtureData />
+        </TabsContent>
       </Tabs>
     </main>
   );
