@@ -5,13 +5,13 @@ import { useState } from "react";
 import { EyeIcon } from "lucide-react";
 
 import { useStore } from "@/lib/store";
-import { Button } from "@/components/ui/button";
+import FixCommentModal from "./fix-comment-modal";
 
 const RefFixtureDetails = () => {
   const { store } = useStore((state) => state);
 
   return (
-    <section className="bg-gray-100 p-2 md:p-4 space-y-6 font-mono">
+    <section className="bg-gray-100 p-2 md:p-4 space-y-6 font-mono rounded-md">
       <div className="space-y-2">
         <strong>Match Officials</strong>
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
@@ -28,12 +28,16 @@ const RefFixtureDetails = () => {
         <div className="flex flex-col md:flex-row gap-4 p-2 border bg-gray-50">
           <p className="lg:w-1/2">
             <strong>Weather:</strong>{" "}
-            <span className="text-muted-foreground">Sunny</span>
+            <span className="text-muted-foreground text-xs md:text-sm">
+              Sunny
+            </span>
           </p>
 
           <p>
             <strong>Pitch:</strong>{" "}
-            <span className="text-muted-foreground">Good</span>
+            <span className="text-muted-foreground text-xs md:text-sm">
+              Good
+            </span>
           </p>
         </div>
       </div>
@@ -42,11 +46,11 @@ const RefFixtureDetails = () => {
         <div className="flex justify-between items-center">
           <strong>Match Comments</strong>
 
-          <Button size={"sm"}>Comment</Button>
+          <FixCommentModal />
         </div>
 
         <div className="border p-2 bg-gray-50">
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-xs md:text-sm">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae
             eligendi quos hic doloribus at quis nihil rerum maxime praesentium,
             fugiat quisquam soluta ullam, libero officiis consectetur tempora

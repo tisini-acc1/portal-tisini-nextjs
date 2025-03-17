@@ -23,7 +23,7 @@ const OfficialsFixturesPage = () => {
     return <div>Error loading tournaments. Please try again later.</div>;
   }
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <main>

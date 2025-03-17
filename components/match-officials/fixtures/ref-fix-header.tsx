@@ -3,7 +3,6 @@
 import Image from "next/image";
 
 import { useStore } from "@/lib/store";
-
 const RefFixHeader = () => {
   const { store } = useStore((state) => state);
 

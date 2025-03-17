@@ -1,13 +1,59 @@
-import { Volleyball } from "lucide-react";
-import FixtureDataMenu from "./fixture-data-menu";
+"use client";
 
-const FixtureData = () => {
+import { Volleyball } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+
+import { useStore } from "@/lib/store";
+import AddFixtureData from "./add-fixture-data";
+import { getFixType, getOfficialsEvents } from "@/actions/php-actions";
+
+type Props = {
+  home: Lineup[];
+  away: Lineup[];
+};
+
+const FixtureData = ({ home, away }: Props) => {
+  const { store } = useStore((state) => state);
+
+  const { data: fixTypes } = useQuery({
+    queryKey: ["fixTypes"],
+    queryFn: getFixType,
+  });
+
+  const selectedFixType = fixTypes?.find(
+    (type) => type.type_code === store.refFix.fixture_type
+  );
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["refEvents", selectedFixType?.id],
+    queryFn: () =>
+      selectedFixType
+        ? getOfficialsEvents(selectedFixType.id)
+        : Promise.resolve({} as RefEventData),
+    enabled: !!selectedFixType,
+  });
+
+  if (isLoading || !data) {
+    return <div>Loading...</div>;
+  }
+
+  // console.log(selectedFixType);
+  // console.log(store.refFix.fixture_type);
+  console.log(data);
+
   return (
     <section className="h-[450px] w-full space-y-6 bg-gray-100 p-3 rounded-md relative">
-      <div></div>
+      <div>
+        <AddFixtureData
+          homeP={home}
+          awayP={away}
+          refEvents={data?.refevent as RefEvent[]}
+          fixType={selectedFixType?.id as string}
+        />
+      </div>
 
       <div className="absolute bottom-0 right-0">
-        <FixtureDataMenu />
+        {/* <FixtureDataMenu /> */}
       </div>
     </section>
   );

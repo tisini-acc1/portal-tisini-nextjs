@@ -11,10 +11,17 @@ import { MoreVerticalIcon } from "lucide-react";
 import AddFixtureData from "./add-fixture-data";
 import VerifyFixtureData from "./verify-fixture-data";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getOfficialsEvents } from "@/actions/php-actions";
 
 const FixtureDataMenu = () => {
   const [openAdd, setOpenAdd] = useState(false);
   const [openVerify, setOpenVerify] = useState(false);
+
+  const { data } = useQuery({
+    queryKey: ["refEvents"],
+    queryFn: () => getOfficialsEvents(),
+  });
 
   return (
     <>
@@ -35,7 +42,11 @@ const FixtureDataMenu = () => {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <AddFixtureData open={openAdd} setOpen={setOpenAdd} />
+      <AddFixtureData
+      // open={openAdd}
+      // setOpen={setOpenAdd}
+      // refEvents={data as RefEvents[]}
+      />
       <VerifyFixtureData open={openVerify} setOpen={setOpenVerify} />
     </>
   );

@@ -1,10 +1,9 @@
-import { getOfficialsEvents, getTeamLineup } from "@/actions/php-actions";
+import { getTeamLineup } from "@/actions/php-actions";
 import FixtureData from "@/components/match-officials/fixtures/fixture-data";
-import RefFixtureDetails from "@/components/match-officials/fixtures/ref-fix-details";
-import RefFixHeader from "@/components/match-officials/fixtures/ref-fix-header";
 import VerifyPlayerCard from "@/components/match-officials/verify-player-card";
+import RefFixHeader from "@/components/match-officials/fixtures/ref-fix-header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Image from "next/image";
+import RefFixtureDetails from "@/components/match-officials/fixtures/ref-fix-details";
 
 type LineupProps = {
   params: Promise<{ fixId: string }>;
@@ -17,11 +16,11 @@ const LineupPage = async ({ params }: LineupProps) => {
 
   const hData = await getTeamLineup(fixture[0], fixture[1]);
   const aData = await getTeamLineup(fixture[0], fixture[2]);
-  const refEvents = await getOfficialsEvents();
+  // const refEvents = await getOfficialsEvents();
 
   // console.log(hData);
   // console.log(aData);
-  console.log(refEvents);
+  // console.log(refEvents);
 
   return (
     <main>
@@ -50,7 +49,7 @@ const LineupPage = async ({ params }: LineupProps) => {
         </TabsContent>
 
         <TabsContent value="data">
-          <FixtureData />
+          <FixtureData home={hData} away={aData} />
         </TabsContent>
       </Tabs>
     </main>

@@ -103,6 +103,31 @@ export const createFixture = async (data: CreateFix) => {
   }
 };
 
+// Create Fixture Event by Ref
+export const createFixtureEvent = async (data: CreateFixEvent) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      ...data,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to create fixture event: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while creating fixture event."
+    );
+  }
+};
+
 // Create Fixtures
 export const getUserTeams = async (): Promise<Team[]> => {
   const token = await getToken();
@@ -476,7 +501,7 @@ export const getOfficials = async (): Promise<Official[]> => {
   }
 };
 
-export const getOfficialsEvents = async () => {
+export const getOfficialsEvents = async (id: string): Promise<RefEventData> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
 
@@ -484,7 +509,7 @@ export const getOfficialsEvents = async () => {
     const res = await axios.post(`${baseURL}`, {
       gettoken: token,
       action: "refevent",
-      fixtype: "5",
+      fixtype: id,
     });
 
     if (res.status === 200) {
