@@ -184,14 +184,19 @@ export const footballAttack = (home: Stats, away: Stats) => {
   return attack;
 };
 
-export const footballDiscipline = (fouls: Fouls, cards: Cards) => {
+export const footballDiscipline = (home: Stats, away: Stats) => {
   const discipline = {} as FootballDiscipline;
 
   discipline["fouls"] = {
-    home: fouls.Homecommitted,
-    away: fouls.Awaycommitted,
+    home: getSubEvent(home, "11", "74"),
+    away: getSubEvent(away, "11", "74"),
   };
-  discipline["cards"] = cards;
+  discipline["cards"] = {
+    Homeyellow: getSubEvent(home, "5", "21"),
+    Homered: getSubEvent(home, "5", "22"),
+    Awayyellow: getSubEvent(away, "5", "21"),
+    Awayred: getSubEvent(away, "5", "22"),
+  };
 
   return discipline;
 };

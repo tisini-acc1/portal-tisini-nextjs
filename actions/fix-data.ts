@@ -40,14 +40,12 @@ export const footballData = (data: FixtureData) => {
   const scores = data["scores"];
   const home = data["home"];
   const away = data["away"];
-  const fouls = data["fouls"];
-  const cards = data["cards"];
 
   const footballData = {} as FootballData;
 
   footballData["details"] = footballDetails(home, away, details, scores);
   footballData["attack"] = footballAttack(home, away);
-  footballData["discipline"] = footballDiscipline(fouls, cards);
+  footballData["discipline"] = footballDiscipline(home, away);
   footballData["passing"] = footballPassing(home, away);
   footballData["duels"] = footballDuels(home, away);
   footballData["defense"] = footballDefense(home, away);

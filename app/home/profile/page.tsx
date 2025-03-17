@@ -5,8 +5,6 @@ import ProfileCert from "@/components/profile/profile-cert";
 import ImageAvatar from "@/components/profile/image-avatar";
 import ProfileImage from "@/components/profile/profile-image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useQuery } from "@tanstack/react-query";
-import { getCertification, getTournaments } from "@/actions/php-actions";
 
 const ProfilePage = () => {
   return (

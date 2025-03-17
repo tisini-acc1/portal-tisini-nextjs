@@ -1,16 +1,5 @@
 "use client";
 
-import React, { useState } from "react";
-
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
 import Image from "next/image";
 import UploadCertModal from "./upload-cert-modal";
 import { useQuery } from "@tanstack/react-query";

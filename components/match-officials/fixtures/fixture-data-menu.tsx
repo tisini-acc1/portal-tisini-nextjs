@@ -8,20 +8,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MoreVerticalIcon } from "lucide-react";
-import AddFixtureData from "./add-fixture-data";
 import VerifyFixtureData from "./verify-fixture-data";
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { getOfficialsEvents } from "@/actions/php-actions";
 
 const FixtureDataMenu = () => {
   const [openAdd, setOpenAdd] = useState(false);
   const [openVerify, setOpenVerify] = useState(false);
 
-  const { data } = useQuery({
-    queryKey: ["refEvents"],
-    queryFn: () => getOfficialsEvents(),
-  });
+  console.log(openAdd);
 
   return (
     <>
@@ -42,11 +36,7 @@ const FixtureDataMenu = () => {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <AddFixtureData
-      // open={openAdd}
-      // setOpen={setOpenAdd}
-      // refEvents={data as RefEvents[]}
-      />
+      {/* <AddFixtureData /> */}
       <VerifyFixtureData open={openVerify} setOpen={setOpenVerify} />
     </>
   );

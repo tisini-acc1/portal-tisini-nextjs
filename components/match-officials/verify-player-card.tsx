@@ -18,7 +18,7 @@ const VerifyPlayerCard = ({ player }: { player: Lineup }) => {
       setIsLoading(true);
 
       const res = await verifyPlayer(id);
-
+      console.log(res);
       toast({
         title: "Success",
         description: `${player.pname} verified successfully`,

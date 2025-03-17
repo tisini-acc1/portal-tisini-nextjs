@@ -30,7 +30,7 @@ const BasketballTeamStats = ({ data }: { data: FixtureData }) => {
   );
 };
 
-const basketballData = (data: FixtureData) => {
+export const basketballData = (data: FixtureData) => {
   const details = data.fixture[0];
 
   const hPass = getEvent(data.home, "182");

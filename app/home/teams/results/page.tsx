@@ -5,10 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 
 import { useStore } from "@/lib/store";
 import { getTeamTournaments } from "@/actions/php-actions";
-import TeamResults from "@/components/teams/results/team-results";
 import ResultsHeader from "@/components/teams/results/results-header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { PlusCircle } from "lucide-react";
 import { formattedDate } from "@/components/teams/fixtures/team-fixtures";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";

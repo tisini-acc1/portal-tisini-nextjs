@@ -4,11 +4,11 @@ import Image from "next/image";
 import { useState } from "react";
 import { EyeIcon } from "lucide-react";
 
-import { useStore } from "@/lib/store";
+// import { useStore } from "@/lib/store";
 import FixCommentModal from "./fix-comment-modal";
 
 const RefFixtureDetails = () => {
-  const { store } = useStore((state) => state);
+  // const { store } = useStore((state) => state);
 
   return (
     <section className="bg-gray-100 p-2 md:p-4 space-y-6 font-mono rounded-md">
