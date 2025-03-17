@@ -38,6 +38,7 @@ type TeamFixture = {
   game_date: string;
   game_status: string;
   total: number;
+  pay_status: number;
 };
 
 type TeamPlayer = {

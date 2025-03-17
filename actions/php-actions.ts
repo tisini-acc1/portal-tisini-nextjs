@@ -628,6 +628,29 @@ export const getFixType = async (): Promise<FixtureType[]> => {
   }
 };
 
+export const getFixRefEvents = async (id: string) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "refevents",
+      fixture: id,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fetch fixture types: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error.message || "An error occurred while fixture types.");
+  }
+};
+
 export const verifyPlayer = async (id: string) => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;

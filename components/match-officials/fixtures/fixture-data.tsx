@@ -5,7 +5,11 @@ import { useQuery } from "@tanstack/react-query";
 
 import { useStore } from "@/lib/store";
 import AddFixtureData from "./add-fixture-data";
-import { getFixType, getOfficialsEvents } from "@/actions/php-actions";
+import {
+  getFixRefEvents,
+  getFixType,
+  getOfficialsEvents,
+} from "@/actions/php-actions";
 
 type Props = {
   home: Lineup[];
@@ -33,16 +37,21 @@ const FixtureData = ({ home, away }: Props) => {
     enabled: !!selectedFixType,
   });
 
+  const { data: fixEvents } = useQuery({
+    queryKey: ["refFixEvents", store.refFix.id],
+    queryFn: () => getFixRefEvents(store.refFix.id),
+  });
+
   if (isLoading || !data) {
     return <div>Loading...</div>;
   }
 
   // console.log(selectedFixType);
   // console.log(store.refFix.fixture_type);
-  console.log(data);
+  console.log(fixEvents.events.length);
 
   return (
-    <section className="h-[450px] w-full space-y-6 bg-gray-100 p-3 rounded-md relative">
+    <section className="h-[450px] w-full space-y-6 bg-gray-100 p-3 rounded-md">
       <div>
         <AddFixtureData
           homeP={home}
@@ -52,8 +61,9 @@ const FixtureData = ({ home, away }: Props) => {
         />
       </div>
 
-      <div className="absolute bottom-0 right-0">
+      <div className="">
         {/* <FixtureDataMenu /> */}
+        {fixEvents.events.length}
       </div>
     </section>
   );

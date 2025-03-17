@@ -137,6 +137,6 @@ const TeamFixtures = () => {
 
 export default TeamFixtures;
 
-const formattedDate = (dateString: string) => {
+export const formattedDate = (dateString: string) => {
   return format(new Date(dateString), "MMMM dd, yyyy");
 };
