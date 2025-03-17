@@ -124,7 +124,7 @@ const ResultsPage = () => {
                     size={"sm"}
                     className={"bg-green-600"}
                     onClick={() =>
-                      router.push(`/home/teams/results/${fixture.id}`)
+                      router.push("/home/teams/results/single-result")
                     }
                   >
                     view

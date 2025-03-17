@@ -9,6 +9,7 @@ import { getFixtureStats, getPlayersData } from "@/actions/php-actions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import BasketballPlayerStats from "./players/basketball-player";
 import { useToast } from "@/hooks/use-toast";
+import Image from "next/image";
 
 const TeamResults = () => {
   const { store } = useStore((state) => state);
@@ -63,10 +64,46 @@ const TeamResults = () => {
 
   return (
     <Tabs defaultValue="team">
-      <TabsList>
-        <TabsTrigger value="team">Team Stats</TabsTrigger>
-        <TabsTrigger value="player">Player Stats</TabsTrigger>
-      </TabsList>
+      <header className="h-32 bg-header rounded-md">
+        <div className="h-24 flex items-center text-white font-bold font-mono">
+          <div className="w-2/5 flex items-center justify-end">
+            <div className="text-xs md:text-2xl text-right">{"team1_name"}</div>
+            <div>
+              <Image
+                src="/homeLogo.png"
+                alt="teamName"
+                width={90}
+                height={90}
+                className="object-contain"
+              />
+            </div>
+          </div>
+          <div className="w-1/5 flex items-center justify-center font-bold md:text-2xl text-xl">
+            VS
+          </div>
+          <div className="w-2/5 flex items-center justify-start">
+            <div>
+              <Image
+                src="/awayLogo.png"
+                alt="teamName"
+                width={90}
+                height={90}
+                className="object-contain"
+              />
+            </div>
+            <div className="text-xs md:text-2xl">team2_name</div>
+          </div>
+        </div>
+
+        <div className="flex justify-between items-center bg-slate-50 rounded-md">
+          <TabsList className="text-sm">
+            <TabsTrigger value="details">Team</TabsTrigger>
+            <TabsTrigger value="home">Player</TabsTrigger>
+          </TabsList>
+
+          <div>filter component</div>
+        </div>
+      </header>
 
       <TabsContent value="team">
         <TeamStats data={fixtureData as FixtureData} />

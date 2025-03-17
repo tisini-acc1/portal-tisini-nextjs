@@ -651,6 +651,55 @@ export const getFixRefEvents = async (id: string) => {
   }
 };
 
+export const getCertification = async (
+  id: string
+): Promise<Certification[]> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "certification",
+      fixtype: id,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fetch fixture types: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error.message || "An error occurred while fixture types.");
+  }
+};
+
+export const getUserCerts = async (): Promise<UserCert[]> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "usercertification",
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fetch user certs: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while fetching user certs."
+    );
+  }
+};
+
 export const verifyPlayer = async (id: string) => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
@@ -704,6 +753,38 @@ export const uploadPhotoUrl = async ({
     console.log(error);
     throw new Error(
       error.message || "An error occurred while uploading player url."
+    );
+  }
+};
+
+export const uploadCertUrl = async ({
+  url,
+  id,
+}: {
+  url: string;
+  id: string;
+}): Promise<any> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "createcertificate",
+      documenturl: url,
+      certificate: id,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to upload player cert: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while uploading player cert."
     );
   }
 };

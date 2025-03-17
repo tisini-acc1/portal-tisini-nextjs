@@ -12,65 +12,51 @@ import {
   SelectValue,
 } from "../ui/select";
 import Image from "next/image";
+import UploadCertModal from "./upload-cert-modal";
+import { useQuery } from "@tanstack/react-query";
+import { getCertification, getUserCerts } from "@/actions/php-actions";
 
 const ProfileCert = () => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const { data, isLoading } = useQuery({
+    queryKey: ["certifications"],
+    queryFn: () => getCertification("1"),
+  });
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
+  const { data: userCerts } = useQuery({
+    queryKey: ["userCertifications"],
+    queryFn: () => getUserCerts(),
+  });
 
-    const file = e.target.files?.[0];
-    if (file) {
-      setSelectedFile(file);
-    }
-  };
+  console.log(userCerts);
 
-  const handleSubmit = () => {
-    console.log("first");
-  };
+  if (isLoading || !data || !userCerts) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <section className="p-5 pt-6 grid grid-cols-1 gap-10">
-      <div className="h-80 border rounded-md flex items-center justify-center">
-        {selectedFile && (
-          <Image
-            src={URL.createObjectURL(selectedFile)}
-            alt="Selected file preview"
-            width={300}
-            height={300}
-            className="object-contain"
-          />
-        )}
+    <section className="">
+      <div className="flex justify-end">
+        <UploadCertModal certs={data as Certification[]} />
       </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col w-full gap-8">
-        <Input type="hidden" name="userId" value={""} />
-
-        <Select defaultValue="level1">
-          <SelectTrigger>
-            <SelectValue placeholder="level 1" />
-          </SelectTrigger>
-
-          <SelectContent>
-            <SelectItem value="level1">Level 1</SelectItem>
-            <SelectItem value="level2">Level 2</SelectItem>
-            <SelectItem value="level3">Level 3</SelectItem>
-            <SelectItem value="level4">Level 4</SelectItem>
-            <SelectItem value="level5">Level 5</SelectItem>
-            <SelectItem value="level6">Level 6</SelectItem>
-          </SelectContent>
-        </Select>
-
-        <div className="flex w-full">
-          <Input
-            id="picture"
-            type="file"
-            name="file"
-            onChange={handleFileChange}
-          />
-          <Button type="submit">Upload</Button>
-        </div>
-      </form>
+      <div>
+        {userCerts.map((cert) => (
+          <div key={cert.id} className="flex items-center">
+            <div className="h-64 w-3/4">
+              <Image
+                src={cert.certdocument}
+                alt={"name"}
+                width={150}
+                height={150}
+                className={
+                  "h-full w-full object-cover transition-all hover:scale-105 aspect-square"
+                }
+              />
+            </div>
+            {cert.certificate}
+          </div>
+        ))}
+      </div>
     </section>
   );
 };

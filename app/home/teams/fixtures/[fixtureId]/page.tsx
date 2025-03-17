@@ -8,7 +8,9 @@ const PopulateLineupPage = async ({ params }: LineupProps) => {
   const { fixtureId } = await params;
 
   const fixType = fixtureId.split("-")[1];
-  console.log(fixType);
+
+  // console.log(fixType);
+
   return <Lineups type={fixType} />;
 };
 
