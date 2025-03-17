@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useStore } from "@/lib/store";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { useRouter } from "next/navigation";
@@ -37,7 +38,9 @@ export const columns: ColumnDef<RefreeFix>[] = [
     header: "Round",
   },
   {
-    accessorKey: "line ups",
+    // accessorKey: "action",
+    id: "action",
+    enableHiding: true,
     cell: ({ row }) => {
       const fixture = row.original;
 
@@ -48,26 +51,21 @@ export const columns: ColumnDef<RefreeFix>[] = [
 
 const NavigateButtons = ({ fixture }: { fixture: RefreeFix }) => {
   const router = useRouter();
+  const { updateRefFixture } = useStore((state) => state);
 
   return (
     <div className="flex gap-2">
       <Button
-        variant={"link"}
-        onClick={() =>
+        size={"sm"}
+        variant={"outline"}
+        onClick={() => {
+          updateRefFixture(fixture);
           router.push(
             `/home/match-officials/fixtures/${fixture.id}-${fixture.team1_id}-${fixture.team2_id}`
-          )
-        }
+          );
+        }}
       >
         More
-      </Button>
-      <Button
-        variant={"link"}
-        onClick={() =>
-          router.push(`/home/match-officials/${fixture.id}-${fixture.team2_id}`)
-        }
-      >
-        Away
       </Button>
     </div>
   );

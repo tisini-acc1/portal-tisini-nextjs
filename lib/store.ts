@@ -23,6 +23,7 @@ export type Store = {
   tournament: string;
   officials: Official[];
   overview: TeamOverview;
+  refFix: RefreeFix;
 };
 
 export type State = {
@@ -38,6 +39,7 @@ export type Actions = {
   updateOfficials: (officials: Official[]) => void;
   updateBalance: (balance: number) => void;
   updateOverview: (overview: TeamOverview) => void;
+  updateRefFixture: (fixture: RefreeFix) => void;
 };
 
 const initialState: Store = {
@@ -59,6 +61,7 @@ const initialState: Store = {
     ongoing_matches: [],
     recent_form: [],
   },
+  refFix: {} as RefreeFix,
 };
 
 export const useStore = create<State & Actions>()(
@@ -96,6 +99,10 @@ export const useStore = create<State & Actions>()(
       updateOverview: (overview: TeamOverview) =>
         set((state) => ({
           store: { ...state.store, overview: overview },
+        })),
+      updateRefFixture: (fixture: RefreeFix) =>
+        set((state) => ({
+          store: { ...state.store, refFix: fixture },
         })),
     }),
     { name: "store" }

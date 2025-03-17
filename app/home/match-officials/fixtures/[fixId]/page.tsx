@@ -1,5 +1,7 @@
-import { getTeamLineup } from "@/actions/php-actions";
+import { getOfficialsEvents, getTeamLineup } from "@/actions/php-actions";
 import FixtureData from "@/components/match-officials/fixtures/fixture-data";
+import RefFixtureDetails from "@/components/match-officials/fixtures/ref-fix-details";
+import RefFixHeader from "@/components/match-officials/fixtures/ref-fix-header";
 import VerifyPlayerCard from "@/components/match-officials/verify-player-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
@@ -15,51 +17,29 @@ const LineupPage = async ({ params }: LineupProps) => {
 
   const hData = await getTeamLineup(fixture[0], fixture[1]);
   const aData = await getTeamLineup(fixture[0], fixture[2]);
+  const refEvents = await getOfficialsEvents();
 
-  console.log(hData);
-  console.log(aData);
+  // console.log(hData);
+  // console.log(aData);
+  console.log(refEvents);
+
   return (
     <main>
-      <Tabs defaultValue="home">
+      <Tabs defaultValue="details">
         <header className="h-32 bg-header rounded-md">
-          <div className="h-24 flex items-center text-white font-bold font-mono">
-            <div className="w-2/5 flex items-center justify-end">
-              <div className="text-xs md:text-2xl text-right">
-                Kakamega Homeboyz
-              </div>
-              <div>
-                <Image
-                  src="/homeLogo.png"
-                  alt="teamName"
-                  width={90}
-                  height={90}
-                  className="object-contain"
-                />
-              </div>
-            </div>
-            <div className="w-1/5 flex items-center justify-center font-bold md:text-2xl text-xl">
-              VS
-            </div>
-            <div className="w-2/5 flex items-center justify-start">
-              <div>
-                <Image
-                  src="/awayLogo.png"
-                  alt="teamName"
-                  width={90}
-                  height={90}
-                  className="object-contain"
-                />
-              </div>
-              <div className="text-xs md:text-2xl">Manchester United</div>
-            </div>
-          </div>
+          <RefFixHeader />
 
-          <TabsList className="w-full">
-            <TabsTrigger value="home">Home Line Up</TabsTrigger>
-            <TabsTrigger value="away">Away Line Up</TabsTrigger>
+          <TabsList className="w-full text-sm">
+            <TabsTrigger value="details">Info</TabsTrigger>
+            <TabsTrigger value="home">Home Lineup</TabsTrigger>
+            <TabsTrigger value="away">Away Lineup</TabsTrigger>
             <TabsTrigger value="data">Match Data</TabsTrigger>
           </TabsList>
         </header>
+
+        <TabsContent value={"details"}>
+          <RefFixtureDetails />
+        </TabsContent>
 
         <TabsContent value={"home"}>
           <Lineups data={hData} />
@@ -80,6 +60,13 @@ const LineupPage = async ({ params }: LineupProps) => {
 const Lineups = ({ data }: { data: Lineup[] }) => {
   // const first11 = data?.filter((item) => item.player_type === "first11");
   // const subs = data?.filter((item) => item.player_type === "sub");
+  if (data.length === 0) {
+    return (
+      <section className="h-[450px] bg-gray-100 flex items-center justify-center text-2xl rounded-md">
+        No data!
+      </section>
+    );
+  }
 
   return (
     <section className="space-y-6 bg-gray-100 p-3 rounded-md">

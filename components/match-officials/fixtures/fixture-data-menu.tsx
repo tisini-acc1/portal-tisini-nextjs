@@ -25,7 +25,7 @@ const FixtureDataMenu = () => {
           </Button>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent>
+        <DropdownMenuContent align="end">
           <DropdownMenuItem onClick={() => setOpenVerify(true)}>
             Verify
           </DropdownMenuItem>
