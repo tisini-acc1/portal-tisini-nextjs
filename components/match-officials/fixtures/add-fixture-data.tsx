@@ -156,7 +156,7 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Populate another event</DialogTitle>
+          <DialogTitle>Add match event</DialogTitle>
         </DialogHeader>
 
         <Form {...form}>
@@ -173,7 +173,7 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Goal" />
+                        <SelectValue placeholder="select event" />
                       </SelectTrigger>
                     </FormControl>
 
@@ -204,7 +204,7 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="open play" />
+                          <SelectValue placeholder="select subevent" />
                         </SelectTrigger>
                       </FormControl>
 
@@ -233,7 +233,7 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Kenya United" />
+                        <SelectValue placeholder="select team" />
                       </SelectTrigger>
                     </FormControl>
 
@@ -263,7 +263,7 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="John Doe" />
+                        <SelectValue placeholder="select player" />
                       </SelectTrigger>
                     </FormControl>
 
@@ -295,7 +295,7 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Jane Doe" />
+                          <SelectValue placeholder="select player" />
                         </SelectTrigger>
                       </FormControl>
 

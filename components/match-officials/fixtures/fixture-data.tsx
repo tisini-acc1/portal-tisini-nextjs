@@ -10,6 +10,7 @@ import {
   getFixType,
   getOfficialsEvents,
 } from "@/actions/php-actions";
+import VerifyFixtureData from "./verify-fixture-data";
 
 type Props = {
   home: Lineup[];
@@ -53,7 +54,8 @@ const FixtureData = ({ home, away, homeId }: Props) => {
 
   return (
     <section className="h-[450px] w-full space-y-6 bg-gray-100 p-3 rounded-md">
-      <div>
+      <div className="flex justify-end gap-4">
+        <VerifyFixtureData />
         <AddFixtureData
           homeP={home}
           awayP={away}

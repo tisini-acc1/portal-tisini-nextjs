@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MoreVerticalIcon } from "lucide-react";
-import VerifyFixtureData from "./verify-fixture-data";
+// import VerifyFixtureData from "./verify-fixture-data";
 import { useState } from "react";
 
 const FixtureDataMenu = () => {
@@ -16,6 +16,7 @@ const FixtureDataMenu = () => {
   const [openVerify, setOpenVerify] = useState(false);
 
   console.log(openAdd);
+  console.log(openVerify);
 
   return (
     <>
@@ -37,7 +38,7 @@ const FixtureDataMenu = () => {
       </DropdownMenu>
 
       {/* <AddFixtureData /> */}
-      <VerifyFixtureData open={openVerify} setOpen={setOpenVerify} />
+      {/* <VerifyFixtureData open={openVerify} setOpen={setOpenVerify} /> */}
     </>
   );
 };

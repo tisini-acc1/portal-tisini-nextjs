@@ -3,7 +3,6 @@
 import ProfileBio from "@/components/profile/profile-bio";
 import ProfileCert from "@/components/profile/profile-cert";
 import ImageAvatar from "@/components/profile/image-avatar";
-import ProfileImage from "@/components/profile/profile-image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const ProfilePage = () => {

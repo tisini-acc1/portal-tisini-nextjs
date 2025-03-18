@@ -118,14 +118,7 @@ const AddFixtureOfficialModal = ({ fixId, open, setOpen }: AddProps) => {
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue
-                            placeholder={
-                              store?.officials
-                                ? `${store.officials[0].first_name}
-                              ${store.officials[0].last_name}`
-                                : "select official"
-                            }
-                          />
+                          <SelectValue placeholder={"select referee"} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -154,14 +147,7 @@ const AddFixtureOfficialModal = ({ fixId, open, setOpen }: AddProps) => {
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue
-                            placeholder={
-                              store?.officials
-                                ? `${store.officials[0].first_name}
-                              ${store.officials[0].last_name}`
-                                : "Select offcial"
-                            }
-                          />
+                          <SelectValue placeholder={"select offcial"} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -190,14 +176,7 @@ const AddFixtureOfficialModal = ({ fixId, open, setOpen }: AddProps) => {
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue
-                            placeholder={
-                              store?.officials
-                                ? `${store.officials[0].first_name}
-                              ${store.officials[0].last_name}`
-                                : "Select ref"
-                            }
-                          />
+                          <SelectValue placeholder={"select official"} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -226,14 +205,7 @@ const AddFixtureOfficialModal = ({ fixId, open, setOpen }: AddProps) => {
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue
-                            placeholder={
-                              store?.officials
-                                ? `${store.officials[0].first_name}
-                              ${store.officials[0].last_name}`
-                                : "Select refs"
-                            }
-                          />
+                          <SelectValue placeholder={"select official"} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>

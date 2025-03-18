@@ -87,7 +87,6 @@ const FixCommentModal = ({ wCond, pCond }: CommentProps) => {
       pitchcondition: values.pitch,
     };
 
-    console.log(values);
     mutation.mutate(data);
   };
 
@@ -99,7 +98,9 @@ const FixCommentModal = ({ wCond, pCond }: CommentProps) => {
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Populate Match Details and Comment</DialogTitle>
+          <DialogTitle>
+            Add match conditions and comment about the match
+          </DialogTitle>
         </DialogHeader>
 
         <Form {...form}>

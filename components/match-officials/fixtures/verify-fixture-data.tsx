@@ -11,20 +11,20 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 
-type Props = {
-  open: boolean;
-  setOpen: (v: boolean) => void;
-};
+// type Props = {
+//   open: boolean;
+//   setOpen: (v: boolean) => void;
+// };
 
-const VerifyFixtureData = ({ open, setOpen }: Props) => {
-  const onOpenChangeWrapper = (value: boolean) => {
-    setOpen(value);
-  };
+const VerifyFixtureData = () => {
+  // const onOpenChangeWrapper = (value: boolean) => {
+  //   setOpen(value);
+  // };
 
   return (
-    <AlertDialog open={open} onOpenChange={onOpenChangeWrapper}>
+    <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button className="hidden">Verify</Button>
+        <Button>Verify</Button>
       </AlertDialogTrigger>
 
       <AlertDialogContent>
@@ -36,12 +36,8 @@ const VerifyFixtureData = ({ open, setOpen }: Props) => {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel onClick={() => setOpen(false)}>
-            Cancel
-          </AlertDialogCancel>
-          <AlertDialogAction onClick={() => setOpen(false)}>
-            Continue
-          </AlertDialogAction>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction>Continue</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
