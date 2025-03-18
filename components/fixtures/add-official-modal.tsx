@@ -38,23 +38,23 @@ type AddProps = {
 };
 
 const officialSchema = z.object({
-  refree: z.string().min(1, { message: "Provide center refree" }),
-  assRefree1: z.string().min(1, { message: "Provide assistant refree 1" }),
-  assRefree2: z.string().min(1, { message: "Provide assistant refree 2" }),
-  reserve: z.string().min(1, { message: "Provide reserve refree" }),
+  referee: z.string().min(1, { message: "Provide center referee" }),
+  assreferee1: z.string(),
+  assreferee2: z.string(),
+  reserve: z.string(),
 });
 
 const AddFixtureOfficialModal = ({ fixId, open, setOpen }: AddProps) => {
   const { toast } = useToast();
   //   const [open, setOpen] = useState(false);
   const { store } = useStore((state) => state);
-
+  console.log(store.officials);
   const form = useForm<z.infer<typeof officialSchema>>({
     resolver: zodResolver(officialSchema),
     defaultValues: {
-      refree: "",
-      assRefree1: "",
-      assRefree2: "",
+      referee: "",
+      assreferee1: "",
+      assreferee2: "",
       reserve: "",
     },
   });
@@ -62,14 +62,14 @@ const AddFixtureOfficialModal = ({ fixId, open, setOpen }: AddProps) => {
   const onSubmit = async (values: z.infer<typeof officialSchema>) => {
     const refs = {
       fixture: fixId,
-      ref1: values.refree,
-      ref2: values.assRefree1,
-      ref3: values.assRefree2,
-      ref4: values.reserve,
+      ref1: values.referee,
+      ref2: values.assreferee1 || 0,
+      ref3: values.assreferee2 || 0,
+      ref4: values.reserve || 0,
     };
 
     const res = await updateFixOfficial(refs);
-
+    console.log(res);
     if (res.error === "0") {
       setOpen(false);
       // queryClient.invalidateQueries({ queryKey: ["allPlayers"] });
@@ -101,166 +101,170 @@ const AddFixtureOfficialModal = ({ fixId, open, setOpen }: AddProps) => {
           You are about to add Match Officials
         </DialogDescription>
 
-        <Form {...form}>
-          <form className="space-y-4">
-            <FormField
-              control={form.control}
-              name="refree"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Center Refree</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue
-                          placeholder={
-                            store.officials
-                              ? `${store.officials[0].first_name}
+        {store.officials.length <= 0 ? (
+          <div>No officials</div>
+        ) : (
+          <Form {...form}>
+            <form className="space-y-4">
+              <FormField
+                control={form.control}
+                name="referee"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Center referee</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue
+                            placeholder={
+                              store?.officials
+                                ? `${store.officials[0].first_name}
                               ${store.officials[0].last_name}`
-                              : "No teams"
-                          }
-                        />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {store?.officials.map((official) => (
-                        <SelectItem key={official.id} value={official.id}>
-                          {official.first_name} {official.last_name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                                : "select official"
+                            }
+                          />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {store?.officials.map((official) => (
+                          <SelectItem key={official.id} value={official.id}>
+                            {official.first_name} {official.last_name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="assRefree1"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Assistant refree 1</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue
-                          placeholder={
-                            store.officials
-                              ? `${store.officials[0].first_name}
-                              ${store.officials[0].last_name}`
-                              : "No teams"
-                          }
-                        />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {store?.officials.map((official) => (
-                        <SelectItem key={official.id} value={official.id}>
-                          {official.first_name} {official.last_name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="assRefree2"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Assistant refree 2</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue
-                          placeholder={
-                            store.officials
-                              ? `${store.officials[0].first_name}
-                              ${store.officials[0].last_name}`
-                              : "No teams"
-                          }
-                        />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {store?.officials.map((official) => (
-                        <SelectItem key={official.id} value={official.id}>
-                          {official.first_name} {official.last_name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="reserve"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Reserve refree</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue
-                          placeholder={
-                            store.officials
-                              ? `${store.officials[0].first_name}
-                              ${store.officials[0].last_name}`
-                              : "No teams"
-                          }
-                        />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {store?.officials.map((official) => (
-                        <SelectItem key={official.id} value={official.id}>
-                          {official.first_name} {official.last_name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <DialogFooter className="p-0">
-              <Button
-                className="w-full"
-                onClick={form.handleSubmit(onSubmit)}
-                disabled={form.formState.isSubmitting}
-              >
-                Add Officials{" "}
-                {form.formState.isSubmitting && (
-                  <RotateCcw className="ml-2 h-4 w-4 animate-spin" />
+                    <FormMessage />
+                  </FormItem>
                 )}
-              </Button>
-            </DialogFooter>
-          </form>
-        </Form>
+              />
+
+              <FormField
+                control={form.control}
+                name="assreferee1"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Assistant referee 1</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue
+                            placeholder={
+                              store?.officials
+                                ? `${store.officials[0].first_name}
+                              ${store.officials[0].last_name}`
+                                : "Select offcial"
+                            }
+                          />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {store?.officials.map((official) => (
+                          <SelectItem key={official.id} value={official.id}>
+                            {official.first_name} {official.last_name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="assreferee2"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Assistant referee 2</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue
+                            placeholder={
+                              store?.officials
+                                ? `${store.officials[0].first_name}
+                              ${store.officials[0].last_name}`
+                                : "Select ref"
+                            }
+                          />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {store?.officials.map((official) => (
+                          <SelectItem key={official.id} value={official.id}>
+                            {official.first_name} {official.last_name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="reserve"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Reserve referee</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue
+                            placeholder={
+                              store?.officials
+                                ? `${store.officials[0].first_name}
+                              ${store.officials[0].last_name}`
+                                : "Select refs"
+                            }
+                          />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {store?.officials.map((official) => (
+                          <SelectItem key={official.id} value={official.id}>
+                            {official.first_name} {official.last_name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <DialogFooter className="p-0">
+                <Button
+                  className="w-full"
+                  onClick={form.handleSubmit(onSubmit)}
+                  disabled={form.formState.isSubmitting}
+                >
+                  Add Officials{" "}
+                  {form.formState.isSubmitting && (
+                    <RotateCcw className="ml-2 h-4 w-4 animate-spin" />
+                  )}
+                </Button>
+              </DialogFooter>
+            </form>
+          </Form>
+        )}
       </DialogContent>
     </Dialog>
   );

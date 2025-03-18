@@ -30,7 +30,7 @@ const MatchOfficialsPage = () => {
     return <span>Error</span>;
   }
 
-  // console.log(fixtype);
+  console.log(data);
 
   return (
     <main className="space-y-6">

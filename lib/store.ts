@@ -24,6 +24,8 @@ export type Store = {
   officials: Official[];
   overview: TeamOverview;
   refFix: RefreeFix;
+  userFix: TeamFixture;
+  fixType: string;
 };
 
 export type State = {
@@ -40,6 +42,8 @@ export type Actions = {
   updateBalance: (balance: number) => void;
   updateOverview: (overview: TeamOverview) => void;
   updateRefFixture: (fixture: RefreeFix) => void;
+  upateUserFixture: (fixture: TeamFixture) => void;
+  updateFixType: (type: string) => void;
 };
 
 const initialState: Store = {
@@ -62,6 +66,8 @@ const initialState: Store = {
     recent_form: [],
   },
   refFix: {} as RefreeFix,
+  userFix: {} as TeamFixture,
+  fixType: "",
 };
 
 export const useStore = create<State & Actions>()(
@@ -88,6 +94,11 @@ export const useStore = create<State & Actions>()(
         set((state) => ({
           store: { ...state.store, fixture: fixture },
         })),
+      updateFixType(type: string) {
+        set((state) => ({
+          store: { ...state.store, fixType: type },
+        }));
+      },
       updateOfficials: (officials: Official[]) =>
         set((state) => ({
           store: { ...state.store, officials: officials },
@@ -104,6 +115,11 @@ export const useStore = create<State & Actions>()(
         set((state) => ({
           store: { ...state.store, refFix: fixture },
         })),
+      upateUserFixture(fixture: TeamFixture) {
+        set((state) => ({
+          store: { ...state.store, userFix: fixture },
+        }));
+      },
     }),
     { name: "store" }
   )

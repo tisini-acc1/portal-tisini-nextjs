@@ -18,7 +18,13 @@ const TeamFixtures = () => {
 
   const router = useRouter();
 
-  const { store, updateSerie, updateTournament } = useStore((state) => state);
+  const {
+    store,
+    updateSerie,
+    updateTournament,
+    upateUserFixture,
+    updateFixType,
+  } = useStore((state) => state);
 
   const teamId = store.team.id;
 
@@ -93,9 +99,11 @@ const TeamFixtures = () => {
                 {formattedDate(fixture.game_date)}
 
                 <PlusCircle
-                  onClick={() =>
-                    router.push(`/home/teams/fixtures/${fixture.id}-${fixType}`)
-                  }
+                  onClick={() => {
+                    updateFixType(fixType);
+                    upateUserFixture(fixture);
+                    router.push(`/home/teams/fixtures/lineup`);
+                  }}
                   className="w-5 h-5 cursor-pointer hover:text-blue-500 hover:scale-100"
                 />
               </CardTitle>

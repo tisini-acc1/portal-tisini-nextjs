@@ -39,13 +39,15 @@ const FixturesPage = () => {
     }
   }, [officials, updateOfficials]);
 
-  if (isLoading) {
+  if (isLoading || !officials) {
     return <div>Loading...</div>;
   }
 
   if (isError) {
     return <div>Error...</div>;
   }
+
+  // console.log(officials);
 
   return (
     <main>

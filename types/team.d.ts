@@ -39,6 +39,12 @@ type TeamFixture = {
   game_status: string;
   total: number;
   pay_status: number;
+  team1_id: string;
+  team2_id: string;
+  pay_status: number;
+  amount: string;
+  billitem: string;
+  accountbalance: number;
 };
 
 type TeamPlayer = {
@@ -417,9 +423,9 @@ type Official = {
 type FixOfficials = {
   fixture: string;
   ref1: string;
-  ref2: string;
-  ref3: string;
-  ref4: string;
+  ref2: string | number;
+  ref3: string | number;
+  ref4: string | number;
 };
 
 type RefreeFix = {
