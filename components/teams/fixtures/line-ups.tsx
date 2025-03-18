@@ -23,7 +23,7 @@ import { getAllPlayers } from "@/actions/php-actions";
 import SelectPlayers from "@/components/teams/fixtures/select-player";
 import RugbyPlayers from "./rugbySP";
 
-const Lineups = ({ type }: { type: string }) => {
+const Lineups = ({ type, fixId }: { type: string; fixId: string }) => {
   const { store } = useStore((state) => state);
 
   // const [showSubs, setShowSubs] = useState(false);
@@ -85,7 +85,7 @@ const Lineups = ({ type }: { type: string }) => {
       {type === "football" ? (
         <SelectPlayers data={data as TeamPlayer[]} />
       ) : (
-        <RugbyPlayers data={data as TeamPlayer[]} />
+        <RugbyPlayers data={data as TeamPlayer[]} fixId={fixId} />
       )}
 
       <section className="grid grid-cols-3 gap-8">

@@ -49,7 +49,7 @@ const LineupPage = async ({ params }: LineupProps) => {
         </TabsContent>
 
         <TabsContent value="data">
-          <FixtureData home={hData} away={aData} />
+          <FixtureData home={hData} away={aData} homeId={fixture[1]} />
         </TabsContent>
       </Tabs>
     </main>

@@ -6,9 +6,40 @@ import { EyeIcon } from "lucide-react";
 
 // import { useStore } from "@/lib/store";
 import FixCommentModal from "./fix-comment-modal";
+import { useQuery } from "@tanstack/react-query";
+import {
+  getFixConditions,
+  getPitchCond,
+  getWeatherCond,
+} from "@/actions/php-actions";
+import { useStore } from "@/lib/store";
 
 const RefFixtureDetails = () => {
-  // const { store } = useStore((state) => state);
+  const { store } = useStore((state) => state);
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["fixConditions", store.refFix.id],
+    queryFn: () => getFixConditions(store.refFix.id),
+  });
+
+  const { data: wCond } = useQuery({
+    queryKey: ["weatherConditions"],
+    queryFn: () => getWeatherCond(),
+  });
+
+  const { data: pitchCond } = useQuery({
+    queryKey: ["pitchConditions"],
+    queryFn: () => getPitchCond(),
+  });
+
+  if (isLoading || !wCond || !pitchCond) {
+    return (
+      <div className="h-96 flex items-center justify-center">Loading...</div>
+    );
+  }
+
+  // console.log(data);
+  // console.log(pitchCond);
 
   return (
     <section className="bg-gray-100 p-2 md:p-4 space-y-6 font-mono rounded-md">
@@ -29,14 +60,14 @@ const RefFixtureDetails = () => {
           <p className="lg:w-1/2">
             <strong>Weather:</strong>{" "}
             <span className="text-muted-foreground text-xs md:text-sm">
-              Sunny
+              {data?.[0].weathertypename}
             </span>
           </p>
 
           <p>
             <strong>Pitch:</strong>{" "}
             <span className="text-muted-foreground text-xs md:text-sm">
-              Good
+              {data?.[0].pitchconditionname}
             </span>
           </p>
         </div>
@@ -46,15 +77,12 @@ const RefFixtureDetails = () => {
         <div className="flex justify-between items-center">
           <strong>Match Comments</strong>
 
-          <FixCommentModal />
+          <FixCommentModal wCond={wCond} pCond={pitchCond} />
         </div>
 
-        <div className="border p-2 bg-gray-50">
+        <div className="border h-20 p-2 bg-gray-50">
           <p className="text-muted-foreground text-xs md:text-sm">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae
-            eligendi quos hic doloribus at quis nihil rerum maxime praesentium,
-            fugiat quisquam soluta ullam, libero officiis consectetur tempora
-            deserunt quasi. Dolorum.
+            {data?.[0].commisioner_comment}
           </p>
         </div>
       </div>

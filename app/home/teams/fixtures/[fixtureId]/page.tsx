@@ -7,11 +7,11 @@ type LineupProps = {
 const PopulateLineupPage = async ({ params }: LineupProps) => {
   const { fixtureId } = await params;
 
-  const fixType = fixtureId.split("-")[1];
+  const fixId = fixtureId.split("-");
 
   // console.log(fixType);
 
-  return <Lineups type={fixType} />;
+  return <Lineups type={fixId[1]} fixId={fixId[0]} />;
 };
 
 export default PopulateLineupPage;

@@ -29,7 +29,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { useStore } from "@/lib/store";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -65,6 +65,7 @@ export const eventsSchema = z.object({
 const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
   const { store } = useStore((state) => state);
   const { toast } = useToast();
+  const queryClient = useQueryClient();
 
   const form = useForm({
     resolver: zodResolver(eventsSchema),
@@ -78,7 +79,7 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
     },
   });
 
-  const subIds = ["17"];
+  const subIds = ["17", "52"];
 
   const selectedId = form.watch("event");
   const selectedEvent = refEvents.find((e) => e.id === selectedId);
@@ -104,7 +105,7 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
       console.log(data);
       if (data.error === "0") {
         // setOpen(false);
-        // queryClient.invalidateQueries({ queryKey: ["fixtures"] });
+        queryClient.invalidateQueries({ queryKey: ["fixtures"] });
         toast({ title: "Success", description: data.message });
       } else if (data.error === "1") {
         toast({
@@ -129,11 +130,11 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
       action: "createrefevent",
       fixture: store.refFix.id,
       event: value.event,
-      subevent: value.subEvent,
+      subevent: value.subEvent || 0,
       fixtype: fixType,
       team: value.team,
       player: value.player,
-      subplayer: value.subPlayer,
+      subplayer: value.subPlayer || 0,
       minute: value.minute,
     };
 

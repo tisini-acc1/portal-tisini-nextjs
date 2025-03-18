@@ -476,6 +476,58 @@ export const createOfficial = async (data: TournaOfficial) => {
   }
 };
 
+export const createFixtureLineup = async (data: CreateLineup, id: string) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      lineup: data,
+      action: "createlineup",
+      fixture: id,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to create fixture lineup: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while creating fixture lineup."
+    );
+  }
+};
+
+// create fix comments
+export const createFixtureComments = async (data: CreateRefComment) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      ...data,
+      action: "fixotherdata",
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to create fixture lineup: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while creating fixture lineup."
+    );
+  }
+};
+
 export const getOfficials = async (): Promise<Official[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
@@ -628,7 +680,7 @@ export const getFixType = async (): Promise<FixtureType[]> => {
   }
 };
 
-export const getFixRefEvents = async (id: string) => {
+export const getFixRefEvents = async (id: string): Promise<RefStats> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
 
@@ -696,6 +748,81 @@ export const getUserCerts = async (): Promise<UserCert[]> => {
     console.log(error);
     throw new Error(
       error.message || "An error occurred while fetching user certs."
+    );
+  }
+};
+
+export const getWeatherCond = async (): Promise<Condition[]> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "weathertype",
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fetch weather condition: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while fetching weather conditions."
+    );
+  }
+};
+
+export const getFixConditions = async (
+  id: string
+): Promise<RefCondComment[]> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "fetchfixotherdata",
+      fixture: id,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fetch weather condition: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while fetching weather conditions."
+    );
+  }
+};
+
+export const getPitchCond = async (): Promise<Condition[]> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "pitchcondition",
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fetch pitch condition: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while fetching pitch conditions."
     );
   }
 };

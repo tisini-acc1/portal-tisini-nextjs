@@ -5,8 +5,18 @@ import {
   useDroppable,
   DragEndEvent,
 } from "@dnd-kit/core";
+import { Button } from "@/components/ui/button";
+import { createFixtureLineup } from "@/actions/php-actions";
+import { useToast } from "@/hooks/use-toast";
 
-const RugbyPlayers = ({ data }: { data: TeamPlayer[] }) => {
+type Props = {
+  data: TeamPlayer[];
+  fixId: string;
+};
+
+const RugbyPlayers = ({ data, fixId }: Props) => {
+  const { toast } = useToast();
+
   const [allPlayers, setAllPlayers] = useState<TeamPlayer[]>(data);
   const [subsPlayers, setSubsPlayers] = useState<TeamPlayer[]>([]);
   const [teamPositions, setTeamPositions] = useState<{
@@ -76,11 +86,38 @@ const RugbyPlayers = ({ data }: { data: TeamPlayer[] }) => {
     }
   };
 
-  console.log(teamPositions);
+  const onSubmit = async () => {
+    // const squad = generatePlayerRoles();
+    const lineUp = {
+      first11: teamPositions,
+      subs: subsPlayers,
+    };
+
+    const res = await createFixtureLineup(lineUp, fixId);
+    console.log(res);
+
+    if (res.error === "0") {
+      toast({ description: res.message, title: "Success!" });
+    } else if (res.error === "1") {
+      toast({ description: res.message, title: "Error!" });
+    } else {
+      toast({
+        description: "Failed to update players lineup",
+        title: "Error!",
+      });
+    }
+  };
+
+  // console.log(teamPositions);
 
   return (
     <main>
-      <div>{allPlayers.length} players</div>
+      <div>
+        {allPlayers.length} players{" "}
+        <Button type="submit" onClick={() => onSubmit()}>
+          Submit
+        </Button>
+      </div>
 
       <DndContext onDragEnd={handleDragEnd}>
         <section className="grid grid-cols-3 gap-8">

@@ -1,3 +1,4 @@
+import { createFixtureComments } from "@/actions/php-actions";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -15,14 +16,80 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
+import { useStore } from "@/lib/store";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-const FixCommentModal = () => {
+type CommentProps = {
+  wCond: Condition[];
+  pCond: Condition[];
+};
+
+const commentSchema = z.object({
+  weather: z.string().min(1, { message: "weather is required" }),
+  pitch: z.string().min(1, { message: "pitch is required" }),
+  comment: z.string().min(1, { message: "comment is required" }),
+});
+
+const FixCommentModal = ({ wCond, pCond }: CommentProps) => {
+  const { store } = useStore((state) => state);
+
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
   const form = useForm({
+    resolver: zodResolver(commentSchema),
     defaultValues: { weather: "", pitch: "", comment: "" },
   });
+
+  const mutation = useMutation({
+    mutationFn: createFixtureComments,
+    onSuccess(data) {
+      console.log(data);
+      if (data.error === "0") {
+        // setOpen(false);
+        queryClient.invalidateQueries({ queryKey: ["fixConditions"] });
+        toast({ title: "Success", description: data.message });
+      } else if (data.error === "1") {
+        toast({
+          title: "Error!",
+          variant: "destructive",
+          description: data.message,
+        });
+      }
+    },
+    onError: (error) => {
+      console.log(error);
+      toast({
+        title: "Error!",
+        variant: "destructive",
+        description: "An error occured while creating fixtures",
+      });
+    },
+  });
+
+  const onSubmit = (values: z.infer<typeof commentSchema>) => {
+    const data = {
+      fixture: store.refFix.id,
+      weather_type: values.weather,
+      commisioner_comment: values.comment,
+      pitchcondition: values.pitch,
+    };
+
+    console.log(values);
+    mutation.mutate(data);
+  };
 
   return (
     <Dialog>
@@ -36,16 +103,31 @@ const FixCommentModal = () => {
         </DialogHeader>
 
         <Form {...form}>
-          <form action="" className="space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
               control={form.control}
               name="weather"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Weather</FormLabel>
-                  <FormControl>
-                    <Input placeholder="sunny" {...field} />
-                  </FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="select weather condition" />
+                      </SelectTrigger>
+                    </FormControl>
+
+                    <SelectContent>
+                      {wCond?.map((item) => (
+                        <SelectItem value={item.id} key={item.id}>
+                          {item.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
@@ -57,9 +139,24 @@ const FixCommentModal = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Pitch</FormLabel>
-                  <FormControl>
-                    <Input placeholder="pathetic" {...field} />
-                  </FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="select pitch condition" />
+                      </SelectTrigger>
+                    </FormControl>
+
+                    <SelectContent>
+                      {pCond?.map((item) => (
+                        <SelectItem value={item.id} key={item.id}>
+                          {item.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}

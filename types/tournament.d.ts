@@ -17,11 +17,11 @@ type CreateFixEvent = {
   action: string;
   fixture: string;
   event: string;
-  subevent: string;
+  subevent: string | number;
   fixtype: string;
   team: string;
   player: string;
-  subplayer: string;
+  subplayer: string | number;
   minute: string;
 };
 
@@ -41,4 +41,59 @@ type UserCert = {
   date_created: string;
   date_updated: string;
   certdocument: string;
+};
+
+type RefStats = {
+  events: RefData[];
+};
+
+type RefData = {
+  id: string;
+  fixture: string;
+  eventid: string;
+  eventname: string;
+  subeventid: string;
+  subeventname: string;
+  teamid: string;
+  teamname: string;
+  playerid: string;
+  playername: string;
+  subplayerid: string;
+  subplayername: string;
+  minute: string;
+  status: string;
+  createdbyid: string;
+  createdby: string;
+};
+
+type CreateRefComment = {
+  fixture: string;
+  weather_type: string;
+  commisioner_comment: string;
+  pitchcondition: string;
+};
+
+type CreateLineup = {
+  first11: { [key: string]: TeamPlayer | null };
+  subs: TeamPlayer[];
+};
+
+type Condition = {
+  id: string;
+  name: string;
+  date_created: string;
+  date_updated: string;
+  created_by: string;
+  status: string;
+};
+
+type RefCondComment = {
+  id: string;
+  weathertypeid: string;
+  weathertypename: string;
+  commisioner_comment: string;
+  pitchconditionid: string;
+  pitchconditionname: string;
+  other_comment: string;
+  matchplay_status: string;
 };

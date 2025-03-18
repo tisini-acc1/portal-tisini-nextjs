@@ -5,6 +5,7 @@ import {
   useDroppable,
   DragEndEvent,
 } from "@dnd-kit/core";
+import { Button } from "@/components/ui/button";
 
 const SelectPlayers = ({ data }: { data: TeamPlayer[] }) => {
   const [allPlayers, setAllPlayers] = useState<TeamPlayer[]>(data);
@@ -72,11 +73,26 @@ const SelectPlayers = ({ data }: { data: TeamPlayer[] }) => {
     }
   };
 
-  console.log(teamPositions);
+  const onSubmit = () => {
+    // const squad = generatePlayerRoles();
+    const lineUp = {
+      first11: teamPositions,
+      subs: subsPlayers,
+    };
+
+    console.log(lineUp);
+  };
+
+  // console.log(teamPositions);
 
   return (
     <main>
-      <div>{allPlayers.length} players</div>
+      <div>
+        {allPlayers.length} players
+        <Button type="submit" onClick={() => onSubmit()}>
+          Submit
+        </Button>
+      </div>
 
       <DndContext onDragEnd={handleDragEnd}>
         <section className="grid grid-cols-3 gap-8">
