@@ -536,7 +536,7 @@ export const getOfficials = async (): Promise<Official[]> => {
     const res = await axios.post(`${baseURL}`, {
       gettoken: token,
       action: "refereelist",
-      fixtype: "5",
+      fixtype: "1",
     });
 
     if (res.status === 200) {
