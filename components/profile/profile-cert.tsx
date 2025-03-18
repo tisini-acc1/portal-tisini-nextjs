@@ -23,20 +23,20 @@ const ProfileCert = () => {
   }
 
   return (
-    <section className="">
+    <section className="space-y-4">
       <div className="flex justify-end">
         <UploadCertModal certs={data as Certification[]} />
       </div>
 
-      <div>
+      <div className="space-y-4">
         {userCerts.map((cert) => (
-          <div key={cert.id} className="flex items-center">
-            <div className="h-64 w-3/4">
+          <div key={cert.id} className="flex items-center gap-4 border p-1">
+            <div className="">
               <Image
                 src={cert.certdocument}
                 alt={"name"}
-                width={150}
-                height={150}
+                width={50}
+                height={50}
                 className={
                   "h-full w-full object-cover transition-all hover:scale-105 aspect-square"
                 }

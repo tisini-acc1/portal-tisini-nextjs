@@ -16,7 +16,6 @@ const ProfilePage = () => {
           </div>
           <TabsList className="absolute bottom-0 right-0">
             <TabsTrigger value={"bio"}>Bio Data</TabsTrigger>
-            <TabsTrigger value={"img"}>Image</TabsTrigger>
             <TabsTrigger value={"cert"}>Certification</TabsTrigger>
           </TabsList>
         </header>
@@ -24,9 +23,7 @@ const ProfilePage = () => {
         <TabsContent value="bio">
           <ProfileBio />
         </TabsContent>
-        <TabsContent value="img">
-          <ProfileImage />
-        </TabsContent>
+
         <TabsContent value="cert">
           <ProfileCert />
         </TabsContent>

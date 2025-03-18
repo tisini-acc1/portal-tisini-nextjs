@@ -87,13 +87,15 @@ const AddFootballLineup = ({ data }: { data: TeamPlayer[] }) => {
   // console.log(teamPositions);
 
   return (
-    <main>
-      <div>
+    <main className="space-y-2">
+      <header className="h-20 w-full bg-gray-300 relative">
         {allPlayers.length} players
-        <Button type="submit" onClick={() => onSubmit()}>
-          Submit
-        </Button>
-      </div>
+        <div className="absolte bottom-0 right-0 hidden">
+          <Button type="submit" onClick={() => onSubmit()}>
+            Submit
+          </Button>
+        </div>
+      </header>
 
       <DndContext onDragEnd={handleDragEnd}>
         <section className="grid grid-cols-3 gap-8">

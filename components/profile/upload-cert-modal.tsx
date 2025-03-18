@@ -23,6 +23,7 @@ import { useStore } from "@/lib/store";
 import { uploadImage } from "@/actions/upload";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { uploadCertUrl } from "@/actions/php-actions";
+import { Label } from "../ui/label";
 
 const UploadCertModal = ({ certs }: { certs: Certification[] }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -110,7 +111,7 @@ const UploadCertModal = ({ certs }: { certs: Certification[] }) => {
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>And Education qualification</DialogTitle>
+          <DialogTitle>Add Qualification</DialogTitle>
         </DialogHeader>
 
         <section className="p-5 pt-6 grid grid-cols-1 gap-10">
@@ -129,23 +130,22 @@ const UploadCertModal = ({ certs }: { certs: Certification[] }) => {
           <form onSubmit={handleSubmit} className="flex flex-col w-full gap-8">
             <Input type="hidden" name="userId" value={""} />
 
-            <Select
-              defaultValue={certs[0].name}
-              value={selectedLevel}
-              onValueChange={handleLevelChange}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder={certs[0].name} />
-              </SelectTrigger>
+            <div className="space-y-2">
+              <Label>Level</Label>
+              <Select value={selectedLevel} onValueChange={handleLevelChange}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select level" />
+                </SelectTrigger>
 
-              <SelectContent>
-                {certs.map((cert) => (
-                  <SelectItem key={cert.id} value={cert.id}>
-                    {cert.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+                <SelectContent>
+                  {certs.map((cert) => (
+                    <SelectItem key={cert.id} value={cert.id}>
+                      {cert.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
 
             <div className="flex w-full">
               <Input

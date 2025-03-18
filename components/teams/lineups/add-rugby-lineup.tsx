@@ -124,13 +124,16 @@ const AddRugbyLineup = ({ data, fixId }: Props) => {
   // console.log(teamPositions);
 
   return (
-    <main>
-      <div>
-        {allPlayers.length} players{" "}
-        <Button type="submit" onClick={() => onSubmit()} disabled={isLoading}>
-          Submit{" "}
-          {isLoading && <RotateCcw className="ml-2 h-4 w-4 animate-spin" />}
-        </Button>
+    <main className="space-y-1">
+      <div className="h-20">
+        <div>{allPlayers.length} players </div>
+
+        <div className="flex justify-end">
+          <Button type="submit" onClick={() => onSubmit()} disabled={isLoading}>
+            Submit{" "}
+            {isLoading && <RotateCcw className="ml-2 h-4 w-4 animate-spin" />}
+          </Button>
+        </div>
       </div>
 
       <DndContext onDragEnd={handleDragEnd}>
