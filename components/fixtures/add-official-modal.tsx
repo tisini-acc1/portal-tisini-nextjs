@@ -1,3 +1,4 @@
+import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PlusCircle, RotateCcw } from "lucide-react";
@@ -29,7 +30,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { z } from "zod";
 
 type AddProps = {
   fixId: string;
