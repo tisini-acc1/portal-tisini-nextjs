@@ -1,7 +1,18 @@
 "use client";
 
-import { createFixtureEvent } from "@/actions/php-actions";
+import { z } from "zod";
+import { useState } from "react";
+import { RotateCcw } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+import { useStore } from "@/lib/store";
+import { useToast } from "@/hooks/use-toast";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { createFixtureEvent } from "@/actions/php-actions";
 import {
   Dialog,
   DialogContent,
@@ -18,7 +29,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -26,15 +36,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useToast } from "@/hooks/use-toast";
-import { useStore } from "@/lib/store";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { RotateCcw } from "lucide-react";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 
 type Props = {
   homeP: Lineup[];
