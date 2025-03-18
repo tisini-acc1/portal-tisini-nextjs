@@ -105,6 +105,7 @@ const AddRugbyLineup = ({ data, fixId }: Props) => {
       // console.log(res);
 
       if (res.error === "0") {
+        router.refresh();
         router.back();
         toast({ description: res.message, title: "Success!" });
       } else if (res.error === "1") {

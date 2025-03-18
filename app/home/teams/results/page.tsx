@@ -55,8 +55,9 @@ const ResultsPage = () => {
     }
   }, [data, store.tournament, store.serie]);
 
-  console.log(fixtures);
+  // console.log(fixtures);
   // console.log(store.fixture);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -116,7 +117,7 @@ const ResultsPage = () => {
                   League
                 </p>{" "}
                 {fixture.pay_status === 0 ? (
-                  <FixPaymentModal />
+                  <FixPaymentModal fixture={fixture} />
                 ) : (
                   <Button
                     size={"sm"}

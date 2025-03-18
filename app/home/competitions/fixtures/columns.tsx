@@ -16,6 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export const columns: ColumnDef<Fixture>[] = [
   {
@@ -43,10 +44,6 @@ export const columns: ColumnDef<Fixture>[] = [
     accessorKey: "matchday",
     header: "Round",
   },
-  {
-    accessorKey: "refree",
-    header: "Official",
-  },
 
   {
     id: "actions",
@@ -54,38 +51,52 @@ export const columns: ColumnDef<Fixture>[] = [
     cell: ({ row }) => {
       const fixture = row.original;
 
-      return <OfficialButton fixId={fixture.id} />;
+      return <OfficialButton fixture={fixture} />;
     },
   },
 ];
 
-const OfficialButton = ({ fixId }: { fixId: string }) => {
+const OfficialButton = ({ fixture }: { fixture: Fixture }) => {
   const [openAdd, setOpenAdd] = useState(false);
+  const router = useRouter();
+
+  const fixId = fixture.id;
 
   return (
     <>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="h-8 w-8 p-0">
-            <span className="sr-only">Open menu</span>
-            <MoreHorizontal />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+      <div className="flex gap-2">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <MoreHorizontal />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => setOpenAdd(true)}>
-            Officials
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => console.log("edit")}>
-            Edit
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => console.log("delete")}>
-            Delete
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => setOpenAdd(true)}>
+              Officials
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => console.log("edit")}>
+              Edit
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => console.log("delete")}>
+              Delete
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+        <Button
+          size={"sm"}
+          variant={"outline"}
+          onClick={() => router.push(`/home/competitions/fixtures/${fixId}`)}
+          className="hidden"
+        >
+          more
+        </Button>
+      </div>
 
       <AddFixtureOfficialModal
         fixId={fixId}

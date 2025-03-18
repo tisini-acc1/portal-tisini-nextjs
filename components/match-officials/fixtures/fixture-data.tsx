@@ -50,7 +50,7 @@ const FixtureData = ({ home, away, homeId }: Props) => {
 
   // console.log(selectedFixType);
   // console.log(store.refFix.fixture_type);
-  console.log(fixEvents);
+  // console.log(fixEvents);
 
   return (
     <section className="h-[450px] w-full space-y-6 bg-gray-100 p-3 rounded-md">
@@ -97,7 +97,7 @@ const RefDataCard = ({ data, homeId }: CardProps) => {
       {data.teamid === homeId ? (
         data.eventname === "Substitute" ? (
           <div className="flex items-center gap-1">
-            {data.minute}`&apos;`
+            {data.minute}&apos;
             <div>
               <div className="text-red-500 capitalize">
                 {"⬇️"} {data.playername}
@@ -113,11 +113,11 @@ const RefDataCard = ({ data, homeId }: CardProps) => {
               data.subeventname === "Scored" ? "text-green-600" : "text-red-500"
             } capitalize flex items-center gap-1`}
           >
-            {data.minute}`&apos;` <Volleyball /> {data.playername}
+            {data.minute}&apos; <Volleyball /> {data.playername}
           </div>
         ) : (
           <div className="capitalize">
-            {data.minute}`&apos;` {icon} {data.playername}
+            {data.minute}&apos; {icon} {data.playername}
           </div>
         )
       ) : data.eventname === "Substitute" ? (
@@ -130,7 +130,7 @@ const RefDataCard = ({ data, homeId }: CardProps) => {
               {data.subplayername} {"⬆️"}
             </div>
           </div>
-          {data.minute}`&apos;`
+          {data.minute}&apos;
         </div>
       ) : data.eventname === "PM Penalties" ? (
         <div
@@ -138,11 +138,11 @@ const RefDataCard = ({ data, homeId }: CardProps) => {
             data.subeventname === "Scored" ? "text-green-600" : "text-red-500"
           } capitalize flex items-center justify-end gap-1`}
         >
-          {data.playername} <Volleyball /> {data.minute}`&apos;`
+          {data.playername} <Volleyball /> {data.minute}&apos;
         </div>
       ) : (
         <div className="flex justify-end capitalize">
-          {data.playername} {icon} {data.minute}`&apos;`
+          {data.playername} {icon} {data.minute}&apos;
         </div>
       )}
     </div>

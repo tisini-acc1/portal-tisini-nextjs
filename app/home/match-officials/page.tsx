@@ -23,10 +23,12 @@ const MatchOfficialsPage = () => {
     return <div>Error loading tournaments. Please try again later.</div>;
   }
 
+  const fixtures = data?.slice().reverse();
+
   return (
     <main>
       <section>
-        <OfficialsFixTable data={data as RefreeFix[]} columns={columns} />
+        <OfficialsFixTable data={fixtures as RefreeFix[]} columns={columns} />
       </section>
     </main>
   );

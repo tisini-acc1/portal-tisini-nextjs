@@ -29,8 +29,10 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { useStore } from "@/lib/store";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import React from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { RotateCcw } from "lucide-react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -65,7 +67,10 @@ export const eventsSchema = z.object({
 const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
   const { store } = useStore((state) => state);
   const { toast } = useToast();
+  const router = useRouter();
   const queryClient = useQueryClient();
+
+  const [open, setOpen] = useState(false);
 
   const form = useForm({
     resolver: zodResolver(eventsSchema),
@@ -104,8 +109,10 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
     onSuccess(data) {
       console.log(data);
       if (data.error === "0") {
-        // setOpen(false);
-        queryClient.invalidateQueries({ queryKey: ["fixtures"] });
+        setOpen(false);
+        form.reset();
+        router.refresh();
+        queryClient.invalidateQueries({ queryKey: ["refFixEvents"] });
         toast({ title: "Success", description: data.message });
       } else if (data.error === "1") {
         toast({
@@ -138,18 +145,20 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
       minute: value.minute,
     };
 
+    setOpen(true);
+
     mutation.mutate(data);
     console.log(data);
   };
 
-  // const onOpenChangeWrapper = (value: boolean) => {
-  //   setOpen(value);
-  // };
+  const onOpenChangeWrapper = (value: boolean) => {
+    setOpen(value);
+  };
 
   // console.log(first11);
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={onOpenChangeWrapper}>
       <DialogTrigger asChild>
         <Button>Populate</Button>
       </DialogTrigger>
@@ -331,8 +340,15 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
           </form>
 
           <DialogFooter className="mt-2">
-            <Button type="submit" onClick={form.handleSubmit(onSubmit)}>
-              Populate
+            <Button
+              type="submit"
+              onClick={form.handleSubmit(onSubmit)}
+              disabled={mutation.isPending}
+            >
+              Populate{" "}
+              {mutation.isPending && (
+                <RotateCcw className="w-4 h-4 animate-spin" />
+              )}
             </Button>
           </DialogFooter>
         </Form>
