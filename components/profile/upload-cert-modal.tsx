@@ -24,6 +24,7 @@ import { uploadImage } from "@/actions/upload";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { uploadCertUrl } from "@/actions/php-actions";
 import { Label } from "../ui/label";
+import { EditIcon } from "lucide-react";
 
 const UploadCertModal = ({ certs }: { certs: Certification[] }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -106,7 +107,9 @@ const UploadCertModal = ({ certs }: { certs: Certification[] }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button size={"sm"}>Add qualification</Button>
+        <Button size={"icon"} variant={"outline"} className="rounded-full">
+          <EditIcon className="h-4 w-4" />
+        </Button>
       </DialogTrigger>
 
       <DialogContent>

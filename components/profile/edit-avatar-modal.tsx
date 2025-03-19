@@ -1,17 +1,25 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
+import { useState } from "react";
+import { CameraIcon } from "lucide-react";
 
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { useStore } from "@/lib/store";
 import { useToast } from "@/hooks/use-toast";
 import { uploadImage } from "@/actions/upload";
-import { useStore } from "@/lib/store";
 import { useMutation } from "@tanstack/react-query";
 import { uploadPhotoUrl } from "@/actions/php-actions";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 
-const ProfileImage = () => {
+const EditAvatarModal = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const { toast } = useToast();
@@ -84,32 +92,46 @@ const ProfileImage = () => {
   };
 
   return (
-    <section className="p-5 pt-6 grid grid-cols-1 gap-10">
-      <div className="h-96 border rounded-md flex items-center justify-center">
-        {selectedFile && (
-          <Image
-            src={URL.createObjectURL(selectedFile)}
-            alt="Selected file preview"
-            width={350}
-            height={350}
-            className="object-contain"
-          />
-        )}
-      </div>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button size={"icon"} variant={"outline"} className="rounded-full">
+          <CameraIcon className="h-4 w-4" />
+        </Button>
+      </DialogTrigger>
 
-      <form onSubmit={handleSubmit} className="flex w-full">
-        <Input type="hidden" name="userId" value={""} />
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Upload your profile image</DialogTitle>
+        </DialogHeader>
 
-        <Input
-          id="picture"
-          type="file"
-          name="file"
-          onChange={handleFileChange}
-        />
-        <Button type="submit">Upload</Button>
-      </form>
-    </section>
+        <section className="p-5 pt-6 grid grid-cols-1 gap-10">
+          {selectedFile && (
+            <div className="h-96 border rounded-md flex items-center justify-center">
+              <Image
+                src={URL.createObjectURL(selectedFile)}
+                alt="Selected file preview"
+                width={350}
+                height={350}
+                className="object-contain"
+              />
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="flex w-full">
+            <Input type="hidden" name="userId" value={""} />
+
+            <Input
+              id="picture"
+              type="file"
+              name="file"
+              onChange={handleFileChange}
+            />
+            <Button type="submit">Upload</Button>
+          </form>
+        </section>
+      </DialogContent>
+    </Dialog>
   );
 };
 
-export default ProfileImage;
+export default EditAvatarModal;

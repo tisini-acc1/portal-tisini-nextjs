@@ -35,8 +35,9 @@ const TeamFixtures = () => {
 
   useEffect(() => {
     if (data) {
-      setSeries(data[0].season);
-      updateSerie(data[0].season[0]?.id);
+      const seriesData = data[0].season.slice().reverse();
+      setSeries(seriesData);
+      updateSerie(seriesData[0].id);
       updateTournament(data[0].tournamentid);
       setFixtures(data[0]?.season[0]?.fixture.slice().reverse() || []);
     }
@@ -64,7 +65,7 @@ const TeamFixtures = () => {
     }
   }, [data, store.tournament, store.serie]);
 
-  console.log(data);
+  // console.log(data);
   // console.log(fixType);
 
   // Handle loading and error states
@@ -75,6 +76,8 @@ const TeamFixtures = () => {
   if (isError) {
     return <div>Error loading tournaments. Please try again later.</div>;
   }
+
+  // console.log(series);
 
   return (
     <main className="space-y-8">

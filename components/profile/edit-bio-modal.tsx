@@ -1,7 +1,12 @@
 "use client";
 
+import { EditIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { useStore } from "@/lib/store";
+// import { RotateCcw } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -10,12 +15,16 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-// import { RotateCcw } from "lucide-react";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { useStore } from "@/lib/store";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 
-const ProfileBio = () => {
+const EditProfileBioModal = () => {
   const user = useStore((state) => state.store.user);
 
   const name = user.name.split(" ");
@@ -36,10 +45,20 @@ const ProfileBio = () => {
   // };
 
   return (
-    <section className="p-5">
-      <Form {...form}>
-        <form className="space-y-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button size={"icon"} variant={"outline"} className="rounded-full">
+          <EditIcon className="h-4 w-4" />
+        </Button>
+      </DialogTrigger>
+
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Edit your personal information</DialogTitle>
+        </DialogHeader>
+
+        <Form {...form}>
+          <form className="space-y-8">
             <FormField
               name="firstName"
               control={form.control}
@@ -81,9 +100,7 @@ const ProfileBio = () => {
                 </FormItem>
               )}
             />
-          </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
             <FormField
               name="phone"
               control={form.control}
@@ -111,20 +128,21 @@ const ProfileBio = () => {
                 </FormItem>
               )}
             />
-          </div>
 
-          <Button
-            className="w-full md:w-auto"
-            // onClick={form.handleSubmit(onSubmit)}
-            // disabled={form.formState.isSubmitting}
-          >
-            Update
-            {/* <RotateCcw className="ml-2 h-4 w-4 animate-spin" /> */}
-          </Button>
-        </form>
-      </Form>
-    </section>
+            <DialogFooter>
+              <Button
+              // onClick={form.handleSubmit(onSubmit)}
+              // disabled={form.formState.isSubmitting}
+              >
+                Update
+                {/* <RotateCcw className="ml-2 h-4 w-4 animate-spin" /> */}
+              </Button>
+            </DialogFooter>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
   );
 };
 
-export default ProfileBio;
+export default EditProfileBioModal;
