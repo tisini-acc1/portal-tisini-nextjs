@@ -7,7 +7,11 @@ import { useQuery } from "@tanstack/react-query";
 import { useStore } from "@/lib/store";
 import Loading from "@/app/home/loading";
 import { Button } from "@/components/ui/button";
-import { getTeamLineup } from "@/actions/php-actions";
+import { getAllPlayers, getTeamLineup } from "@/actions/php-actions";
+import { Edit2Icon, Edit3Icon } from "lucide-react";
+import EditJerseyModal from "@/components/teams/lineups/edit-jersey-modal";
+import ReplacePlayerModal from "@/components/teams/lineups/replace-player-modal";
+import SwapPlayerModal from "@/components/teams/lineups/swap-player-modal";
 
 const LineupsPage = () => {
   const { store } = useStore((state) => state);
@@ -20,7 +24,12 @@ const LineupsPage = () => {
     queryFn: () => getTeamLineup(store.userFix.id, store.team.id),
   });
 
-  if (isLoading) {
+  const { data: allPlayers } = useQuery({
+    queryKey: ["allPlayers", store.team.id],
+    queryFn: () => getAllPlayers(store.team.id),
+  });
+
+  if (isLoading || !data || !allPlayers) {
     return <Loading />;
   }
 
@@ -72,12 +81,22 @@ const LineupsPage = () => {
         </div>
 
         <div className="absolute bottom-0 right-0 p-1">
-          <Button
-            size={"sm"}
-            onClick={() => router.push("/home/teams/fixtures/lineup/add")}
-          >
-            Select Players
-          </Button>
+          {data && data?.length <= 0 ? (
+            <Button
+              size={"sm"}
+              onClick={() => router.push("/home/teams/fixtures/lineup/add")}
+            >
+              Select Players
+            </Button>
+          ) : (
+            <div className="flex gap-2">
+              <SwapPlayerModal lineups={data as Lineup[]} />
+              <ReplacePlayerModal
+                lineups={data as Lineup[]}
+                allPlayers={allPlayers as TeamPlayer[]}
+              />
+            </div>
+          )}
         </div>
       </header>
 
@@ -87,15 +106,21 @@ const LineupsPage = () => {
             <h1>Starting players</h1>
             {starting?.map((player) => (
               <div key={player.id} className="border p-3 bg-gray-300">
-                {player.Jersey_No} {player.pname}
+                <div className="flex justify-between items-center">
+                  {player.Jersey_No} {player.pname}
+                  <EditJerseyModal player={player} />
+                </div>
               </div>
             ))}
           </div>
           <div className="space-y-2 p-4">
             <h1>Subs</h1>
             {subs?.map((player) => (
-              <div key={player.id} className="border p-3 bg-muted">
-                {player.pname}
+              <div key={player.id} className="border p-3 bg-gray-300">
+                <div className="flex justify-between items-center">
+                  {player.Jersey_No} {player.pname}
+                  <EditJerseyModal player={player} />
+                </div>
               </div>
             ))}
           </div>
