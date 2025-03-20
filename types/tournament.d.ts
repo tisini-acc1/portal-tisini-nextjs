@@ -78,6 +78,26 @@ type CreateLineup = {
   subs: TeamPlayer[];
 };
 
+type ChangeJersey = {
+  jerseyNo: string;
+  playerid: string;
+  fixture: string;
+  teamid: string;
+};
+
+type SwapPlayers = {
+  player: string;
+  swapPlayerId: string;
+  fixtureid: string;
+};
+
+type ReplacePlayers = {
+  playernewid: string;
+  playertype: string;
+  fixture: string;
+  playerid: string;
+};
+
 type Condition = {
   id: string;
   name: string;

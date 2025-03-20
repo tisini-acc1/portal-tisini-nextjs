@@ -528,6 +528,84 @@ export const createFixtureComments = async (data: CreateRefComment) => {
   }
 };
 
+// create fix comments
+export const changeJersey = async (data: ChangeJersey) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      ...data,
+      action: "changeJersey",
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to change player's jersey number: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while changing player jersey no."
+    );
+  }
+};
+
+// swap lineup players
+export const swapLineupPlayers = async (data: SwapPlayers) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      ...data,
+      action: "swapPlayer",
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to change swap players: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while swapping players."
+    );
+  }
+};
+
+// Replace lineup players
+export const replaceLineupPlayers = async (data: ReplacePlayers) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      ...data,
+      action: "replacePlayer",
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to change replace players: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while replacing players."
+    );
+  }
+};
+
 export const getOfficials = async (): Promise<Official[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;

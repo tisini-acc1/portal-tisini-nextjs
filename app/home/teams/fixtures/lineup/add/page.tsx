@@ -4,7 +4,6 @@ import { useStore } from "@/lib/store";
 import { useQuery } from "@tanstack/react-query";
 
 import { getAllPlayers } from "@/actions/php-actions";
-import AddRugbyLineup from "@/components/teams/lineups/add-rugby-lineup";
 import AddFootballLineup from "@/components/teams/lineups/add-football-lineup";
 import SelectRugbyLineup from "@/components/teams/lineups/select-rugby-lineup";
 

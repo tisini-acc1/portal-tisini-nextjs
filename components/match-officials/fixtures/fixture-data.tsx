@@ -50,7 +50,7 @@ const FixtureData = ({ home, away, homeId }: Props) => {
 
   // console.log(selectedFixType);
   // console.log(store.refFix.fixture_type);
-  // console.log(fixEvents);
+  console.log(fixEvents);
 
   return (
     <section className="h-[450px] w-full space-y-6 bg-gray-100 p-3 rounded-md">

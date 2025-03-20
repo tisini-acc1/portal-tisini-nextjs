@@ -7,12 +7,6 @@ import { EyeIcon } from "lucide-react";
 import MatchSheetHeader from "@/components/match-sheet/match-sheet-header";
 
 const SingleFixturePage = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleCard = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
     <main className="space-y-2">
       <MatchSheetHeader />

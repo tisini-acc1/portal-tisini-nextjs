@@ -1,6 +1,6 @@
 "use client";
 
-import { Edit3Icon } from "lucide-react";
+import { Edit3Icon, RotateCcwIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 
 import { Input } from "@/components/ui/input";
@@ -21,8 +21,17 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { changeJersey } from "@/actions/php-actions";
+import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const EditJerseyModal = ({ player }: { player: Lineup }) => {
+  const [open, setOpen] = useState(false);
+
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+
   const form = useForm({
     defaultValues: {
       jersey: player.Jersey_No,
@@ -30,12 +39,50 @@ const EditJerseyModal = ({ player }: { player: Lineup }) => {
     mode: "onChange",
   });
 
-  const onSubmit = (values: { jersey: string }) => {
-    console.log(values);
+  const mutation = useMutation({
+    mutationFn: changeJersey,
+    onSuccess: (data) => {
+      // console.log(data);
+      if (data.error === "0") {
+        setOpen(false);
+        queryClient.invalidateQueries({ queryKey: ["teamLineups"] });
+        toast({ title: "Success", description: data.message });
+      } else {
+        // setIsUploading(false);
+        toast({
+          title: "Error!",
+          variant: "destructive",
+          description: data.message,
+        });
+      }
+    },
+    onError: (error) => {
+      console.log(error);
+      toast({
+        title: "Error!",
+        variant: "destructive",
+        description: "An error occured while creating player",
+      });
+    },
+  });
+
+  const onSubmit = async (values: { jersey: string }) => {
+    const data = {
+      jerseyNo: values.jersey,
+      playerid: player.player_id,
+      fixture: player.fixture_id,
+      teamid: player.teamId,
+    };
+
+    mutation.mutate(data);
+  };
+
+  const onOpenChangeWrapper = (value: boolean) => {
+    setOpen(value);
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={onOpenChangeWrapper}>
       <DialogTrigger asChild>
         <Button size={"icon"} variant={"outline"} className="rounded-full">
           <Edit3Icon />
@@ -68,8 +115,13 @@ const EditJerseyModal = ({ player }: { player: Lineup }) => {
         </Form>
 
         <DialogFooter>
-          <Button type="submit" onClick={form.handleSubmit(onSubmit)}>
-            Update
+          <Button
+            type="submit"
+            onClick={form.handleSubmit(onSubmit)}
+            disabled={mutation.isPending}
+          >
+            Update{" "}
+            {mutation.isPending && <RotateCcwIcon className="animate-spin" />}
           </Button>
         </DialogFooter>
       </DialogContent>

@@ -8,7 +8,6 @@ import { useStore } from "@/lib/store";
 import Loading from "@/app/home/loading";
 import { Button } from "@/components/ui/button";
 import { getAllPlayers, getTeamLineup } from "@/actions/php-actions";
-import { Edit2Icon, Edit3Icon } from "lucide-react";
 import EditJerseyModal from "@/components/teams/lineups/edit-jersey-modal";
 import ReplacePlayerModal from "@/components/teams/lineups/replace-player-modal";
 import SwapPlayerModal from "@/components/teams/lineups/swap-player-modal";
@@ -37,7 +36,7 @@ const LineupsPage = () => {
     console.log(error);
     return <div>Error</div>;
   }
-
+  console.log(data);
   const starting = data?.filter((player) => player.player_type === "first11");
   const subs = data?.filter((player) => player.player_type === "sub");
 

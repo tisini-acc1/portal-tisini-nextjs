@@ -27,6 +27,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
+import { replaceLineupPlayers } from "@/actions/php-actions";
+import { RotateCwIcon } from "lucide-react";
 
 type ReplaceProps = {
   allPlayers: TeamPlayer[];
@@ -34,6 +39,11 @@ type ReplaceProps = {
 };
 
 const ReplacePlayerModal = ({ allPlayers, lineups }: ReplaceProps) => {
+  const [open, setOpen] = useState(false);
+
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+
   const form = useForm({
     defaultValues: {
       player: "",
@@ -41,8 +51,48 @@ const ReplacePlayerModal = ({ allPlayers, lineups }: ReplaceProps) => {
     },
   });
 
-  const onSubmit = () => {
-    console.log("first");
+  const mutation = useMutation({
+    mutationFn: replaceLineupPlayers,
+    onSuccess: (data) => {
+      console.log(data);
+      if (data.error === "0") {
+        setOpen(false);
+        queryClient.invalidateQueries({ queryKey: ["teamLineups"] });
+        toast({ title: "Success", description: data.message });
+      } else {
+        // setIsUploading(false);
+        toast({
+          title: "Error!",
+          variant: "destructive",
+          description: data.message,
+        });
+      }
+    },
+    onError: (error) => {
+      console.log(error);
+      toast({
+        title: "Error!",
+        variant: "destructive",
+        description: "An error occured while creating player",
+      });
+    },
+  });
+
+  const onSubmit = (values: { player: string; replaceWith: string }) => {
+    const player = lineups.find((player) => player.player_id === values.player);
+
+    const data = {
+      playernewid: values.replaceWith,
+      playertype: player?.player_type as string,
+      fixture: lineups[0].fixture_id,
+      playerid: values.player,
+    };
+
+    mutation.mutate(data);
+  };
+
+  const onOpenChangeWrapper = (value: boolean) => {
+    setOpen(value);
   };
 
   const unusedPlayers = allPlayers.filter(
@@ -51,7 +101,7 @@ const ReplacePlayerModal = ({ allPlayers, lineups }: ReplaceProps) => {
   );
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={onOpenChangeWrapper}>
       <DialogTrigger asChild>
         <Button size={"sm"}>Replace</Button>
       </DialogTrigger>
@@ -126,8 +176,13 @@ const ReplacePlayerModal = ({ allPlayers, lineups }: ReplaceProps) => {
         </Form>
 
         <DialogFooter className="mt-4">
-          <Button type="submit" onClick={form.handleSubmit(onSubmit)}>
-            Replace
+          <Button
+            type="submit"
+            onClick={form.handleSubmit(onSubmit)}
+            disabled={mutation.isPending}
+          >
+            Replace{" "}
+            {mutation.isPending && <RotateCwIcon className="animate-spin" />}
           </Button>
         </DialogFooter>
       </DialogContent>

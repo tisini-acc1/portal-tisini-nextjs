@@ -1,13 +1,13 @@
-import { getTeamLineup } from "@/actions/php-actions";
-import FixtureData from "@/components/match-officials/fixtures/fixture-data";
+// import { getTeamLineup } from "@/actions/php-actions";
+// import FixtureData from "@/components/match-officials/fixtures/fixture-data";
 import VerifyPlayerCard from "@/components/match-officials/verify-player-card";
 import RefFixHeader from "@/components/match-officials/fixtures/ref-fix-header";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import RefFixtureDetails, {
   RefreeCard,
 } from "@/components/match-officials/fixtures/ref-fix-details";
-import MatchSheetHeader from "@/components/match-sheet/match-sheet-header";
-import FixCommentModal from "@/components/match-officials/fixtures/fix-comment-modal";
+// import MatchSheetHeader from "@/components/match-sheet/match-sheet-header";
+// import FixCommentModal from "@/components/match-officials/fixtures/fix-comment-modal";
 
 type LineupProps = {
   params: Promise<{ fixId: string }>;
@@ -17,6 +17,8 @@ const LineupPage = async ({ params }: LineupProps) => {
   const { fixId } = await params;
 
   const fixture = fixId.split("-");
+
+  console.log(fixture);
 
   // const hData = await getTeamLineup(fixture[0], fixture[1]);
   // const aData = await getTeamLineup(fixture[0], fixture[2]);
@@ -80,6 +82,7 @@ const LineupPage = async ({ params }: LineupProps) => {
       </section>
 
       <RefFixtureDetails />
+      {/* <FixtureData home={hData} away={aData} homeId={fixture[1]} /> */}
     </main>
     // <main>
     //   <Tabs defaultValue="details">

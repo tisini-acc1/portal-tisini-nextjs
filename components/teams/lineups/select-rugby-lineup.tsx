@@ -122,7 +122,7 @@ const SelectRugbyLineup = ({ data, fixId }: LineupProps) => {
     }
 
     const lineUp: CreateLineup = {
-      first11: selectedPlayers,
+      first11: first11,
       subs: subs as TeamPlayer[],
     };
 

@@ -27,12 +27,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { swapLineupPlayers } from "@/actions/php-actions";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
+import { RotateCcwIcon } from "lucide-react";
 
 type SwapProps = {
   lineups: Lineup[];
 };
 
 const SwapPlayerModal = ({ lineups }: SwapProps) => {
+  const [open, setOpen] = useState(false);
+
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+
   const form = useForm({
     defaultValues: {
       player: "",
@@ -40,15 +50,52 @@ const SwapPlayerModal = ({ lineups }: SwapProps) => {
     },
   });
 
-  const onSubmit = () => {
-    console.log("first");
+  const mutation = useMutation({
+    mutationFn: swapLineupPlayers,
+    onSuccess: (data) => {
+      // console.log(data);
+      if (data.error === "0") {
+        setOpen(false);
+        queryClient.invalidateQueries({ queryKey: ["teamLineups"] });
+        toast({ title: "Success", description: data.message });
+      } else {
+        // setIsUploading(false);
+        toast({
+          title: "Error!",
+          variant: "destructive",
+          description: data.message,
+        });
+      }
+    },
+    onError: (error) => {
+      console.log(error);
+      toast({
+        title: "Error!",
+        variant: "destructive",
+        description: "An error occured while creating player",
+      });
+    },
+  });
+
+  const onSubmit = (values: { player: string; swapWith: string }) => {
+    const data = {
+      player: values.player,
+      swapPlayerId: values.swapWith,
+      fixtureid: lineups[0].fixture_id,
+    };
+
+    mutation.mutate(data);
+  };
+
+  const onOpenChangeWrapper = (value: boolean) => {
+    setOpen(value);
   };
 
   const starting = lineups.filter((player) => player.player_type === "first11");
   const subs = lineups.filter((player) => player.player_type === "sub");
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={onOpenChangeWrapper}>
       <DialogTrigger asChild>
         <Button size={"sm"}>Swap</Button>
       </DialogTrigger>
@@ -63,7 +110,7 @@ const SwapPlayerModal = ({ lineups }: SwapProps) => {
         </DialogHeader>
 
         <Form {...form}>
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
               name="player"
@@ -123,8 +170,13 @@ const SwapPlayerModal = ({ lineups }: SwapProps) => {
         </Form>
 
         <DialogFooter className="mt-4">
-          <Button type="submit" onClick={form.handleSubmit(onSubmit)}>
-            Replace
+          <Button
+            type="submit"
+            onClick={form.handleSubmit(onSubmit)}
+            disabled={mutation.isPending}
+          >
+            Replace{" "}
+            {mutation.isPending && <RotateCcwIcon className="animate-spin" />}
           </Button>
         </DialogFooter>
       </DialogContent>

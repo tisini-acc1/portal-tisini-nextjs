@@ -2,13 +2,13 @@
 
 import Image from "next/image";
 
-import { useStore } from "@/lib/store";
+// import { useStore } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 
 const RefFixHeader = () => {
-  const { store } = useStore((state) => state);
+  // const { store } = useStore((state) => state);
 
-  const refFix = store.refFix;
+  // const refFix = store.refFix;
 
   return (
     <header className="bg-header rounded-md text-white font-bold font-mono">
