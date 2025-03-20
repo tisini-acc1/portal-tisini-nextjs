@@ -65,7 +65,7 @@ const NavigateButtons = ({ fixture }: { fixture: RefreeFix }) => {
           );
         }}
       >
-        More
+        Match sheet
       </Button>
     </div>
   );

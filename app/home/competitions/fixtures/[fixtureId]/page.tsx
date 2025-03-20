@@ -18,9 +18,10 @@ const SingleFixturePage = () => {
       <MatchSheetHeader />
 
       <section className="space-y-4">
-        <div className="grid md:grid-cols-12 grid-cols-1 gap-4">
+        <div className="grid lg:grid-cols-12 grid-cols-1 gap-4">
           <div className="space-y-2 col-span-6 border p-3 shadow-md rounded-md">
             <strong>Match Officials</strong>
+
             <div className=" grid grid-cols-2 lg:grid-cols-2 gap-4">
               <RefreeCard title="Commissioner" />
               <RefreeCard title="Center Refree" />
@@ -36,7 +37,7 @@ const SingleFixturePage = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-12 grid-cols-1 gap-4">
+        <div className="grid lg:grid-cols-12 grid-cols-1 gap-4">
           <div className="col-span-6 border p-3 shadow-md rounded-md">
             <div className="flex items-center justify-center">
               <strong className="text-center">Starting players</strong>
@@ -141,7 +142,7 @@ const RefreeCard = ({ title }: RefProps) => {
   const [blur, setBlur] = useState(true);
 
   return (
-    <div className="border rounded-md p-1 pt-2 flex flex-col md:flex-row gap-2 items-center bg-slate-50">
+    <div className="border rounded-md p-1 pt-2 flex flex-col lg:flex-row gap-2 items-center bg-slate-50">
       <Image
         src={"/avatar.webp"}
         alt="profile"
@@ -149,7 +150,7 @@ const RefreeCard = ({ title }: RefProps) => {
         height={80}
         className="rounded-full object-contain"
       />
-      <div className="flex flex-col md:items-center text-xs md:text-sm font-mono">
+      <div className="flex flex-col lg:items-center text-xs md:text-sm font-mono">
         <span className="">Michael Odiambo</span>
         <span className="text-muted-foreground">{title}</span>
         <span className="text-muted-foreground flex items-center gap-2">

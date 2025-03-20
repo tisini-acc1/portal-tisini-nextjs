@@ -42,21 +42,10 @@ const RefFixtureDetails = () => {
   // console.log(pitchCond);
 
   return (
-    <section className="bg-gray-100 p-2 md:p-4 space-y-6 font-mono rounded-md">
-      <div className="space-y-2">
-        <strong>Match Officials</strong>
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-          <RefreeCard title="Commissioner" />
-          <RefreeCard title="Center Refree" />
-          <RefreeCard title="1st Assistant Refree" />
-          <RefreeCard title="2nd Assistant Refree" />
-          <RefreeCard title="Reserve Refree" />
-        </div>
-      </div>
-
-      <div className="p-2 space-y-2">
+    <section className="space-y-6 font-mono rounded-md grid grid-cols-1 lg:grid-cols-12 gap-4 bg-blue-300">
+      <div className="col-span-4 bg-red-200 shadow-md">
         <strong>Match Conditions</strong>
-        <div className="flex flex-col md:flex-row gap-4 p-2 border bg-gray-50">
+        <div className="flex flex-col gap-4 p-2 border bg-gray-50">
           <p className="lg:w-1/2">
             <strong>Weather:</strong>{" "}
             <span className="text-muted-foreground text-xs md:text-sm">
@@ -71,19 +60,19 @@ const RefFixtureDetails = () => {
             </span>
           </p>
         </div>
-      </div>
 
-      <div className="p-2 space-y-2">
-        <div className="flex justify-between items-center">
-          <strong>Match Comments</strong>
+        <div className="space-y-2">
+          <div className="flex justify-between items-center">
+            <strong>Match Comments</strong>
 
-          <FixCommentModal wCond={wCond} pCond={pitchCond} />
-        </div>
+            <FixCommentModal wCond={wCond} pCond={pitchCond} />
+          </div>
 
-        <div className="border h-20 p-2 bg-gray-50">
-          <p className="text-muted-foreground text-xs md:text-sm">
-            {data?.[0].commisioner_comment}
-          </p>
+          <div className="border h-20 p-2 bg-gray-50">
+            <p className="text-muted-foreground text-xs md:text-sm">
+              {data?.[0].commisioner_comment}
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -94,7 +83,7 @@ type RefProps = {
   title: string;
 };
 
-const RefreeCard = ({ title }: RefProps) => {
+export const RefreeCard = ({ title }: RefProps) => {
   const [blur, setBlur] = useState(true);
 
   return (

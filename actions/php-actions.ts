@@ -635,12 +635,7 @@ export const getTeamLineup = async (
 ): Promise<Lineup[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
-  console.log(`${baseURL}`, {
-    gettoken: token,
-    action: "fixturelineup",
-    fixture: fixId,
-    teamid: teamId,
-  });
+
   try {
     const res = await axios.post(`${baseURL}`, {
       gettoken: token,

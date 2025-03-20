@@ -25,7 +25,7 @@ const AddLineupPage = () => {
 
   const fixType = store.fixType;
 
-  console.log(fixType);
+  // console.log(fixType);
 
   return (
     <>
