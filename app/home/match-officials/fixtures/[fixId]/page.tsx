@@ -117,43 +117,43 @@ const LineupPage = async ({ params }: LineupProps) => {
   );
 };
 
-export const Lineups = ({ data }: { data: Lineup[] }) => {
-  // const first11 = data?.filter((item) => item.player_type === "first11");
-  // const subs = data?.filter((item) => item.player_type === "sub");
-  if (data.length === 0) {
-    return (
-      <section className="h-[450px] bg-gray-100 flex items-center justify-center text-2xl rounded-md">
-        No data!
-      </section>
-    );
-  }
+// const Lineups = ({ data }: { data: Lineup[] }) => {
+//   // const first11 = data?.filter((item) => item.player_type === "first11");
+//   // const subs = data?.filter((item) => item.player_type === "sub");
+//   if (data.length === 0) {
+//     return (
+//       <section className="h-[450px] bg-gray-100 flex items-center justify-center text-2xl rounded-md">
+//         No data!
+//       </section>
+//     );
+//   }
 
-  return (
-    <section className="space-y-6 bg-gray-100 p-3 rounded-md">
-      <div>
-        {/* <div className="w-full bg-blue-600 text-white py-2 px-4 rounded-b-lg shadow-lg flex justify-center space-x-2">
-          <strong className="text-2xl font-bold">Verified {12}</strong>
-          <span className="text-lg">of</span>
-          <span className="text-2xl font-bold">{23} players</span>
-        </div> */}
+//   return (
+//     <section className="space-y-6 bg-gray-100 p-3 rounded-md">
+//       <div>
+//         {/* <div className="w-full bg-blue-600 text-white py-2 px-4 rounded-b-lg shadow-lg flex justify-center space-x-2">
+//           <strong className="text-2xl font-bold">Verified {12}</strong>
+//           <span className="text-lg">of</span>
+//           <span className="text-2xl font-bold">{23} players</span>
+//         </div> */}
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center">
-          {data.map((player) => (
-            <VerifyPlayerCard key={player.id} player={player} />
-          ))}
-        </div>
-      </div>
+//         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center">
+//           {data.map((player) => (
+//             <VerifyPlayerCard key={player.id} player={player} />
+//           ))}
+//         </div>
+//       </div>
 
-      {/* <div>
-        <strong className="mb-2">Substitutes</strong>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-          {subs.map((player) => (
-            <VerifyPlayerCard key={player.id} player={player} />
-          ))}
-        </div>
-      </div> */}
-    </section>
-  );
-};
+//       {/* <div>
+//         <strong className="mb-2">Substitutes</strong>
+//         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+//           {subs.map((player) => (
+//             <VerifyPlayerCard key={player.id} player={player} />
+//           ))}
+//         </div>
+//       </div> */}
+//     </section>
+//   );
+// };
 
 export default LineupPage;
