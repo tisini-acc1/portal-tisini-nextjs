@@ -1,6 +1,6 @@
 // import { getTeamLineup } from "@/actions/php-actions";
 // import FixtureData from "@/components/match-officials/fixtures/fixture-data";
-import VerifyPlayerCard from "@/components/match-officials/verify-player-card";
+// import VerifyPlayerCard from "@/components/match-officials/verify-player-card";
 import RefFixHeader from "@/components/match-officials/fixtures/ref-fix-header";
 // import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import RefFixtureDetails, {
