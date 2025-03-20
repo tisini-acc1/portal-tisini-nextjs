@@ -1,5 +1,5 @@
-// import { getTeamLineup } from "@/actions/php-actions";
-// import FixtureData from "@/components/match-officials/fixtures/fixture-data";
+import { getTeamLineup } from "@/actions/php-actions";
+import FixtureData from "@/components/match-officials/fixtures/fixture-data";
 // import VerifyPlayerCard from "@/components/match-officials/verify-player-card";
 import RefFixHeader from "@/components/match-officials/fixtures/ref-fix-header";
 // import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -20,8 +20,8 @@ const LineupPage = async ({ params }: LineupProps) => {
 
   console.log(fixture);
 
-  // const hData = await getTeamLineup(fixture[0], fixture[1]);
-  // const aData = await getTeamLineup(fixture[0], fixture[2]);
+  const hData = await getTeamLineup(fixture[0], fixture[1]);
+  const aData = await getTeamLineup(fixture[0], fixture[2]);
   // const refEvents = await getOfficialsEvents();
 
   // console.log(hData);
@@ -82,7 +82,7 @@ const LineupPage = async ({ params }: LineupProps) => {
       </section>
 
       <RefFixtureDetails />
-      {/* <FixtureData home={hData} away={aData} homeId={fixture[1]} /> */}
+      <FixtureData home={hData} away={aData} homeId={fixture[1]} />
     </main>
     // <main>
     //   <Tabs defaultValue="details">
