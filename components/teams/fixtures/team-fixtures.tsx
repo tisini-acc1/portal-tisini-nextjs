@@ -34,12 +34,12 @@ const TeamFixtures = () => {
   });
 
   useEffect(() => {
-    if (data) {
-      const seriesData = data[0].season.slice().reverse();
+    if (data && data[0]?.season) {
+      const seriesData = data[0]?.season.slice().reverse();
       setSeries(seriesData);
-      updateSerie(seriesData[0].id);
-      updateTournament(data[0].tournamentid);
-      setFixtures(data[0]?.season[0]?.fixture.slice().reverse() || []);
+      updateSerie(seriesData[0]?.id);
+      updateTournament(data[0]?.tournamentid);
+      setFixtures(data[0]?.season[0]?.fixture?.slice().reverse() || []);
     }
   }, [data]);
 
@@ -77,72 +77,81 @@ const TeamFixtures = () => {
     return <div>Error loading tournaments. Please try again later.</div>;
   }
 
-  // console.log(series);
-
   return (
-    <main className="space-y-8">
-      <TeamSelectHeader
-        tournamentsData={data as TeamTournament[]}
-        seriesData={series}
-      />
+    <>
+      {data && data?.length <= 0 ? (
+        <div className="h-screen bg-gray-50 flex items-center justify-center">
+          No scheduled fixtures available!
+        </div>
+      ) : (
+        <main className="space-y-8">
+          <TeamSelectHeader
+            tournamentsData={data as TeamTournament[]}
+            seriesData={series}
+          />
 
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {/* <FixturesCalendar fixtures={fixtures} /> */}
-        {fixtures.map((fixture) => (
-          <Card
-            key={fixture.id}
-            className={
-              fixture.game_status === "FT" || fixture.game_status === "ended"
-                ? "text-gray-400"
-                : ""
-            }
-          >
-            <CardHeader>
-              <CardTitle className="flex justify-between items-center">
-                {formattedDate(fixture.game_date)}
+          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* <FixturesCalendar fixtures={fixtures} /> */}
+            {fixtures.map((fixture) => (
+              <Card
+                key={fixture.id}
+                className={
+                  fixture.game_status === "FT" ||
+                  fixture.game_status === "ended"
+                    ? "text-gray-400"
+                    : ""
+                }
+              >
+                <CardHeader>
+                  <CardTitle className="flex justify-between items-center">
+                    {formattedDate(fixture.game_date)}
 
-                <PlusCircle
-                  onClick={() => {
-                    updateFixType(fixType);
-                    upateUserFixture(fixture);
-                    router.push(`/home/teams/fixtures/lineup`);
-                  }}
-                  className="w-5 h-5 cursor-pointer hover:text-blue-500 hover:scale-100"
-                />
-              </CardTitle>
-            </CardHeader>
+                    <PlusCircle
+                      onClick={() => {
+                        updateFixType(fixType);
+                        upateUserFixture(fixture);
+                        router.push(`/home/teams/fixtures/lineup`);
+                      }}
+                      className="w-5 h-5 cursor-pointer hover:text-blue-500 hover:scale-100"
+                    />
+                  </CardTitle>
+                </CardHeader>
 
-            <CardContent className="flex flex-col space-y-4">
-              <div className="flex items-center gap-4">
-                <p className="text-3xl">Vs</p>
-                <div className="font-mono">
-                  <p>
-                    {store.team.name === fixture.team1_name
-                      ? fixture.team2_name
-                      : fixture.team1_name}
-                  </p>
-                  <p>
-                    {store.team.name === fixture.team1_name ? "Home" : "Away"}
-                  </p>
-                </div>
-              </div>
+                <CardContent className="flex flex-col space-y-4">
+                  <div className="flex items-center gap-4">
+                    <p className="text-3xl">Vs</p>
+                    <div className="font-mono">
+                      <p>
+                        {store.team.name === fixture.team1_name
+                          ? fixture.team2_name
+                          : fixture.team1_name}
+                      </p>
+                      <p>
+                        {store.team.name === fixture.team1_name
+                          ? "Home"
+                          : "Away"}
+                      </p>
+                    </div>
+                  </div>
 
-              <div className="flex justify-between text-xs text-gray-500 whitespace-nowrap">
-                <p
-                  className="w-9/12 overflow-hidden text-ellipsis
+                  <div className="flex justify-between text-xs text-gray-500 whitespace-nowrap">
+                    <p
+                      className="w-9/12 overflow-hidden text-ellipsis
                 "
-                >
-                  League
-                </p>{" "}
-                <p className="w-[20%] overflow-hidden text-ellipsis">
-                  Matchday
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </section>
-    </main>
+                    >
+                      League
+                    </p>{" "}
+                    <p className="w-[20%] overflow-hidden text-ellipsis">
+                      Matchday
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </section>
+        </main>
+      )}
+    </>
   );
 };
 

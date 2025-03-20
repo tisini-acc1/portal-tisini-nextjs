@@ -34,10 +34,15 @@ const TeamPlayers = () => {
   });
 
   useEffect(() => {
-    if (tournamentsData) {
-      setSeries(tournamentsData[0].season);
-      updateSerie(tournamentsData[0].season[0]?.id);
-      updateTournament(tournamentsData[0].tournamentid);
+    if (
+      tournamentsData &&
+      tournamentsData.length > 0 &&
+      tournamentsData[0]?.season
+    ) {
+      const seasonData = tournamentsData[0]?.season;
+      setSeries(seasonData);
+      updateSerie(seasonData[0]?.id);
+      updateTournament(tournamentsData[0]?.tournamentid);
     }
   }, [tournamentsData, updateSerie, updateTournament]);
 
@@ -63,13 +68,15 @@ const TeamPlayers = () => {
   if (!store.tournament || !store.serie) {
     return <div>Please select a league and season to view players.</div>;
   }
-  // console.log(playersData);
+  // console.log(tournamentsData);
   return (
     <main className="space-y-8">
-      <TeamSelectHeader
-        tournamentsData={tournamentsData as TeamTournament[]}
-        seriesData={series}
-      />
+      {tournamentsData && tournamentsData?.length > 0 && (
+        <TeamSelectHeader
+          tournamentsData={tournamentsData as TeamTournament[]}
+          seriesData={series}
+        />
+      )}
 
       <section>
         <TeamPlayersTable
@@ -80,5 +87,13 @@ const TeamPlayers = () => {
     </main>
   );
 };
+
+{
+  /* <div className="flex items-center justify-center bg-gray-50 h-screen text-2xl font-mono p-4">
+          <p className="w-1/2 mx-auto">
+            Ooops! No fixture results available at this time.
+          </p>
+        </div> */
+}
 
 export default TeamPlayers;

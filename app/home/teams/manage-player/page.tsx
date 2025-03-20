@@ -68,109 +68,121 @@ const ManagePlayerPage = () => {
   // console.log(players?.slice().reverse());
 
   return (
-    <main className="space-y-4">
-      <header className="flex justify-between items-center">
-        <p className="font-mono">{players?.length} players</p>
-        <CreatePlayerModal countries={countries as Country[]} />
-      </header>
+    <>
+      <main className="space-y-4">
+        <header className="flex justify-between items-center">
+          <p className="font-mono">{players?.length} players</p>
+          <CreatePlayerModal countries={countries as Country[]} />
+        </header>
 
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {players
-          ?.slice()
-          .reverse()
-          .map((player) => (
-            <Card
-              key={player.id}
-              className="cursor-pointer hover:bg-gray-100 font-mono"
-            >
-              <CardHeader className="p-1">
-                <div className="relative overflow-hidden rounded-md w-full">
-                  {player.passportphoto === "" ||
-                  player.passportphoto === null ? (
-                    <div className="h-64 bg-gray-300 rounded-sm flex items-center justify-center mx-auto text-gray-600">
-                      No Image
+        {players && players?.length < 0 ? (
+          <div className="flex items-center justify-center bg-gray-50 h-screen text-2xl font-mono p-4">
+            <p className="w-1/2 mx-auto">
+              Ooops! No fixture results available at this time.
+            </p>
+          </div>
+        ) : (
+          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {players
+              ?.slice()
+              .reverse()
+              .map((player) => (
+                <Card
+                  key={player.id}
+                  className="cursor-pointer hover:bg-gray-100 font-mono"
+                >
+                  <CardHeader className="p-1">
+                    <div className="relative overflow-hidden rounded-md w-full">
+                      {player.passportphoto === "" ||
+                      player.passportphoto === null ? (
+                        <div className="h-64 bg-gray-300 rounded-sm flex items-center justify-center mx-auto text-gray-600">
+                          No Image
+                        </div>
+                      ) : (
+                        <Image
+                          src={player.passportphoto}
+                          alt={"name"}
+                          width={150}
+                          height={150}
+                          className={
+                            "h-full w-full object-cover transition-all hover:scale-105 aspect-square"
+                          }
+                        />
+                      )}
+
+                      <div className="absolute top-1 right-1 bg-gray-200 rounded-full h-7 w-7 flex justify-center items-center font-semibold">
+                        {player.current_jersey_no}
+                      </div>
                     </div>
-                  ) : (
-                    <Image
-                      src={player.passportphoto}
-                      alt={"name"}
-                      width={150}
-                      height={150}
-                      className={
-                        "h-full w-full object-cover transition-all hover:scale-105 aspect-square"
-                      }
-                    />
-                  )}
+                  </CardHeader>
 
-                  <div className="absolute top-1 right-1 bg-gray-200 rounded-full h-7 w-7 flex justify-center items-center font-semibold">
-                    {player.current_jersey_no}
-                  </div>
-                </div>
-              </CardHeader>
+                  <CardContent className="p-2">
+                    <div className="flex justify-between items-center mb-2">
+                      <h3 className="lg:text-sm whitespace-nowrap text-ellipsis font-semibold text-gray-800">
+                        {player.pname}
+                      </h3>
 
-              <CardContent className="p-2">
-                <div className="flex justify-between items-center mb-2">
-                  <h3 className="lg:text-sm whitespace-nowrap text-ellipsis font-semibold text-gray-800">
-                    {player.pname}
-                  </h3>
+                      {/* Dropdown menu trigger icon in the top right corner */}
+                      <DropdownMenu>
+                        <DropdownMenuTrigger className="">
+                          <MoreVerticalIcon
+                            className="text-gray-600 cursor-pointer"
+                            size={17}
+                          />
+                        </DropdownMenuTrigger>
 
-                  {/* Dropdown menu trigger icon in the top right corner */}
-                  <DropdownMenu>
-                    <DropdownMenuTrigger className="">
-                      <MoreVerticalIcon
-                        className="text-gray-600 cursor-pointer"
-                        size={17}
-                      />
-                    </DropdownMenuTrigger>
-
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem
-                        onClick={() => {
-                          setOpenTransfer(true);
-                          setSelectedPlayer(player);
-                        }}
-                      >
-                        Transfer
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        onClick={() => {
-                          setOpenUpload(true);
-                          setSelectedPlayer(player);
-                        }}
-                      >
-                        Upload
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        onClick={() => {
-                          setOpenEdit(true);
-                          setSelectedPlayer(player);
-                        }}
-                      >
-                        Edit
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => console.log("delete")}>
-                        Delete
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-                <p className="lg:text-xs text-gray-600 mb-1">
-                  <strong>
-                    {player.nationality}
-                    {","}
-                  </strong>{" "}
-                  {calculateYearsOld(player.dob)} year(s)
-                </p>
-                {/* <p className="text-xs text-gray-600 mb-1">
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem
+                            onClick={() => {
+                              setOpenTransfer(true);
+                              setSelectedPlayer(player);
+                            }}
+                          >
+                            Transfer
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => {
+                              setOpenUpload(true);
+                              setSelectedPlayer(player);
+                            }}
+                          >
+                            Upload
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => {
+                              setOpenEdit(true);
+                              setSelectedPlayer(player);
+                            }}
+                          >
+                            Edit
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => console.log("delete")}
+                          >
+                            Delete
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </div>
+                    <p className="lg:text-xs text-gray-600 mb-1">
+                      <strong>
+                        {player.nationality}
+                        {","}
+                      </strong>{" "}
+                      {calculateYearsOld(player.dob)} year(s)
+                    </p>
+                    {/* <p className="text-xs text-gray-600 mb-1">
                   <strong>Jersey Number:</strong> {player.current_jersey_no}
                 </p> */}
-                <p className="lg:text-xs text-gray-600">
-                  <strong>Signed Date:</strong>{" "}
-                  {format(new Date(player.signed_date), "d MMM, yyy")}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
+                    <p className="lg:text-xs text-gray-600">
+                      <strong>Signed Date:</strong>{" "}
+                      {format(new Date(player.signed_date), "d MMM, yyy")}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+          </section>
+        )}
 
         <TransferDialog
           open={openTransfer}
@@ -192,8 +204,8 @@ const ManagePlayerPage = () => {
           player={selectedPlayer as TeamPlayer}
           countries={[]}
         />
-      </section>
-    </main>
+      </main>
+    </>
   );
 };
 

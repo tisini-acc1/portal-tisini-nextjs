@@ -55,7 +55,7 @@ const ResultsPage = () => {
     }
   }, [data, store.tournament, store.serie]);
 
-  // console.log(fixtures);
+  console.log(data);
   // console.log(store.fixture);
 
   if (isLoading) {
@@ -68,73 +68,88 @@ const ResultsPage = () => {
   }
 
   return (
-    <main className="space-y-4">
-      <ResultsHeader
-        tournamentsData={data as TeamTournament[]}
-        seriesData={series}
-        fixtureData={fixtures}
-      />
+    <>
+      {data && data.length <= 0 ? (
+        <div className="flex items-center justify-center bg-gray-50 h-screen text-2xl font-mono p-4">
+          <p className="w-1/2 mx-auto">
+            Ooops! No fixture results available at this time.
+          </p>
+        </div>
+      ) : (
+        <main className="space-y-4">
+          <ResultsHeader
+            tournamentsData={data as TeamTournament[]}
+            seriesData={series}
+            fixtureData={fixtures}
+          />
 
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {/* <FixturesCalendar fixtures={fixtures} /> */}
-        {fixtures.map((fixture) => (
-          <Card
-            key={fixture.id}
-            className={
-              fixture.game_status === "FT" || fixture.game_status === "ended"
-                ? "text-gray-400"
-                : ""
-            }
-          >
-            <CardHeader>
-              <CardTitle className="flex justify-between items-center">
-                {formattedDate(fixture.game_date)}
+          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* <FixturesCalendar fixtures={fixtures} /> */}
+            {fixtures.map((fixture) => (
+              <Card
+                key={fixture.id}
+                className={
+                  fixture.game_status === "FT" ||
+                  fixture.game_status === "ended"
+                    ? "text-gray-400"
+                    : ""
+                }
+              >
+                <CardHeader>
+                  <CardTitle className="flex justify-between items-center">
+                    {formattedDate(fixture.game_date)}
 
-                <p className="overflow-hidden text-elipsis flex">Round 24</p>
-              </CardTitle>
-            </CardHeader>
+                    <p className="overflow-hidden text-elipsis flex">
+                      Round 24
+                    </p>
+                  </CardTitle>
+                </CardHeader>
 
-            <CardContent className="flex flex-col space-y-4">
-              <div className="flex items-center gap-4">
-                <p className="text-3xl">Vs</p>
-                <div className="font-mono">
-                  <p>
-                    {store.team.name === fixture.team1_name
-                      ? fixture.team2_name
-                      : fixture.team1_name}
-                  </p>
-                  <p>
-                    {store.team.name === fixture.team1_name ? "Home" : "Away"}
-                  </p>
-                </div>
-              </div>
+                <CardContent className="flex flex-col space-y-4">
+                  <div className="flex items-center gap-4">
+                    <p className="text-3xl">Vs</p>
+                    <div className="font-mono">
+                      <p>
+                        {store.team.name === fixture.team1_name
+                          ? fixture.team2_name
+                          : fixture.team1_name}
+                      </p>
+                      <p>
+                        {store.team.name === fixture.team1_name
+                          ? "Home"
+                          : "Away"}
+                      </p>
+                    </div>
+                  </div>
 
-              <div className="flex justify-between items-center text-xs text-gray-500 whitespace-nowrap">
-                <p
-                  className="w-9/12 overflow-hidden text-ellipsis
+                  <div className="flex justify-between items-center text-xs text-gray-500 whitespace-nowrap">
+                    <p
+                      className="w-9/12 overflow-hidden text-ellipsis
                 "
-                >
-                  League
-                </p>{" "}
-                {fixture.pay_status === 0 ? (
-                  <FixPaymentModal fixture={fixture} />
-                ) : (
-                  <Button
-                    size={"sm"}
-                    className={"bg-green-600"}
-                    onClick={() =>
-                      router.push("/home/teams/results/single-result")
-                    }
-                  >
-                    view
-                  </Button>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </section>
-    </main>
+                    >
+                      League
+                    </p>{" "}
+                    {fixture.pay_status === 0 ? (
+                      <FixPaymentModal fixture={fixture} />
+                    ) : (
+                      <Button
+                        size={"sm"}
+                        className={"bg-green-600"}
+                        onClick={() =>
+                          router.push("/home/teams/results/single-result")
+                        }
+                      >
+                        view
+                      </Button>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </section>
+        </main>
+      )}
+    </>
   );
 };
 
