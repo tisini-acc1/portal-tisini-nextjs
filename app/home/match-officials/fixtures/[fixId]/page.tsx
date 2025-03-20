@@ -117,7 +117,7 @@ const LineupPage = async ({ params }: LineupProps) => {
   );
 };
 
-const Lineups = ({ data }: { data: Lineup[] }) => {
+export const Lineups = ({ data }: { data: Lineup[] }) => {
   // const first11 = data?.filter((item) => item.player_type === "first11");
   // const subs = data?.filter((item) => item.player_type === "sub");
   if (data.length === 0) {
