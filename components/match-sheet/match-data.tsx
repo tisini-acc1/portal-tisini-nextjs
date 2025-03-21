@@ -50,15 +50,17 @@ const MatchDataSection = ({ homeId, home, away, fixEvents }: DataProps) => {
           <strong>Match Data</strong>
         </h1>
 
-        <div className="flex gap-2">
-          <VerifyFixtureData />
-          <AddFixtureData
-            homeP={home}
-            awayP={away}
-            refEvents={data?.refevent as RefEvent[]}
-            fixType={selectedFixType?.id as string}
-          />
-        </div>
+        {store.user.role === "9" && (
+          <div className="flex gap-2">
+            <VerifyFixtureData />
+            <AddFixtureData
+              homeP={home}
+              awayP={away}
+              refEvents={data?.refevent as RefEvent[]}
+              fixType={selectedFixType?.id as string}
+            />
+          </div>
+        )}
       </div>
 
       {fixEvents.length === 0 ? (

@@ -129,6 +129,18 @@ const ResultsPage = () => {
                     >
                       League
                     </p>{" "}
+                    <Button
+                      size={"sm"}
+                      variant={"outline"}
+                      className="mr-2"
+                      onClick={() =>
+                        router.push(
+                          `/home/teams/results/match-sheet/${fixture.id}-${fixture.team1_id}`
+                        )
+                      }
+                    >
+                      match sheet
+                    </Button>
                     {fixture.pay_status === 0 ? (
                       <FixPaymentModal fixture={fixture} />
                     ) : (

@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import FixCommentModal from "../match-officials/fixtures/fix-comment-modal";
 import RefreeCard from "./ref-card";
 import { getPitchCond, getWeatherCond } from "@/actions/php-actions";
+import { useStore } from "@/lib/store";
 
 type CommentsProps = {
   details: MatchDetails;
@@ -11,6 +12,8 @@ type CommentsProps = {
 };
 
 const OfficialsCommentsSection = ({ details, refData }: CommentsProps) => {
+  const user = useStore((state) => state.store.user);
+
   const { data, isLoading } = useQuery({
     queryKey: ["weatherConditions"],
     queryFn: () => getWeatherCond(),
@@ -84,7 +87,9 @@ const OfficialsCommentsSection = ({ details, refData }: CommentsProps) => {
               <div className="flex justify-between items-center">
                 <strong>Referee Comments</strong>
 
-                <FixCommentModal wCond={data} pCond={pCond} />
+                {user.role === "9" && (
+                  <FixCommentModal wCond={data} pCond={pCond} />
+                )}
               </div>
 
               <div className="flex flex-col gap-4 p-2">
