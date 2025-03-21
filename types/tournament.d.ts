@@ -43,11 +43,21 @@ type UserCert = {
   certdocument: string;
 };
 
-type RefStats = {
-  events: RefData[];
+type Lineup = {
+  id: string;
+  date_created: string;
+  team_player_id: string;
+  Jersey_No: string;
+  player_type: string;
+  player_id: string;
+  pname: string;
+  lineupposition: string;
+  red: string;
+  GK: string;
+  verify: string;
 };
 
-type RefData = {
+type RefEvents = {
   id: string;
   fixture: string;
   eventid: string;
@@ -64,6 +74,49 @@ type RefData = {
   status: string;
   createdbyid: string;
   createdby: string;
+};
+
+type MatchDetails = {
+  hometeam: string;
+  awayteam: string;
+  game_date: string;
+
+  status: string;
+  game_status: string;
+  league: string;
+  matchday: string;
+  fixture_type: string;
+  weather_type: string;
+  commisioner_comment: string;
+  pitch_condition: string;
+  other_comment: string;
+};
+
+type Referee = {
+  id: string;
+  first_name: string;
+  last_name: string;
+  other_name: string;
+  is_active: string;
+  phone_number: string;
+  id_no: string;
+  account_no: null;
+  email: string;
+  status: string;
+  profileurl: null;
+};
+
+type MatchSheet = {
+  fixturedata: MatchDetails[];
+  events: RefEvents[];
+  referee: {
+    ref1: Referee[];
+    ref2: Referee[];
+    ref3: Referee[];
+    ref4: Referee[];
+  };
+  hometeamlineup: Lineup[];
+  awayteamlineup: Lineup[];
 };
 
 type CreateRefComment = {

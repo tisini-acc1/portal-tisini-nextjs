@@ -1,9 +1,18 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useStore } from "@/lib/store";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
+import { MoreHorizontal } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export const columns: ColumnDef<RefreeFix>[] = [
@@ -54,19 +63,39 @@ const NavigateButtons = ({ fixture }: { fixture: RefreeFix }) => {
   const { updateRefFixture } = useStore((state) => state);
 
   return (
-    <div className="flex gap-2">
-      <Button
-        size={"sm"}
-        variant={"outline"}
-        onClick={() => {
-          updateRefFixture(fixture);
-          router.push(
-            `/home/match-officials/fixtures/${fixture.id}-${fixture.team1_id}-${fixture.team2_id}`
-          );
-        }}
-      >
-        Match sheet
-      </Button>
-    </div>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" className="h-8 w-8 p-0">
+          <span className="sr-only">Open menu</span>
+          <MoreHorizontal />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+
+        <DropdownMenuSeparator />
+
+        <DropdownMenuItem
+          onClick={() => {
+            updateRefFixture(fixture);
+            router.push(
+              `/home/match-officials/fixtures/match-sheet/${fixture.id}-${fixture.team1_id}-${fixture.team2_id}`
+            );
+          }}
+        >
+          Match sheet
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => {
+            updateRefFixture(fixture);
+            router.push(
+              `/home/match-officials/fixtures/verify-lineup/${fixture.id}-${fixture.team1_id}-${fixture.team2_id}`
+            );
+          }}
+        >
+          Verify lineup
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };

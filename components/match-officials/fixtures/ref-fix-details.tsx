@@ -42,7 +42,7 @@ const RefFixtureDetails = () => {
   // console.log(pitchCond);
 
   return (
-    <section className="space-y-6 font-mono rounded-md grid grid-cols-1 lg:grid-cols-12 gap-4 bg-blue-300">
+    <section className="space-y-6 mt-10 font-mono rounded-md grid grid-cols-1 lg:grid-cols-12 gap-4 bg-blue-300">
       <div className="col-span-4 bg-red-200 shadow-md">
         <strong>Match Conditions</strong>
         <div className="flex flex-col gap-4 p-2 border bg-gray-50">

@@ -758,7 +758,7 @@ export const getFixType = async (): Promise<FixtureType[]> => {
   }
 };
 
-export const getFixRefEvents = async (id: string): Promise<RefStats> => {
+export const getFixRefEvents = async (id: string): Promise<MatchSheet> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
 

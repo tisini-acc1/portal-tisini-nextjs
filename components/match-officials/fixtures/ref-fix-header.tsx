@@ -4,11 +4,13 @@ import Image from "next/image";
 
 // import { useStore } from "@/lib/store";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 const RefFixHeader = () => {
   // const { store } = useStore((state) => state);
 
   // const refFix = store.refFix;
+  const router = useRouter();
 
   return (
     <header className="bg-header rounded-md text-white font-bold font-mono">
@@ -47,7 +49,7 @@ const RefFixHeader = () => {
         </div>
       </div>
 
-      <div className="p-1 px-2 flex justify-between items-center gap-2 text-xs font-mono overflow-hidden whitespace-nowrap">
+      {/* <div className="p-1 px-2 flex justify-between items-center gap-2 text-xs font-mono overflow-hidden whitespace-nowrap">
         <div>
           <p className="sm:w-3/4">Weather: Sunny</p>
           <p className="sm:w-1/4 text-right">Pitch: Pathetic</p>
@@ -57,7 +59,7 @@ const RefFixHeader = () => {
           <Button size={"sm"}>Home</Button>
           <Button size={"sm"}>Away</Button>
         </div>
-      </div>
+      </div> */}
     </header>
   );
 };

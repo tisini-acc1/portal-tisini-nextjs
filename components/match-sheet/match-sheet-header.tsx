@@ -1,16 +1,23 @@
-import Image from "next/image";
+"use client";
 
-const MatchSheetHeader = () => {
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+
+const MatchSheetHeader = ({ details }: { details: MatchDetails }) => {
+  const router = useRouter();
+
   return (
     <header className="bg-header rounded-md text-white font-bold font-mono">
       <div className="p-1 px-2 flex justify-between gap-2 text-xs font-mono overflow-hidden whitespace-nowrap">
-        <p className="sm:w-3/4">{"league"}</p>
-        <p className="sm:w-1/4 text-right">Round: </p>
+        <p className="sm:w-3/4">{details?.league}</p>
+        <p className="sm:w-1/4 text-right">Round: {details?.matchday}</p>
       </div>
 
       <div className="h-24 flex items-center">
         <div className="w-2/5 flex items-center justify-end">
-          <div className="text-xs md:text-2xl text-right">{"team1_name"}</div>
+          <div className="text-xs md:text-2xl text-right">
+            {details.hometeam}
+          </div>
           <div>
             <Image
               src="/homeLogo.png"
@@ -34,13 +41,8 @@ const MatchSheetHeader = () => {
               className="object-contain"
             />
           </div>
-          <div className="text-xs md:text-2xl">{"team2_name"}</div>
+          <div className="text-xs md:text-2xl">{details?.awayteam}</div>
         </div>
-      </div>
-
-      <div className="p-1 px-2 flex justify-between gap-2 text-xs font-mono overflow-hidden whitespace-nowrap">
-        <p className="sm:w-3/4">Weather: Sunny</p>
-        <p className="sm:w-1/4 text-right">Pitch: Pathetic</p>
       </div>
     </header>
   );
