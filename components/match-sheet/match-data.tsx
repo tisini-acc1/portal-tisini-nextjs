@@ -47,14 +47,20 @@ const MatchDataSection = ({ homeId, home, away }: DataProps) => {
 
   return (
     <section className="h-[450px] w-full space-y-6 bg-gray-100 p-3 rounded-md">
-      <div className="flex justify-end gap-4">
-        <VerifyFixtureData />
-        <AddFixtureData
-          homeP={home}
-          awayP={away}
-          refEvents={data?.refevent as RefEvent[]}
-          fixType={selectedFixType?.id as string}
-        />
+      <div className="flex justify-between items-center">
+        <h1>
+          <strong>Match Data</strong>
+        </h1>
+
+        <div className="flex gap-2">
+          <VerifyFixtureData />
+          <AddFixtureData
+            homeP={home}
+            awayP={away}
+            refEvents={data?.refevent as RefEvent[]}
+            fixType={selectedFixType?.id as string}
+          />
+        </div>
       </div>
 
       <div className="">
