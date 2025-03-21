@@ -89,13 +89,15 @@ const RefDataCard = ({ data, homeId }: CardProps) => {
       ? "/conversion.png"
       : ["42", "62", "61"].includes(data.subeventid)
       ? "/missed.png"
-      : ["43", "44", "200"].includes(data.subeventid)
+      : ["43", "44"].includes(data.subeventid)
       ? "/goal.png"
-      : ["66"].includes(data.subeventid)
+      : ["66", "200"].includes(data.subeventid)
       ? "/rugby.jpg"
-      : data.subeventid === "45"
+      : data.subeventid === "46"
       ? "/yellowcard.avif"
-      : "/redcard.webp";
+      : data.subeventid === "45"
+      ? "/redcard.webp"
+      : "/homeLogo.png";
 
   return (
     <div className="p-2 font-semibold">

@@ -20,7 +20,7 @@ const RugbyTeamStats = ({ data }: { data: FixtureData }) => {
   // console.log(territory);
   return (
     <section className="grid gap-4">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <div className="space-y-2">
           <TeamStatsHeader
             details={rData.details}
@@ -39,7 +39,7 @@ const RugbyTeamStats = ({ data }: { data: FixtureData }) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <RugbyTeamDiscipline data={rData.discipline} />
         <RugbyTeamRestarts data={rData.restarts} />
         <RugbyTeamZone data={rData.zones} />

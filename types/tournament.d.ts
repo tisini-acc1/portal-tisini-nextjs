@@ -20,7 +20,7 @@ type CreateFixEvent = {
   subevent: string | number;
   fixtype: string;
   team: string;
-  player: string;
+  player: string | number;
   subplayer: string | number;
   minute: string;
 };

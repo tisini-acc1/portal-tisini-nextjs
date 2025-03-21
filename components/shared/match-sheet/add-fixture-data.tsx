@@ -54,10 +54,7 @@ export const eventsSchema = z.object({
     .string()
     .min(1, { message: "Matchday is required" })
     .max(6, { message: "Home team is required" }),
-  player: z
-    .string()
-    .min(1, { message: "Fixture type is required" })
-    .max(9, { message: "Home team is required" }),
+  player: z.string(),
   subPlayer: z.string(),
   minute: z
     .string()
@@ -88,6 +85,7 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
   const subIds = ["17", "52"];
 
   const selectedId = form.watch("event");
+  const selectedSubId = form.watch("subEvent");
   const selectedEvent = refEvents.find((e) => e.id === selectedId);
   const subEvents = selectedEvent?.subevent;
 
@@ -141,7 +139,7 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
       subevent: value.subEvent || 0,
       fixtype: fixType,
       team: value.team,
-      player: value.player,
+      player: value.player || 0,
       subplayer: value.subPlayer || 0,
       minute: value.minute,
     };
@@ -261,36 +259,38 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="player"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Player</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="select player" />
-                      </SelectTrigger>
-                    </FormControl>
+            {selectedSubId !== "200" && (
+              <FormField
+                control={form.control}
+                name="player"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Player</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="select player" />
+                        </SelectTrigger>
+                      </FormControl>
 
-                    <SelectContent>
-                      {first11.map((player) => (
-                        <SelectItem
-                          key={player.player_id}
-                          value={player.player_id}
-                        >
-                          {player.pname} - {player.Jersey_No}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </FormItem>
-              )}
-            />
+                      <SelectContent>
+                        {first11.map((player) => (
+                          <SelectItem
+                            key={player.player_id}
+                            value={player.player_id}
+                          >
+                            {player.pname} - {player.Jersey_No}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
+            )}
 
             {showSub && (
               <FormField

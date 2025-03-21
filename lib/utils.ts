@@ -539,7 +539,12 @@ export const rugbyDiscipline = (home: Stats, away: Stats, cards: Cards) => {
     home: getEvent(home, "46"),
     away: getEvent(away, "46"),
   };
-  discipline["cards"] = cards;
+  discipline["cards"] = {
+    Homeyellow: getSubEvent(home, "55", "46"),
+    Awayyellow: getSubEvent(away, "55", "46"),
+    Homered: getSubEvent(home, "55", "45"),
+    Awayred: getSubEvent(away, "55", "45"),
+  };
 
   return discipline;
 };

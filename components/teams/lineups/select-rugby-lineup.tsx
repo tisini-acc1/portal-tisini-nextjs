@@ -44,7 +44,7 @@ const rugby15Positions = [
   "Outside center",
   "Right wing",
   "Full back",
-  "Hooker",
+  "Front row",
   "Front row",
   "Front row",
   "Any player",

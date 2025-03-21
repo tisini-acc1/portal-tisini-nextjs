@@ -49,13 +49,12 @@ const ResultsPage = () => {
         if (season && season.fixture && season.fixture.length > 0) {
           const reversedFixtures = [...season.fixture].reverse();
           setFixtures(reversedFixtures);
-          updateFixture(reversedFixtures[0].id);
         }
       }
     }
   }, [data, store.tournament, store.serie]);
 
-  console.log(data);
+  // console.log(data);
   // console.log(store.fixture);
 
   if (isLoading) {
@@ -147,9 +146,10 @@ const ResultsPage = () => {
                       <Button
                         size={"sm"}
                         className={"bg-green-600"}
-                        onClick={() =>
-                          router.push("/home/teams/results/single-result")
-                        }
+                        onClick={() => {
+                          updateFixture(fixture.id);
+                          router.push("/home/teams/results/single-result");
+                        }}
                       >
                         view
                       </Button>
