@@ -4,12 +4,14 @@ import Image from "next/image";
 import { useState } from "react";
 import { EyeIcon } from "lucide-react";
 
-import MatchSheetHeader from "@/components/match-sheet/match-sheet-header";
+// import MatchSheetHeader from "@/components/match-sheet/match-sheet-header";
+import RefFixHeader from "@/components/match-officials/fixtures/ref-fix-header";
 
 const SingleFixturePage = () => {
   return (
     <main className="space-y-2">
-      <MatchSheetHeader />
+      {/* <MatchSheetHeader /> */}
+      <RefFixHeader />
 
       <section className="space-y-4">
         <div className="grid lg:grid-cols-12 grid-cols-1 gap-4">

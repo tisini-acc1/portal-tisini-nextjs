@@ -1,11 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 const MatchSheetHeader = ({ details }: { details: MatchDetails }) => {
-  const router = useRouter();
-
   return (
     <header className="bg-header rounded-md text-white font-bold font-mono">
       <div className="p-1 px-2 flex justify-between gap-2 text-xs font-mono overflow-hidden whitespace-nowrap">

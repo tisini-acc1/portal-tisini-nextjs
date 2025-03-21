@@ -17,7 +17,7 @@ const MatchSheetPage = async ({ params }: SheetProps) => {
   const id = fixId.split("-")[0];
   const homeId = fixId.split("-")[1];
 
-  const data = await getFixRefEvents(fixId);
+  const data = await getFixRefEvents(id);
   // const refFix = useStore((state) => state.store.refFix);
 
   console.log(data);
