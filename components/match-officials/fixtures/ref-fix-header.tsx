@@ -11,19 +11,18 @@ const RefFixHeader = () => {
 
   const refFix = store.refFix;
   // const router = useRouter();
+  console.log(refFix);
 
   return (
     <header className="bg-header rounded-md text-white font-bold font-mono">
       <div className="p-1 px-2 flex justify-between gap-2 text-xs font-mono overflow-hidden whitespace-nowrap">
-        <p className="sm:w-3/4">{refFix.league}</p>
-        <p className="sm:w-1/4 text-right">Round: {refFix.matchday}</p>
+        <p className="sm:w-3/4">{"league"}</p>
+        <p className="sm:w-1/4 text-right">Round: {"matchday"}</p>
       </div>
 
       <div className="h-24 flex items-center">
         <div className="w-2/5 flex items-center justify-end">
-          <div className="text-xs md:text-2xl text-right">
-            {refFix.team1_name}
-          </div>
+          <div className="text-xs md:text-2xl text-right">{"team1_name"}</div>
           <div>
             <Image
               src="/homeLogo.png"
@@ -47,7 +46,7 @@ const RefFixHeader = () => {
               className="object-contain"
             />
           </div>
-          <div className="text-xs md:text-2xl">{refFix.team2_name}</div>
+          <div className="text-xs md:text-2xl">{"team2_name"}</div>
         </div>
       </div>
 
