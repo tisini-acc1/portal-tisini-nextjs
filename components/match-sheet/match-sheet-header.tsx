@@ -5,7 +5,7 @@ import Image from "next/image";
 type HeaderProps = { details: MatchDetails; fixData: RefEvents[] };
 
 const MatchSheetHeader = ({ details, fixData }: HeaderProps) => {
-  let scores = { home: 0, away: 0 };
+  const scores = { home: 0, away: 0 };
   const homeTeam = details.hometeam;
 
   if (details.fixture_type === "rugby15") {

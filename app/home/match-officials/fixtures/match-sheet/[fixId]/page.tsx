@@ -1,10 +1,6 @@
 // "use client";
 
-import {
-  getFixRefEvents,
-  getPitchCond,
-  getWeatherCond,
-} from "@/actions/php-actions";
+import { getFixRefEvents } from "@/actions/php-actions";
 import LineupsSection from "@/components/match-sheet/lineups";
 import MatchDataSection from "@/components/match-sheet/match-data";
 import MatchSheetHeader from "@/components/match-sheet/match-sheet-header";
