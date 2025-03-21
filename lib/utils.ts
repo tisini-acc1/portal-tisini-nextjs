@@ -532,7 +532,7 @@ export const rugbySetPiece = (home: Stats, away: Stats) => {
   return setPiece;
 };
 
-export const rugbyDiscipline = (home: Stats, away: Stats, cards: Cards) => {
+export const rugbyDiscipline = (home: Stats, away: Stats) => {
   const discipline = {} as RugbyDiscipline;
 
   discipline["penalty"] = {

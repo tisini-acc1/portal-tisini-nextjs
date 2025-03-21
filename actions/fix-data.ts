@@ -20,7 +20,6 @@ export const rugbyData = (data: FixtureData) => {
   const scores = data["scores"];
   const home = data["home"];
   const away = data["away"];
-  const cards = data["cards"];
 
   const rugbyData = {} as RugbyData;
 
@@ -28,7 +27,7 @@ export const rugbyData = (data: FixtureData) => {
   rugbyData["defense"] = rugbyDefense(home, away);
   rugbyData["attack"] = rugbyAttack(home, away);
   rugbyData["setPiece"] = rugbySetPiece(home, away);
-  rugbyData["discipline"] = rugbyDiscipline(home, away, cards);
+  rugbyData["discipline"] = rugbyDiscipline(home, away);
   rugbyData["restarts"] = rugbyRestarts(home, away);
   rugbyData["zones"] = rugbyZones(home, away);
 
