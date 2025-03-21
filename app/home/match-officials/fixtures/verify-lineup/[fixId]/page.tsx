@@ -1,5 +1,5 @@
 import { getTeamLineup } from "@/actions/php-actions";
-import RefFixHeader from "@/components/match-officials/fixtures/ref-fix-header";
+// import RefFixHeader from "@/components/match-officials/fixtures/ref-fix-header";
 import VerifyPlayerCard from "@/components/match-officials/verify-lineup/verify-player-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -21,7 +21,7 @@ const VerifyLineupPage = async ({ params }: SheetProps) => {
     <main>
       <Tabs defaultValue="home">
         <header className="h-32 bg-header rounded-md">
-          <RefFixHeader />
+          {/* <RefFixHeader /> */}
 
           <TabsList className="w-full text-sm">
             <TabsTrigger value="home">Home Lineup</TabsTrigger>
