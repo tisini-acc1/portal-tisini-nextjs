@@ -13,8 +13,6 @@ import {
 } from "lucide-react";
 
 import { useStore } from "@/lib/store";
-import { NavMain } from "@/components/sidebar/nav-main";
-import { NavUser } from "@/components/sidebar/nav-user";
 // import { NavProjects } from "@/components/nav-projects";
 import {
   COMPS_ITEMS,
@@ -32,6 +30,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { NavMain } from "./nav-main";
+import { NavUser } from "./nav-user";
 // import SelectTournament from "./select-tournament";
 
 // interface NavItem {

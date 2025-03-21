@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -17,6 +16,7 @@ import {
 } from "@/components/ui/sidebar";
 import { cookies } from "next/headers";
 import Filter from "@/components/shared/filters/filter";
+import { AppSidebar } from "@/components/shared/sidebar/app-sidebar";
 
 export const metadata: Metadata = {
   title: "Tisini portal",
