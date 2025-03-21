@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import { useStore } from "@/lib/store";
 // import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 const RefFixHeader = () => {
   const { store } = useStore((state) => state);
