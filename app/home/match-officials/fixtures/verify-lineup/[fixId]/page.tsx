@@ -1,8 +1,22 @@
+import { getTeamLineup } from "@/actions/php-actions";
 import RefFixHeader from "@/components/match-officials/fixtures/ref-fix-header";
 import VerifyPlayerCard from "@/components/match-officials/verify-lineup/verify-player-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-const VerifyLineupPage = () => {
+type SheetProps = {
+  params: Promise<{ fixId: string }>;
+};
+
+const VerifyLineupPage = async ({ params }: SheetProps) => {
+  const { fixId } = await params;
+
+  const id = fixId.split("-")[0];
+  const homeId = fixId.split("-")[1];
+  const awayId = fixId.split("-")[2];
+
+  const hData = await getTeamLineup(id, homeId);
+  const aData = await getTeamLineup(id, awayId);
+
   return (
     <main>
       <Tabs defaultValue="home">
@@ -16,13 +30,11 @@ const VerifyLineupPage = () => {
         </header>
 
         <TabsContent value={"home"}>
-          Home
-          {/* <Lineups data={hData} /> */}
+          <Lineups data={hData} />
         </TabsContent>
 
         <TabsContent value="away">
-          Away
-          {/* <Lineups data={aData} /> */}
+          <Lineups data={aData} />
         </TabsContent>
       </Tabs>
     </main>

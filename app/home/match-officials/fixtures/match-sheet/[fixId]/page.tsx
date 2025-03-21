@@ -1,7 +1,6 @@
 // "use client";
 
 import { getFixRefEvents } from "@/actions/php-actions";
-import { RefreeCard } from "@/components/match-officials/fixtures/ref-fix-details";
 import LineupsSection from "@/components/match-sheet/lineups";
 import MatchDataSection from "@/components/match-sheet/match-data";
 import MatchSheetHeader from "@/components/match-sheet/match-sheet-header";
