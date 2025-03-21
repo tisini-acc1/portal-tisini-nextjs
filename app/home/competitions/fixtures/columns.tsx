@@ -79,7 +79,11 @@ const OfficialButton = ({ fixture }: { fixture: Fixture }) => {
             Add officials
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => router.push(`/home/competitions/fixtures/${fixId}`)}
+            onClick={() =>
+              router.push(
+                `/home/competitions/fixtures/match-sheet/${fixId}-${fixture.team1_id}`
+              )
+            }
           >
             Match sheet
           </DropdownMenuItem>

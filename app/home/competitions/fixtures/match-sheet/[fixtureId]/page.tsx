@@ -3,16 +3,15 @@ import LineupsSection from "@/components/match-sheet/lineups";
 import MatchDataSection from "@/components/match-sheet/match-data";
 import MatchSheetHeader from "@/components/match-sheet/match-sheet-header";
 import OfficialsCommentsSection from "@/components/match-sheet/officials-comments-section";
-import React from "react";
 
 type SheetProps = {
-  params: Promise<{ fixId: string }>;
+  params: Promise<{ fixtureId: string }>;
 };
 
-const MatchSheetPage = async ({ params }: SheetProps) => {
-  const { fixId } = await params;
+const CompMatchSheetPage = async ({ params }: SheetProps) => {
+  const { fixtureId } = await params;
 
-  const ids = fixId.split("-");
+  const ids = fixtureId.split("-");
 
   const data = await getFixRefEvents(ids?.[0]);
 
@@ -39,4 +38,4 @@ const MatchSheetPage = async ({ params }: SheetProps) => {
   );
 };
 
-export default MatchSheetPage;
+export default CompMatchSheetPage;
