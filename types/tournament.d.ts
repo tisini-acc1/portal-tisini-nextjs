@@ -106,17 +106,19 @@ type Referee = {
   profileurl: null;
 };
 
+type RefData = {
+  ref1: Referee[];
+  ref2: Referee[];
+  ref3: Referee[];
+  ref4: Referee[];
+};
+
 type MatchSheet = {
-  fixturedata: MatchDetails[];
+  referee: RefData;
   events: RefEvents[];
-  referee: {
-    ref1: Referee[];
-    ref2: Referee[];
-    ref3: Referee[];
-    ref4: Referee[];
-  };
   hometeamlineup: Lineup[];
   awayteamlineup: Lineup[];
+  fixturedata: MatchDetails[];
 };
 
 type CreateRefComment = {

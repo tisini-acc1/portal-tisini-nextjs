@@ -4,18 +4,19 @@ import { Volleyball } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
 import { useStore } from "@/lib/store";
-import {
-  getFixRefEvents,
-  getFixType,
-  getOfficialsEvents,
-} from "@/actions/php-actions";
-
-import VerifyFixtureData from "../match-officials/fixtures/verify-fixture-data";
+import { getFixType, getOfficialsEvents } from "@/actions/php-actions";
 import AddFixtureData from "../match-officials/fixtures/add-fixture-data";
+import VerifyFixtureData from "../match-officials/fixtures/verify-fixture-data";
+import Image from "next/image";
 
-type DataProps = { homeId: string; home: Lineup[]; away: Lineup[] };
+type DataProps = {
+  homeId: string;
+  home: Lineup[];
+  away: Lineup[];
+  fixEvents: RefEvents[];
+};
 
-const MatchDataSection = ({ homeId, home, away }: DataProps) => {
+const MatchDataSection = ({ homeId, home, away, fixEvents }: DataProps) => {
   const { store } = useStore((state) => state);
 
   const { data: fixTypes } = useQuery({
@@ -36,17 +37,14 @@ const MatchDataSection = ({ homeId, home, away }: DataProps) => {
     enabled: !!selectedFixType,
   });
 
-  const { data: fixEvents } = useQuery({
-    queryKey: ["refFixEvents", store.refFix.id],
-    queryFn: () => getFixRefEvents(store.refFix.id),
-  });
-
-  if (isLoading || !data || !fixEvents) {
+  if (isLoading || !data) {
     return <div>Loading...</div>;
   }
 
+  // console.log(fixEvents);
+
   return (
-    <section className="h-[450px] w-full space-y-6 bg-gray-100 p-3 rounded-md">
+    <section className="w-full space-y-6 bg-gray-100 p-3 rounded-md">
       <div className="flex justify-between items-center">
         <h1>
           <strong>Match Data</strong>
@@ -63,14 +61,20 @@ const MatchDataSection = ({ homeId, home, away }: DataProps) => {
         </div>
       </div>
 
-      <div className="">
-        {/* <FixtureDataMenu /> */}
-        {fixEvents.events.map((item) => (
-          <div key={item.id}>
-            <RefDataCard data={item} homeId={homeId} />
-          </div>
-        ))}
-      </div>
+      {fixEvents.length === 0 ? (
+        <div className="flex items-center justify-center">
+          No match data yet!
+        </div>
+      ) : (
+        <div className="">
+          {/* <FixtureDataMenu /> */}
+          {fixEvents.map((item) => (
+            <div key={item.id}>
+              <RefDataCard data={item} homeId={homeId} />
+            </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 };
@@ -78,18 +82,18 @@ const MatchDataSection = ({ homeId, home, away }: DataProps) => {
 type CardProps = { data: RefEvents; homeId: string };
 
 const RefDataCard = ({ data, homeId }: CardProps) => {
-  const icon =
-    data.subeventname === "Red"
-      ? "🟥"
-      : data.eventname === "Card"
-      ? "🟨"
-      : data.eventname === "Goal" || data.eventname === "PM Penalties"
-      ? "⚽"
-      : data.eventname === "Conversion"
-      ? "↔️"
-      : data.eventname === "Score"
-      ? "🏉"
-      : "";
+  const img =
+    data.subeventid === "60"
+      ? "/conversion.png"
+      : ["42", "62", "61"].includes(data.subeventid)
+      ? "/missed.png"
+      : ["43", "44", "200"].includes(data.subeventid)
+      ? "/goal.png"
+      : ["66"].includes(data.subeventid)
+      ? "/rugby.jpg"
+      : data.subeventid === "45"
+      ? "/yellowcard.avif"
+      : "/redcard.webp";
 
   return (
     <div className="p-2 font-semibold">
@@ -115,8 +119,13 @@ const RefDataCard = ({ data, homeId }: CardProps) => {
             {data.minute}&apos; <Volleyball /> {data.playername}
           </div>
         ) : (
-          <div className="capitalize">
-            {data.minute}&apos; {icon} {data.playername}
+          <div className="capitalize flex items-center">
+            {data.minute}&apos;{" "}
+            <Image src={img} alt={data.eventname} width={25} height={25} />{" "}
+            {data.playername}{" "}
+            <span className="text-muted-foreground text-xs ml-1">
+              {data.eventid === "52" ? data.eventname : data.subeventname}
+            </span>
           </div>
         )
       ) : data.eventname === "Substitute" ? (
@@ -140,8 +149,13 @@ const RefDataCard = ({ data, homeId }: CardProps) => {
           {data.playername} <Volleyball /> {data.minute}&apos;
         </div>
       ) : (
-        <div className="flex justify-end capitalize">
-          {data.playername} {icon} {data.minute}&apos;
+        <div className="flex justify-end items-center capitalize">
+          <span className="text-muted-foreground text-xs mr-1">
+            {data.eventid === "52" ? data.eventname : data.subeventname}
+          </span>
+          {data.playername}{" "}
+          <Image src={img} alt={data.eventname} width={25} height={25} />{" "}
+          {data.minute}&apos;
         </div>
       )}
     </div>

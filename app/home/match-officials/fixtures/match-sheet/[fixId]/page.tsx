@@ -1,6 +1,10 @@
 // "use client";
 
-import { getFixRefEvents } from "@/actions/php-actions";
+import {
+  getFixRefEvents,
+  getPitchCond,
+  getWeatherCond,
+} from "@/actions/php-actions";
 import LineupsSection from "@/components/match-sheet/lineups";
 import MatchDataSection from "@/components/match-sheet/match-data";
 import MatchSheetHeader from "@/components/match-sheet/match-sheet-header";
@@ -20,13 +24,16 @@ const MatchSheetPage = async ({ params }: SheetProps) => {
   const data = await getFixRefEvents(id);
   // const refFix = useStore((state) => state.store.refFix);
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <main className="space-y-4">
-      <MatchSheetHeader details={data?.fixturedata[0]} />
+      <MatchSheetHeader details={data?.fixturedata[0]} fixData={data?.events} />
 
-      <OfficialsCommentsSection details={data?.fixturedata[0]} />
+      <OfficialsCommentsSection
+        refData={data?.referee}
+        details={data?.fixturedata[0]}
+      />
 
       <LineupsSection home={data?.hometeamlineup} away={data?.awayteamlineup} />
 
@@ -34,6 +41,7 @@ const MatchSheetPage = async ({ params }: SheetProps) => {
         home={data?.hometeamlineup}
         away={data?.awayteamlineup}
         homeId={homeId}
+        fixEvents={data?.events}
       />
     </main>
   );

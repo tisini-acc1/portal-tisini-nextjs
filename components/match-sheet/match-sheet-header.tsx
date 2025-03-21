@@ -2,7 +2,41 @@
 
 import Image from "next/image";
 
-const MatchSheetHeader = ({ details }: { details: MatchDetails }) => {
+type HeaderProps = { details: MatchDetails; fixData: RefEvents[] };
+
+const MatchSheetHeader = ({ details, fixData }: HeaderProps) => {
+  let scores = { home: 0, away: 0 };
+  const homeTeam = details.hometeam;
+
+  if (details.fixture_type === "rugby15") {
+    let home = 0;
+    let away = 0;
+    for (const data of fixData) {
+      if (["43", "44", "200"].includes(data.subeventid)) {
+        if (data.teamname === homeTeam) {
+          home += 3;
+        } else {
+          away += 3;
+        }
+      } else if (data.subeventid === "60") {
+        if (data.teamname === homeTeam) {
+          home += 2;
+        } else {
+          away += 2;
+        }
+      } else if (data.subeventid === "66") {
+        if (data.teamname === homeTeam) {
+          home += 5;
+        } else {
+          away += 5;
+        }
+      }
+    }
+
+    scores.home = home;
+    scores.away = away;
+  }
+
   return (
     <header className="bg-header rounded-md text-white font-bold font-mono">
       <div className="p-1 px-2 flex justify-between gap-2 text-xs font-mono overflow-hidden whitespace-nowrap">
@@ -26,7 +60,13 @@ const MatchSheetHeader = ({ details }: { details: MatchDetails }) => {
           </div>
         </div>
         <div className="w-1/5 flex items-center justify-center font-bold md:text-2xl text-xl">
-          VS
+          {details.fixture_type === "rugby15" ? (
+            <p>
+              {scores.home} - {scores.away}
+            </p>
+          ) : (
+            "VS"
+          )}
         </div>
         <div className="w-2/5 flex items-center justify-start">
           <div>

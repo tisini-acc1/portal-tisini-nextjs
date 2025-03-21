@@ -1,3 +1,5 @@
+"use client";
+
 import { createFixtureComments } from "@/actions/php-actions";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,6 +30,9 @@ import { useToast } from "@/hooks/use-toast";
 import { useStore } from "@/lib/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { RotateCcwIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -43,10 +48,12 @@ const commentSchema = z.object({
 });
 
 const FixCommentModal = ({ wCond, pCond }: CommentProps) => {
+  const [open, setOpen] = useState(false);
   const { store } = useStore((state) => state);
 
   const queryClient = useQueryClient();
   const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm({
     resolver: zodResolver(commentSchema),
@@ -58,7 +65,8 @@ const FixCommentModal = ({ wCond, pCond }: CommentProps) => {
     onSuccess(data) {
       console.log(data);
       if (data.error === "0") {
-        // setOpen(false);
+        setOpen(false);
+        router.refresh();
         queryClient.invalidateQueries({ queryKey: ["fixConditions"] });
         toast({ title: "Success", description: data.message });
       } else if (data.error === "1") {
@@ -90,8 +98,12 @@ const FixCommentModal = ({ wCond, pCond }: CommentProps) => {
     mutation.mutate(data);
   };
 
+  const onOpenChangeWrapper = (value: boolean) => {
+    setOpen(value);
+  };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={onOpenChangeWrapper}>
       <DialogTrigger asChild>
         <Button size={"sm"}>Comment</Button>
       </DialogTrigger>
@@ -182,7 +194,12 @@ const FixCommentModal = ({ wCond, pCond }: CommentProps) => {
             />
 
             <DialogFooter>
-              <Button>Comment</Button>
+              <Button type="submit" disabled={mutation.isPending}>
+                Comment
+                {mutation.isPending && (
+                  <RotateCcwIcon className="animate-spin" />
+                )}
+              </Button>
             </DialogFooter>
           </form>
         </Form>
