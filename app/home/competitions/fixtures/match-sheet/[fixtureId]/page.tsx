@@ -1,8 +1,8 @@
 import { getFixRefEvents } from "@/actions/php-actions";
-import LineupsSection from "@/components/match-sheet/lineups";
-import MatchDataSection from "@/components/match-sheet/match-data";
-import MatchSheetHeader from "@/components/match-sheet/match-sheet-header";
-import OfficialsCommentsSection from "@/components/match-sheet/officials-comments-section";
+import LineupsSection from "@/components/shared/match-sheet/lineups";
+import MatchDataSection from "@/components/shared/match-sheet/match-data";
+import MatchSheetHeader from "@/components/shared/match-sheet/match-sheet-header";
+import OfficialsCommentsSection from "@/components/shared/match-sheet/officials-comments-section";
 
 type SheetProps = {
   params: Promise<{ fixtureId: string }>;

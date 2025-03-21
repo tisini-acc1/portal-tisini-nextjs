@@ -1,6 +1,6 @@
 import { getEvent, getSubEvent } from "@/lib/utils";
-import StatsRow from "@/components/shared/stats-row";
-import HorizontalBar from "@/components/shared/horizontal-bar";
+import StatsRow from "@/components/shared/charts/stats-row";
+import HorizontalBar from "@/components/shared/charts/horizontal-bar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const BasketballRebounds = ({ home, away }: { home: Stats; away: Stats }) => {

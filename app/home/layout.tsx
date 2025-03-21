@@ -16,7 +16,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { cookies } from "next/headers";
-import Filter from "@/components/home/filter";
+import Filter from "@/components/shared/filters/filter";
 
 export const metadata: Metadata = {
   title: "Tisini portal",

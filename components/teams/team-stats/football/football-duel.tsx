@@ -1,4 +1,4 @@
-import RoundedBar from "@/components/shared/rounded-bar";
+import RoundedBar from "@/components/shared/charts/rounded-bar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const FootballTeamDuel = ({ data }: { data: FootballDuels }) => {

@@ -5,8 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 
 import { useStore } from "@/lib/store";
 import { getFixType, getOfficialsEvents } from "@/actions/php-actions";
-import AddFixtureData from "../match-officials/fixtures/add-fixture-data";
-import VerifyFixtureData from "../match-officials/fixtures/verify-fixture-data";
+import AddFixtureData from "./add-fixture-data";
+import VerifyFixtureData from "./verify-fixture-data";
 import Image from "next/image";
 
 type DataProps = {

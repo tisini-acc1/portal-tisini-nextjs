@@ -3,8 +3,8 @@
 import { EditIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+import { Input } from "../../ui/input";
+import { Button } from "../../ui/button";
 import { useStore } from "@/lib/store";
 // import { RotateCcw } from "lucide-react";
 import {
@@ -14,7 +14,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
+} from "../../ui/form";
 import {
   Dialog,
   DialogContent,
@@ -22,7 +22,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
+} from "../../ui/dialog";
 
 const EditProfileBioModal = () => {
   const user = useStore((state) => state.store.user);

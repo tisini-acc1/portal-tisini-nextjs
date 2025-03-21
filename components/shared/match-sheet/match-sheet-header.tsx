@@ -12,7 +12,7 @@ const MatchSheetHeader = ({ details, fixData }: HeaderProps) => {
     let home = 0;
     let away = 0;
     for (const data of fixData) {
-      if (["43", "44", "200"].includes(data.subeventid)) {
+      if (["43", "44"].includes(data.subeventid)) {
         if (data.teamname === homeTeam) {
           home += 3;
         } else {
@@ -29,6 +29,12 @@ const MatchSheetHeader = ({ details, fixData }: HeaderProps) => {
           home += 5;
         } else {
           away += 5;
+        }
+      } else if (data.subeventid === "200") {
+        if (data.teamname === homeTeam) {
+          home += 7;
+        } else {
+          away += 7;
         }
       }
     }

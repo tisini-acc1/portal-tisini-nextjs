@@ -1,6 +1,6 @@
 import { getUserRole } from "@/actions/actions";
-import TournamentFilter from "./tournament-filter";
 import TeamFilter from "./team-filter";
+import TournamentFilter from "./tournament-filter";
 
 const Filter = async () => {
   const userRole = await getUserRole();

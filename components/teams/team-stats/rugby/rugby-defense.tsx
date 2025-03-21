@@ -1,5 +1,5 @@
-import RoundedBar from "@/components/shared/rounded-bar";
-import HorizontalBar from "@/components/shared/horizontal-bar";
+import RoundedBar from "@/components/shared/charts/rounded-bar";
+import HorizontalBar from "@/components/shared/charts/horizontal-bar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const RugbyTeamDefense = ({ data }: { data: RugbyDefense }) => {

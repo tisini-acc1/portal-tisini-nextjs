@@ -7,23 +7,23 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
-import { Button } from "../ui/button";
+} from "../../ui/dialog";
+import { Button } from "../../ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
-import { Input } from "../ui/input";
+} from "../../ui/select";
+import { Input } from "../../ui/input";
 import Image from "next/image";
 import { useToast } from "@/hooks/use-toast";
 import { useStore } from "@/lib/store";
 import { uploadImage } from "@/actions/upload";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { uploadCertUrl } from "@/actions/php-actions";
-import { Label } from "../ui/label";
+import { Label } from "../../ui/label";
 import { EditIcon } from "lucide-react";
 
 const UploadCertModal = ({ certs }: { certs: Certification[] }) => {

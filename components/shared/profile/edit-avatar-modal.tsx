@@ -4,8 +4,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { CameraIcon } from "lucide-react";
 
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+import { Input } from "../../ui/input";
+import { Button } from "../../ui/button";
 import { useStore } from "@/lib/store";
 import { useToast } from "@/hooks/use-toast";
 import { uploadImage } from "@/actions/upload";
@@ -17,7 +17,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
+} from "../../ui/dialog";
 
 const EditAvatarModal = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);

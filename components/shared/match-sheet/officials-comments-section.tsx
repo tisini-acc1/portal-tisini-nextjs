@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import FixCommentModal from "../match-officials/fixtures/fix-comment-modal";
+import FixCommentModal from "./fix-comment-modal";
 import RefreeCard from "./ref-card";
 import { getPitchCond, getWeatherCond } from "@/actions/php-actions";
 import { useStore } from "@/lib/store";

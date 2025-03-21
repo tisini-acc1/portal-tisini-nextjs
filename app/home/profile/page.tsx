@@ -5,9 +5,9 @@ import { Mail, PhoneIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
 import { useStore } from "@/lib/store";
-import UploadCertModal from "@/components/profile/upload-cert-modal";
-import EditAvatarModal from "@/components/profile/edit-avatar-modal";
-import EditProfileBioModal from "@/components/profile/edit-bio-modal";
+import UploadCertModal from "@/components/shared/profile/upload-cert-modal";
+import EditAvatarModal from "@/components/shared/profile/edit-avatar-modal";
+import EditProfileBioModal from "@/components/shared/profile/edit-bio-modal";
 import { getCertification, getUserCerts } from "@/actions/php-actions";
 
 const ProfilePage = () => {
@@ -49,7 +49,7 @@ const ProfilePage = () => {
         </div>
         <div className="pt-12 p-3 space-y-2">
           <div className="flex justify-between items-center">
-            <strong className="text-xl">John Doe</strong>
+            <strong className="text-xl">{user.name}</strong>
 
             <EditProfileBioModal />
           </div>

@@ -1,4 +1,4 @@
-import PercentBar from "@/components/shared/percent-bar";
+import PercentBar from "@/components/shared/charts/percent-bar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 type HeaderProps = {

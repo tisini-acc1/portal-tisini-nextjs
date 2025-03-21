@@ -1,4 +1,4 @@
-import HorizontalBar from "@/components/shared/horizontal-bar";
+import HorizontalBar from "@/components/shared/charts/horizontal-bar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const RugbyTeamZone = ({ data }: { data: RugbyZones }) => {

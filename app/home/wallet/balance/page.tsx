@@ -7,8 +7,8 @@ import { columns } from "./columns";
 import { useStore } from "@/lib/store";
 import { StatementTable } from "./statement-table";
 import { getStatement } from "@/actions/wallet-actions";
-import DepositModal from "@/components/wallet/deposit-modal";
-import WithdrawalModal from "@/components/wallet/withdraw-modal";
+import DepositModal from "@/components/shared/wallet/deposit-modal";
+import WithdrawalModal from "@/components/shared/wallet/withdraw-modal";
 
 const WalletPage = () => {
   const [openWithdraw, setOpenWithdraw] = useState(false);
