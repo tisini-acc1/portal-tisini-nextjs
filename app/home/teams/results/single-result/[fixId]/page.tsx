@@ -18,7 +18,7 @@ const SingleResultPage = async ({ params }: RProps) => {
   const details = teamData?.fixture[0];
   const scores = teamData?.scores;
 
-  const fixType = teamData && teamData["fixture"][0].fixture_type;
+  // const fixType = teamData && teamData["fixture"][0].fixture_type;
 
   // console.log(playersData);
   // console.log(details);

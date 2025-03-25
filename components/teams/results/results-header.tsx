@@ -18,9 +18,7 @@ interface TeamProps {
 }
 
 const ResultsHeader: FC<TeamProps> = ({ tournamentsData, seriesData }) => {
-  const { store, updateSerie, updateTournament, updateFixture } = useStore(
-    (state) => state
-  );
+  const { store, updateSerie, updateTournament } = useStore((state) => state);
 
   // const tourn = [
   //   "27",
