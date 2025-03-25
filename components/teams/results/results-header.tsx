@@ -14,14 +14,10 @@ import {
 interface TeamProps {
   tournamentsData: TeamTournament[];
   seriesData: TeamSeason[];
-  fixtureData: TeamFixture[];
+  // fixtureData: TeamFixture[];
 }
 
-const ResultsHeader: FC<TeamProps> = ({
-  tournamentsData,
-  seriesData,
-  fixtureData,
-}) => {
+const ResultsHeader: FC<TeamProps> = ({ tournamentsData, seriesData }) => {
   const { store, updateSerie, updateTournament, updateFixture } = useStore(
     (state) => state
   );
@@ -48,8 +44,8 @@ const ResultsHeader: FC<TeamProps> = ({
   // );
 
   return (
-    <header className="flex flex-col-reverse md:flex-row gap-4 justify-between">
-      <Select value={store.fixture} onValueChange={updateFixture}>
+    <header className="flex flex-col-reverse md:flex-row gap-4 justify-end">
+      {/* <Select value={store.fixture} onValueChange={updateFixture}>
         <SelectTrigger className="w-[280px]">
           <SelectValue placeholder="Select fixture" />
         </SelectTrigger>
@@ -62,7 +58,7 @@ const ResultsHeader: FC<TeamProps> = ({
             ))}
           </SelectGroup>
         </SelectContent>
-      </Select>
+      </Select> */}
 
       <div className="flex gap-4">
         <Select value={store.tournament} onValueChange={updateTournament}>

@@ -2,9 +2,9 @@
 
 // import { rugbyData } from "@/actions/fix-data";
 
-import RugbyTeamStats from "../team-stats/rugby-team-stats";
-import FootballTeamStats from "../team-stats/football-team-stats";
-import BasketballTeamStats from "../team-stats/basketball-team-stats";
+import RugbyTeamStats from "../../team-stats/rugby-team-stats";
+import FootballTeamStats from "../../team-stats/football-team-stats";
+import BasketballTeamStats from "../../team-stats/basketball-team-stats";
 
 const TeamStats = ({ data }: { data: FixtureData }) => {
   const fixType = data && data["fixture"][0].fixture_type;

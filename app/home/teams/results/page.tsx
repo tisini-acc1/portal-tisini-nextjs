@@ -79,7 +79,6 @@ const ResultsPage = () => {
           <ResultsHeader
             tournamentsData={data as TeamTournament[]}
             seriesData={series}
-            fixtureData={fixtures}
           />
 
           <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -148,7 +147,9 @@ const ResultsPage = () => {
                         className={"bg-green-600"}
                         onClick={() => {
                           updateFixture(fixture.id);
-                          router.push("/home/teams/results/single-result");
+                          router.push(
+                            `/home/teams/results/single-result/${fixture.id}`
+                          );
                         }}
                       >
                         view
