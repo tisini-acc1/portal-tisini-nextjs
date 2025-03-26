@@ -25,6 +25,7 @@ export async function uploadImage(formData: FormData) {
     });
 
     formDataS3.append("file", formData.get("file") as string);
+    // console.log(formDataS3);
 
     const response = await fetch(url, {
       method: "POST",

@@ -36,9 +36,11 @@ const LineupsPage = () => {
     console.log(error);
     return <div>Error</div>;
   }
-  console.log(data);
+
   const starting = data?.filter((player) => player.player_type === "first11");
   const subs = data?.filter((player) => player.player_type === "sub");
+
+  // console.log(data);
 
   return (
     <main className="space-y-2">

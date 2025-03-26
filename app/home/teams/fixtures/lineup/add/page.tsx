@@ -4,8 +4,8 @@ import { useStore } from "@/lib/store";
 import { useQuery } from "@tanstack/react-query";
 
 import { getAllPlayers } from "@/actions/php-actions";
-import AddFootballLineup from "@/components/teams/lineups/add-football-lineup";
 import SelectRugbyLineup from "@/components/teams/lineups/select-rugby-lineup";
+import SelectFootballLineup from "@/components/teams/lineups/select-football-lineup";
 
 const AddLineupPage = () => {
   const { store } = useStore((state) => state);
@@ -30,7 +30,11 @@ const AddLineupPage = () => {
   return (
     <>
       {fixType === "football" ? (
-        <AddFootballLineup data={data as TeamPlayer[]} />
+        // <AddFootballLineup data={data as TeamPlayer[]} />
+        <SelectFootballLineup
+          data={data as TeamPlayer[]}
+          fixId={store.userFix.id}
+        />
       ) : (
         <SelectRugbyLineup
           data={data as TeamPlayer[]}

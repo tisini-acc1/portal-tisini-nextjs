@@ -137,7 +137,6 @@ export const getUserTeams = async (): Promise<Team[]> => {
     const res = await axios.post(`${baseURL}?gettoken=${token}`, {
       action: "userteam",
     });
-    console.log(`${baseURL}?gettoken=${token}`);
 
     if (res.status === 200) {
       console.log("server 119", res.data);
@@ -945,6 +944,38 @@ export const uploadPhotoUrl = async ({
       action: "passportphoto",
       photourl: url,
       playerid: id,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to upload player photo: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while uploading player url."
+    );
+  }
+};
+
+export const uploadTeamLogo = async ({
+  url,
+  id,
+}: {
+  url: string;
+  id: string;
+}): Promise<any> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "teamlogo",
+      photourl: url,
+      teamid: id,
       gettoken: token,
     });
 

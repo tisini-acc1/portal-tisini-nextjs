@@ -2,26 +2,13 @@
 
 import * as React from "react";
 import { useState } from "react";
+import { RotateCcw } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
-import { Check, ChevronsUpDown, RotateCcw } from "lucide-react";
 
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { SelectPlayer } from "./select-rugby-lineup";
 import { createFixtureLineup } from "@/actions/php-actions";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 
 type LineupProps = {
   data: TeamPlayer[];
@@ -29,32 +16,32 @@ type LineupProps = {
 };
 
 const rugby15Positions = [
-  "Loose head prop",
-  "Hooker",
-  "Tight head prop",
-  "Second row",
-  "Second row",
-  "Blind side flanker",
-  "Open side flanker",
-  "Number 8",
-  "Scrum half",
-  "Fly half",
-  "Left wing",
-  "Inside center",
-  "Outside center",
-  "Right wing",
-  "Full back",
-  "Front row",
-  "Front row",
-  "Front row",
-  "Any player",
-  "Any player",
-  "Any player",
-  "Any player",
-  "Any player",
+  "Goalkeeper",
+  "Rightback",
+  "Leftback",
+  "Centerback",
+  "Centerback",
+  "Defensive midfielder",
+  "Central midfielder",
+  "Leftwinger",
+  "Rightwinger",
+  "Central attacking mid",
+  "Forward",
+  "Sub player",
+  "Sub player",
+  "Sub player",
+  "Sub player",
+  "Sub player",
+  "Sub player",
+  "Sub player",
+  "Sub player",
+  "Sub player",
+  "Sub player",
+  "Sub player",
+  "Sub player",
 ];
 
-const SelectRugbyLineup = ({ data, fixId }: LineupProps) => {
+const SelectFootballLineup = ({ data, fixId }: LineupProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedPlayers, setSelectedPlayers] = useState<{
     [position: string]: TeamPlayer | null;
@@ -84,13 +71,13 @@ const SelectRugbyLineup = ({ data, fixId }: LineupProps) => {
     "9": selectedPlayers["8"] || null,
     "10": selectedPlayers["9"] || null,
     "11": selectedPlayers["10"] || null,
-    "12": selectedPlayers["11"] || null,
-    "13": selectedPlayers["12"] || null,
-    "14": selectedPlayers["13"] || null,
-    "15": selectedPlayers["14"] || null,
   };
 
   const subs = [
+    selectedPlayers["11"],
+    selectedPlayers["12"],
+    selectedPlayers["13"],
+    selectedPlayers["14"],
     selectedPlayers["15"],
     selectedPlayers["16"],
     selectedPlayers["17"],
@@ -113,7 +100,7 @@ const SelectRugbyLineup = ({ data, fixId }: LineupProps) => {
     // const squad = generatePlayerRoles();
     setIsLoading(true);
 
-    if (Object.keys(selectedPlayers).length < 23) {
+    if (Object.keys(selectedPlayers).length < 11) {
       toast({
         title: "Error!",
         description: "Please select all the required players.",
@@ -216,65 +203,4 @@ const SelectRugbyLineup = ({ data, fixId }: LineupProps) => {
   );
 };
 
-type SelectPlayerProps = {
-  players: TeamPlayer[];
-  selectedPlayer: TeamPlayer | null;
-  onSelect: (player: TeamPlayer | null) => void;
-};
-
-export const SelectPlayer = ({
-  players,
-  selectedPlayer,
-  onSelect,
-}: SelectPlayerProps) => {
-  const [open, setOpen] = React.useState(false);
-
-  return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="w-full justify-between"
-        >
-          {selectedPlayer ? selectedPlayer.pname : "Select player..."}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
-      </PopoverTrigger>
-
-      <PopoverContent className="lg:w-[350px] p-0">
-        <Command>
-          <CommandInput placeholder="Search player..." />
-          <CommandList>
-            <CommandEmpty>No player found.</CommandEmpty>
-            <CommandGroup>
-              {players.map((player) => (
-                <CommandItem
-                  key={player.id}
-                  value={player.pname} // Use player.pname for filtering
-                  onSelect={() => {
-                    onSelect(player === selectedPlayer ? null : player); // Toggle selection
-                    setOpen(false);
-                  }}
-                >
-                  <Check
-                    className={cn(
-                      "mr-2 h-4 w-4",
-                      selectedPlayer?.id === player.id
-                        ? "opacity-100"
-                        : "opacity-0"
-                    )}
-                  />
-                  {player.pname} {player.current_jersey_no}
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </CommandList>
-        </Command>
-      </PopoverContent>
-    </Popover>
-  );
-};
-
-export default SelectRugbyLineup;
+export default SelectFootballLineup;
