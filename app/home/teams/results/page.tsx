@@ -1,20 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 
 import { useStore } from "@/lib/store";
+import { Button } from "@/components/ui/button";
 import { getTeamTournaments } from "@/actions/php-actions";
 import ResultsHeader from "@/components/teams/results/results-header";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formattedDate } from "@/components/teams/fixtures/team-fixtures";
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 import FixPaymentModal from "@/components/teams/results/fix-payment-modal";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const ResultsPage = () => {
   const [series, setSeries] = useState<TeamSeason[]>([]);
   const [fixtures, setFixtures] = useState<TeamFixture[]>([]);
+  const [open, setOpen] = useState(false);
 
   const router = useRouter();
 
@@ -142,6 +143,7 @@ const ResultsPage = () => {
                     {fixture.pay_status === 0 ? (
                       <FixPaymentModal fixture={fixture} />
                     ) : (
+                      // <DepositModal open={open} setOpen={setOpen} />
                       <Button
                         size={"sm"}
                         className={"bg-green-600"}

@@ -1049,3 +1049,29 @@ export const createTournament = async (data: TournaCreate) => {
     );
   }
 };
+
+// fixture payment
+export const fixturePayment = async (data: FixPay) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "utilize",
+      ...data,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to make fixture payment: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while making fixture payment."
+    );
+  }
+};

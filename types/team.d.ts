@@ -30,6 +30,11 @@ type TeamSeason = {
   fixture: TeamFixture[];
 };
 
+type TeamScores = {
+  Home: string;
+  Away: string;
+};
+
 type TeamFixture = {
   id: string;
   team1_name: string;
@@ -45,6 +50,7 @@ type TeamFixture = {
   amount: string;
   billitem: string;
   accountbalance: number;
+  scores: TeamScores;
 };
 
 type TeamPlayer = {
@@ -515,4 +521,12 @@ type BasketballPlayerStats = {
   threePoint: string;
   freeThrow: string;
   name: string;
+};
+
+type FixPay = {
+  username: string;
+  password: string;
+  amount: string;
+  reference: string;
+  tcode: string;
 };

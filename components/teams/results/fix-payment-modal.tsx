@@ -1,10 +1,17 @@
 "use client";
 
+import { z } from "zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { RotateCwIcon } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { useStore } from "@/lib/store";
+import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { fixturePayment } from "@/actions/php-actions";
 import {
   Dialog,
   DialogContent,
@@ -27,21 +34,65 @@ type PayProps = {
   fixture: TeamFixture;
 };
 
+const paySchema = z.object({
+  password: z.string().min(4, { message: "Enter a valid password" }),
+});
+
 const FixPaymentModal = ({ fixture }: PayProps) => {
-  const { store } = useStore((state) => state);
+  const user = useStore((state) => state.store.user);
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+  const [open, setOpen] = useState(false);
 
   const form = useForm({
+    resolver: zodResolver(paySchema),
     defaultValues: {
-      phone: store.user.phone || "",
+      // phone: user.phone || "",
+      password: "",
     },
   });
 
-  const onSubmit = () => {
-    console.log("first");
+  const onSubmit = async (values: z.infer<typeof paySchema>) => {
+    const data = {
+      username: user.phone,
+      password: values.password,
+      amount: fixture.amount,
+      reference: `fixture payment: ${fixture.team1_name} v ${fixture.team2_name}`,
+      tcode: fixture.billitem,
+      fixture: fixture.id,
+    };
+
+    try {
+      const res = await fixturePayment(data);
+
+      // console.log(res);
+      if (res.code === "1") {
+        setOpen(false);
+        toast({ title: "Success", description: res.message });
+        queryClient.invalidateQueries({ queryKey: ["teamTournaments"] });
+      } else if (res.code === "0") {
+        toast({
+          title: "Error!",
+          variant: "destructive",
+          description: res.message,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Error!",
+        variant: "destructive",
+        description: "An error occured while creating fixtures",
+      });
+    }
+  };
+
+  const onOpenChangeWrapper = (value: boolean) => {
+    setOpen(value);
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={onOpenChangeWrapper}>
       <DialogTrigger asChild>
         <Button size={"sm"}>pay</Button>
       </DialogTrigger>
@@ -58,7 +109,7 @@ const FixPaymentModal = ({ fixture }: PayProps) => {
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
+            {/* <FormField
               control={form.control}
               name="phone"
               render={({ field }) => (
@@ -71,10 +122,34 @@ const FixPaymentModal = ({ fixture }: PayProps) => {
                   <FormMessage />
                 </FormItem>
               )}
+            /> */}
+
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      placeholder="your password"
+                      {...field}
+                    />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
             />
 
             <DialogFooter>
-              <Button size={"sm"}>Deposit</Button>
+              <Button size={"sm"}>
+                Make payment
+                {form.formState.isSubmitting && (
+                  <RotateCwIcon className="animate-spin mr-1" />
+                )}
+              </Button>
             </DialogFooter>
           </form>
         </Form>
