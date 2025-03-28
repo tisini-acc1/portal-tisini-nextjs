@@ -15,7 +15,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 const ResultsPage = () => {
   const [series, setSeries] = useState<TeamSeason[]>([]);
   const [fixtures, setFixtures] = useState<TeamFixture[]>([]);
-  const [open, setOpen] = useState(false);
 
   const router = useRouter();
 
