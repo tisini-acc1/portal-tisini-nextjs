@@ -1,15 +1,26 @@
-import React from "react";
+import { getPlayerFixtures } from "@/actions/fetch-php";
+import FixtureCard from "@/components/players/fixture-card";
 
-const PlayersPage = () => {
+const PlayersPage = async () => {
+  const data: Promise<PlayerFixture[]> = getPlayerFixtures();
+  const fData = await data;
+
+  const fixtures = fData.slice().reverse();
+
+  // const playerData = await getPlayersData("6845");
+
+  console.log(fixtures);
+
   return (
-    <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-      <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-        <div className="aspect-video rounded-xl bg-muted/50" />
-        <div className="aspect-video rounded-xl bg-muted/50" />
-        <div className="aspect-video rounded-xl bg-muted/50" />
-      </div>
-      <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
-    </div>
+    <main>
+      <section className="grid gap-4 lg:grid-cols-2">
+        {fixtures.map((fixture) => (
+          <div key={fixture.id}>
+            <FixtureCard fixture={fixture} />
+          </div>
+        ))}
+      </section>
+    </main>
   );
 };
 

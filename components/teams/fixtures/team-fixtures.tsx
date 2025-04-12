@@ -54,6 +54,7 @@ const TeamFixtures = () => {
         const season = tournament.season.find(
           (season) => season.id === store.serie
         );
+
         if (season && season.fixture) {
           // Compare the fixtures in a shallow way to avoid unnecessary state updates
           const newFixtures = season.fixture.slice().reverse();
@@ -61,6 +62,9 @@ const TeamFixtures = () => {
             setFixtures(newFixtures);
           }
         }
+
+        setSeries(tournament.season);
+        updateSerie(tournament.season[0].id);
       }
     }
   }, [data, store.tournament, store.serie]);

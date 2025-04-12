@@ -57,8 +57,8 @@ const ResultsPage = () => {
     }
   }, [data, store.tournament, store.serie]);
 
-  console.log(series);
-  console.log(store.serie);
+  // console.log(series);
+  // console.log(store.serie);
 
   if (isLoading) {
     return <div>Loading...</div>;
