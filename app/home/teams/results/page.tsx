@@ -40,7 +40,7 @@ const ResultsPage = () => {
       const tournament = data.find(
         (tournament) => tournament.tournamentid === store.tournament
       );
-
+      console.log(tournament);
       if (tournament && tournament.season && tournament.season.length > 0) {
         const season = tournament.season.find(
           (season) => season.id === store.serie
@@ -50,12 +50,15 @@ const ResultsPage = () => {
           const reversedFixtures = [...season.fixture].reverse();
           setFixtures(reversedFixtures);
         }
+
+        setSeries(tournament.season);
+        updateSerie(tournament.season[0].id);
       }
     }
   }, [data, store.tournament, store.serie]);
 
-  // console.log(data);
-  // console.log(store.fixture);
+  console.log(series);
+  console.log(store.serie);
 
   if (isLoading) {
     return <div>Loading...</div>;
