@@ -19,6 +19,7 @@ const eventPoints: EventPoints = {
   "161": { base: 2 }, // Set-piece Chance
   "96": { "154": 1, "155": -0.5 }, // Dribbles
   "21": { "398": 2, "397": 0.5 }, // Freekick
+  "200": { "471": 0.5, "472": 0.25 }, // New Freekick
   "1": { "150": 3, "304": -3, "151": -3 }, // Penalty
   "154": { base: 0.5 }, // Box Carry
   "155": { base: 0.5 }, // Box Touch
@@ -27,10 +28,10 @@ const eventPoints: EventPoints = {
   // Defense
   "20": { base: -5 }, // OG
   "97": { "156": 1, "157": -0.5 }, // Tackle
-  "11": { "73": 0.5, "74": -0.5 }, // Foul
+  "11": { "73": 2, "74": -0.5, "470": 0.5 }, // Foul
   "28": { "403": 0.75, "404": 1 }, // Interceptions
   "26": { base: 1 }, // Clearances
-  "27": { base: 2 }, // Blocks
+  "27": { base: 2, "468": 2, "469": 1 }, // Blocks
   "5": { "21": -2, "22": -4 }, // Card
 
   // Duels
@@ -43,6 +44,7 @@ const eventPoints: EventPoints = {
   "25": { base: -0.15 }, // Incomplete Pass
   "95": { "152": 1, "153": -0.15 }, // Progress Pass
   "67": { "75": 1, "76": -0.5 }, // Ball
+  "201": { base: 0.5 }, // Second Ball
   "159": { "413": 1, "414": 0.5, "415": 0.25 }, // Cross Right
   "166": { "426": 1, "427": 0.5, "425": 0.25 }, // Cross Left
   "3": { base: 0.5 }, // Corner

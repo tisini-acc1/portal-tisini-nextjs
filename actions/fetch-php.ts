@@ -17,3 +17,12 @@ export const getPlayerFixtures = async () => {
 
   return data;
 };
+
+// Fetch users details
+export const getUsers = async () => {
+  const token = await getToken();
+
+  const data = await apiPost({ action: "users", userid: 7, gettoken: token });
+
+  return data;
+};

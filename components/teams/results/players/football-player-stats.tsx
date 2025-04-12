@@ -35,7 +35,8 @@ const FootballPlayerStats = ({ data, team }: StatsProps) => {
     (a, b) => parseFloat(b.rating) - parseFloat(a.rating)
   );
 
-  //   console.log(playerData);
+  console.log(data);
+  console.log(playerData);
 
   return <PlayerStatsTable columns={columns} data={playerData} />;
 };

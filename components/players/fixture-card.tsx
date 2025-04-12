@@ -1,11 +1,12 @@
 "use client";
 
-import { Button } from "../ui/button";
-import { formattedDate } from "../teams/fixtures/team-fixtures";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { useRouter } from "next/navigation";
+
+import { Button } from "../ui/button";
 import { useStore } from "@/lib/store";
-import { ArrowRightIcon, CalendarDaysIcon, TrophyIcon } from "lucide-react";
+import { formattedDate } from "../teams/fixtures/team-fixtures";
+import { ArrowRightIcon, CalendarDaysIcon } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
 const FixtureCard = ({ fixture }: { fixture: PlayerFixture }) => {
   const router = useRouter();

@@ -7,10 +7,6 @@ const PlayersPage = async () => {
 
   const fixtures = fData.slice().reverse();
 
-  // const playerData = await getPlayersData("6845");
-
-  console.log(fixtures);
-
   return (
     <main>
       <section className="grid gap-4 lg:grid-cols-2">

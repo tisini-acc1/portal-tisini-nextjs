@@ -88,7 +88,8 @@ export const playerBallStats = (data: Stats) => {
 
   const save = getEvent(data, "24");
 
-  const foul_won = getSubEvent(data, "11", "73");
+  const foul_won =
+    getSubEvent(data, "11", "73") + getSubEvent(data, "11", "470");
   const foul_com = getSubEvent(data, "11", "74");
 
   const card_yellow = getSubEvent(data, "5", "21");

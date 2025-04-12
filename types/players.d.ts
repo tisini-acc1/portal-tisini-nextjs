@@ -1,4 +1,4 @@
-type RefData = {
+type RefStat = {
   id: string;
   fixture_id: string;
   event_id: string;
@@ -41,5 +41,5 @@ type PlayerFixture = {
   fixture_type: string;
   series: string;
   matchtime: string;
-  refdata: RefData[];
+  refdata: RefStat[];
 };

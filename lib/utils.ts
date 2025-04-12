@@ -145,8 +145,8 @@ export const footballAttack = (home: Stats, away: Stats) => {
     away: getEvent(away, "161"),
   };
   attack["freekick"] = {
-    home: getSubEvent(home, "21", "398"),
-    away: getSubEvent(away, "21", "398"),
+    home: getSubEvent(home, "200", "471"),
+    away: getSubEvent(away, "200", "471"),
   };
   attack["boxTouch"] = {
     home: getEvent(home, "155"),
