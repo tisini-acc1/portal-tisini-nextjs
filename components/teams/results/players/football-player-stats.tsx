@@ -2,8 +2,7 @@
 
 import { footballRating } from "@/lib/rating";
 import { playerBallStats } from "@/lib/calculations";
-import { PlayerStatsTable } from "../stats-table";
-import { columns } from "../columns";
+import { PlayerStatsTable } from "./player-stats-table";
 
 type StatsProps = {
   data: TeamPlayerData;
@@ -35,10 +34,10 @@ const FootballPlayerStats = ({ data, team }: StatsProps) => {
     (a, b) => parseFloat(b.rating) - parseFloat(a.rating)
   );
 
-  console.log(data);
-  console.log(playerData);
+  // console.log(data);
+  // console.log(playerData);
 
-  return <PlayerStatsTable columns={columns} data={playerData} />;
+  return <PlayerStatsTable players={playerData} />;
 };
 
 export default FootballPlayerStats;

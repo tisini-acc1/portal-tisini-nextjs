@@ -40,7 +40,7 @@ const ResultsPage = () => {
       const tournament = data.find(
         (tournament) => tournament.tournamentid === store.tournament
       );
-      console.log(tournament);
+
       if (tournament && tournament.season && tournament.season.length > 0) {
         const season = tournament.season.find(
           (season) => season.id === store.serie

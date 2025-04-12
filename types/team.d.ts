@@ -507,6 +507,7 @@ type PlayerEvent = {
   runouts: string;
   throwouts: string;
   saves: string;
+  [key: string]: string; // Index signature
 };
 
 type BasketballPlayerStats = {
