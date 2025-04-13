@@ -31,6 +31,7 @@ const eventPoints: EventPoints = {
   "11": { "73": 2, "74": -0.5, "470": 0.5 }, // Foul
   "28": { "403": 0.75, "404": 1 }, // Interceptions
   "26": { base: 1 }, // Clearances
+  "202": { base: 2, "468": 2, "469": 1 }, // Blocks
   "27": { base: 2, "468": 2, "469": 1 }, // Blocks
   "5": { "21": -2, "22": -4 }, // Card
 
@@ -98,7 +99,7 @@ export const footballRating = (data: Stats) => {
   }
 
   // Normalize and calculate final rating
-  const MAX_POINTS = 44.3;
+  const MAX_POINTS = 46.05;
   const BASE_RATING = 5.0;
   const rating = ((points / MAX_POINTS) * 5 + BASE_RATING).toFixed(1);
 
