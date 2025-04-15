@@ -10,8 +10,8 @@ export const getPlayerFixtures = async () => {
     playerid: 6857,
     gettoken: token,
   });
-
-  if (data.error === "1") {
+  console.log(data);
+  if (data?.error === "1") {
     throw new Error(data.message || "The fixture has not been paid for");
   }
 
@@ -19,10 +19,10 @@ export const getPlayerFixtures = async () => {
 };
 
 // Fetch users details
-export const getUsers = async () => {
+export const getUser = async () => {
   const token = await getToken();
 
   const data = await apiPost({ action: "users", userid: 7, gettoken: token });
-
+  console.log(data);
   return data;
 };

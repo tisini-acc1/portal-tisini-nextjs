@@ -2,12 +2,17 @@
 
 import { cookies } from "next/headers";
 
-export async function handleLogin(accessToken: string, role: string) {
+export async function handleLogin(
+  accessToken: string,
+  role: string,
+  userId: string
+) {
   const cookieStore = await cookies(); // No need for `await`
 
   const sessionData = {
     accessToken,
     role,
+    userId,
   };
 
   cookieStore.set("session", JSON.stringify(sessionData), {
@@ -21,15 +26,17 @@ export async function handleLogin(accessToken: string, role: string) {
   // Redirect URL based on role
   switch (role) {
     case "1":
-      return "/home/agents";
+      return "/home/tisini-agent";
     case "2":
       return "/home/teams";
     case "5":
-      return "/home/players";
+      return "/home/team-player";
     case "6":
       return "/home/competitions";
     case "9":
       return "/home/match-officials";
+    case "7":
+      return "/home/super-agent";
     default:
       return "/home";
   }
@@ -64,4 +71,9 @@ export async function getToken() {
 export async function getUserRole() {
   const session = await getSession();
   return session?.role || null;
+}
+
+export async function getUserId() {
+  const session = await getSession();
+  return session?.userId || null;
 }

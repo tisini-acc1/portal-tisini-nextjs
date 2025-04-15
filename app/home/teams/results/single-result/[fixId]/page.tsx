@@ -24,9 +24,9 @@ const SingleResultPage = async ({ params }: RProps) => {
   // console.log(teamData);
 
   return (
-    <main className="overflow-hidden">
+    <main className="max-w-full">
       <Tabs defaultValue="team">
-        <header className="h-32 bg-header rounded-md w-full max-w-[100vw] overflow-hidden">
+        <header className="h-32 bg-header rounded-md w-full">
           <div className="h-24 flex flex-col gap-1 text-white font-bold font-mono">
             <div className="p-1 px-2 flex justify-between gap-2 text-xs font-mono overflow-hidden whitespace-nowrap">
               <p className="sm:w-3/4">{details.league}</p>
@@ -66,7 +66,7 @@ const SingleResultPage = async ({ params }: RProps) => {
             </div>
           </div>
 
-          <div className="flex justify-between items-center bg-slate-50 rounded-md w-full max-w-[100vw] overflow-hidden">
+          <div className="flex justify-between items-center bg-slate-50 rounded-md w-full">
             <TabsList className="text-sm">
               <TabsTrigger value="team">Team</TabsTrigger>
               <TabsTrigger value="player">Player</TabsTrigger>
@@ -76,17 +76,12 @@ const SingleResultPage = async ({ params }: RProps) => {
           </div>
         </header>
 
-        <div className="overflow-x-auto">
-          <div className="min-w-max">
-            <TabsContent value="team">
-              <TeamStats data={teamData as FixtureData} />
-            </TabsContent>
-
-            <TabsContent value="player">
-              <PlayerStats pData={playersData} tData={teamData} />
-            </TabsContent>
-          </div>
-        </div>
+        <TabsContent value="team">
+          <TeamStats data={teamData as FixtureData} />
+        </TabsContent>
+        <TabsContent value="player">
+          <PlayerStats pData={playersData} tData={teamData} />
+        </TabsContent>
       </Tabs>
     </main>
   );

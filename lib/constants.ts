@@ -9,7 +9,7 @@ import {
   // LifeBuoy,
   // Map,
   PersonStanding,
-  // PieChart,
+  PieChart,
   // PlaySquare,
   // Send,
   ShieldHalf,
@@ -44,6 +44,15 @@ export const TEAMS_ITEMS = [
     icon: Gamepad,
   },
   {
+    title: "Dashboard",
+    url: "/home/teams/dashboard",
+    icon: PieChart,
+    // items: [
+    //   { title: "Team", url: "#" },
+    //   { title: "Player", url: "#" },
+    // ],
+  },
+  {
     title: "Team",
     url: "#",
     icon: ShieldHalf,
@@ -58,15 +67,6 @@ export const TEAMS_ITEMS = [
     url: "/home/teams/transfers",
     icon: Gamepad,
   },
-  // {
-  //   title: "Visulaization",
-  //   url: "#",
-  //   icon: PieChart,
-  //   items: [
-  //     { title: "Team", url: "#" },
-  //     { title: "Player", url: "#" },
-  //   ],
-  // },
   {
     title: "Wallet",
     url: "/home/wallet",

@@ -72,7 +72,11 @@ const UsernameForm = () => {
           profileurl: res.data.profileurl,
         });
 
-        const redirectUrl = await handleLogin(res.data.userKey, res.data.role);
+        const redirectUrl = await handleLogin(
+          res.data.userKey,
+          res.data.role,
+          res.data.userid
+        );
 
         router.replace(redirectUrl);
       } else {
