@@ -9,7 +9,7 @@ import {
   // LifeBuoy,
   // Map,
   PersonStanding,
-  PieChart,
+  // PieChart,s
   // PlaySquare,
   // Send,
   ShieldHalf,

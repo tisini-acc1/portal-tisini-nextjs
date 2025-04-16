@@ -1104,9 +1104,7 @@ export const PlayerFixtures = async () => {
 };
 
 // Create Fixtures
-export const getTeamHistory = async (
-  teamId: string
-): Promise<TeamTournament[]> => {
+export const getSuperAgentFixtures = async (): Promise<AgentFixture[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
 
@@ -1114,7 +1112,7 @@ export const getTeamHistory = async (
     const res = await axios.post(`${baseURL}`, {
       action: "fixtures",
       all: "",
-      limit: "200",
+      limit: "20",
       from: "0",
       gettoken: token,
     });

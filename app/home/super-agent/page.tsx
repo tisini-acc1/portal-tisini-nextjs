@@ -1,12 +1,19 @@
-import { getTeamHistory } from "@/actions/php-actions";
-import React from "react";
+import { getSuperAgentFixtures } from "@/actions/php-actions";
+
+import { columns } from "./columns";
+import { FixturesTable } from "./fixtures-table";
 
 const TisiniAdminPage = async () => {
-  const data = await getTeamHistory("657");
+  const data: Promise<AgentFixture[]> = getSuperAgentFixtures();
+  const fixtures = await data;
 
-  console.log(data);
+  console.log(fixtures[0]);
 
-  return <div>TisiniAdminPage</div>;
+  return (
+    <main>
+      <FixturesTable data={fixtures} columns={columns} />
+    </main>
+  );
 };
 
 export default TisiniAdminPage;

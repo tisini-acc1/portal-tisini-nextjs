@@ -43,3 +43,28 @@ type PlayerFixture = {
   matchtime: string;
   refdata: RefStat[];
 };
+type AgentFixture = {
+  fixture: string;
+  team1_id: string;
+  team1_logo: string;
+  team2_id: string;
+  team2_logo: string;
+  game_date: string;
+  team1_name: string;
+  team2_name: string;
+  status: string;
+  game_status: string;
+  minute: string;
+  second: string;
+  game_moment: string;
+  league: string;
+  matchday: string;
+  fixture_type: string;
+  series: string;
+  matchtime: string;
+  tisiniscores: {
+    Home: number;
+    Away: number;
+  };
+  refdata: RefStat[];
+};
