@@ -26,11 +26,11 @@ const FootballTeamDefense = ({ data }: { data: FootballDefense }) => {
           stat={"Clearances"}
         />
 
-        <HorizontalBar
+        {/* <HorizontalBar
           hValue={data.blocks.home.toString()}
           aValue={data.blocks.away.toString()}
           stat={"Blocks"}
-        />
+        /> */}
 
         <HorizontalBar
           hValue={data.intercptOwn.home.toString()}
@@ -44,11 +44,11 @@ const FootballTeamDefense = ({ data }: { data: FootballDefense }) => {
           stat={"Interceptions opp half"}
         />
 
-        <HorizontalBar
+        {/* <HorizontalBar
           hValue={data.foulWon.home.toString()}
           aValue={data.foulWon.away.toString()}
           stat={"Foul won"}
-        />
+        /> */}
       </CardContent>
     </Card>
   );

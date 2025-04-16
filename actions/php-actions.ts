@@ -281,6 +281,7 @@ export const getPlayersData = async (
     const res = await axios.post(`${baseURL}`, {
       action: "playerdata",
       fixture: fixId,
+      playerid: "",
       gettoken: token,
     });
 
@@ -1112,6 +1113,9 @@ export const getTeamHistory = async (
   try {
     const res = await axios.post(`${baseURL}`, {
       action: "fixtures",
+      all: "",
+      limit: "200",
+      from: "0",
       gettoken: token,
     });
 

@@ -17,6 +17,7 @@ const eventPoints: EventPoints = {
   "165": { "422": 2, "423": 1, "424": 0.5 }, // Shot In-box
   "98": { base: 2 }, // Key Pass
   "161": { base: 2 }, // Set-piece Chance
+  "203": { base: 2 }, // Chance
   "96": { "154": 1, "155": -0.5 }, // Dribbles
   "21": { "398": 2, "397": 0.5 }, // Freekick
   "200": { "471": 0.5, "472": 0.25 }, // New Freekick
@@ -45,6 +46,7 @@ const eventPoints: EventPoints = {
   "25": { base: -0.15 }, // Incomplete Pass
   "95": { "152": 1, "153": -0.15 }, // Progress Pass
   "67": { "75": 1, "76": -0.5 }, // Ball
+  "204": { "478": 1, "479": 1, "480": 0.5, "481": -0.5, "482": -0.5 }, // Ball
   "201": { base: 0.5 }, // Second Ball
   "159": { "413": 1, "414": 0.5, "415": 0.25 }, // Cross Right
   "166": { "426": 1, "427": 0.5, "425": 0.25 }, // Cross Left

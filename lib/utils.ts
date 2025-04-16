@@ -201,17 +201,52 @@ export const footballDiscipline = (home: Stats, away: Stats) => {
   return discipline;
 };
 
+export const footballChances = (home: Stats, away: Stats) => {
+  const chance = {} as FootballChance;
+
+  chance["chances"] = {
+    home: getEvent(home, "203"),
+    away: getEvent(away, "203"),
+  };
+  chance["cross"] = {
+    home: getSubEvent(home, "203", "477"),
+    away: getSubEvent(home, "203", "477"),
+  };
+  chance["freeKick"] = {
+    home: getSubEvent(home, "203", "474"),
+    away: getSubEvent(home, "203", "474"),
+  };
+  chance["cornerKick"] = {
+    home: getSubEvent(home, "203", "475"),
+    away: getSubEvent(home, "203", "475"),
+  };
+  chance["throwin"] = {
+    home: getSubEvent(home, "203", "476"),
+    away: getSubEvent(home, "203", "476"),
+  };
+  chance["keyPass"] = {
+    home: getSubEvent(home, "203", "473"),
+    away: getSubEvent(home, "203", "473"),
+  };
+
+  return chance;
+};
+
 export const footballPassing = (home: Stats, away: Stats) => {
   const passing = {} as FootballPassing;
 
   passing["corner"] = { home: getEvent(home, "3"), away: getEvent(away, "3") };
   passing["ballLost"] = {
-    home: getSubEvent(home, "67", "76"),
-    away: getSubEvent(away, "67", "76"),
+    home: getSubEvent(home, "204", "481") + getSubEvent(home, "204", "482"),
+    away: getSubEvent(away, "204", "481") + getSubEvent(away, "204", "482"),
   };
   passing["ballWon"] = {
-    home: getSubEvent(home, "67", "75"),
-    away: getSubEvent(away, "67", "75"),
+    home: getSubEvent(home, "204", "478") + getSubEvent(home, "204", "479"),
+    away: getSubEvent(away, "204", "478") + getSubEvent(away, "204", "479"),
+  };
+  passing["secondBall"] = {
+    home: getSubEvent(home, "204", "480"),
+    away: getSubEvent(away, "204", "480"),
   };
   passing["throwIn"] = {
     home: getSubEvent(home, "12", "400"),
@@ -279,16 +314,16 @@ export const footballDuels = (home: Stats, away: Stats) => {
     },
   };
 
-  duels["ground"] = {
-    home: {
-      value: getSubEvent(home, "94", "146"),
-      total: getEvent(home, "94"),
-    },
-    away: {
-      value: getSubEvent(away, "94", "146"),
-      total: getEvent(away, "94"),
-    },
-  };
+  // duels["ground"] = {
+  //   home: {
+  //     value: getSubEvent(home, "94", "146"),
+  //     total: getEvent(home, "94"),
+  //   },
+  //   away: {
+  //     value: getSubEvent(away, "94", "146"),
+  //     total: getEvent(away, "94"),
+  //   },
+  // };
 
   return duels;
 };
@@ -301,12 +336,12 @@ export const footballDefense = (home: Stats, away: Stats) => {
     away: getEvent(away, "26"),
   };
   defense["blocks"] = {
-    home: getEvent(home, "27"),
-    away: getEvent(away, "27"),
+    home: getEvent(home, "202"),
+    away: getEvent(away, "202"),
   };
   defense["foulWon"] = {
-    home: getSubEvent(home, "11", "73"),
-    away: getSubEvent(away, "11", "73"),
+    home: getSubEvent(home, "11", "470"),
+    away: getSubEvent(away, "11", "470"),
   };
   defense["intercptOwn"] = {
     home: getSubEvent(home, "28", "403"),

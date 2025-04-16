@@ -154,7 +154,7 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
     setOpen(value);
   };
 
-  // console.log(first11);
+  // console.log(store.fixture);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChangeWrapper}>

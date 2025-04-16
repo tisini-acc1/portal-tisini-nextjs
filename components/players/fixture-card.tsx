@@ -87,7 +87,7 @@ const FixtureCard = ({ fixture }: { fixture: PlayerFixture }) => {
             className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-sm"
             onClick={() => {
               updateFixture(fixture.id);
-              router.push(`/home/players/fixtures/${fixture.id}`);
+              router.push(`/home/team-player/fixtures/${fixture.id}`);
             }}
           >
             View stats

@@ -19,7 +19,7 @@ const FootballTeamDuel = ({ data }: { data: FootballDuels }) => {
           aTotal={data.aerial.away.total}
         />
 
-        <RoundedBar
+        {/* <RoundedBar
           hValue={data.ground.home.value}
           aValue={data.ground.away.value}
           hPercent={30}
@@ -27,7 +27,7 @@ const FootballTeamDuel = ({ data }: { data: FootballDuels }) => {
           stat={"Ariel Duels won"}
           hTotal={data.ground.home.total}
           aTotal={data.ground.away.total}
-        />
+        /> */}
       </CardContent>
     </Card>
   );

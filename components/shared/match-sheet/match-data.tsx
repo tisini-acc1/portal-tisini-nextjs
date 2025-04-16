@@ -41,7 +41,7 @@ const MatchDataSection = ({ homeId, home, away, fixEvents }: DataProps) => {
     return <div>Loading...</div>;
   }
 
-  // console.log(fixEvents);
+  // console.log(store.user.role);
 
   return (
     <section className="w-full space-y-6 bg-gray-100 p-3 rounded-md">
@@ -50,7 +50,7 @@ const MatchDataSection = ({ homeId, home, away, fixEvents }: DataProps) => {
           <strong>Match Data</strong>
         </h1>
 
-        {store.user.role === "9" && (
+        {(store.user.role === "9" || store.user.role === "6") && (
           <div className="flex gap-2">
             <VerifyFixtureData />
             <AddFixtureData

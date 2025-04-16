@@ -1,5 +1,6 @@
 import {
   footballAttack,
+  footballChances,
   footballDefense,
   footballDetails,
   footballDiscipline,
@@ -49,6 +50,7 @@ export const footballData = (data: FixtureData) => {
   footballData["duels"] = footballDuels(home, away);
   footballData["defense"] = footballDefense(home, away);
   footballData["gk"] = footballGK(home, away);
+  footballData["chance"] = footballChances(home, away);
 
   return footballData;
 };

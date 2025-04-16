@@ -30,7 +30,7 @@ const FootballTeamAttack = ({ data }: { data: FootballAttack }) => {
           aTotal={data.shotOutBox.away.total}
         />
 
-        <HorizontalBar
+        {/* <HorizontalBar
           hValue={data.keyPass.home.toString()}
           aValue={data.keyPass.away.toString()}
           stat={"Key Pass"}
@@ -40,7 +40,7 @@ const FootballTeamAttack = ({ data }: { data: FootballAttack }) => {
           hValue={data.setPiece.home.toString()}
           aValue={data.setPiece.away.toString()}
           stat={"Set-piece chance"}
-        />
+        /> */}
 
         <HorizontalBar
           hValue={data.freekick.home.toString()}

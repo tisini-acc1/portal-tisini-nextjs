@@ -36,6 +36,12 @@ const FootballTeamPasses = ({ data }: { data: FootballPassing }) => {
         />
 
         <HorizontalBar
+          hValue={data.secondBall.home.toString()}
+          aValue={data.secondBall.away.toString()}
+          stat={"Second ball"}
+        />
+
+        <HorizontalBar
           hValue={data.ballLost.home.toString()}
           aValue={data.ballLost.away.toString()}
           stat={"Ball lost"}

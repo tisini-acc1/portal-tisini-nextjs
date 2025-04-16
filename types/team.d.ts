@@ -269,6 +269,15 @@ type FootballDiscipline = {
   cards: Cards;
 };
 
+type FootballChance = {
+  chances: Stat;
+  cross: Stat;
+  keyPass: Stat;
+  freeKick: Stat;
+  throwin: Stat;
+  cornerKick: Stat;
+};
+
 type RugbyDiscipline = {
   penalty: Stat;
   cards: Cards;
@@ -278,6 +287,7 @@ type FootballPassing = {
   corner: Stat;
   ballLost: Stat;
   ballWon: Stat;
+  secondBall: Stat;
   throwIn: Stat;
   longThrowIn: Stat;
   pass: TotalStat;
@@ -348,6 +358,7 @@ type FootballData = {
   duels: FootballDuels;
   defense: FootballDefense;
   gk: FootballGK;
+  chance: FootballChance;
 };
 
 type RugbyData = {

@@ -43,15 +43,15 @@ export const TEAMS_ITEMS = [
     url: "/home/teams/results",
     icon: Gamepad,
   },
-  {
-    title: "Dashboard",
-    url: "/home/teams/dashboard",
-    icon: PieChart,
-    // items: [
-    //   { title: "Team", url: "#" },
-    //   { title: "Player", url: "#" },
-    // ],
-  },
+  // {
+  //   title: "Dashboard",
+  //   url: "/home/teams/dashboard",
+  //   icon: PieChart,
+  //   items: [
+  //     { title: "Team", url: "#" },
+  //     { title: "Player", url: "#" },
+  //   ],
+  // },
   {
     title: "Team",
     url: "#",
@@ -145,7 +145,7 @@ export const COMPS_ITEMS = [
 export const PLAYER_ITEMS = [
   {
     title: "Home",
-    url: "/home/players",
+    url: "/home/team-player",
     icon: Home,
     isActive: true,
   },
