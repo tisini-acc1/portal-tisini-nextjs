@@ -68,6 +68,7 @@ const NavigateButtons = ({ fixture }: { fixture: RefreeFix }) => {
     team2_name: fixture.team2_name,
     team2_id: fixture.team2_id,
     fixId: fixture.id,
+    fixType: fixture.fixture_type,
   };
 
   return (

@@ -70,6 +70,7 @@ const OfficialButton = ({ fixture }: { fixture: AgentFixture }) => {
     team2_name: fixture.team2_name,
     team2_id: fixture.team2_id,
     fixId: fixId,
+    fixType: fixture.fixture_type,
   };
 
   // console.log(fixture);

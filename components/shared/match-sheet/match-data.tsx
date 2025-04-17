@@ -25,7 +25,7 @@ const MatchDataSection = ({ homeId, home, away, fixEvents }: DataProps) => {
   });
 
   const selectedFixType = fixTypes?.find(
-    (type) => type.type_code === store.refFix.fixture_type
+    (type) => type.type_code === store.sheetFix.fixType
   );
 
   const { data, isLoading } = useQuery({
@@ -41,7 +41,8 @@ const MatchDataSection = ({ homeId, home, away, fixEvents }: DataProps) => {
     return <div>Loading...</div>;
   }
 
-  // console.log(store.user.role);
+  // console.log(fixTypes);
+  // console.log(selectedFixType);
 
   return (
     <section className="w-full space-y-6 bg-gray-100 p-3 rounded-md">

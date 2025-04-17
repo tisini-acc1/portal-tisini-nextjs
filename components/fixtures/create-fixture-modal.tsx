@@ -86,11 +86,11 @@ const CreateFixtureModal = () => {
     }
   }, [data]);
 
-  useEffect(() => {
-    if (form.formState.errors) {
-      console.log("Validation errors:", form.formState.errors);
-    }
-  }, [form.formState.errors]);
+  // useEffect(() => {
+  //   if (form.formState.errors) {
+  //     console.log("Validation errors:", form.formState.errors);
+  //   }
+  // }, [form.formState.errors]);
 
   const mutation = useMutation({
     mutationFn: createFixture,

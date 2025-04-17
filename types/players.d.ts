@@ -75,4 +75,5 @@ type SheetFix = {
   team2_name: string;
   team2_id: string;
   fixId: string;
+  fixType: string;
 };
