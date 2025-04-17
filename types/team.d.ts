@@ -507,6 +507,7 @@ type PlayerEvent = {
   "prog-pass": string;
   tackles: string;
   "ball-efficiency": string;
+  second_ball: string;
   interception: string;
   clearance: string;
   blocks: string;

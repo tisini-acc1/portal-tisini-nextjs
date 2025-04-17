@@ -272,7 +272,8 @@ export const getFixtureStats = async (fixId: string): Promise<FixtureData> => {
 
 // Get Players Data
 export const getPlayersData = async (
-  fixId: string
+  fixId: string,
+  player: number
 ): Promise<TeamPlayerData> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
@@ -281,7 +282,7 @@ export const getPlayersData = async (
     const res = await axios.post(`${baseURL}`, {
       action: "playerdata",
       fixture: fixId,
-      playerid: "",
+      playerid: player,
       gettoken: token,
     });
 

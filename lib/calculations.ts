@@ -30,16 +30,18 @@ export const playerBallStats = (data: Stats) => {
   const acc = getPercent(shots, on_target);
   //   const rate = getPercent(shots, goals);
 
-  const chances =
-    getEvent(data, "23") + getEvent(data, "98") + getEvent(data, "161");
+  const chances = getEvent(data, "203");
 
   const inter_opp = getSubEvent(data, "28", "404");
   const inter_own = getSubEvent(data, "28", "403");
   // const intercept = inter_opp + inter_own;
 
   // const ball = getEvent(data, "67");
-  const ball_won = getSubEvent(data, "67", "75");
-  const ball_lost = getSubEvent(data, "67", "76");
+  const ball_won =
+    getSubEvent(data, "204", "478") + getSubEvent(data, "204", "479");
+  const ball_lost =
+    getSubEvent(data, "204", "481") + getSubEvent(data, "204", "481");
+  const second_ball = getSubEvent(data, "204", "480");
 
   const aerial = getEvent(data, "93");
   const aerial_won = getSubEvent(data, "93", "144");
@@ -120,6 +122,7 @@ export const playerBallStats = (data: Stats) => {
     "prog-pass": `${prog_passes} / ${comp_prog_pass}   ${prog_pct}%`,
     tackles: `${tackle} / ${tackle_won}   ${tackle_acc}%`,
     "ball-efficiency": `${ball_lost} / ${ball_won}`,
+    second_ball: second_ball.toString(),
     interception: `${inter_opp} / ${inter_own}`,
     clearance: clearances.toString(),
     blocks: blocks.toString(),

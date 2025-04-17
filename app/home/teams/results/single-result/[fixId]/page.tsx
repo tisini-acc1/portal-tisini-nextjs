@@ -12,7 +12,7 @@ type RProps = {
 const SingleResultPage = async ({ params }: RProps) => {
   const { fixId } = await params;
 
-  const playersData = await getPlayersData(fixId);
+  const playersData = await getPlayersData(fixId, 0);
   const teamData = await getFixtureStats(fixId);
 
   const details = teamData?.fixture[0];
@@ -20,7 +20,7 @@ const SingleResultPage = async ({ params }: RProps) => {
 
   // const fixType = teamData && teamData["fixture"][0].fixture_type;
 
-  // console.log(playersData);
+  console.log(playersData);
   // console.log(teamData);
 
   return (
