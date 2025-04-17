@@ -55,7 +55,7 @@ export const playerBallStats = (data: Stats) => {
   const tackle_won = getSubEvent(data, "97", "156");
   // const tackle_lost = getSubEvent(data, "97", "157");
 
-  const blocks = getEvent(data, "27");
+  const blocks = getEvent(data, "202");
   const clearances = getEvent(data, "26");
 
   // const pos =
@@ -122,7 +122,7 @@ export const playerBallStats = (data: Stats) => {
     "prog-pass": `${prog_passes} / ${comp_prog_pass}   ${prog_pct}%`,
     tackles: `${tackle} / ${tackle_won}   ${tackle_acc}%`,
     "ball-efficiency": `${ball_lost} / ${ball_won}`,
-    second_ball: second_ball.toString(),
+    "second-ball": second_ball.toString(),
     interception: `${inter_opp} / ${inter_own}`,
     clearance: clearances.toString(),
     blocks: blocks.toString(),

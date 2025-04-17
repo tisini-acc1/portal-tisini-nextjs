@@ -15,6 +15,7 @@ const StatCategory = {
   DEFENSE: [
     "tackles",
     "ball-efficiency",
+    "second-ball",
     "interception",
     "clearance",
     "blocks",
