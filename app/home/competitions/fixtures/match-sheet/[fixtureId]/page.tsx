@@ -16,6 +16,7 @@ const CompMatchSheetPage = async ({ params }: SheetProps) => {
   const data = await getFixRefEvents(ids?.[0]);
 
   // console.log(data);
+  // console.log(fixtureId);
 
   return (
     <main className="space-y-4">

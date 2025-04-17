@@ -91,7 +91,7 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
 
   const showSub = subIds.includes(selectedId);
 
-  const { team1_name, team1_id, team2_name, team2_id } = store.refFix;
+  const { team1_name, team1_id, team2_name, team2_id } = store.sheetFix;
   const teams = [
     { team: team1_name, id: team1_id },
     { team: team2_name, id: team2_id },
@@ -106,7 +106,7 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
   const mutation = useMutation({
     mutationFn: createFixtureEvent,
     onSuccess(data) {
-      console.log(data);
+      // console.log(data);
       if (data.error === "0") {
         setOpen(false);
         form.reset();
@@ -134,7 +134,7 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
   const onSubmit = (value: z.infer<typeof eventsSchema>) => {
     const data = {
       action: "createrefevent",
-      fixture: store.refFix.id,
+      fixture: store.sheetFix.fixId,
       event: value.event,
       subevent: value.subEvent || 0,
       fixtype: fixType,

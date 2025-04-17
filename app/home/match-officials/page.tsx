@@ -24,6 +24,7 @@ const MatchOfficialsPage = () => {
   }
 
   const fixtures = data?.slice().reverse();
+  // console.log(data);
 
   return (
     <main>

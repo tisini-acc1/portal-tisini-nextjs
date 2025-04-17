@@ -68,3 +68,11 @@ type AgentFixture = {
   };
   refdata: RefStat[];
 };
+
+type SheetFix = {
+  team1_name: string;
+  team1_id: string;
+  team2_name: string;
+  team2_id: string;
+  fixId: string;
+};

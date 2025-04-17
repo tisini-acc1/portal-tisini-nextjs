@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { MoreHorizontal } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 
+import { useStore } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import EditFixtureModal from "@/components/fixtures/edit-fixture-modal";
 import DeleteFixtureModal from "@/components/fixtures/delete-fixture-modal";
@@ -18,9 +19,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export const columns: ColumnDef<Fixture>[] = [
+export const columns: ColumnDef<AgentFixture>[] = [
   {
-    accessorKey: "id",
+    accessorKey: "fixture",
     header: "#",
   },
   {
@@ -56,11 +57,22 @@ export const columns: ColumnDef<Fixture>[] = [
   },
 ];
 
-const OfficialButton = ({ fixture }: { fixture: Fixture }) => {
+const OfficialButton = ({ fixture }: { fixture: AgentFixture }) => {
   const [openAdd, setOpenAdd] = useState(false);
   const router = useRouter();
 
-  const fixId = fixture.id;
+  const updateSheetFix = useStore((state) => state.updateSheetFix);
+
+  const fixId = fixture.fixture;
+  const sheetFix = {
+    team1_name: fixture.team1_name,
+    team1_id: fixture.team1_id,
+    team2_name: fixture.team2_name,
+    team2_id: fixture.team2_id,
+    fixId: fixId,
+  };
+
+  // console.log(fixture);
 
   return (
     <>
@@ -79,11 +91,12 @@ const OfficialButton = ({ fixture }: { fixture: Fixture }) => {
             Add officials
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() =>
+            onClick={() => {
+              updateSheetFix(sheetFix);
               router.push(
-                `/home/competitions/fixtures/match-sheet/${fixId}-${fixture.team1_id}`
-              )
-            }
+                `/home/competitions/fixtures/match-sheet/${fixId}-${fixture.team1_id}-${fixture.team2_id}`
+              );
+            }}
           >
             Match sheet
           </DropdownMenuItem>

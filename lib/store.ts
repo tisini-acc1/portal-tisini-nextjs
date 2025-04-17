@@ -26,6 +26,7 @@ export type Store = {
   refFix: RefreeFix;
   userFix: TeamFixture;
   fixType: string;
+  sheetFix: SheetFix;
 };
 
 export type State = {
@@ -44,6 +45,7 @@ export type Actions = {
   updateRefFixture: (fixture: RefreeFix) => void;
   upateUserFixture: (fixture: TeamFixture) => void;
   updateFixType: (type: string) => void;
+  updateSheetFix: (type: SheetFix) => void;
 };
 
 const initialState: Store = {
@@ -68,6 +70,7 @@ const initialState: Store = {
   refFix: {} as RefreeFix,
   userFix: {} as TeamFixture,
   fixType: "",
+  sheetFix: {} as SheetFix,
 };
 
 export const useStore = create<State & Actions>()(
@@ -120,6 +123,10 @@ export const useStore = create<State & Actions>()(
           store: { ...state.store, userFix: fixture },
         }));
       },
+      updateSheetFix: (fixture: SheetFix) =>
+        set((state) => ({
+          store: { ...state.store, sheetFix: fixture },
+        })),
     }),
     { name: "store" }
   )

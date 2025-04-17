@@ -28,7 +28,7 @@ export const getTournaments = async (): Promise<Competition[]> => {
 };
 
 // Get Tournament Fixtures
-export const getTournFixtures = async (id: number): Promise<Fixture[]> => {
+export const getTournFixtures = async (id: number): Promise<AgentFixture[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
 
@@ -1114,6 +1114,32 @@ export const getSuperAgentFixtures = async (): Promise<AgentFixture[]> => {
       all: "",
       limit: "20",
       from: "0",
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fetch tournaments for team: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while fetching tournament teams."
+    );
+  }
+};
+
+//  {"action":"fixtures","fixtureid":1}
+export const getFixture = async (): Promise<AgentFixture[]> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "fixtures",
+      fixtureid: 7285,
       gettoken: token,
     });
 

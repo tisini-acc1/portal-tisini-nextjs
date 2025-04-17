@@ -60,7 +60,15 @@ export const columns: ColumnDef<RefreeFix>[] = [
 
 const NavigateButtons = ({ fixture }: { fixture: RefreeFix }) => {
   const router = useRouter();
-  const { updateRefFixture } = useStore((state) => state);
+  const { updateSheetFix, updateRefFixture } = useStore((state) => state);
+
+  const sheetFix = {
+    team1_name: fixture.team1_name,
+    team1_id: fixture.team1_id,
+    team2_name: fixture.team2_name,
+    team2_id: fixture.team2_id,
+    fixId: fixture.id,
+  };
 
   return (
     <DropdownMenu>
@@ -77,7 +85,7 @@ const NavigateButtons = ({ fixture }: { fixture: RefreeFix }) => {
 
         <DropdownMenuItem
           onClick={() => {
-            updateRefFixture(fixture);
+            updateSheetFix(sheetFix);
             router.push(
               `/home/match-officials/fixtures/match-sheet/${fixture.id}-${fixture.team1_id}-${fixture.team2_id}`
             );

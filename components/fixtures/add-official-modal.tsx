@@ -48,7 +48,8 @@ const AddFixtureOfficialModal = ({ fixId, open, setOpen }: AddProps) => {
   const { toast } = useToast();
   //   const [open, setOpen] = useState(false);
   const { store } = useStore((state) => state);
-  console.log(store.officials);
+  // console.log(store.officials);
+
   const form = useForm<z.infer<typeof officialSchema>>({
     resolver: zodResolver(officialSchema),
     defaultValues: {
@@ -69,7 +70,7 @@ const AddFixtureOfficialModal = ({ fixId, open, setOpen }: AddProps) => {
     };
 
     const res = await updateFixOfficial(refs);
-    console.log(res);
+    // console.log(res);
     if (res.error === "0") {
       setOpen(false);
       // queryClient.invalidateQueries({ queryKey: ["allPlayers"] });

@@ -20,6 +20,7 @@ const MatchSheetPage = async ({ params }: SheetProps) => {
   const data = await getFixRefEvents(id);
   // const refFix = useStore((state) => state.store.refFix);
 
+  // console.log(fixId);
   // console.log(data);
 
   return (

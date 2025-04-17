@@ -12,7 +12,7 @@ const FixturesPage = () => {
   // const data = await fixtureService.getFixtures();
 
   // const fixtures = data.filter((fixture) => fixture.series === "14").reverse();
-  const [fixtures, setFixtures] = useState<Fixture[]>([]);
+  const [fixtures, setFixtures] = useState<AgentFixture[]>([]);
 
   const { store, updateOfficials } = useStore((state) => state);
 

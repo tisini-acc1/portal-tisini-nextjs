@@ -1,13 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import { Volleyball } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
 import { useStore } from "@/lib/store";
-import { getFixType, getOfficialsEvents } from "@/actions/php-actions";
 import AddFixtureData from "./add-fixture-data";
 import VerifyFixtureData from "./verify-fixture-data";
-import Image from "next/image";
+import { getFixType, getOfficialsEvents } from "@/actions/php-actions";
 
 type DataProps = {
   homeId: string;
@@ -87,15 +87,17 @@ const RefDataCard = ({ data, homeId }: CardProps) => {
   const img =
     data.subeventid === "60"
       ? "/conversion.png"
+      : data.eventid === "19"
+      ? "/ball.png"
       : ["42", "62", "61"].includes(data.subeventid)
       ? "/missed.png"
       : ["43", "44"].includes(data.subeventid)
       ? "/goal.png"
       : ["66", "200"].includes(data.subeventid)
       ? "/rugby.jpg"
-      : data.subeventid === "46"
+      : ["46", "21"].includes(data.subeventid)
       ? "/yellowcard.avif"
-      : data.subeventid === "45"
+      : ["45", "22"].includes(data.subeventid)
       ? "/redcard.webp"
       : "/homeLogo.png";
 
@@ -155,7 +157,9 @@ const RefDataCard = ({ data, homeId }: CardProps) => {
       ) : (
         <div className="flex justify-end items-center capitalize">
           <span className="text-muted-foreground text-xs mr-1">
-            {data.eventid === "52" ? data.eventname : data.subeventname}
+            {data.eventid === "52" || data.eventid === "19"
+              ? data.eventname
+              : data.subeventname}
           </span>
           {data.playername}{" "}
           <Image src={img} alt={data.eventname} width={25} height={25} />{" "}
