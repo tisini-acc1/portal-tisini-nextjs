@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import FilterLoader from "./filter-loader";
 import { getTournaments } from "@/actions/django-actions";
 import FilterTournamentSeries from "./filter-tournament-series";

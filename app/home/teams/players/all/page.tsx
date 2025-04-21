@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import { MoreVerticalIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 // import { Button } from "@/components/ui/button";
 import { calculateYearsOld } from "@/lib/utils";
 import EditPlayerModal from "@/components/teams/manage-player/edit-player-modal";

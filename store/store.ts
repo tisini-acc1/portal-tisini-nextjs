@@ -27,6 +27,7 @@ export type Store = {
   userFix: TeamFixture;
   fixType: string;
   sheetFix: SheetFix;
+  playerFix: PlayerFixture;
 };
 
 export type State = {
@@ -46,6 +47,7 @@ export type Actions = {
   upateUserFixture: (fixture: TeamFixture) => void;
   updateFixType: (type: string) => void;
   updateSheetFix: (type: SheetFix) => void;
+  updatePlayerFix: (type: PlayerFixture) => void;
 };
 
 const initialState: Store = {
@@ -53,24 +55,15 @@ const initialState: Store = {
   fixture: "",
   balance: 0,
   officials: [],
+  fixType: "",
   tournament: "",
   team: { id: "", name: "" },
   user: { id: "", name: "", role: "", phone: "", profileurl: "", account: "" },
-  overview: {
-    team_id: "",
-    team_name: "",
-    date_created: "",
-    date_updated: "",
-    status: "",
-    last_5_fixtures: [],
-    upcoming_fixtures: [],
-    ongoing_matches: [],
-    recent_form: [],
-  },
+  overview: {} as TeamOverview,
   refFix: {} as RefreeFix,
   userFix: {} as TeamFixture,
-  fixType: "",
   sheetFix: {} as SheetFix,
+  playerFix: {} as PlayerFixture,
 };
 
 export const useStore = create<State & Actions>()(
@@ -127,6 +120,11 @@ export const useStore = create<State & Actions>()(
         set((state) => ({
           store: { ...state.store, sheetFix: fixture },
         })),
+      updatePlayerFix: (fixture: PlayerFixture) => {
+        set((state) => ({
+          store: { ...state.store, playerFix: fixture },
+        }));
+      },
     }),
     { name: "store" }
   )

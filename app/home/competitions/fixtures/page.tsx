@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { columns } from "./columns";
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import { FixturesTable } from "./fixtures-table";
 import { getOfficials, getTournFixtures } from "@/actions/php-actions";
 import CreateFixtureModal from "@/components/fixtures/create-fixture-modal";

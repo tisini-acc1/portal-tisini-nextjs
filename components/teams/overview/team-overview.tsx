@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import Loading from "@/app/home/loading";
 import { CurrentForm } from "./current-form";
 import { UpcomingMatch } from "./upcoming-match";

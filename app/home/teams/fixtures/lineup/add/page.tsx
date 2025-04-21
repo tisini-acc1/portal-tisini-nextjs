@@ -1,6 +1,6 @@
 "use client";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import { useQuery } from "@tanstack/react-query";
 
 import { getAllPlayers } from "@/actions/php-actions";

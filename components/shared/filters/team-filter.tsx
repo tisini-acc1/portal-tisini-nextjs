@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import FilterLoader from "./filter-loader";
 import { getUserTeams } from "@/actions/php-actions";
 import {

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Volleyball } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import AddFixtureData from "./add-fixture-data";
 import VerifyFixtureData from "./verify-fixture-data";
 import { getFixType, getOfficialsEvents } from "@/actions/php-actions";

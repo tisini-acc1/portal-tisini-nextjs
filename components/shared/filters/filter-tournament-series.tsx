@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import {

@@ -6,7 +6,7 @@ import { CameraIcon } from "lucide-react";
 
 import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import { useToast } from "@/hooks/use-toast";
 import { uploadImage } from "@/actions/upload";
 import { useMutation } from "@tanstack/react-query";

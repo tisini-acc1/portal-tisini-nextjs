@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { columns } from "./columns";
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import { TransferTable } from "./transfer-table";
 import { getTeamTransfers } from "@/actions/php-actions";
 

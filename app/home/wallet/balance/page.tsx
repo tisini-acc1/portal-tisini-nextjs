@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { columns } from "./columns";
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import { StatementTable } from "./statement-table";
 import { getStatement } from "@/actions/wallet-actions";
 import DepositModal from "@/components/shared/wallet/deposit-modal";

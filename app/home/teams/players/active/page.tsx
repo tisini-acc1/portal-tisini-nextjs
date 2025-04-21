@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { columns } from "./columns";
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import { TeamPlayersTable } from "./team-players-table";
 import TeamSelectHeader from "@/components/teams/team-select-header";
 import { getTeamPlayers, getTeamTournaments } from "@/actions/php-actions";

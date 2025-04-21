@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import { getTournamentOverview } from "@/actions/django-actions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Mail, PhoneIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import UploadCertModal from "@/components/shared/profile/upload-cert-modal";
 import EditAvatarModal from "@/components/shared/profile/edit-avatar-modal";
 import EditProfileBioModal from "@/components/shared/profile/edit-bio-modal";

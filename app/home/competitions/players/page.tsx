@@ -6,7 +6,7 @@ import { columns } from "./columns";
 import FilterTournTeams from "@/components/tournaments/filter-tourn-teams";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 
 const PlayersPage = () => {
   const [players, setPlayers] = useState<Player[]>([]);

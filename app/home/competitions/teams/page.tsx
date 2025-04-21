@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import { getTournamentTeams } from "@/actions/django-actions";
 import UploadTeamLogoModal from "@/components/tournaments/teams/upload-teamlogo-modal";
 import { Button } from "@/components/ui/button";

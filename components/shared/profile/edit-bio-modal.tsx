@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 
 import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 // import { RotateCcw } from "lucide-react";
 import {
   Form,

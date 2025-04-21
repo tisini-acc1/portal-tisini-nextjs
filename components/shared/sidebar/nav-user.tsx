@@ -9,7 +9,7 @@ import {
   // Sparkles,
 } from "lucide-react";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import { useRouter } from "next/navigation";
 import { resetAuthCookies } from "@/actions/actions";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";

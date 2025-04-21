@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { CalendarDays } from "lucide-react";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const UpcomingMatch = ({ fixture }: { fixture: Fixture }) => {

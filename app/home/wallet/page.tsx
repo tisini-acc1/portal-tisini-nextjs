@@ -5,7 +5,7 @@ import { RotateCw } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";

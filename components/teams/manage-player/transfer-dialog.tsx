@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import React, { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";

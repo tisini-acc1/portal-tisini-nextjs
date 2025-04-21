@@ -1,7 +1,7 @@
 "use client";
 
 import { getTournamentTransfers } from "@/actions/php-actions";
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import { useQuery } from "@tanstack/react-query";
 import { TournamentTransferTable } from "./transfers-table";
 import { columns } from "./columns";

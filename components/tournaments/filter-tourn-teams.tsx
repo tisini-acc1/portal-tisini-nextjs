@@ -17,7 +17,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { getTournamentTeams } from "@/actions/django-actions";
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 
 const FilterTournTeams = () => {
   const [open, setOpen] = React.useState(false);

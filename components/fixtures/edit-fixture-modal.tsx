@@ -18,7 +18,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { useForm } from "react-hook-form";
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import {
   Select,
   SelectContent,

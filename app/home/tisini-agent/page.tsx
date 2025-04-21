@@ -1,6 +1,6 @@
 "use client";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 
 const AgentsPage = () => {
   const { store } = useStore((state) => state);

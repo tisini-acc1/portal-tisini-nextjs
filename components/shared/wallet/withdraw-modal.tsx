@@ -22,7 +22,7 @@ import { Input } from "../../ui/input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { makeWithdraw, withdrawCost } from "@/actions/wallet-actions";
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import { useToast } from "@/hooks/use-toast";
 
 type Props = {

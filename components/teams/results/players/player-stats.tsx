@@ -1,6 +1,6 @@
 "use client";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import BasketballPlayerStats from "./basketball-player";
 import FootballPlayerStats from "./football-player-stats";
 

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { MoreHorizontal } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import { Button } from "@/components/ui/button";
 import EditFixtureModal from "@/components/fixtures/edit-fixture-modal";
 import DeleteFixtureModal from "@/components/fixtures/delete-fixture-modal";

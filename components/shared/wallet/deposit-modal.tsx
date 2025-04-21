@@ -2,7 +2,7 @@ import { Plus, RotateCw } from "lucide-react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import { Button } from "../../ui/button";
 import {
   Dialog,

@@ -12,7 +12,7 @@ import {
   Send,
 } from "lucide-react";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 // import { NavProjects } from "@/components/nav-projects";
 import {
   COMPS_ITEMS,

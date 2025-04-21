@@ -1,12 +1,15 @@
-import { getPlayersData } from "@/actions/php-actions";
-import React from "react";
+import SinglePlayerStats from "@/components/players/single-player-stats";
 
-const SingleFixturePage = async () => {
-  const data = await getPlayersData("6845", 1);
+type FixtureParams = {
+  params: Promise<{
+    fixtureId: string;
+  }>;
+};
 
-  console.log(data);
+const SingleFixturePage = async ({ params }: FixtureParams) => {
+  const { fixtureId } = await params;
 
-  return <div>SingleFixturePage</div>;
+  return <SinglePlayerStats fixtureId={fixtureId} />;
 };
 
 export default SingleFixturePage;

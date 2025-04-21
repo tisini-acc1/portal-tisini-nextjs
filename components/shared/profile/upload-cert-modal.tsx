@@ -19,7 +19,7 @@ import {
 import { Input } from "../../ui/input";
 import Image from "next/image";
 import { useToast } from "@/hooks/use-toast";
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import { uploadImage } from "@/actions/upload";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { uploadCertUrl } from "@/actions/php-actions";

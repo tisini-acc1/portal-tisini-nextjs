@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import { Button } from "@/components/ui/button";
 import { getTeamTournaments } from "@/actions/php-actions";
 import ResultsHeader from "@/components/teams/results/results-header";

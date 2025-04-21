@@ -4,7 +4,7 @@ import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import TeamSelectHeader from "../team-select-header";
 import { getTeamTournaments } from "@/actions/php-actions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,7 +12,6 @@ import { PlusCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const TeamFixtures = () => {
-  const [series, setSeries] = useState<TeamSeason[]>([]);
   const [fixtures, setFixtures] = useState<TeamFixture[]>([]);
   const [fixType, setFixType] = useState<string>("");
 
@@ -36,7 +35,6 @@ const TeamFixtures = () => {
   useEffect(() => {
     if (data && data[0]?.season) {
       const seriesData = data[0]?.season.slice().reverse();
-      setSeries(seriesData);
       updateSerie(seriesData[0]?.id);
       updateTournament(data[0]?.tournamentid);
       setFixtures(data[0]?.season[0]?.fixture?.slice().reverse() || []);
@@ -63,7 +61,6 @@ const TeamFixtures = () => {
           }
         }
 
-        setSeries(tournament.season);
         updateSerie(tournament.season[0].id);
       }
     }
@@ -89,10 +86,7 @@ const TeamFixtures = () => {
         </div>
       ) : (
         <main className="space-y-8">
-          <TeamSelectHeader
-            tournamentsData={data as TeamTournament[]}
-            seriesData={series}
-          />
+          <TeamSelectHeader tournamentsData={data as TeamTournament[]} />
 
           <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {/* <FixturesCalendar fixtures={fixtures} /> */}

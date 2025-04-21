@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import FixCommentModal from "./fix-comment-modal";
 import RefreeCard from "./ref-card";
 import { getPitchCond, getWeatherCond } from "@/actions/php-actions";
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 
 type CommentsProps = {
   details: MatchDetails;

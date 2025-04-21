@@ -12,7 +12,7 @@ import {
   CommandItem,
 } from "cmdk";
 import { ChevronsUpDown, Command, Check } from "lucide-react";
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 
 const FilterSeries = ({ series }: { series: Serie[] }) => {
   const [open, setOpen] = React.useState(false);

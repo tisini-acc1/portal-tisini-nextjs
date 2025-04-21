@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import { getRefreeFixtures } from "@/actions/php-actions";
 import { OfficialsFixTable } from "./fixtures-table";
 import { columns } from "./columns";

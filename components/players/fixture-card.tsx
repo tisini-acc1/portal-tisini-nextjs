@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 
 import { Button } from "../ui/button";
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import { formattedDate } from "../teams/fixtures/team-fixtures";
 import { ArrowRightIcon, CalendarDaysIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
@@ -11,7 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 const FixtureCard = ({ fixture }: { fixture: PlayerFixture }) => {
   const router = useRouter();
 
-  const { updateFixture } = useStore((state) => state);
+  const { updateFixture, updatePlayerFix } = useStore((state) => state);
 
   return (
     <Card
@@ -87,6 +87,7 @@ const FixtureCard = ({ fixture }: { fixture: PlayerFixture }) => {
             className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-sm"
             onClick={() => {
               updateFixture(fixture.id);
+              updatePlayerFix(fixture);
               router.push(`/home/team-player/fixtures/${fixture.id}`);
             }}
           >

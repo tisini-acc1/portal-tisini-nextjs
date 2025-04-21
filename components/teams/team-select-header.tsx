@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 
-import { useStore } from "@/lib/store";
+import { useStore } from "@/store/store";
 import {
   Select,
   SelectContent,
