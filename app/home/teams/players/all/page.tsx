@@ -32,13 +32,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
-const ManagePlayerPage = () => {
+const AllPlayersPage = () => {
   const { store } = useStore((state) => state);
   const [openEdit, setOpenEdit] = useState(false);
   const [openUpload, setOpenUpload] = useState(false);
   const [openTransfer, setOpenTransfer] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState<TeamPlayer | null>(null);
+
+  const router = useRouter();
 
   const { data: players } = useQuery({
     queryKey: ["allPlayers", store.team.id],
@@ -72,7 +76,17 @@ const ManagePlayerPage = () => {
       <main className="space-y-4">
         <header className="flex justify-between items-center">
           <p className="font-mono">{players?.length} players</p>
-          <CreatePlayerModal countries={countries as Country[]} />
+
+          <div className="flex items-center justify-center gap-1">
+            <Button
+              size={"sm"}
+              onClick={() => router.push("/home/teams/players/active")}
+            >
+              Active players
+            </Button>
+
+            <CreatePlayerModal countries={countries as Country[]} />
+          </div>
         </header>
 
         {players && players?.length < 0 ? (
@@ -209,4 +223,4 @@ const ManagePlayerPage = () => {
   );
 };
 
-export default ManagePlayerPage;
+export default AllPlayersPage;

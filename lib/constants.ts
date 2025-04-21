@@ -53,14 +53,9 @@ export const TEAMS_ITEMS = [
   //   ],
   // },
   {
-    title: "Team",
-    url: "#",
+    title: "Players",
+    url: "/home/teams/players/all",
     icon: ShieldHalf,
-    items: [
-      { title: "Team Player", url: "/home/teams/team-player" },
-      { title: "Manage Player", url: "/home/teams/manage-player" },
-      // { title: "Staffs", url: "#" },
-    ],
   },
   {
     title: "Transfers",

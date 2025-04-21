@@ -65,18 +65,21 @@ export const columns: ColumnDef<AgentFixture>[] = [
     cell: ({ row }) => {
       const fixture = row.original;
 
-      const router = useRouter();
-
-      return (
-        <Button
-          size={"sm"}
-          onClick={() =>
-            router.push(`/home/super-agent/review-data/${fixture.fixture}`)
-          }
-        >
-          Review
-        </Button>
-      );
+      return <NavigateButton fixture={fixture} />;
     },
   },
 ];
+
+const NavigateButton = (fixture: { fixture: AgentFixture }) => {
+  const router = useRouter();
+  return (
+    <Button
+      size={"sm"}
+      onClick={() =>
+        router.push(`/home/super-agent/review-data/${fixture.fixture}`)
+      }
+    >
+      Review
+    </Button>
+  );
+};
