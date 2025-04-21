@@ -1,12 +1,13 @@
 "use client";
 
-import { FixturesTable } from "./fixtures-table";
-import { columns } from "./columns";
-import CreateFixtureModal from "@/components/fixtures/create-fixture-modal";
-import { useQuery } from "@tanstack/react-query";
-import { getOfficials, getTournFixtures } from "@/actions/php-actions";
 import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+
+import { columns } from "./columns";
 import { useStore } from "@/lib/store";
+import { FixturesTable } from "./fixtures-table";
+import { getOfficials, getTournFixtures } from "@/actions/php-actions";
+import CreateFixtureModal from "@/components/fixtures/create-fixture-modal";
 
 const FixturesPage = () => {
   // const data = await fixtureService.getFixtures();

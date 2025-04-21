@@ -175,3 +175,28 @@ export const REFREE_ITEMS = [
     icon: Wallet,
   },
 ];
+
+export const SUPERAGENT_ITEMS = [
+  {
+    title: "Home",
+    url: "/home/super-agent",
+    icon: Home,
+    isActive: true,
+  },
+  {
+    title: "Data Review",
+    url: "/home/super-agent/review-data",
+    icon: Workflow,
+    isActive: true,
+  },
+  {
+    title: "Clean Data",
+    url: "/home/super-agent/clean-data",
+    icon: Wallet,
+  },
+  {
+    title: "Merge Data",
+    url: "/home/super-agent/merge-data",
+    icon: Wallet,
+  },
+];

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { useRouter } from "next/navigation";
 
-export const columns: ColumnDef<AgentFixture>[] = [
+export const reviewColumns: ColumnDef<AgentFixture>[] = [
   {
     accessorKey: "fixture",
     header: "#",

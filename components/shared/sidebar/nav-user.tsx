@@ -53,6 +53,8 @@ export function NavUser() {
       ? "Player"
       : user.role === "9" || user.role === "17"
       ? "Match Official"
+      : user.role === "7"
+      ? "Super Agent"
       : "System User";
 
   return (

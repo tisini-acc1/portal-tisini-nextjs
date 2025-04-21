@@ -18,6 +18,7 @@ import {
   COMPS_ITEMS,
   PLAYER_ITEMS,
   REFREE_ITEMS,
+  SUPERAGENT_ITEMS,
   TEAMS_ITEMS,
 } from "@/lib/constants";
 // import { NavSecondary } from "@/components/sidebar/nav-secondary";
@@ -96,6 +97,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       ? PLAYER_ITEMS
       : userRole === "9" || userRole === "17"
       ? REFREE_ITEMS
+      : userRole === "7"
+      ? SUPERAGENT_ITEMS
       : [];
 
   return (
