@@ -34,6 +34,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import Loading from "@/app/home/loading";
 
 const AllPlayersPage = () => {
   const { store } = useStore((state) => state);
@@ -44,7 +45,7 @@ const AllPlayersPage = () => {
 
   const router = useRouter();
 
-  const { data: players } = useQuery({
+  const { data: players, isLoading } = useQuery({
     queryKey: ["allPlayers", store.team.id],
     queryFn: () => getAllPlayers(store.team.id),
   });
@@ -59,27 +60,25 @@ const AllPlayersPage = () => {
     queryFn: () => getTeamTournaments(store.team.id),
   });
 
-  // const {
-  //   data: teams,
-  //   isLoading,
-  //   isError,
-  // } = useQuery({
-  //   queryKey: ["myTeams"],
-  //   queryFn: () => getUserTeams(),
-  // });
-
-  // console.log(players);
-  // console.log(players?.slice().reverse());
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <>
       <main className="space-y-4">
-        <header className="flex justify-between items-center">
-          <p className="font-mono">{players?.length} players</p>
+        <header className="flex flex-col justify-between gap-1 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+          <div className="font-mono text-2xl text-gray-700 dark:text-gray-300">
+            <span className="font-bold">{players?.length} </span>
 
-          <div className="flex items-center justify-center gap-1">
+            {players?.length === 1 ? "player" : "players"}
+          </div>
+
+          <div className="flex items-center justify-end gap-2">
             <Button
-              size={"sm"}
+              size="sm"
+              variant="outline"
+              className="bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
               onClick={() => router.push("/home/teams/players/active")}
             >
               Active players

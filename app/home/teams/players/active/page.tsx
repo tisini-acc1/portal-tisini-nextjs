@@ -8,10 +8,9 @@ import { useStore } from "@/lib/store";
 import { TeamPlayersTable } from "./team-players-table";
 import TeamSelectHeader from "@/components/teams/team-select-header";
 import { getTeamPlayers, getTeamTournaments } from "@/actions/php-actions";
+import Loading from "@/app/home/loading";
 
 const ActivePlayersPage = () => {
-  const [series, setSeries] = useState<TeamSeason[]>([]);
-
   const { store, updateTournament, updateSerie } = useStore((state) => state);
 
   const {
@@ -40,7 +39,6 @@ const ActivePlayersPage = () => {
       tournamentsData[0]?.season
     ) {
       const seasonData = tournamentsData[0]?.season;
-      setSeries(seasonData);
       updateSerie(seasonData[0]?.id);
       updateTournament(tournamentsData[0]?.tournamentid);
     }
@@ -57,7 +55,7 @@ const ActivePlayersPage = () => {
 
   // Handle loading and error states for players
   if (playersLoading) {
-    return <div>Loading players...</div>;
+    return <Loading />;
   }
 
   if (playersError) {
@@ -70,11 +68,10 @@ const ActivePlayersPage = () => {
   }
   // console.log(tournamentsData);
   return (
-    <main className="space-y-8">
+    <main className="space-y-3">
       {tournamentsData && tournamentsData?.length > 0 && (
         <TeamSelectHeader
           tournamentsData={tournamentsData as TeamTournament[]}
-          seriesData={series}
         />
       )}
 
@@ -87,13 +84,5 @@ const ActivePlayersPage = () => {
     </main>
   );
 };
-
-{
-  /* <div className="flex items-center justify-center bg-gray-50 h-screen text-2xl font-mono p-4">
-          <p className="w-1/2 mx-auto">
-            Ooops! No fixture results available at this time.
-          </p>
-        </div> */
-}
 
 export default ActivePlayersPage;
