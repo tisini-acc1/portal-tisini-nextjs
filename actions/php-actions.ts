@@ -1113,7 +1113,7 @@ export const getSuperAgentFixtures = async (): Promise<AgentFixture[]> => {
     const res = await axios.post(`${baseURL}`, {
       action: "fixtures",
       all: "",
-      limit: "20",
+      limit: "200",
       from: "0",
       gettoken: token,
     });

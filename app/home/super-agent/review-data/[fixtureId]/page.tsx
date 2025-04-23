@@ -1,6 +1,4 @@
-import { getFixtureStats } from "@/actions/php-actions";
 import EventCard from "@/components/super-agent/event-card";
-import React from "react";
 
 type Props = {
   params: Promise<{ fixtureId: string }>;
@@ -27,55 +25,52 @@ const ReviewDataPage = async ({ params }: Props) => {
 
   const homeEvents = fixData.home;
   const awayEvents = fixData.away;
+  const fixture = fixData.fixture[0];
 
-  const eventOrder = [
-    "Goal",
-    "Goal Conceded",
-    "Assists",
-    "Shot In-box",
-    "Shot Out-box",
-    "Blocks",
-    "Cross Right",
-    "Cross Left",
-    "Box Carry",
-    "Box Touch",
-    "Chance",
-    "Progress Pass",
-    "Pass",
-    "Incomplete Pass",
-    "Ball",
-    "Interceptions",
-    "Corner",
-    "Tackle",
-    "Freekick",
-    "Foul",
-    "Penalty",
-    "Card",
-    "Offside",
-    "Short GK",
-    "Long GK",
-    "Save",
-    "Throw-out",
-    "Kick-outs",
-    "Run-outs",
-    "Claims",
-    "Clearances",
-    "Dribbles",
-    "Aerial Duels",
-    "Substitute",
-    "Throw in",
-  ];
-
-  console.log(fixData.home);
+  // console.log(fixData.fixture);
 
   return (
-    <main>
+    <main className="relative">
+      <header className="sticky top-0 z-50 bg-white shadow-md">
+        <div className="bg-gray-800 text-white p-2">
+          <h1 className="text-lg font-semibold text-center">Match Review</h1>
+        </div>
+        <div className="container mx-auto px-4 py-3">
+          <div className="flex items-center justify-between">
+            {/* Home Team */}
+            <div className="text-center w-1/3">
+              <h2 className="text-xl font-bold text-blue-600 truncate">
+                {fixture.team1_name}
+              </h2>
+              <p className="text-sm text-gray-600 mt-1">
+                <span className="font-medium">Agent:</span> {"N/A"}
+              </p>
+            </div>
+
+            {/* Match Info (optional) */}
+            <div className="text-center mx-4">
+              <div className="text-xs text-gray-500">VS</div>
+              <div className="text-sm font-medium mt-1">
+                {fixture.game_date &&
+                  new Date(fixture.game_date).toLocaleDateString()}
+              </div>
+            </div>
+
+            {/* Away Team */}
+            <div className="text-center w-1/3">
+              <h2 className="text-xl font-bold text-red-600 truncate">
+                {fixture.team2_name}
+              </h2>
+              <p className="text-sm text-gray-600 mt-1">
+                <span className="font-medium">Agent:</span> {"N/A"}
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
+
       <section>
         <div className="max-w-3xl mx-auto p-4">
-          <h1 className="text-2xl font-bold text-center mb-6">
-            Match Statistics
-          </h1>
-
           <div className="space-y-6">
             {eventOrder.map((eventName) => {
               const homeEvent = homeEvents[eventName];
@@ -99,5 +94,43 @@ const ReviewDataPage = async ({ params }: Props) => {
     </main>
   );
 };
+
+const eventOrder = [
+  "Goal",
+  "Goal Conceded",
+  "Assists",
+  "Shot In-box",
+  "Shot Out-box",
+  "Blocks",
+  "Cross Right",
+  "Cross Left",
+  "Box Carry",
+  "Box Touch",
+  "Chance",
+  "Progress Pass",
+  "Pass",
+  "Incomplete Pass",
+  "Ball",
+  "Interceptions",
+  "Corner",
+  "Tackle",
+  "Freekick",
+  "Foul",
+  "Penalty",
+  "Card",
+  "Offside",
+  "Short GK",
+  "Long GK",
+  "Save",
+  "Throw-out",
+  "Kick-outs",
+  "Run-outs",
+  "Claims",
+  "Clearances",
+  "Dribbles",
+  "Aerial Duels",
+  "Substitute",
+  "Throw in",
+];
 
 export default ReviewDataPage;
