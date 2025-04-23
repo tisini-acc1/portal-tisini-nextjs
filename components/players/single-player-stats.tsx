@@ -21,14 +21,14 @@ const SinglePlayerStats = ({ fixtureId }: { fixtureId: string }) => {
 
   const playerData =
     data && data?.home.length > 0 ? data?.home[0] : data?.away[0];
-  const opponent =
-    data && data?.home.length > 0 ? fixture?.team1_name : fixture?.team2_name;
+  // const opponent =
+  //   data && data?.home.length > 0 ? fixture?.team1_name : fixture?.team2_name;
 
   const rating = footballRating(playerData?.pnameanddata as Stats);
   const stats = playerBallStats(playerData?.pnameanddata as Stats);
 
-  console.log(rating);
-  console.log(stats);
+  // console.log(rating);
+  // console.log(stats);
 
   return (
     <div className="max-w-6xl mx-auto p-4 bg-white dark:bg-gray-900 rounded-xl shadow-sm">
