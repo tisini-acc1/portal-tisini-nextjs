@@ -77,7 +77,7 @@ const NavigateButton = (fixture: { fixture: AgentFixture }) => {
     <Button
       size={"sm"}
       onClick={() =>
-        router.push(`/home/super-agent/review-data/${fixture.fixture}`)
+        router.push(`/home/super-agent/review-data/${fixture.fixture.fixture}`)
       }
     >
       Review

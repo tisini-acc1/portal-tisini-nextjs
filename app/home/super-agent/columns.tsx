@@ -72,11 +72,12 @@ export const columns: ColumnDef<AgentFixture>[] = [
 
 const NavigateButton = (fixture: { fixture: AgentFixture }) => {
   const router = useRouter();
+
   return (
     <Button
       size={"sm"}
       onClick={() =>
-        router.push(`/home/super-agent/review-data/${fixture.fixture}`)
+        router.push(`/home/super-agent/review-data/${fixture.fixture.fixture}`)
       }
     >
       Review
