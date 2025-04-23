@@ -3,7 +3,7 @@ import { ChartNoAxesCombined } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export const SeasonSnapshot = () => {
+export const SeasonSnapshot = ({ data }: { data: SeasonSnapshot }) => {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -12,9 +12,9 @@ export const SeasonSnapshot = () => {
       </CardHeader>
 
       <CardContent className="grid grid-cols-3 gap-1">
-        <SnapBox title="W" stat={0} />
-        <SnapBox title="D" stat={0} />
-        <SnapBox title="L" stat={0} />
+        <SnapBox title="W" stat={data?.W} />
+        <SnapBox title="D" stat={data?.D} />
+        <SnapBox title="L" stat={data?.L} />
       </CardContent>
     </Card>
   );

@@ -54,7 +54,10 @@ const LineupDisplay = ({ starters, subs, team }: Display) => {
           <div className="col-span-1">
             <h1 className="text-muted-foreground">Starting players</h1>
             {starters.map((player) => (
-              <div key={player.id} className="mt-2 text-nowrap text-ellipsis">
+              <div
+                key={player.team_player_id}
+                className="mt-2 text-nowrap text-ellipsis"
+              >
                 <span className="h-4 w-4 mr-1 bg-gray-100 border rounded-full px-2">
                   {player.lineupposition}
                 </span>
@@ -70,7 +73,7 @@ const LineupDisplay = ({ starters, subs, team }: Display) => {
             <h1 className="text-muted-foreground">Substitutes</h1>
             {subs.map((player) => (
               <div
-                key={player.id}
+                key={player.team_player_id}
                 className="mt-2 pl-3 text-nowrap text-ellipsis"
               >
                 <span className={player.verify === "1" ? "text-green-500" : ""}>

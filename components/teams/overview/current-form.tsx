@@ -4,7 +4,13 @@ import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export const CurrentForm = ({ recentForm }: { recentForm: string[] }) => {
+type FormProps = {
+  recentForm: string[];
+  ga: number;
+  gf: number;
+};
+
+export const CurrentForm = ({ recentForm, ga, gf }: FormProps) => {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -16,11 +22,11 @@ export const CurrentForm = ({ recentForm }: { recentForm: string[] }) => {
         <div className="grid grid-cols-2 gap-x-1">
           <div className="border p-1 flex justify-evenly">
             <span className="text-muted-foreground font-bold">GF</span>
-            <span>0</span>
+            <span>{gf}</span>
           </div>
           <div className="border p-1 flex justify-evenly">
             <span className="text-muted-foreground font-bold">GA</span>
-            <span>0</span>
+            <span>{ga}</span>
           </div>
         </div>
 

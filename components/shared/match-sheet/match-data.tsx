@@ -42,7 +42,7 @@ const MatchDataSection = ({ homeId, home, away, fixEvents }: DataProps) => {
   }
 
   // console.log(fixTypes);
-  // console.log(selectedFixType);
+  // console.log(data);
 
   return (
     <section className="w-full space-y-6 bg-gray-100 p-3 rounded-md">

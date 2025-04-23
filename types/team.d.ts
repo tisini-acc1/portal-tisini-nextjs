@@ -4,10 +4,55 @@ type TeamOverview = {
   date_created: string;
   date_updated: string;
   status: string;
-  last_5_fixtures: Fixture[];
-  upcoming_fixtures: Fixture[];
-  ongoing_matches: [];
+  tournaments: OverviewTourn[];
+};
+
+type OverviewTourn = {
+  tournamentname: string;
+  tournamentid: string;
+  status: string;
+  fixture_type: string;
+  date_from: string | null;
+  date_to: string | null;
+  season: OverviewSeason[];
+};
+
+type OverviewSeason = {
+  id: string;
+  name: string;
+  date_from: string;
+  date_to: string;
+  status: string;
+  total: number;
+  fixtures: SeasonFixture;
+  season_snapshot: SeasonSnapshot;
   recent_form: string[];
+  GF: number;
+  GA: number;
+};
+
+type SeasonSnapshot = {
+  W: number;
+  D: number;
+  L: number;
+};
+
+type SeasonFixture = {
+  played: OverviewFixture[];
+  upcoming: OverviewFixture[];
+  ongoing: OverviewFixture[];
+};
+
+type OverviewFixture = {
+  id: string;
+  team1_name: string;
+  team2_name: string;
+  team1_id: string;
+  team2_id: string;
+  game_moment: string;
+  game_date: string;
+  game_status: string;
+  scores: TeamScore;
 };
 
 type TeamTournament = {
@@ -30,7 +75,7 @@ type TeamSeason = {
   fixture: TeamFixture[];
 };
 
-type TeamScores = {
+type TeamScore = {
   Home: string;
   Away: string;
 };
@@ -50,7 +95,7 @@ type TeamFixture = {
   amount: string;
   billitem: string;
   accountbalance: number;
-  scores: TeamScores;
+  scores: TeamScore;
 };
 
 type TeamPlayer = {

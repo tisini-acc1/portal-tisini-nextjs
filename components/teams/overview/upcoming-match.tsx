@@ -4,7 +4,7 @@ import { CalendarDays } from "lucide-react";
 import { useStore } from "@/store/store";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export const UpcomingMatch = ({ fixture }: { fixture: Fixture }) => {
+export const UpcomingMatch = ({ fixture }: { fixture: OverviewFixture }) => {
   const { store } = useStore((state) => state);
   const teamId = store.team.id;
 
