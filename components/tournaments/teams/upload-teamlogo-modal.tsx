@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { useStore } from "@/store/store";
 import { CameraIcon } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 
@@ -19,14 +20,11 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-type LogoProps = {
-  open: boolean;
-  team: CompTeam;
-  setOpen: (v: boolean) => void;
-};
-
-const UploadTeamLogoModal = ({ open, team, setOpen }: LogoProps) => {
+const UploadTeamLogoModal = () => {
+  const [open, setOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const team = useStore((state) => state.store.team);
 
   const { toast } = useToast();
 
@@ -104,8 +102,8 @@ const UploadTeamLogoModal = ({ open, team, setOpen }: LogoProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChangeWrapper}>
       <DialogTrigger asChild>
-        <Button size={"icon"} variant={"outline"} className="hidden">
-          <CameraIcon className="w-4 h-4" />
+        <Button size={"icon"} variant={"outline"}>
+          <CameraIcon className="w-3 h-3" />
         </Button>
       </DialogTrigger>
 

@@ -29,6 +29,20 @@ type Competition = {
   created_by: string;
   position: string;
   status: string;
+  season: [];
+};
+
+type CompSeason = {
+  id: string;
+  name: string;
+  ranker: string;
+  tournament: string;
+  date_created: string;
+  date_updated: string;
+  created_by: string;
+  date_from: string;
+  date_to: string;
+  status: string;
 };
 
 type Tournament = {
