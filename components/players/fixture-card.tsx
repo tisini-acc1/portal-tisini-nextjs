@@ -88,7 +88,9 @@ const FixtureCard = ({ fixture }: { fixture: PlayerFixture }) => {
             onClick={() => {
               updateFixture(fixture.id);
               updatePlayerFix(fixture);
-              router.push(`/home/team-player/fixtures/${fixture.id}`);
+              router.push(
+                `/home/team-player/fixtures/${fixture.fixture_type}-${fixture.id}`
+              );
             }}
           >
             View stats

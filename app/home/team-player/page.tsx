@@ -12,7 +12,7 @@ const PlayersPage = async () => {
 
   // const data = await PlayerFixtures();
 
-  console.log(fData);
+  // console.log(fData);
 
   return (
     <main>

@@ -9,7 +9,7 @@ type FixtureParams = {
 const SingleFixturePage = async ({ params }: FixtureParams) => {
   const { fixtureId } = await params;
 
-  return <SinglePlayerStats fixtureId={fixtureId} />;
+  return <SinglePlayerStats fixId={fixtureId} />;
 };
 
 export default SingleFixturePage;
