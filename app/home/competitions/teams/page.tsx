@@ -7,11 +7,15 @@ import { useQuery } from "@tanstack/react-query";
 import { columns } from "./columns";
 import Loading from "../../loading";
 import { useStore } from "@/store/store";
-import { Button } from "@/components/ui/button";
 import { CompPlayersTable } from "./comp-player-table";
 import { getTournamentTeams } from "@/actions/django-actions";
-import { getAllPlayers, getTournaments } from "@/actions/php-actions";
 import UploadTeamLogoModal from "@/components/tournaments/teams/upload-teamlogo-modal";
+import CreateCompPlayerModal from "@/components/tournaments/players/create-comp-player";
+import {
+  getAllPlayers,
+  getCountry,
+  getTournaments,
+} from "@/actions/php-actions";
 import {
   Select,
   SelectContent,
@@ -23,7 +27,9 @@ import {
 
 const TeamsPage = () => {
   const [seasons, setSeasons] = useState<CompSeason[]>([]);
-  const { store, updateTeamId, updateSerie } = useStore((state) => state);
+  const { store, updateTeamId, updateTeam, updateSerie } = useStore(
+    (state) => state
+  );
 
   const teamId = store.teamId;
   const tournId = store.tournament;
@@ -44,6 +50,11 @@ const TeamsPage = () => {
   const { data: players, isLoading: pLoading } = useQuery({
     queryKey: ["allPlayers", teamId],
     queryFn: () => getAllPlayers(teamId),
+  });
+
+  const { data: countries, isLoading: cLoading } = useQuery({
+    queryKey: ["countries"],
+    queryFn: () => getCountry(),
   });
 
   useEffect(() => {
@@ -67,7 +78,20 @@ const TeamsPage = () => {
     }
   }, [data]);
 
-  if (isLoading || tLoading) {
+  useEffect(() => {
+    if (teamId) {
+      const selectedTeam = data?.find((team) => team.id === teamId);
+
+      const team = {
+        id: teamId,
+        name: selectedTeam?.name as string,
+      };
+
+      updateTeam(team);
+    }
+  }, [data, teamId]);
+
+  if (isLoading || tLoading || cLoading) {
     return <Loading />;
   }
 
@@ -145,9 +169,8 @@ const TeamsPage = () => {
                 <h3 className="text-lg font-semibold text-gray-900">
                   {players?.length} Players
                 </h3>
-                <Button variant="outline" className="shadow-sm">
-                  Add Player
-                </Button>
+
+                <CreateCompPlayerModal countries={countries as Country[]} />
               </div>
             </div>
           </div>
