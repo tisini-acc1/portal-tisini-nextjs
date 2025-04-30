@@ -157,6 +157,7 @@ export const getUserTeams = async (): Promise<Team[]> => {
 // Create Fixtures
 export const getTeamTournaments = async (
   teamId: string
+  // playerId: string
 ): Promise<TeamTournament[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
@@ -165,6 +166,7 @@ export const getTeamTournaments = async (
     const res = await axios.post(`${baseURL}`, {
       action: "teamtournamentseries",
       teamid: teamId,
+      // playerid: playerId,
       gettoken: token,
     });
 
@@ -253,6 +255,32 @@ export const getFixtureStats = async (fixId: string): Promise<FixtureData> => {
     const res = await axios.post(`${baseURL}`, {
       action: "teamdata",
       fixture: fixId,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fixture stats: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while fetching fixture stats."
+    );
+  }
+};
+
+// Create Fixtures
+export const getVideoEvents = async (fixId: string) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "fixtureevents",
+      fixtureid: fixId,
       gettoken: token,
     });
 
@@ -1141,6 +1169,59 @@ export const getFixture = async (): Promise<AgentFixture[]> => {
     const res = await axios.post(`${baseURL}`, {
       action: "fixtures",
       fixtureid: 7285,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fetch tournaments for team: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while fetching tournament teams."
+    );
+  }
+};
+
+//  {"action":"fixtures","fixtureid":1}
+export const getMainEvents = async () => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      getmainevent: "event",
+      fixture_type: "football",
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fetch tournaments for team: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while fetching tournament teams."
+    );
+  }
+};
+
+//  {"action":"fixtures","fixtureid":1}
+export const EditOnlineFixture = async () => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "activateonline",
+      fixtureid: "7462",
+      live: "1",
       gettoken: token,
     });
 

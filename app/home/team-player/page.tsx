@@ -1,6 +1,6 @@
 // import { getSession, getUserId } from "@/actions/actions";
 // import { getPlayerFixtures, getUser } from "@/actions/fetch-php";
-import { PlayerFixtures } from "@/actions/php-actions";
+import { getTeamTournaments, PlayerFixtures } from "@/actions/php-actions";
 import FixtureCard from "@/components/players/fixture-card";
 
 const PlayersPage = async () => {
@@ -10,9 +10,9 @@ const PlayersPage = async () => {
   const fixtures = fData?.slice().reverse();
   // const data = await getUser();
 
-  // const data = await PlayerFixtures();
+  // const pData = await getTeamTournaments("", "6857");
 
-  // console.log(fData);
+  // console.log(pData);
 
   return (
     <main>

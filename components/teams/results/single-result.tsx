@@ -29,7 +29,7 @@ const SingleResult = ({ fixId }: { fixId: string }) => {
 
   //   const fixType = teamData && teamData["fixture"][0].fixture_type;
 
-  //   console.log(playersData);
+  console.log(playersData);
   //   console.log(teamData);
 
   if (isLoading || pLoading) {

@@ -6,8 +6,15 @@ type LineupProps = {
 };
 
 const LineupsSection = ({ home, away }: LineupProps) => {
-  const hStarting = home.filter((player) => player.player_type === "first11");
-  const aStarting = away.filter((player) => player.player_type === "first11");
+  const hStarting = home.filter(
+    (player) =>
+      player.player_type === "first11" || player.player_type === "fixplayer"
+  );
+  const aStarting = away.filter(
+    (player) =>
+      player.player_type === "first11" || player.player_type === "fixplayer"
+  );
+
   const hSubs = home.filter((player) => player.player_type === "sub");
   const aSubs = away.filter((player) => player.player_type === "sub");
 
@@ -48,6 +55,16 @@ const LineupDisplay = ({ starters, subs, team }: Display) => {
       {starters.length <= 0 ? (
         <div className="flex items-center justify-center h-14">
           No lineup found!
+        </div>
+      ) : subs.length <= 0 ? (
+        <div className="grid grid-cols-2 gap-x-2">
+          {starters.map((player) => (
+            <div key={player.team_player_id} className="mt-2">
+              <span className={player.verify === "1" ? "text-green-500" : ""}>
+                {player.pname}
+              </span>
+            </div>
+          ))}
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-2">
