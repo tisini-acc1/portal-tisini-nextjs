@@ -63,8 +63,8 @@ const FixturesPage = () => {
     return <div>Error...</div>;
   }
 
-  console.log(fixtures);
-  console.log(store.matchStatus);
+  // console.log(fixtures);
+  // console.log(store.matchStatus);
 
   return (
     <main>

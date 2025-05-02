@@ -1,7 +1,7 @@
 "use client";
 
 import { z } from "zod";
-import validator from "validator";
+// import validator from "validator";
 import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 // import { useRouter } from "next/navigation";
@@ -15,8 +15,8 @@ import { useStore } from "@/store/store";
 import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
 import { addPlayer } from "@/actions/php-actions";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Dialog,
   DialogContent,
@@ -413,10 +413,10 @@ const CreateCompPlayerModal = ({ countries }: { countries: Country[] }) => {
               <Button
                 className="w-full"
                 onClick={form.handleSubmit(onSubmit)}
-                disabled={form.formState.isSubmitting}
+                disabled={mutation.isPending}
               >
                 Create{" "}
-                {form.formState.isSubmitting && mutation.isPending && (
+                {mutation.isPending && (
                   <RotateCcw className="ml-2 h-4 w-4 animate-spin" />
                 )}
               </Button>

@@ -24,7 +24,9 @@ const VerifyFixtureData = () => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button>Verify</Button>
+        <Button size={"sm"} variant={"outline"}>
+          Verify
+        </Button>
       </AlertDialogTrigger>
 
       <AlertDialogContent>

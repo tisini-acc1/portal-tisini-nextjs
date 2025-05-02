@@ -46,7 +46,6 @@ export const fixtureSchema = z.object({
   home: z.string().min(1, { message: "Home team is required" }),
   away: z.string().min(1, { message: "Away team is required" }),
   matchday: z.string().min(1, { message: "Matchday is required" }),
-  type: z.string().min(4, { message: "Fixture type is required" }),
   gameTime: z.string({ message: "Match Time type is required" }),
   gameDate: z.date({
     required_error: "Match date is required.",
@@ -76,7 +75,6 @@ const CreateFixtureModal = () => {
       gameTime: "",
       matchday: "",
       // teamStats: false,
-      type: "rugby15",
     },
   });
 
@@ -126,7 +124,7 @@ const CreateFixtureModal = () => {
       gamedate: date,
       tournamentid: store.tournament,
       matchday: values.matchday,
-      fixturetype: values.type,
+      fixturetype: store.fixType,
       live: "0",
       teamview: "0",
       series: store.serie,
@@ -156,7 +154,9 @@ const CreateFixtureModal = () => {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Create Fixture</DialogTitle>
-          <DialogDescription>Fixture creation</DialogDescription>
+          <DialogDescription>
+            You are about to create a new fixture.
+          </DialogDescription>
         </DialogHeader>
 
         <Form {...form}>
@@ -223,68 +223,34 @@ const CreateFixtureModal = () => {
               )}
             />
 
-            <div className="flex gap-4">
+            <FormField
+              control={form.control}
+              name="matchday"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Matchday</FormLabel>
+                  <FormControl>
+                    <Input placeholder="4" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <div className="flex gap-2">
               <FormField
                 control={form.control}
-                name="matchday"
+                name="gameTime"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Matchday</FormLabel>
+                    <FormLabel>Fixture Time</FormLabel>
                     <FormControl>
-                      <Input placeholder="4" {...field} />
+                      <Input placeholder="15:00" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-
-              <div className="w-1/2">
-                <FormField
-                  control={form.control}
-                  name="type"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Fixture Type</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Rugby 15s" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="rugby15">Rugby 15s</SelectItem>
-                          <SelectItem value="rugby7">Rugby 7s</SelectItem>
-                          <SelectItem value="football">Football</SelectItem>
-                          <SelectItem value="basketball">Basketball</SelectItem>
-                        </SelectContent>
-                      </Select>
-
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-            </div>
-
-            <div className="flex gap-2">
-              <div className="w-1/2">
-                <FormField
-                  control={form.control}
-                  name="gameTime"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Fixture Time</FormLabel>
-                      <FormControl>
-                        <Input placeholder="15:00" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
 
               <FormField
                 control={form.control}

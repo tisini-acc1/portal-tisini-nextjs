@@ -8,6 +8,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { useStore } from "@/store/store";
 import { Button } from "@/components/ui/button";
 import EditFixtureModal from "@/components/fixtures/edit-fixture-modal";
+import UpdateScoresModal from "@/components/fixtures/update-scores-modal";
 import DeleteFixtureModal from "@/components/fixtures/delete-fixture-modal";
 import AddFixtureOfficialModal from "@/components/fixtures/add-official-modal";
 import {
@@ -18,7 +19,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import UpdateScoresModal from "@/components/fixtures/update-scores-modal";
 
 export const columns: ColumnDef<AgentFixture>[] = [
   {
@@ -82,22 +82,7 @@ export const columns: ColumnDef<AgentFixture>[] = [
     cell: ({ row }) => {
       const fixture = row.original;
 
-      const data = fixture.refdata.length;
-      const status = fixture.game_status;
-
-      return (
-        <Button
-          variant={"outline"}
-          size={"sm"}
-          className={
-            data <= 0 && status
-              ? "border-red-300 text-red-300 hover:text-red-500"
-              : "border-green-300 text-green-300 hover:text-green-500"
-          }
-        >
-          {data <= 0 && status === "notstarted" ? "No Data!" : "Updated"}
-        </Button>
-      );
+      return <NavigateButton fixture={fixture} />;
     },
   },
   {
@@ -110,6 +95,40 @@ export const columns: ColumnDef<AgentFixture>[] = [
     },
   },
 ];
+
+const NavigateButton = ({ fixture }: { fixture: AgentFixture }) => {
+  const router = useRouter();
+
+  const data = fixture.refdata.length;
+  const status = fixture.game_status;
+
+  return (
+    <>
+      {data <= 0 && status === "notstarted" ? (
+        <Button
+          variant={"outline"}
+          size={"sm"}
+          className={"border-red-300 text-red-300 hover:text-red-500"}
+          onClick={() =>
+            router.push(
+              `/home/competitions/fixtures/match-data/${fixture.fixture}-${fixture.team1_id}-${fixture.team2_id}`
+            )
+          }
+        >
+          No Data!
+        </Button>
+      ) : (
+        <Button
+          variant={"outline"}
+          size={"sm"}
+          className={"border-green-300 text-green-300 hover:text-green-500"}
+        >
+          {"Updated"}
+        </Button>
+      )}
+    </>
+  );
+};
 
 const OfficialButton = ({ fixture }: { fixture: AgentFixture }) => {
   const [openAdd, setOpenAdd] = useState(false);

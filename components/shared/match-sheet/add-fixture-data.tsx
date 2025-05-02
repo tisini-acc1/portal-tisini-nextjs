@@ -159,7 +159,7 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChangeWrapper}>
       <DialogTrigger asChild>
-        <Button>Populate</Button>
+        <Button size={"sm"}>Populate</Button>
       </DialogTrigger>
 
       <DialogContent>

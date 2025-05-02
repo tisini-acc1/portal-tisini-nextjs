@@ -33,7 +33,9 @@ const FilterTournamentSeries = ({
   const [serieVal, setSerieVal] = useState<string>("");
   const [series, setSeries] = useState<Serie[]>([]);
 
-  const { updateSerie, updateTournament } = useStore((state) => state);
+  const { updateSerie, updateTournament, updateFixType } = useStore(
+    (state) => state
+  );
 
   useEffect(() => {
     if (tournaments && tournaments.length >= 1) {
@@ -42,7 +44,11 @@ const FilterTournamentSeries = ({
   }, [tournaments]);
 
   useEffect(() => {
+    const tournament = tournaments.filter((tourn) => tourn.id === value);
+
     updateTournament(value);
+
+    updateFixType(tournament[0]?.fixture_type as string);
   }, [updateTournament, value, tournaments]);
 
   useEffect(() => {
