@@ -29,6 +29,7 @@ export type Store = {
   fixType: string;
   sheetFix: SheetFix;
   playerFix: PlayerFixture;
+  matchStatus: MatchPlayStatus[];
 };
 
 export type State = {
@@ -50,6 +51,7 @@ export type Actions = {
   updateFixType: (type: string) => void;
   updateSheetFix: (type: SheetFix) => void;
   updatePlayerFix: (type: PlayerFixture) => void;
+  updateMatchStatus: (status: MatchPlayStatus[]) => void;
 };
 
 const initialState: Store = {
@@ -67,6 +69,7 @@ const initialState: Store = {
   userFix: {} as TeamFixture,
   sheetFix: {} as SheetFix,
   playerFix: {} as PlayerFixture,
+  matchStatus: [],
 };
 
 export const useStore = create<State & Actions>()(
@@ -105,6 +108,10 @@ export const useStore = create<State & Actions>()(
       updateOfficials: (officials: Official[]) =>
         set((state) => ({
           store: { ...state.store, officials: officials },
+        })),
+      updateMatchStatus: (status: MatchPlayStatus[]) =>
+        set((state) => ({
+          store: { ...state.store, matchStatus: status },
         })),
       updateBalance: (balance: number) =>
         set((state) => ({

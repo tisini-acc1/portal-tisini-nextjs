@@ -16,7 +16,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import { createPlayer } from "@/actions/php-actions";
+import { addPlayer } from "@/actions/php-actions";
 import {
   Dialog,
   DialogContent,
@@ -61,9 +61,8 @@ export const playerSchema = z.object({
   //   .max(15, "Username should be less than 12 characters long"),
   // // .regex(new RegExp("^[a-zA-Z]+$", "No special characters allowed!")),
   // email: z.string().email(),
-  phone: z
-    .string()
-    .refine(validator.isMobilePhone, "Please enter a valid phone number"),
+  phone: z.string(),
+  // .refine(validator.isMobilePhone, "Please enter a valid phone number"),
   firstName: z
     .string()
     .min(3, "Provide a valid firstname")
@@ -93,6 +92,7 @@ const CreateCompPlayerModal = ({ countries }: { countries: Country[] }) => {
   // const router = useRouter();
   const [open, setOpen] = useState(false);
   const team = useStore((state) => state.store.team);
+  const user = useStore((state) => state.store.user);
   const queryClient = useQueryClient();
 
   const form = useForm<z.infer<typeof playerSchema>>({
@@ -117,9 +117,9 @@ const CreateCompPlayerModal = ({ countries }: { countries: Country[] }) => {
   //   }, [form.formState.errors]);
 
   const mutation = useMutation({
-    mutationFn: createPlayer,
+    mutationFn: addPlayer,
     onSuccess: (data) => {
-      // console.log(data);
+      console.log(data);
       if (data.error === "0") {
         setOpen(false);
         queryClient.invalidateQueries({ queryKey: ["allPlayers", team.id] });
@@ -145,20 +145,19 @@ const CreateCompPlayerModal = ({ countries }: { countries: Country[] }) => {
 
   const onSubmit = async (data: z.infer<typeof playerSchema>) => {
     const player = {
-      id_no: data.idNumber,
-      phone_number: data.phone,
-      first_name: data.firstName,
-      last_name: data.lastName,
-      sirname: "",
-      dob: format(data.dob, "yyyy-M-d"),
-      nationality: data.nationality,
+      idno: data.idNumber,
+      phone: data.phone,
+      fname: data.firstName,
+      sname: data.lastName,
+      oname: "",
+      playerdob: format(data.dob, "yyyy-M-d"),
+      countrycode: data.nationality,
       position: data.position,
       email: "",
-      password: data.idNumber.slice(1, 5),
-      role: "5",
+      agent: user.id,
       teamid: team.id,
-      Jersey: data.jersey,
-      signed: format(data.signed, "yyyy-M-d"),
+      jersey: data.jersey,
+      contract: format(data.signed, "yyyy-M-d"),
     };
 
     mutation.mutate(player);
@@ -221,7 +220,9 @@ const CreateCompPlayerModal = ({ countries }: { countries: Country[] }) => {
               name="idNumber"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>ID number or Birth Certificate number</FormLabel>
+                  <FormLabel>
+                    ID number or Birth Certificate number or UP number
+                  </FormLabel>
                   <FormControl>
                     <Input type="text" placeholder="John" {...field} />
                   </FormControl>

@@ -6,7 +6,11 @@ import { useQuery } from "@tanstack/react-query";
 import { columns } from "./columns";
 import { useStore } from "@/store/store";
 import { FixturesTable } from "./fixtures-table";
-import { getOfficials, getTournFixtures } from "@/actions/php-actions";
+import {
+  getMatchPlayStatus,
+  getOfficials,
+  getTournFixtures,
+} from "@/actions/php-actions";
 import CreateFixtureModal from "@/components/fixtures/create-fixture-modal";
 
 const FixturesPage = () => {
@@ -15,11 +19,18 @@ const FixturesPage = () => {
   // const fixtures = data.filter((fixture) => fixture.series === "14").reverse();
   const [fixtures, setFixtures] = useState<AgentFixture[]>([]);
 
-  const { store, updateOfficials } = useStore((state) => state);
+  const { store, updateOfficials, updateMatchStatus } = useStore(
+    (state) => state
+  );
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["fixtures", store.serie],
     queryFn: () => getTournFixtures(parseInt(store.serie)),
+  });
+
+  const { data: status } = useQuery({
+    queryKey: ["matchplaystatus"],
+    queryFn: () => getMatchPlayStatus(),
   });
 
   const { data: officials } = useQuery({
@@ -38,9 +49,13 @@ const FixturesPage = () => {
     if (officials) {
       updateOfficials(officials);
     }
-  }, [officials, updateOfficials]);
 
-  if (isLoading || !officials) {
+    if (status) {
+      updateMatchStatus(status);
+    }
+  }, [officials, status, updateMatchStatus, updateOfficials]);
+
+  if (isLoading || !officials || !status) {
     return <div>Loading...</div>;
   }
 
@@ -48,7 +63,8 @@ const FixturesPage = () => {
     return <div>Error...</div>;
   }
 
-  // console.log(officials);
+  console.log(fixtures);
+  console.log(store.matchStatus);
 
   return (
     <main>

@@ -18,6 +18,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import UpdateScoresModal from "@/components/fixtures/update-scores-modal";
 
 export const columns: ColumnDef<AgentFixture>[] = [
   {
@@ -26,26 +27,85 @@ export const columns: ColumnDef<AgentFixture>[] = [
   },
   {
     accessorKey: "team1_name",
-    header: "Home",
+    header: () => <div className="text-right">Home</div>,
+    cell: ({ row }) => {
+      const fixture = row.original;
+
+      return (
+        <div className="text-right">
+          <div>{fixture.team1_name}</div>
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "home_score",
+    header: "",
+    cell: ({ row }) => {
+      const fixture = row.original;
+
+      return (
+        <div className="flex items-center justify-center">
+          {fixture.game_status === "notstarted" ? (
+            <div className="bg-slate-100 p-1 px-2 rounded-md text-center">
+              {fixture.matchtime}
+            </div>
+          ) : (
+            <div className="flex justify-between items-center sm:gap-1">
+              <div className="px-2 py-1 bg-slate-100 rounded-md">
+                {fixture.tisiniscores.Home}
+              </div>
+              <div className="px-2 py-1 bg-slate-100 rounded-md">
+                {fixture.tisiniscores.Away}
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "team2_name",
     header: "Away",
   },
   {
-    accessorKey: "game_date",
-    header: "Date",
-  },
-  {
-    accessorKey: "game_status",
-    header: "Status",
-  },
-
-  {
     accessorKey: "matchday",
     header: "Round",
-  },
+    cell: ({ row }) => {
+      const fixture = row.original;
 
+      return (
+        <div className="text-xs">
+          <div>Round: {fixture.matchday}</div>
+          <div>{fixture.game_date}</div>
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "refdata",
+    header: "Ref Data",
+    cell: ({ row }) => {
+      const fixture = row.original;
+
+      const data = fixture.refdata.length;
+      const status = fixture.game_status;
+
+      return (
+        <Button
+          variant={"outline"}
+          size={"sm"}
+          className={
+            data <= 0 && status
+              ? "border-red-300 text-red-300 hover:text-red-500"
+              : "border-green-300 text-green-300 hover:text-green-500"
+          }
+        >
+          {data <= 0 && status === "notstarted" ? "No Data!" : "Updated"}
+        </Button>
+      );
+    },
+  },
   {
     id: "actions",
     enableHiding: false,
@@ -59,6 +119,7 @@ export const columns: ColumnDef<AgentFixture>[] = [
 
 const OfficialButton = ({ fixture }: { fixture: AgentFixture }) => {
   const [openAdd, setOpenAdd] = useState(false);
+  const [openUpdate, setOpenUpdate] = useState(false);
   const router = useRouter();
 
   const updateSheetFix = useStore((state) => state.updateSheetFix);
@@ -91,6 +152,11 @@ const OfficialButton = ({ fixture }: { fixture: AgentFixture }) => {
           <DropdownMenuItem onClick={() => setOpenAdd(true)}>
             Add officials
           </DropdownMenuItem>
+
+          <DropdownMenuItem onClick={() => setOpenUpdate(true)}>
+            Update scores
+          </DropdownMenuItem>
+
           <DropdownMenuItem
             onClick={() => {
               updateSheetFix(sheetFix);
@@ -116,7 +182,14 @@ const OfficialButton = ({ fixture }: { fixture: AgentFixture }) => {
         setOpen={setOpenAdd}
       />
       <EditFixtureModal fixId={fixId} />
+
       <DeleteFixtureModal />
+
+      <UpdateScoresModal
+        fixture={fixture}
+        open={openUpdate}
+        setOpen={setOpenUpdate}
+      />
     </>
   );
 };

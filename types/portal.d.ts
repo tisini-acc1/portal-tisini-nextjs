@@ -128,20 +128,18 @@ type CreateFix = {
 };
 
 type CreatePlayer = {
-  id_no: string;
-  phone_number: string;
-  first_name: string;
-  last_name: string;
-  sirname: string;
-  dob: string;
-  nationality: string;
+  idno: string;
+  phone: string;
+  fname: string;
+  oname: string;
+  sname: string;
+  playerdob: string;
+  countrycode: string;
   position: string;
-  email: string;
-  password: string;
-  role: string;
+  agent: string;
   teamid: string;
-  Jersey: string;
-  signed: string;
+  jersey: string;
+  contract: string;
 };
 
 type Player = {

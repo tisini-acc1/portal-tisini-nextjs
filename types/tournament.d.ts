@@ -172,3 +172,11 @@ type RefCondComment = {
   other_comment: string;
   matchplay_status: string;
 };
+
+type MatchPlayStatus = {
+  id: string;
+  name: string;
+  date_created: string;
+  date_updated: string;
+  created_by: string;
+};

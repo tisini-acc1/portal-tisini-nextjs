@@ -43,6 +43,7 @@ type PlayerFixture = {
   matchtime: string;
   refdata: RefStat[];
 };
+
 type AgentFixture = {
   fixture: string;
   team1_id: string;
@@ -67,6 +68,23 @@ type AgentFixture = {
     Away: number;
   };
   refdata: RefStat[];
+  agent1id: string | null;
+  agent1name: string;
+  agent2id: string | null;
+  agent2name: string;
+  live: string;
+  matchtime: string;
+  home_score: string;
+  away_score: string;
+  weather_type: string;
+  commisioner_comment: string | null;
+  pitch_condition: string;
+  other_comment: null | string;
+  matchplay_status: string;
+  date_updated: string;
+  field_id: string;
+  videofixtid: null | string;
+  videourl: null | string;
 };
 
 type SheetFix = {
@@ -76,4 +94,20 @@ type SheetFix = {
   team2_id: string;
   fixId: string;
   fixType: string;
+};
+
+type UpdateFix = {
+  gamedate: string;
+  fieldid: string;
+  gamestatus: string;
+  homescore: string;
+  awayscore: string;
+  matchday: string;
+  matchtime: string;
+  commcomments: string | null;
+  othercomments: string | null;
+  playstatus: string;
+  videoURL: string | null;
+  vfixid: string | null;
+  fixture: string;
 };

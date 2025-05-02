@@ -406,6 +406,32 @@ export const createPlayer = async (data: CreatePlayer) => {
   }
 };
 
+export const addPlayer = async (data: CreatePlayer) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "addPlayer",
+      ...data,
+      channel: "web",
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to create player: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while creating player."
+    );
+  }
+};
+
 export const createPlayerTransfer = async (data: TransferPlayer) => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
@@ -883,6 +909,30 @@ export const getWeatherCond = async (): Promise<Condition[]> => {
   }
 };
 
+export const getMatchPlayStatus = async (): Promise<MatchPlayStatus[]> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "fetchmatchplaystatus",
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      // console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fetch match play status: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while fetching match play status."
+    );
+  }
+};
+
 export const getFixConditions = async (
   id: string
 ): Promise<RefCondComment[]> => {
@@ -1213,28 +1263,54 @@ export const getMainEvents = async () => {
 };
 
 //  {"action":"fixtures","fixtureid":1}
-export const EditOnlineFixture = async () => {
+export const ModifyOnlineFixture = async (data: {
+  fixtureid: string;
+  live: string;
+}) => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
 
   try {
     const res = await axios.post(`${baseURL}`, {
       action: "activateonline",
-      fixtureid: "7462",
-      live: "1",
+      ...data,
       gettoken: token,
     });
 
     if (res.status === 200) {
-      console.log("server", res.data);
       return res.data;
     } else {
-      throw new Error(`Failed to fetch tournaments for team: ${res.status}`);
+      throw new Error(`Failed to modify fixture online status: ${res.status}`);
     }
   } catch (error: any) {
     console.log(error);
     throw new Error(
-      error.message || "An error occurred while fetching tournament teams."
+      error.message || "An error occurred while modifing fixture status."
+    );
+  }
+};
+
+//  {"action":"fixtures","fixtureid":1}
+export const ModifyFixture = async (data: UpdateFix) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "updatefixture",
+      ...data,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      throw new Error(`Failed to modify fixture online status: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while modifing fixture status."
     );
   }
 };
