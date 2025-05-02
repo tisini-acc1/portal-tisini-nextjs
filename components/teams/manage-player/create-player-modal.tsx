@@ -15,8 +15,8 @@ import { useStore } from "@/store/store";
 import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { addPlayer } from "@/actions/php-actions";
 import { Calendar } from "@/components/ui/calendar";
-import { createPlayer } from "@/actions/php-actions";
 import {
   Dialog,
   DialogContent,
@@ -117,7 +117,7 @@ const CreatePlayerModal = ({ countries }: { countries: Country[] }) => {
   }, [form.formState.errors]);
 
   const mutation = useMutation({
-    mutationFn: createPlayer,
+    mutationFn: addPlayer,
     onSuccess: (data) => {
       // console.log(data);
       if (data.error === "0") {
@@ -145,20 +145,19 @@ const CreatePlayerModal = ({ countries }: { countries: Country[] }) => {
 
   const onSubmit = async (data: z.infer<typeof playerSchema>) => {
     const player = {
-      id_no: data.idNumber,
-      phone_number: data.phone,
-      first_name: data.firstName,
-      last_name: data.lastName,
-      sirname: "",
-      dob: format(data.dob, "yyyy-M-d"),
-      nationality: data.nationality,
+      idno: data.idNumber,
+      phone: data.phone,
+      fname: data.firstName,
+      sname: data.lastName,
+      oname: "",
+      playerdob: format(data.dob, "yyyy-M-d"),
+      countrycode: data.nationality,
       position: data.position,
       email: "",
-      password: data.idNumber.slice(1, 5),
-      role: "5",
+      agent: store.user.id,
       teamid: store.team.id,
-      Jersey: data.jersey,
-      signed: format(data.signed, "yyyy-M-d"),
+      jersey: data.jersey,
+      contract: format(data.signed, "yyyy-M-d"),
     };
 
     mutation.mutate(player);

@@ -1,6 +1,6 @@
 // import { getSession, getUserId } from "@/actions/actions";
 // import { getPlayerFixtures, getUser } from "@/actions/fetch-php";
-import { getTeamTournaments, PlayerFixtures } from "@/actions/php-actions";
+import { PlayerFixtures } from "@/actions/php-actions";
 import FixtureCard from "@/components/players/fixture-card";
 
 const PlayersPage = async () => {

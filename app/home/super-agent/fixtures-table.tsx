@@ -17,30 +17,30 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-} from "@/components/ui/select";
+// import {
+//   Select,
+//   SelectContent,
+//   SelectItem,
+//   SelectTrigger,
+// } from "@/components/ui/select";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-const fixtypes = ["football", "rugby15", "rugby7", "hockey", "basketball"];
+// const fixtypes = ["football", "rugby15", "rugby7", "hockey", "basketball"];
 
 export function FixturesTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [fixtureType, setFixtureType] = useState("football");
+  // const [fixtureType, setFixtureType] = useState("football");
 
-  const [fixData, setFixData] = useState<AgentFixture[]>([]);
+  // const [fixData, setFixData] = useState<AgentFixture[]>([]);
 
   const table = useReactTable({
     data,
@@ -51,21 +51,21 @@ export function FixturesTable<TData, TValue>({
     state: { columnFilters },
   });
 
-  useEffect(() => {
-    if (data.length > 0) {
-      const fixtures = data.filter(
-        (fixture) => fixture.fixture_type === fixtureType
-      );
+  // useEffect(() => {
+  //   if (data.length > 0) {
+  //     const fixtures = data.filter(
+  //       (fixture) => fixture.fixture_type === fixtureType
+  //     );
 
-      setFixData(fixtures);
-    }
-  }, [data, fixtureType]);
+  //     setFixData(fixtures);
+  //   }
+  // }, [data, fixtureType]);
 
-  console.log(fixData);
+  // console.log(fixData);
 
   return (
     <div>
-      <div>
+      {/* <div>
         <Select
           value={
             (table.getColumn("fixture_type")?.getFilterValue() as string) ?? ""
@@ -83,7 +83,7 @@ export function FixturesTable<TData, TValue>({
             ))}
           </SelectContent>
         </Select>
-      </div>
+      </div> */}
 
       <div className="flex items-center py-4 gap-4">
         {/* Filter for team1_name */}
