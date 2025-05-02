@@ -1314,3 +1314,28 @@ export const ModifyFixture = async (data: UpdateFix) => {
     );
   }
 };
+
+//  {"action":"fixtures","fixtureid":1}
+export const DeleteFixture = async (id: string) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "deletefixture",
+      fixtureid: id,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      throw new Error(`Failed to modify fixture online status: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while modifing fixture status."
+    );
+  }
+};

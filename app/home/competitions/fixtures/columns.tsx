@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { MoreHorizontal } from "lucide-react";
+// import { MoreHorizontal } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 
 import { useStore } from "@/store/store";
@@ -71,16 +71,10 @@ export const columns: ColumnDef<AgentFixture>[] = [
   {
     accessorKey: "matchday",
     header: "Round",
-    cell: ({ row }) => {
-      const fixture = row.original;
-
-      return (
-        <div className="text-xs">
-          <div>Round: {fixture.matchday}</div>
-          <div>{fixture.game_date}</div>
-        </div>
-      );
-    },
+  },
+  {
+    accessorKey: "game_date",
+    header: "Date",
   },
   {
     accessorKey: "refdata",
@@ -120,6 +114,7 @@ export const columns: ColumnDef<AgentFixture>[] = [
 const OfficialButton = ({ fixture }: { fixture: AgentFixture }) => {
   const [openAdd, setOpenAdd] = useState(false);
   const [openUpdate, setOpenUpdate] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
   const router = useRouter();
 
   const updateSheetFix = useStore((state) => state.updateSheetFix);
@@ -140,9 +135,10 @@ const OfficialButton = ({ fixture }: { fixture: AgentFixture }) => {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="h-8 w-8 p-0">
+          <Button variant="outline">
             <span className="sr-only">Open menu</span>
-            <MoreHorizontal />
+            {/* <MoreHorizontal /> */}
+            More
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
@@ -170,7 +166,7 @@ const OfficialButton = ({ fixture }: { fixture: AgentFixture }) => {
           <DropdownMenuItem onClick={() => console.log("edit")}>
             Edit
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => console.log("delete")}>
+          <DropdownMenuItem onClick={() => setOpenDelete(true)}>
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>
@@ -183,7 +179,11 @@ const OfficialButton = ({ fixture }: { fixture: AgentFixture }) => {
       />
       <EditFixtureModal fixId={fixId} />
 
-      <DeleteFixtureModal />
+      <DeleteFixtureModal
+        fixture={fixture}
+        open={openDelete}
+        setOpen={setOpenDelete}
+      />
 
       <UpdateScoresModal
         fixture={fixture}
