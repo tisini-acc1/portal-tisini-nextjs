@@ -24,7 +24,7 @@ const ResultsPage = () => {
 
   const { data, isError, isLoading, error } = useQuery({
     queryKey: ["teamTournaments", store.team.id],
-    queryFn: () => getTeamTournaments(store.team.id),
+    queryFn: () => getTeamTournaments(store.team.id, ""),
   });
 
   useEffect(() => {

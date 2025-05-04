@@ -46,7 +46,7 @@ const WithdrawalModal = ({ open, setOpen }: Props) => {
 
   const onSubmit = async (values: z.infer<typeof withdrawSchema>) => {
     const data = await withdrawCost(values.amount);
-    console.log(data);
+    // console.log(data);
     if (data.code === "1") {
       const withdraw = {
         wamount: values.amount,
@@ -55,8 +55,8 @@ const WithdrawalModal = ({ open, setOpen }: Props) => {
       };
 
       const res = await makeWithdraw(withdraw);
-      console.log(withdraw);
-      console.log(res);
+      // console.log(withdraw);
+      // console.log(res);
       if (res.code === "1") {
         updateBalance(res.balance);
         setOpen(false);

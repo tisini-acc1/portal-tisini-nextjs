@@ -57,7 +57,7 @@ const AllPlayersPage = () => {
 
   const { data: tournaments } = useQuery({
     queryKey: ["teamTournaments", store.team.id],
-    queryFn: () => getTeamTournaments(store.team.id),
+    queryFn: () => getTeamTournaments(store.team.id, ""),
   });
 
   if (isLoading) {

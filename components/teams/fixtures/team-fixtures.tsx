@@ -29,7 +29,7 @@ const TeamFixtures = () => {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["teamTournaments", teamId],
-    queryFn: () => getTeamTournaments(teamId),
+    queryFn: () => getTeamTournaments(teamId, ""),
   });
 
   useEffect(() => {

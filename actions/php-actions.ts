@@ -156,8 +156,8 @@ export const getUserTeams = async (): Promise<Team[]> => {
 
 // Create Fixtures
 export const getTeamTournaments = async (
-  teamId: string
-  // playerId: string
+  teamId: string,
+  playerId: string
 ): Promise<TeamTournament[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
@@ -166,7 +166,7 @@ export const getTeamTournaments = async (
     const res = await axios.post(`${baseURL}`, {
       action: "teamtournamentseries",
       teamid: teamId,
-      // playerid: playerId,
+      playerid: playerId,
       gettoken: token,
     });
 
