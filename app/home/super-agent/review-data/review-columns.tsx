@@ -81,6 +81,7 @@ export const reviewColumns: ColumnDef<AgentFixture>[] = [
   },
   {
     id: "actions",
+    header: "Actions",
     cell: ({ row }) => {
       const fixture = row.original;
 

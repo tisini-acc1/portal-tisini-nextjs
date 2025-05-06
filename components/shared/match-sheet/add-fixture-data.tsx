@@ -100,8 +100,13 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
   const selectedTeamId = form.watch("team");
   const home = teams[0].id === selectedTeamId ? "true" : "false";
   const players = home === "true" ? homeP : awayP;
-  const first11 = players.filter((player) => player.player_type === "first11");
-  const subs = players.filter((player) => player.player_type === "sub");
+  const starters = players.filter((player) => player.player_type === "first11");
+
+  const first11 = starters.length > 0 ? starters : players;
+  const subs =
+    starters.length > 0
+      ? players.filter((player) => player.player_type === "sub")
+      : players;
 
   const mutation = useMutation({
     mutationFn: createFixtureEvent,
@@ -279,7 +284,7 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
                       <SelectContent>
                         {first11.map((player) => (
                           <SelectItem
-                            key={player.player_id}
+                            key={player.team_player_id}
                             value={player.player_id}
                           >
                             {player.pname} - {player.Jersey_No}
@@ -312,7 +317,7 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
                       <SelectContent>
                         {subs.map((player) => (
                           <SelectItem
-                            key={player.player_id}
+                            key={player.team_player_id}
                             value={player.player_id}
                           >
                             {player.pname} - {player.Jersey_No}
