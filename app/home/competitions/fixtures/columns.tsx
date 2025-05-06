@@ -53,10 +53,10 @@ export const columns: ColumnDef<AgentFixture>[] = [
           ) : (
             <div className="flex justify-between items-center sm:gap-1">
               <div className="px-2 py-1 bg-slate-100 rounded-md">
-                {fixture.tisiniscores.Home}
+                {fixture.home_score}
               </div>
               <div className="px-2 py-1 bg-slate-100 rounded-md">
-                {fixture.tisiniscores.Away}
+                {fixture.away_score}
               </div>
             </div>
           )}
