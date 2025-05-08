@@ -2,15 +2,23 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { MoreVertical } from "lucide-react";
+import { MoreVertical, MoreVerticalIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
 import { useStore } from "@/store/store";
 import { getTournaments } from "@/actions/django-actions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import CreateTournamentModal from "@/components/tournaments/leagues/create-tournament-modal";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import AddCategoryModal from "@/components/tournaments/leagues/create-category-modal";
 
 const CompetitionsPage = () => {
+  const [openCategory, setOpenCategory] = useState(false);
   const [tournament, setTournament] = useState<Tournament | undefined>(
     undefined
   );
@@ -53,7 +61,37 @@ const CompetitionsPage = () => {
           <CardHeader className="bg-gray-50">
             <CardTitle className="flex justify-between">
               {tournament?.name}
-              <MoreVertical />
+
+              <DropdownMenu>
+                <DropdownMenuTrigger className="">
+                  <MoreVerticalIcon
+                    className="text-gray-600 cursor-pointer"
+                    size={17}
+                  />
+                </DropdownMenuTrigger>
+
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem
+                    onClick={() => {
+                      setOpenCategory(true);
+                    }}
+                  >
+                    Category
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem
+                  // onClick={() => {
+                  //   setOpenEdit(true);
+                  //   setSelectedPlayer(player);
+                  // }}
+                  >
+                    Edit
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => console.log("delete")}>
+                    Delete
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </CardTitle>
           </CardHeader>
           <CardContent className="grid md:grid-cols-2 grid-cols-1">
@@ -88,6 +126,8 @@ const CompetitionsPage = () => {
           </CardContent>
         </Card>
       </section>
+
+      <AddCategoryModal open={openCategory} setOpen={setOpenCategory} />
     </main>
   );
 };
