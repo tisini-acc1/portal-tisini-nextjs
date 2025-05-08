@@ -46,7 +46,8 @@ export const columns: ColumnDef<AgentFixture>[] = [
 
       return (
         <div className="flex items-center justify-center">
-          {fixture.game_status === "notstarted" ? (
+          {fixture.matchplay_status === "5" ||
+          fixture.game_status === "notstarted" ? (
             <div className="bg-slate-100 p-1 px-2 rounded-md text-center">
               {fixture.matchtime}
             </div>
@@ -99,12 +100,26 @@ export const columns: ColumnDef<AgentFixture>[] = [
 const NavigateButton = ({ fixture }: { fixture: AgentFixture }) => {
   const router = useRouter();
 
-  const data = fixture.refdata.length;
+  const refScorers = () => {
+    let scores = 0;
+
+    for (const item of fixture.refdata) {
+      if (item.event_id === "19") {
+        scores += 1;
+      }
+    }
+
+    return scores;
+  };
+
   const status = fixture.game_status;
+  const refreeScores = refScorers();
+  const matchResult =
+    parseInt(fixture.home_score) + parseInt(fixture.away_score);
 
   return (
     <>
-      {data <= 0 && status === "notstarted" ? (
+      {status === "notstarted" || matchResult !== refreeScores ? (
         <Button
           variant={"outline"}
           size={"sm"}

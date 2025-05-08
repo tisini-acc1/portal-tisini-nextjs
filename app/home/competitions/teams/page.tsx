@@ -107,86 +107,97 @@ const TeamsPage = () => {
   // console.log(seasons);
 
   return (
-    <main className="space-y-2">
-      <header className="bg-white shadow-md rounded-md">
-        <div className="bg-gray-100 border-b">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between py-3 gap-3">
-              <h2 className="text-sm font-medium text-gray-600">
-                {teams.length} teams in season 2024/2025
-              </h2>
-              <Select value={serie} onValueChange={updateSerie}>
-                <SelectTrigger className="w-[180px] bg-white">
-                  <SelectValue placeholder="Filter season" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {seasons.map((season) => (
-                      <SelectItem key={season.id} value={season.id}>
-                        {season.name}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
+    <>
+      {data && data?.length < 0 ? (
+        <div className="h-96 flex items-center justify-center bg-slate-300 text-2xl">
+          No teams registered yet!
         </div>
+      ) : (
+        <main className="space-y-2">
+          <header className="bg-white shadow-md rounded-md">
+            <div className="bg-gray-100 border-b">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between py-3 gap-3">
+                  <h2 className="text-sm font-medium text-gray-600">
+                    {teams.length} teams in season 2024/2025
+                  </h2>
+                  <Select value={serie} onValueChange={updateSerie}>
+                    <SelectTrigger className="w-[180px] bg-white">
+                      <SelectValue placeholder="Filter season" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        {seasons.map((season) => (
+                          <SelectItem key={season.id} value={season.id}>
+                            {season.name}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 bg-gray-50">
-          <div className="flex flex-row items-start sm:items-center gap-4 sm:gap-6">
-            <div className="relative flex-shrink-0">
-              <Image
-                src="/homeLogo.png"
-                alt={"name"}
-                className="h-16 w-16 sm:h-20 sm:w-20 object-contain"
-                height={80}
-                width={80}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 bg-gray-50">
+              <div className="flex flex-row items-start sm:items-center gap-4 sm:gap-6">
+                <div className="relative flex-shrink-0">
+                  <Image
+                    src="/homeLogo.png"
+                    alt={"name"}
+                    className="h-16 w-16 sm:h-20 sm:w-20 object-contain"
+                    height={80}
+                    width={80}
+                  />
+
+                  <div className="absolute bottom-0 right-0">
+                    <UploadTeamLogoModal />
+                  </div>
+                </div>
+
+                <div className="flex-1 min-w-0 space-y-3">
+                  <Select value={teamId} onValueChange={updateTeamId}>
+                    <SelectTrigger className="w-full sm:w-[280px] bg-white">
+                      <SelectValue placeholder="Filter team" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        {teams.map((team) => (
+                          <SelectItem key={team.id} value={team.id}>
+                            {team.name}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+
+                  <div className="flex items-center justify-between flex-wrap gap-3">
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {players?.length} Players
+                    </h3>
+
+                    <CreateCompPlayerModal countries={countries as Country[]} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <section className="">
+            {pLoading === true ? (
+              <div className="flex items-center justify-center h-20">
+                Loading...
+              </div>
+            ) : (
+              <CompPlayersTable
+                data={players as TeamPlayer[]}
+                columns={columns}
               />
-
-              <div className="absolute bottom-0 right-0">
-                <UploadTeamLogoModal />
-              </div>
-            </div>
-
-            <div className="flex-1 min-w-0 space-y-3">
-              <Select value={teamId} onValueChange={updateTeamId}>
-                <SelectTrigger className="w-full sm:w-[280px] bg-white">
-                  <SelectValue placeholder="Filter team" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {teams.map((team) => (
-                      <SelectItem key={team.id} value={team.id}>
-                        {team.name}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-
-              <div className="flex items-center justify-between flex-wrap gap-3">
-                <h3 className="text-lg font-semibold text-gray-900">
-                  {players?.length} Players
-                </h3>
-
-                <CreateCompPlayerModal countries={countries as Country[]} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <section className="">
-        {pLoading === true ? (
-          <div className="flex items-center justify-center h-20">
-            Loading...
-          </div>
-        ) : (
-          <CompPlayersTable data={players as TeamPlayer[]} columns={columns} />
-        )}
-      </section>
-    </main>
+            )}
+          </section>
+        </main>
+      )}
+    </>
   );
 };
 

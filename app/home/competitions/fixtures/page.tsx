@@ -6,18 +6,20 @@ import { useQuery } from "@tanstack/react-query";
 import { columns } from "./columns";
 import { useStore } from "@/store/store";
 import { FixturesTable } from "./fixtures-table";
+import CreateFixtureModal from "@/components/fixtures/create-fixture-modal";
 import {
   getMatchPlayStatus,
   getOfficials,
   getTournFixtures,
 } from "@/actions/php-actions";
-import CreateFixtureModal from "@/components/fixtures/create-fixture-modal";
 
 const FixturesPage = () => {
   // const data = await fixtureService.getFixtures();
 
   // const fixtures = data.filter((fixture) => fixture.series === "14").reverse();
   const [fixtures, setFixtures] = useState<AgentFixture[]>([]);
+  // const [round, setRound] = useState("");
+  // const [matchdays, setMatchdays] = useState<string[]>([]);
 
   const { store, updateOfficials, updateMatchStatus } = useStore(
     (state) => state
@@ -41,6 +43,7 @@ const FixturesPage = () => {
   useEffect(() => {
     if (data) {
       const fix = data.filter((item) => item.league === store.tournament);
+
       setFixtures(fix.reverse());
     }
   }, [store.tournament, data]);
@@ -55,6 +58,18 @@ const FixturesPage = () => {
     }
   }, [officials, status, updateMatchStatus, updateOfficials]);
 
+  // useEffect(() => {
+  //   if (fixtures) {
+  //     const rounds = [...new Set(fixtures.map((f) => f.matchday))];
+
+  //     setMatchdays(rounds);
+
+  //     if (rounds) {
+  //       setRound(rounds[0]);
+  //     }
+  //   }
+  // }, [fixtures]);
+
   if (isLoading || !officials || !status) {
     return <div>Loading...</div>;
   }
@@ -63,6 +78,11 @@ const FixturesPage = () => {
     return <div>Error...</div>;
   }
 
+  // const roundFixtures = fixtures.filter(
+  //   (fixture) => fixture.matchday === round
+  // );
+
+  // console.log(roundFixtures);
   // console.log(fixtures);
   // console.log(store.matchStatus);
 

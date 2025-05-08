@@ -61,7 +61,7 @@ const UpdateScoresModal = ({ fixture, open, setOpen }: UpdateProps) => {
   const mutation = useMutation({
     mutationFn: ModifyFixture,
     onSuccess: (data) => {
-      // console.log(data);
+      console.log(data);
       if (data.error === "0") {
         setOpen(false);
         queryClient.invalidateQueries({ queryKey: ["fixtures", serie] });

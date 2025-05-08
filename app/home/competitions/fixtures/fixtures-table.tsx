@@ -1,5 +1,9 @@
 "use client";
 
+import { useState } from "react";
+
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import {
   ColumnDef,
   flexRender,
@@ -7,9 +11,8 @@ import {
   useReactTable,
   ColumnFiltersState,
   getFilteredRowModel,
-  getPaginationRowModel,
+  // getPaginationRowModel,
 } from "@tanstack/react-table";
-
 import {
   Table,
   TableBody,
@@ -18,9 +21,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { Input } from "@/components/ui/input";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -36,7 +36,7 @@ export function FixturesTable<TData, TValue>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
+    // getPaginationRowModel: getPaginationRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     state: { columnFilters },
@@ -44,7 +44,7 @@ export function FixturesTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4">
+      <div className="flex items-center gap-3 py-4">
         <Input
           placeholder="Filter home teams..."
           value={
@@ -52,6 +52,17 @@ export function FixturesTable<TData, TValue>({
           }
           onChange={(event) =>
             table.getColumn("team1_name")?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm"
+        />
+
+        <Input
+          placeholder="Filter by matchday..."
+          value={
+            (table.getColumn("matchday")?.getFilterValue() as string) ?? ""
+          }
+          onChange={(event) =>
+            table.getColumn("matchday")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
