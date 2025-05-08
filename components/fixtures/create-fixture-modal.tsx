@@ -47,6 +47,8 @@ export const fixtureSchema = z.object({
   away: z.string().min(1, { message: "Away team is required" }),
   matchday: z.string().min(1, { message: "Matchday is required" }),
   gameTime: z.string({ message: "Match Time type is required" }),
+  category: z.string(),
+  group: z.string(),
   gameDate: z.date({
     required_error: "Match date is required.",
   }),
@@ -74,6 +76,8 @@ const CreateFixtureModal = () => {
       gameDate: new Date(),
       gameTime: "",
       matchday: "",
+      category: "",
+      group: "",
       // teamStats: false,
     },
   });
@@ -236,6 +240,36 @@ const CreateFixtureModal = () => {
                 </FormItem>
               )}
             />
+
+            <div className="flex gap-2">
+              <FormField
+                control={form.control}
+                name="category"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Category</FormLabel>
+                    <FormControl>
+                      <Input placeholder="U15" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="group"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Group</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Group A" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <div className="flex gap-2">
               <FormField
