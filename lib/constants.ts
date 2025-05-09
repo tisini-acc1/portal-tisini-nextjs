@@ -24,11 +24,11 @@ export const TEAMS_ITEMS = [
     icon: Home,
     isActive: true,
   },
-  // {
-  //   title: "Competitions",
-  //   url: "#",
-  //   icon: Gamepad,
-  // },
+  {
+    title: "Competitions",
+    url: "/home/teams/leagues",
+    icon: Gamepad,
+  },
   {
     title: "Schedule",
     url: "/home/teams/fixtures",
