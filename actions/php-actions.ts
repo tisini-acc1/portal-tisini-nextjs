@@ -1130,6 +1130,56 @@ export const createTournament = async (data: TournaCreate) => {
   }
 };
 
+export const createCategory = async (data: CreateCategory) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "createcategory",
+      ...data,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to create tournament category: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while creating tournament category."
+    );
+  }
+};
+
+export const createGroupCategory = async (data: CreateGroup) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "creategroup",
+      ...data,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to create group category: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while creating group category."
+    );
+  }
+};
+
 // fixture payment
 export const fixturePayment = async (data: FixPay) => {
   const token = await getToken();

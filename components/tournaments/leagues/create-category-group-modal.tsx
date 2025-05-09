@@ -2,16 +2,16 @@
 
 import { z } from "zod";
 import { useEffect } from "react";
-import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { Plus, RotateCcw } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+import { useStore } from "@/store/store";
 import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { createCategory } from "@/actions/php-actions";
+import { createGroupCategory } from "@/actions/php-actions";
 import {
   Dialog,
   DialogContent,
@@ -29,10 +29,17 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useStore } from "@/store/store";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export const fixtureSchema = z.object({
   category: z.string().min(1, { message: "Category name is required" }),
+  group: z.string().min(1, { message: "Group name is required" }),
 });
 
 type CategoryProps = {
@@ -40,7 +47,7 @@ type CategoryProps = {
   setOpen: (v: boolean) => void;
 };
 
-const AddCategoryModal = ({ open, setOpen }: CategoryProps) => {
+const AddCategoryGroupModal = ({ open, setOpen }: CategoryProps) => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -50,6 +57,7 @@ const AddCategoryModal = ({ open, setOpen }: CategoryProps) => {
     resolver: zodResolver(fixtureSchema),
     defaultValues: {
       category: "",
+      group: "",
     },
   });
 
@@ -60,7 +68,7 @@ const AddCategoryModal = ({ open, setOpen }: CategoryProps) => {
   }, [form.formState.errors]);
 
   const mutation = useMutation({
-    mutationFn: createCategory,
+    mutationFn: createGroupCategory,
     onSuccess(data) {
       console.log(data);
       queryClient.invalidateQueries({ queryKey: ["tournaments"] });
@@ -87,13 +95,13 @@ const AddCategoryModal = ({ open, setOpen }: CategoryProps) => {
   });
 
   async function onSubmit(values: z.infer<typeof fixtureSchema>) {
-    const category = {
-      seasonid: serieId,
-      cname: values.category,
+    const group = {
+      gname: "group 1",
+      categoryid: "1",
     };
 
-    console.log(category);
-    mutation.mutate(category);
+    console.log(group);
+    mutation.mutate(group);
   }
 
   const onOpenChangeWrapper = (value: boolean) => {
@@ -110,9 +118,9 @@ const AddCategoryModal = ({ open, setOpen }: CategoryProps) => {
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add Category</DialogTitle>
+          <DialogTitle>Add Group Category</DialogTitle>
           <DialogDescription>
-            You are about to create a new category for tournament.
+            You are about to create a new group for category.
           </DialogDescription>
         </DialogHeader>
 
@@ -124,8 +132,35 @@ const AddCategoryModal = ({ open, setOpen }: CategoryProps) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Category</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="U15" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="rugby15">U15</SelectItem>
+                      <SelectItem value="rugby7">U7</SelectItem>
+                      <SelectItem value="football">U9</SelectItem>
+                    </SelectContent>
+                  </Select>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="group"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Group</FormLabel>
                   <FormControl>
-                    <Input placeholder="U15" {...field} />
+                    <Input placeholder="Group F" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -151,4 +186,4 @@ const AddCategoryModal = ({ open, setOpen }: CategoryProps) => {
   );
 };
 
-export default AddCategoryModal;
+export default AddCategoryGroupModal;

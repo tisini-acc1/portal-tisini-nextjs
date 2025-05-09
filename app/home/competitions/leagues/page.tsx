@@ -2,22 +2,24 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { MoreVertical, MoreVerticalIcon } from "lucide-react";
+import { MoreVerticalIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
 import { useStore } from "@/store/store";
 import { getTournaments } from "@/actions/django-actions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import CreateTournamentModal from "@/components/tournaments/leagues/create-tournament-modal";
+import AddCategoryModal from "@/components/tournaments/leagues/create-category-modal";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import AddCategoryModal from "@/components/tournaments/leagues/create-category-modal";
+import AddCategoryGroupModal from "@/components/tournaments/leagues/create-category-group-modal";
 
 const CompetitionsPage = () => {
+  const [openGroup, setOpenGroup] = useState(false);
   const [openCategory, setOpenCategory] = useState(false);
   const [tournament, setTournament] = useState<Tournament | undefined>(
     undefined
@@ -80,16 +82,16 @@ const CompetitionsPage = () => {
                   </DropdownMenuItem>
 
                   <DropdownMenuItem
-                  // onClick={() => {
-                  //   setOpenEdit(true);
-                  //   setSelectedPlayer(player);
-                  // }}
+                    onClick={() => {
+                      setOpenGroup(true);
+                      // setSelectedPlayer(player);
+                    }}
                   >
-                    Edit
+                    Group
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => console.log("delete")}>
+                  {/* <DropdownMenuItem onClick={() => console.log("delete")}>
                     Delete
-                  </DropdownMenuItem>
+                  </DropdownMenuItem> */}
                 </DropdownMenuContent>
               </DropdownMenu>
             </CardTitle>
@@ -128,6 +130,7 @@ const CompetitionsPage = () => {
       </section>
 
       <AddCategoryModal open={openCategory} setOpen={setOpenCategory} />
+      <AddCategoryGroupModal open={openGroup} setOpen={setOpenGroup} />
     </main>
   );
 };

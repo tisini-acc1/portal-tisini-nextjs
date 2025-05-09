@@ -180,3 +180,13 @@ type MatchPlayStatus = {
   date_updated: string;
   created_by: string;
 };
+
+type CreateCategory = {
+  seasonid: string;
+  cname: string;
+};
+
+type CreateGroup = {
+  gname: string;
+  categoryid: string;
+};
