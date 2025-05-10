@@ -14,8 +14,8 @@ import { Button } from "../ui/button";
 import { useStore } from "@/store/store";
 import { Calendar } from "../ui/calendar";
 import { useToast } from "@/hooks/use-toast";
-import { createFixture } from "@/actions/php-actions";
-import { getTournamentTeams } from "@/actions/django-actions";
+import { createFixture, getTournamentTeams } from "@/actions/php-actions";
+// import { getTournamentTeams } from "@/actions/django-actions";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import {
   Dialog,
@@ -55,24 +55,30 @@ export const fixtureSchema = z.object({
   // teamStats: z.boolean().default(false),
 });
 
-const CreateFixtureModal = () => {
+const CreateFixtureModal = ({ tournament }: { tournament: Competition }) => {
   const [team, setTeam] = useState<CompTeam>({} as CompTeam);
+  // const [selectedCategory, setSelectedCategory] = useState("");
 
   const { store } = useStore((state) => state);
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
 
+  // const { data } = useQuery({
+  //   queryKey: ["teams", store.tournament, store.serie],
+  //   queryFn: () => getTournamentTeams(store.tournament, store.serie),
+  // });
+
   const { data } = useQuery({
     queryKey: ["teams", store.tournament, store.serie],
-    queryFn: () => getTournamentTeams(store.tournament, store.serie),
+    queryFn: () => getTournamentTeams(store.serie),
   });
 
   const form = useForm<z.infer<typeof fixtureSchema>>({
     resolver: zodResolver(fixtureSchema),
     defaultValues: {
-      home: team.id,
-      away: team.id,
+      home: team.teamid || "",
+      away: team.teamid || "",
       gameDate: new Date(),
       gameTime: "",
       matchday: "",
@@ -83,7 +89,7 @@ const CreateFixtureModal = () => {
   });
 
   useEffect(() => {
-    if (data) {
+    if (data && data.length > 0) {
       setTeam(data[0]);
     }
   }, [data]);
@@ -147,6 +153,14 @@ const CreateFixtureModal = () => {
     setOpen(value);
   };
 
+  const selectedCategory = form.watch("category");
+  const category = tournament?.season?.[0]?.category?.filter(
+    (category) => category.id === selectedCategory
+  );
+
+  // console.log(selectedCategory);
+  // console.log(category);
+
   return (
     <Dialog open={open} onOpenChange={onOpenChangeWrapper}>
       <DialogTrigger asChild>
@@ -178,14 +192,14 @@ const CreateFixtureModal = () => {
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue
-                          placeholder={data ? team.name : "No teams"}
+                          placeholder={data ? team.teamname : "No teams"}
                         />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
                       {data?.map((team) => (
-                        <SelectItem key={team.id} value={team.id}>
-                          {team.name}
+                        <SelectItem key={team.teamid} value={team.teamid}>
+                          {team.teamname}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -209,14 +223,14 @@ const CreateFixtureModal = () => {
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue
-                          placeholder={data ? team.name : "No teams"}
+                          placeholder={data ? team.teamname : "No teams"}
                         />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
                       {data?.map((team) => (
-                        <SelectItem key={team.id} value={team.id}>
-                          {team.name}
+                        <SelectItem key={team.teamid} value={team.teamid}>
+                          {team.teamname}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -241,16 +255,33 @@ const CreateFixtureModal = () => {
               )}
             />
 
-            <div className="flex gap-2">
+            <div className="grid grid-cols-2 gap-2">
               <FormField
                 control={form.control}
                 name="category"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Category</FormLabel>
-                    <FormControl>
-                      <Input placeholder="U15" {...field} />
-                    </FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue
+                            placeholder={data ? team.teamname : "No categories"}
+                          />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {tournament.season[0].category?.map((category) => (
+                          <SelectItem key={category.id} value={category.id}>
+                            {category.categoryname}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+
                     <FormMessage />
                   </FormItem>
                 )}
@@ -262,9 +293,26 @@ const CreateFixtureModal = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Group</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Group A" {...field} />
-                    </FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue
+                            placeholder={data ? team.teamname : "No categories"}
+                          />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {category[0]?.group?.map((group) => (
+                          <SelectItem key={group.id} value={group.id}>
+                            {group.groupname}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+
                     <FormMessage />
                   </FormItem>
                 )}

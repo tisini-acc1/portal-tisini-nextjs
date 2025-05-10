@@ -21,6 +21,30 @@ type SidebarData = {
   }[];
 };
 
+type OpenCompetition = {
+  id: string;
+  name: string;
+  date_created: string;
+  fixture_type: string | null;
+  created_by: string;
+  date_updated: string;
+  date_from: string | null;
+  date_to: string | null;
+  status: string;
+  is_competitive: string;
+  leaguelogo: string;
+  series: {
+    id: string;
+    seriesname: string;
+    date_from: string;
+    date_to: string;
+    noteam: number;
+  }[];
+  latestseriesid: string | null;
+  latestseriesname: string | null;
+  latestseriesnoteam: number;
+};
+
 type Competition = {
   tournament_id: string;
   tournament: string;
@@ -77,9 +101,13 @@ type Tournament = {
 };
 
 type CompTeam = {
-  id: string;
-  name: string;
-  date_created: string;
+  seriesid: string;
+  teamid: string;
+  status: string;
+  teamname: string;
+  team_type: string;
+  teamlogo: string;
+  organisation_id: string;
 };
 
 type Team = {

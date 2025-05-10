@@ -74,17 +74,17 @@ const TeamsPage = () => {
 
   useEffect(() => {
     if (data) {
-      updateTeamId(data[0].id);
+      updateTeamId(data[0].teamid);
     }
   }, [data]);
 
   useEffect(() => {
     if (teamId) {
-      const selectedTeam = data?.find((team) => team.id === teamId);
+      const selectedTeam = data?.find((team) => team.teamid === teamId);
 
       const team = {
         id: teamId,
-        name: selectedTeam?.name as string,
+        name: selectedTeam?.teamname as string,
       };
 
       updateTeam(team);
@@ -163,8 +163,8 @@ const TeamsPage = () => {
                     <SelectContent>
                       <SelectGroup>
                         {teams.map((team) => (
-                          <SelectItem key={team.id} value={team.id}>
-                            {team.name}
+                          <SelectItem key={team.teamid} value={team.teamid}>
+                            {team.teamname}
                           </SelectItem>
                         ))}
                       </SelectGroup>

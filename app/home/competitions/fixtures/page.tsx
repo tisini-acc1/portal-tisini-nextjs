@@ -10,6 +10,7 @@ import CreateFixtureModal from "@/components/fixtures/create-fixture-modal";
 import {
   getMatchPlayStatus,
   getOfficials,
+  getTournaments,
   getTournFixtures,
 } from "@/actions/php-actions";
 
@@ -18,6 +19,7 @@ const FixturesPage = () => {
 
   // const fixtures = data.filter((fixture) => fixture.series === "14").reverse();
   const [fixtures, setFixtures] = useState<AgentFixture[]>([]);
+  const [tournament, setTournament] = useState<Competition>({} as Competition);
   // const [round, setRound] = useState("");
   // const [matchdays, setMatchdays] = useState<string[]>([]);
 
@@ -28,6 +30,11 @@ const FixturesPage = () => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["fixtures", store.serie],
     queryFn: () => getTournFixtures(parseInt(store.serie)),
+  });
+
+  const { data: tournaments } = useQuery({
+    queryKey: ["tournaments"],
+    queryFn: () => getTournaments(),
   });
 
   const { data: status } = useQuery({
@@ -58,19 +65,17 @@ const FixturesPage = () => {
     }
   }, [officials, status, updateMatchStatus, updateOfficials]);
 
-  // useEffect(() => {
-  //   if (fixtures) {
-  //     const rounds = [...new Set(fixtures.map((f) => f.matchday))];
+  useEffect(() => {
+    if (tournaments) {
+      const tourna = tournaments.filter(
+        (tournament) => tournament.tournament_id === store.tournament
+      );
 
-  //     setMatchdays(rounds);
+      setTournament(tourna[0]);
+    }
+  }, [tournaments, store.tournament]);
 
-  //     if (rounds) {
-  //       setRound(rounds[0]);
-  //     }
-  //   }
-  // }, [fixtures]);
-
-  if (isLoading || !officials || !status) {
+  if (isLoading || !officials || !status || !tournaments) {
     return <div>Loading...</div>;
   }
 
@@ -85,11 +90,13 @@ const FixturesPage = () => {
   // console.log(roundFixtures);
   // console.log(fixtures);
   // console.log(store.matchStatus);
+  console.log(tournaments);
+  console.log(store.tournament);
 
   return (
     <main>
       <div className="flex justify-end">
-        <CreateFixtureModal />
+        <CreateFixtureModal tournament={tournament} />
       </div>
 
       <FixturesTable columns={columns} data={fixtures} />

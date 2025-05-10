@@ -8,7 +8,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
-import { ModifyOnlineFixture } from "@/actions/php-actions";
+import { SubscribetoTournament } from "@/actions/php-actions";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -21,24 +21,20 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-type Tourn = {
-  tournamentname: string;
-  tournamentid: string;
-  status: string;
-  fixture_type: string;
-  date_from: null | string;
-  date_to: null | string;
-};
-
-const TournSubscribeModal = ({ tournament }: { tournament: Tourn }) => {
+const TournSubscribeModal = ({
+  tournament,
+}: {
+  tournament: OpenCompetition;
+}) => {
   const team = useStore((state) => state.store.team);
+  // const serie = useStore((state) => state.store.serie);
 
   const router = useRouter();
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: ModifyOnlineFixture,
+    mutationFn: SubscribetoTournament,
     onSuccess(data) {
       console.log(data);
       router.refresh();
@@ -65,10 +61,16 @@ const TournSubscribeModal = ({ tournament }: { tournament: Tourn }) => {
   });
 
   async function onSubmit() {
-    // mutation.mutate(data);
+    const data = {
+      seasonid: tournament.latestseriesid as string,
+      teamid: team.id,
+    };
+
+    mutation.mutate(data);
   }
 
-  console.log(tournament);
+  // console.log(tournament);
+  // console.log(serie, team);
 
   return (
     <AlertDialog>

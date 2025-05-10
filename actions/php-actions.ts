@@ -27,6 +27,30 @@ export const getTournaments = async (): Promise<Competition[]> => {
   }
 };
 
+// Get Team Players
+export const getOpenTournaments = async (): Promise<OpenCompetition[]> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}?gettoken=${token}`, {
+      action: "fetchleague",
+    });
+
+    if (res.status === 200) {
+      // console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fetch open tournaments: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while fetching open tournaments."
+    );
+  }
+};
+
 // Get Tournament Fixtures
 export const getTournFixtures = async (id: number): Promise<AgentFixture[]> => {
   const token = await getToken();
@@ -136,6 +160,33 @@ export const getUserTeams = async (): Promise<Team[]> => {
   try {
     const res = await axios.post(`${baseURL}?gettoken=${token}`, {
       action: "userteam",
+    });
+
+    if (res.status === 200) {
+      console.log("server 119", res.data);
+      if (res.data && res.data.error === "1") {
+        throw new Error("userNotAuthenticated");
+      }
+
+      return res.data;
+    } else {
+      throw new Error(`Failed to fetch user teams: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error.message || "An error occurred while fetching teams.");
+  }
+};
+
+// Create Fixtures
+export const getTournamentTeams = async (id: string): Promise<CompTeam[]> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}?gettoken=${token}`, {
+      action: "fetchteam",
+      seasonid: id,
     });
 
     if (res.status === 200) {
@@ -1348,6 +1399,34 @@ export const ModifyFixture = async (data: UpdateFix) => {
   try {
     const res = await axios.post(`${baseURL}`, {
       action: "updatefixture",
+      ...data,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      throw new Error(`Failed to modify fixture online status: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while modifing fixture status."
+    );
+  }
+};
+
+//  {"action":"fixtures","fixtureid":1}
+export const SubscribetoTournament = async (data: {
+  seasonid: string;
+  teamid: string;
+}) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "subscribe",
       ...data,
       gettoken: token,
     });

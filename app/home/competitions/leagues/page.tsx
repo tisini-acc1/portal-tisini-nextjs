@@ -24,6 +24,7 @@ const CompetitionsPage = () => {
   const [openGroup, setOpenGroup] = useState(false);
   const [openCategory, setOpenCategory] = useState(false);
   const [openUpload, setOpenUpload] = useState(false);
+  const [categories, setCategories] = useState<CompCategory[]>([]);
   const [tournament, setTournament] = useState<Competition | undefined>(
     undefined
   );
@@ -41,6 +42,7 @@ const CompetitionsPage = () => {
         (tournament) => tournament.tournament_id === store.tournament
       );
       setTournament(tourna as Competition);
+      setCategories(tourna?.season[0].category as CompCategory[]);
     }
   }, [store.tournament, store.serie, data]);
 
@@ -157,8 +159,12 @@ const CompetitionsPage = () => {
       </section>
 
       <AddCategoryModal open={openCategory} setOpen={setOpenCategory} />
-      <AddCategoryGroupModal open={openGroup} setOpen={setOpenGroup} />
       <UploadTournLogoModal open={openUpload} setOpen={setOpenUpload} />
+      <AddCategoryGroupModal
+        open={openGroup}
+        setOpen={setOpenGroup}
+        categories={categories}
+      />
     </main>
   );
 };

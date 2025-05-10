@@ -28,7 +28,6 @@ type UploadProps = {
 const UploadTournLogoModal = ({ open, setOpen }: UploadProps) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  const team = useStore((state) => state.store.team);
   const tournId = useStore((state) => state.store.tournament);
 
   const { toast } = useToast();

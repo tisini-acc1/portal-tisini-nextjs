@@ -36,15 +36,15 @@ const FilterTournTeams = () => {
     if (data) {
       setTeams(data);
       if (data && data.length >= 1) {
-        setValue(data[0].id);
+        setValue(data[0].teamid);
       }
     }
   }, [data]);
 
   useEffect(() => {
     if (value) {
-      const team = teams.filter((t) => t.id === value);
-      updateTeam({ id: team[0].id, name: team[0].name });
+      const team = teams.filter((t) => t.teamid === value);
+      updateTeam({ id: team[0].teamid, name: team[0].teamname });
     }
   }, [updateTeam, value]);
 
@@ -68,7 +68,7 @@ const FilterTournTeams = () => {
             className="w-[200px] justify-between text-ellipsis overflow-hidden whitespace-nowra"
           >
             {value
-              ? teams.find((team) => team.id === value)?.name
+              ? teams.find((team) => team.teamid === value)?.teamname
               : "Select team..."}
             <ChevronsUpDown className="opacity-50" />
           </Button>
@@ -81,18 +81,18 @@ const FilterTournTeams = () => {
               <CommandGroup>
                 {teams?.map((team) => (
                   <CommandItem
-                    key={team.id}
-                    value={team.id}
+                    key={team.teamid}
+                    value={team.teamid}
                     onSelect={(currentValue) => {
                       setValue(currentValue === value ? "" : currentValue);
                       setOpen(false);
                     }}
                   >
-                    {team.name}
+                    {team.teamname}
                     <Check
                       className={cn(
                         "ml-auto",
-                        value === team.name ? "opacity-100" : "opacity-0"
+                        value === team.teamname ? "opacity-100" : "opacity-0"
                       )}
                     />
                   </CommandItem>

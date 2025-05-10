@@ -7,7 +7,7 @@ import { Plus, RotateCcw } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { useStore } from "@/store/store";
+// import { useStore } from "@/store/store";
 import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -45,13 +45,18 @@ export const fixtureSchema = z.object({
 type CategoryProps = {
   open: boolean;
   setOpen: (v: boolean) => void;
+  categories: CompCategory[];
 };
 
-const AddCategoryGroupModal = ({ open, setOpen }: CategoryProps) => {
+const AddCategoryGroupModal = ({
+  open,
+  setOpen,
+  categories,
+}: CategoryProps) => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  const serieId = useStore((state) => state.store.serie);
+  // const serieId = useStore((state) => state.store.serie);
 
   const form = useForm<z.infer<typeof fixtureSchema>>({
     resolver: zodResolver(fixtureSchema),
@@ -96,8 +101,8 @@ const AddCategoryGroupModal = ({ open, setOpen }: CategoryProps) => {
 
   async function onSubmit(values: z.infer<typeof fixtureSchema>) {
     const group = {
-      gname: "group 1",
-      categoryid: "21",
+      gname: values.group,
+      categoryid: values.category,
     };
 
     console.log(group);
@@ -142,9 +147,11 @@ const AddCategoryGroupModal = ({ open, setOpen }: CategoryProps) => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="rugby15">U15</SelectItem>
-                      <SelectItem value="rugby7">U7</SelectItem>
-                      <SelectItem value="football">U9</SelectItem>
+                      {categories.map((category) => (
+                        <SelectItem key={category.id} value={category.id}>
+                          {category.categoryname}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
 

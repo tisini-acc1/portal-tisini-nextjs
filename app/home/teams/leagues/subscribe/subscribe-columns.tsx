@@ -1,30 +1,19 @@
 "use client";
 
-import TournSubscribeModal from "@/components/teams/leagues/subdcribe-modal";
+import TournSubscribeModal from "@/components/teams/leagues/subscribe-modal";
 import { ColumnDef } from "@tanstack/react-table";
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-type Tourn = {
-  tournamentname: string;
-  tournamentid: string;
-  status: string;
-  fixture_type: string;
-  date_from: null | string;
-  date_to: null | string;
-};
-
-export const subscribeColumns: ColumnDef<Tourn>[] = [
+export const subscribeColumns: ColumnDef<OpenCompetition>[] = [
   {
-    accessorKey: "tournamentname",
+    accessorKey: "name",
     header: "Tournament",
   },
   {
-    accessorKey: "email",
+    accessorKey: "latestseriesnoteam",
     header: "Registered Teams",
   },
   {
-    accessorKey: "amount",
+    accessorKey: "latestseriesname",
     header: "Current season",
   },
   {
