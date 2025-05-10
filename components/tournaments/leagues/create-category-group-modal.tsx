@@ -97,7 +97,7 @@ const AddCategoryGroupModal = ({ open, setOpen }: CategoryProps) => {
   async function onSubmit(values: z.infer<typeof fixtureSchema>) {
     const group = {
       gname: "group 1",
-      categoryid: "1",
+      categoryid: "21",
     };
 
     console.log(group);

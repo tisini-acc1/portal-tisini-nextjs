@@ -26,10 +26,14 @@ type Competition = {
   tournament: string;
   date_created: string;
   date_updated: string;
+  position: string;
   created_by: string;
   position: string;
   status: string;
-  season: [];
+  fixturetype: string;
+  leaguelogo: null | string;
+  is_competitive: string;
+  season: CompSeason[];
 };
 
 type CompSeason = {
@@ -43,6 +47,20 @@ type CompSeason = {
   date_from: string;
   date_to: string;
   status: string;
+  category: CompCategory[];
+};
+
+type CompCategory = {
+  id: string;
+  categoryname: string;
+  seasonid: string;
+  group: CompGroup[];
+};
+
+type CompGroup = {
+  id: string;
+  groupname: string;
+  categoryid: string;
 };
 
 type Tournament = {
