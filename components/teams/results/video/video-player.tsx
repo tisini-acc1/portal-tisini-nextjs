@@ -3,16 +3,13 @@ import React, { useState, useEffect } from "react";
 interface VideoPlayerProps {
   url: string;
   currentTime: number;
-  onTimeUpdate?: (time: number) => void;
+  // onTimeUpdate?: (time: number) => void;
   autoplay?: boolean;
   controls?: boolean;
 }
 
 const VideoPlayer = React.forwardRef<HTMLIFrameElement, VideoPlayerProps>(
-  (
-    { url, currentTime, onTimeUpdate, autoplay = true, controls = false },
-    ref
-  ) => {
+  ({ url, currentTime, autoplay = true, controls = false }, ref) => {
     const [error, setError] = useState<string | null>(null);
     const [videoId, setVideoId] = useState<string | null>(null);
 

@@ -71,7 +71,7 @@ const VideoAnalysis = ({ videoData = [], fixEvents = [] }: VideoProps) => {
     const teamData = videoData.filter((event) => event.team === team.id);
 
     // First filter events based on current selections
-    let filtered = teamData.filter((event) => {
+    const filtered = teamData.filter((event) => {
       const eventMatch =
         selectedEvent === "all-events" || event.eventid === selectedEvent;
       const playerMatch =
@@ -128,7 +128,7 @@ const VideoAnalysis = ({ videoData = [], fixEvents = [] }: VideoProps) => {
     );
   }
 
-  console.log(selectedEvent);
+  console.log(fixEvents);
 
   return (
     <div className="flex flex-col md:flex-row h-screen bg-gray-100">
@@ -138,7 +138,7 @@ const VideoAnalysis = ({ videoData = [], fixEvents = [] }: VideoProps) => {
           <VideoPlayer
             url={videoUrl}
             currentTime={currentTime - 2}
-            onTimeUpdate={setCurrentTime}
+            // onTimeUpdate={setCurrentTime}
           />
         ) : (
           <div className="flex items-center justify-center h-full text-gray-400">
