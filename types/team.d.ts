@@ -588,3 +588,48 @@ type FixPay = {
   reference: string;
   tcode: string;
 };
+
+type EventType = {
+  id: string;
+  name: string;
+  is_active: string;
+  fixture_type: string;
+  ranker: string;
+  gke: string;
+  isPlayer: string;
+  closewindow: string;
+  uploaddata: string;
+};
+
+type VideoEvent = {
+  id: string;
+  event_name: string;
+  time: string;
+  team: string;
+  gameid: string;
+  player_id: string;
+  subevent_id: string;
+  subplayer_id: string;
+  game_minute: string;
+  game_second: string;
+  game_moment: string;
+  quarter: string;
+  app_timelog: null | string;
+  player_type: string;
+  pname: string;
+  Jersey_No: string;
+  subsubevent_id: string;
+  zone_id: string;
+  KickFrom: string;
+  KickLanding: string;
+  MetersMade: string;
+  NoPlayersRuck: string;
+  NoPlayersLineout: string;
+  defenderbeaten: string;
+  PlayStartEndtimevideo: string;
+  PlayTimeinvideo: string;
+  x: string;
+  y: string;
+  eventid: string;
+  videourl: string;
+};

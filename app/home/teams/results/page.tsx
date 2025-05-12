@@ -57,7 +57,7 @@ const ResultsPage = () => {
     }
   }, [data, store.tournament, store.serie]);
 
-  // console.log(data);
+  // console.log(fixtures);
   // console.log(store.team.id);
 
   if (isLoading) {
@@ -101,7 +101,7 @@ const ResultsPage = () => {
                     {formattedDate(fixture.game_date)}
 
                     <p className="overflow-hidden text-elipsis flex">
-                      Round 24
+                      Round 00
                     </p>
                   </CardTitle>
                 </CardHeader>
@@ -128,7 +128,7 @@ const ResultsPage = () => {
                       className="w-9/12 overflow-hidden text-ellipsis
                 "
                     >
-                      League
+                      {fixture.scores.Home} - {fixture.scores.Away}
                     </p>{" "}
                     <Button
                       size={"sm"}

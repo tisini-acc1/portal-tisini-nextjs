@@ -102,6 +102,31 @@ export const getSeriesTeams = async (tourn: string, serie: string) => {
   }
 };
 
+// Get Series Teams
+export const getEvents = async (type: string): Promise<EventType[]> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}?gettoken=${token}`, {
+      getmainevent: "event",
+      fixture_type: type,
+    });
+
+    if (res.status === 200) {
+      // console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fetch tournaments fixtures: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while fetching tournament teams."
+    );
+  }
+};
+
 // Create Fixtures
 export const createFixture = async (data: CreateFix) => {
   const token = await getToken();

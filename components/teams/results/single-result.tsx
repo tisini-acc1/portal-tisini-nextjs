@@ -6,8 +6,14 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "@/app/home/loading";
 import TeamStats from "./teams/team-stats";
 import PlayerStats from "./players/player-stats";
-import { getFixtureStats, getPlayersData } from "@/actions/php-actions";
+import VideoAnalysis from "./video/video-analysis";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  getEvents,
+  getFixtureStats,
+  getPlayersData,
+  getVideoEvents,
+} from "@/actions/php-actions";
 
 const SingleResult = ({ fixId }: { fixId: string }) => {
   const {
@@ -27,12 +33,22 @@ const SingleResult = ({ fixId }: { fixId: string }) => {
   const details = teamData?.fixture[0];
   const scores = teamData?.scores;
 
-  //   const fixType = teamData && teamData["fixture"][0].fixture_type;
+  const fixType = teamData && teamData["fixture"][0].fixture_type;
 
-  // console.log(playersData);
-  //   console.log(teamData);
+  const { data: videoData, isLoading: vLoading } = useQuery({
+    queryKey: ["videoData", fixId],
+    queryFn: () => getVideoEvents(fixId),
+  });
 
-  if (isLoading || pLoading) {
+  const { data: events, isLoading: eLoading } = useQuery({
+    queryKey: ["fixtureEvents", fixType],
+    queryFn: () => getEvents(fixType as string),
+  });
+
+  // console.log(videoData);
+  // console.log(events);
+
+  if (isLoading || pLoading || vLoading || eLoading) {
     return <Loading />;
   }
 
@@ -87,6 +103,7 @@ const SingleResult = ({ fixId }: { fixId: string }) => {
             <TabsList className="text-sm">
               <TabsTrigger value="team">Team</TabsTrigger>
               <TabsTrigger value="player">Player</TabsTrigger>
+              <TabsTrigger value="video">Video</TabsTrigger>
             </TabsList>
 
             <div>filter component</div>
@@ -100,6 +117,13 @@ const SingleResult = ({ fixId }: { fixId: string }) => {
           <PlayerStats
             pData={playersData as TeamPlayerData}
             tData={teamData as FixtureData}
+          />
+        </TabsContent>
+
+        <TabsContent value="video">
+          <VideoAnalysis
+            videoData={videoData}
+            fixEvents={events as EventType[]}
           />
         </TabsContent>
       </Tabs>
