@@ -110,6 +110,12 @@ type CompTeam = {
   organisation_id: string;
 };
 
+type TournTeam = {
+  id: string;
+  name: string;
+  date_created: string;
+};
+
 type Team = {
   team_id: string;
   teamname: string;

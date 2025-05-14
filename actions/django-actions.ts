@@ -56,7 +56,7 @@ export const getTournaments = async (): Promise<Tournament[]> => {
 export const getTournamentTeams = async (
   tourna: string,
   serie: string
-): Promise<CompTeam[]> => {
+): Promise<TournTeam[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_DJANGO_BASE_URL;
 

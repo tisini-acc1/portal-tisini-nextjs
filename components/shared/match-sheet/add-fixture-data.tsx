@@ -102,11 +102,10 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
   const players = home === "true" ? homeP : awayP;
   const starters = players.filter((player) => player.player_type === "first11");
 
-  const first11 = starters.length > 0 ? starters : players;
-  const subs =
-    starters.length > 0
-      ? players.filter((player) => player.player_type === "sub")
-      : players;
+  const first11 = showSub ? starters : players;
+  const subs = showSub
+    ? players.filter((player) => player.player_type === "sub")
+    : players;
 
   const mutation = useMutation({
     mutationFn: createFixtureEvent,
@@ -152,7 +151,7 @@ const AddFixtureData = ({ homeP, awayP, fixType, refEvents }: Props) => {
     setOpen(true);
 
     mutation.mutate(data);
-    console.log(data);
+    // console.log(data);
   };
 
   const onOpenChangeWrapper = (value: boolean) => {

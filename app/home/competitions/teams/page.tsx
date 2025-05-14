@@ -74,17 +74,17 @@ const TeamsPage = () => {
 
   useEffect(() => {
     if (data) {
-      updateTeamId(data[0].teamid);
+      updateTeamId(data[0].id);
     }
   }, [data]);
 
   useEffect(() => {
     if (teamId) {
-      const selectedTeam = data?.find((team) => team.teamid === teamId);
+      const selectedTeam = data?.find((team) => team.id === teamId);
 
       const team = {
         id: teamId,
-        name: selectedTeam?.teamname as string,
+        name: selectedTeam?.name as string,
       };
 
       updateTeam(team);
@@ -99,12 +99,10 @@ const TeamsPage = () => {
     return <span>Error: {error.message}</span>;
   }
 
-  const teams = data ? data : [];
-
   // console.log(store.teamId);
   // console.log(players);
   // console.log(tournaments);
-  // console.log(seasons);
+  // console.log(teams);
 
   return (
     <>
@@ -119,7 +117,7 @@ const TeamsPage = () => {
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between py-3 gap-3">
                   <h2 className="text-sm font-medium text-gray-600">
-                    {teams.length} teams in season 2024/2025
+                    {data?.length} teams in season 2024/2025
                   </h2>
                   <Select value={serie} onValueChange={updateSerie}>
                     <SelectTrigger className="w-[180px] bg-white">
@@ -162,9 +160,9 @@ const TeamsPage = () => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        {teams.map((team) => (
-                          <SelectItem key={team.teamid} value={team.teamid}>
-                            {team.teamname}
+                        {data?.map((team) => (
+                          <SelectItem key={team.id} value={team.id}>
+                            {team.name}
                           </SelectItem>
                         ))}
                       </SelectGroup>
