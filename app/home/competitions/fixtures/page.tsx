@@ -90,8 +90,8 @@ const FixturesPage = () => {
   // console.log(roundFixtures);
   // console.log(fixtures);
   // console.log(store.matchStatus);
-  console.log(tournaments);
-  console.log(store.tournament);
+  // console.log(tournaments);
+  // console.log(store.tournament);
 
   return (
     <main>

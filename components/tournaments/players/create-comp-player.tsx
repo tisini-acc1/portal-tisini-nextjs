@@ -119,7 +119,7 @@ const CreateCompPlayerModal = ({ countries }: { countries: Country[] }) => {
   const mutation = useMutation({
     mutationFn: addPlayer,
     onSuccess: (data) => {
-      console.log(data);
+      // console.log(data);
       if (data.error === "0") {
         setOpen(false);
         queryClient.invalidateQueries({ queryKey: ["allPlayers", team.id] });

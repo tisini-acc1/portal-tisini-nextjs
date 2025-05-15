@@ -1,9 +1,14 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { useQuery } from "@tanstack/react-query";
 
+import { cn } from "@/lib/utils";
 import { useStore } from "@/store/store";
+import { Separator } from "@/components/ui/separator";
+import { Card, CardContent } from "@/components/ui/card";
 import { getFixType, getOfficialsEvents } from "@/actions/php-actions";
 import { RefDataCard } from "@/components/shared/match-sheet/ref-data-card";
 import AddFixtureData from "@/components/shared/match-sheet/add-fixture-data";
@@ -15,7 +20,7 @@ type DataProps = {
 };
 
 const AddMatchData = ({ sheetData, homeId }: DataProps) => {
-  const user = useStore((state) => state.store.user);
+  // const user = useStore((state) => state.store.user);
   const { store } = useStore((state) => state);
 
   const { data: fixTypes } = useQuery({
@@ -38,52 +43,99 @@ const AddMatchData = ({ sheetData, homeId }: DataProps) => {
     enabled: !!selectedFixType,
   });
 
+  const groupEvents = () => {
+    const grpEvents: { [key: string]: RefEvents[] } = {};
+
+    for (const item of sheetData.events) {
+      const key = item.eventname;
+
+      if (!grpEvents[key]) {
+        grpEvents[key] = [];
+      }
+
+      grpEvents[key].push(item);
+    }
+
+    return grpEvents;
+  };
+
+  const groupedData = groupEvents();
+
   if (isLoading || !data) {
     return <div>Loading...</div>;
   }
 
+  // console.log(groupEvents());
+
   return (
     <main>
-      <header className="bg-gray-50 shadow-sm sticky top-0 z-10 py-4 px-4">
-        <div className="flex flex-col gap-4">
-          {/* Match Info */}
-          <div className="space-y-3">
-            <div className="flex items-center justify-between gap-3 text-sm text-gray-600">
-              <span className="font-medium bg-gray-100 px-2 py-1 rounded">
-                {fixture.league}
-              </span>
-              <span>Matchday {fixture.matchday}</span>
-              <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded">
+      <header className="sticky top-0 z-10 w-full border-b shadow-sm">
+        <Card className="border-0 rounded-none shadow-none bg-gray-50">
+          <CardContent className="p-4 space-y-3">
+            {/* Top Section - League Info */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Badge
+                  variant="outline"
+                  className="font-medium text-sm px-3 py-1"
+                >
+                  {fixture.league}
+                </Badge>
+                <span className="text-sm text-muted-foreground">
+                  Matchday {fixture.matchday}
+                </span>
+              </div>
+
+              <Badge
+                className={cn(
+                  "px-3 py-1",
+                  fixture.game_status.toLowerCase().includes("live")
+                    ? "bg-green-100 text-green-800 hover:bg-green-200"
+                    : fixture.game_status.toLowerCase().includes("upcoming")
+                    ? "bg-blue-100 text-blue-800 hover:bg-blue-200"
+                    : "bg-amber-100 text-amber-800 hover:bg-amber-200"
+                )}
+              >
                 {fixture.game_status}
-              </span>
+              </Badge>
             </div>
 
-            <h1 className="text-2xl text-center font-bold">
-              <span className="text-blue-600">{fixture.hometeam}</span>
-              <span className="mx-2 text-gray-400">vs</span>
-              <span className="text-red-600">{fixture.awayteam}</span>
-            </h1>
-          </div>
-
-          {/* Admin Controls */}
-          <div className="flex justify-between items-center">
-            <div className="text-sm text-gray-500">
-              {format(new Date(fixture.game_date), "MMMM d, yyyy - h:mm a")}
+            {/* Team Names */}
+            <div className="py-2">
+              <h1 className="text-center flex items-center justify-center gap-4 font-bold">
+                <span className="text-2xl text-blue-600 hover:text-blue-800 transition-colors">
+                  {fixture.hometeam}
+                </span>
+                <span className="text-lg text-muted-foreground font-normal">
+                  vs
+                </span>
+                <span className="text-2xl text-red-600 hover:text-red-800 transition-colors">
+                  {fixture.awayteam}
+                </span>
+              </h1>
             </div>
 
-            {(user.role === "9" || user.role === "6") && (
-              <div className="flex gap-3 flex-shrink-0">
+            <Separator className="my-2" />
+
+            {/* Date and Admin Controls */}
+            <div className="flex justify-between items-center">
+              <div className="flex items-center text-sm text-muted-foreground">
+                <CalendarIcon className="h-4 w-4 mr-2" />
+                {format(new Date(fixture.game_date), "MMMM d, yyyy - h:mm a")}
+              </div>
+
+              <div className="flex gap-2 flex-shrink-0">
                 <VerifyFixtureData />
                 <AddFixtureData
                   homeP={sheetData.hometeamlineup}
                   awayP={sheetData.awayteamlineup}
-                  refEvents={data?.refevent as RefEvent[]}
+                  refEvents={data?.refevent}
                   fixType={selectedFixType?.id as string}
                 />
               </div>
-            )}
-          </div>
-        </div>
+            </div>
+          </CardContent>
+        </Card>
       </header>
 
       <section className="pt-2">
@@ -94,11 +146,38 @@ const AddMatchData = ({ sheetData, homeId }: DataProps) => {
         ) : (
           <div className="space-y-2">
             {/* <FixtureDataMenu /> */}
-            {sheetData.events.map((item) => (
-              <div key={item.id}>
-                <RefDataCard data={item} homeId={homeId} />
-              </div>
-            ))}
+            {Object.entries(groupedData).map(([groupKey, items]) => {
+              const homeData = items.filter((item) => item.teamid === homeId);
+              const awayData = items.filter((item) => item.teamid !== homeId);
+
+              return (
+                <div
+                  key={groupKey}
+                  className="p-4 bg-gray-100 rounded-md space-y-3"
+                >
+                  <h3 className="font-medium font-mono text-center bg-white p-2 shadow-sm rounded-md">
+                    {groupKey}s
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-2">
+                    <div className="col-span-1 space-y-3">
+                      {homeData.map((item) => (
+                        <div key={item.id}>
+                          <RefDataCard data={item} homeId={homeId} />
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="col-span-1 space-y-3">
+                      {awayData.map((item) => (
+                        <div key={item.id}>
+                          <RefDataCard data={item} homeId={homeId} />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         )}
       </section>

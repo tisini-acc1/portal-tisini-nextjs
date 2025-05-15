@@ -191,12 +191,24 @@ const OfficialButton = ({ fixture }: { fixture: AgentFixture }) => {
             onClick={() => {
               updateSheetFix(sheetFix);
               router.push(
+                `/home/competitions/fixtures/match-data/${fixId}-${fixture.team1_id}-${fixture.team2_id}`
+              );
+            }}
+          >
+            Upload data
+          </DropdownMenuItem>
+
+          <DropdownMenuItem
+            onClick={() => {
+              updateSheetFix(sheetFix);
+              router.push(
                 `/home/competitions/fixtures/match-sheet/${fixId}-${fixture.team1_id}-${fixture.team2_id}`
               );
             }}
           >
             Match sheet
           </DropdownMenuItem>
+
           <DropdownMenuItem onClick={() => console.log("edit")}>
             Edit
           </DropdownMenuItem>
