@@ -42,6 +42,8 @@ export function FixturesTable<TData, TValue>({
 
   // const [fixData, setFixData] = useState<AgentFixture[]>([]);
 
+  console.log(data);
+
   const table = useReactTable({
     data,
     columns,
