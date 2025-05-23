@@ -7,6 +7,7 @@ import Loading from "@/app/home/loading";
 import TeamStats from "./teams/team-stats";
 import PlayerStats from "./players/player-stats";
 import VideoAnalysis from "./video/video-analysis";
+import SequenceAnalysis from "./video/sequence-analysis";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   getEvents,
@@ -45,8 +46,16 @@ const SingleResult = ({ fixId }: { fixId: string }) => {
     queryFn: () => getEvents(fixType as string),
   });
 
+  // const { data: sequence, isLoading: sLoading } = useQuery({
+  //   queryKey: ["sequences", fixId],
+  //   queryFn: () => getSequenceAnalysis(fixId, fixType as string),
+  // });
+
+  // console.log(sequence);
+  // const res = passSequenceAnalysis(videoData);
+
   // console.log(videoData);
-  // console.log(events);
+  // console.log(res);
 
   if (isLoading || pLoading || vLoading || eLoading) {
     return <Loading />;
@@ -104,6 +113,7 @@ const SingleResult = ({ fixId }: { fixId: string }) => {
               <TabsTrigger value="team">Team</TabsTrigger>
               <TabsTrigger value="player">Player</TabsTrigger>
               <TabsTrigger value="video">Video</TabsTrigger>
+              <TabsTrigger value="sequence">Sequence</TabsTrigger>
             </TabsList>
 
             <div>filter component</div>
@@ -125,6 +135,10 @@ const SingleResult = ({ fixId }: { fixId: string }) => {
             videoData={videoData}
             fixEvents={events as EventType[]}
           />
+        </TabsContent>
+
+        <TabsContent value="sequence">
+          <SequenceAnalysis videoData={videoData} />
         </TabsContent>
       </Tabs>
     </main>

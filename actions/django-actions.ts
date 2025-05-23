@@ -146,3 +146,31 @@ export const getTeamOverview = async (): Promise<TeamOverview[]> => {
     );
   }
 };
+
+// Get Tornament overview
+export const getSequenceAnalysis = async (
+  fixId: string,
+  fixType: string
+): Promise<MatchSequence> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_DJANGO_BASE_URL;
+
+  try {
+    const res = await axios.get(
+      `${baseURL}/api/sequence/${token}/${fixId}/${fixType}/`
+    );
+
+    if (res.status === 200) {
+      console.log("server 137:", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fetch match sequence analysis: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error.message);
+    throw new Error(
+      error.message ||
+        "An error occurred while fetching  match sequence analysis."
+    );
+  }
+};

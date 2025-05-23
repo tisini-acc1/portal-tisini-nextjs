@@ -619,6 +619,7 @@ type VideoEvent = {
   pname: string;
   Jersey_No: string;
   subsubevent_id: string;
+  subeventname: string;
   zone_id: string;
   KickFrom: string;
   KickLanding: string;
@@ -632,4 +633,42 @@ type VideoEvent = {
   y: string;
   eventid: string;
   videourl: string;
+  Passer: string;
+  Receiver: string;
+};
+
+type MatchSequence = {
+  team_id: string;
+  outcome_stats: {
+    Positive: number;
+    Negative: number;
+    Neutral: number;
+  };
+  event_enders: EventEnder[];
+  player_enders: PlayerEnder[];
+  sequences: Sequence[];
+  all_events: VideoEvent[];
+};
+
+type EventEnder = {
+  Next_Event: string;
+  Sequence_End_Count: number;
+};
+
+type PlayerEnder = {
+  Player: string;
+  Next_Event: string;
+  Count: number;
+};
+
+type Sequence = {
+  Team: string;
+  Pass_Count: number;
+  Next_Event: string;
+  Player: string;
+  Pass_Type: string;
+  Quarter: string;
+  Minute: string;
+  Second: string;
+  Outcome: string;
 };
