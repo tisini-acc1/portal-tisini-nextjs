@@ -6,7 +6,12 @@ import RugbyTeamStats from "../../team-stats/rugby-team-stats";
 import FootballTeamStats from "../../team-stats/football-team-stats";
 import BasketballTeamStats from "../../team-stats/basketball-team-stats";
 
-const TeamStats = ({ data }: { data: FixtureData }) => {
+type TeamProps = {
+  data: FixtureData;
+  videoData: VideoEvent[];
+};
+
+const TeamStats = ({ data, videoData }: TeamProps) => {
   const fixType = data && data["fixture"][0].fixture_type;
 
   // const rugby = rugbyData(data as SingleFixtureStats);
@@ -17,7 +22,7 @@ const TeamStats = ({ data }: { data: FixtureData }) => {
       {fixType === "rugby15" || fixType === "rugby7" ? (
         <RugbyTeamStats data={data as FixtureData} />
       ) : fixType === "football" ? (
-        <FootballTeamStats data={data as FixtureData} />
+        <FootballTeamStats data={data as FixtureData} videoData={videoData} />
       ) : fixType === "basketball" ? (
         <BasketballTeamStats data={data as FixtureData} />
       ) : (

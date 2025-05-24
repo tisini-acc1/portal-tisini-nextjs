@@ -121,7 +121,7 @@ const SingleResult = ({ fixId }: { fixId: string }) => {
         </header>
 
         <TabsContent value="team">
-          <TeamStats data={teamData as FixtureData} />
+          <TeamStats data={teamData as FixtureData} videoData={videoData} />
         </TabsContent>
         <TabsContent value="player">
           <PlayerStats

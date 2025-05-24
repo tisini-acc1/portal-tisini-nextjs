@@ -57,7 +57,7 @@ const ResultsPage = () => {
     }
   }, [data, store.tournament, store.serie]);
 
-  // console.log(fixtures);
+  // console.log(store.tournament);
   // console.log(store.team.id);
 
   if (isLoading) {
