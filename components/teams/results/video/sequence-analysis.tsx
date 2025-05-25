@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useStore } from "@/store/store";
 
 type SequenceProps = {
   videoData: VideoEvent[];
@@ -32,32 +33,35 @@ const SequenceAnalysis = ({ videoData }: SequenceProps) => {
   const [selectedKeyword, setSelectedKeyword] = useState<string>("all");
   const [selectedPlayer, setSelectedPlayer] = useState<string>("all");
 
-  const data = passSequenceAnalysis(videoData);
+  const teamId = useStore((state) => state.store.team.id);
+  const teamEvents = videoData.filter((item) => item.team === teamId);
+
+  const sequences = passSequenceAnalysis(teamEvents);
 
   // Pass sequence metrics
-  const totalSequences = data.all_sequence.length;
-  const totalPassCount = data.all_sequence.reduce(
+  const totalSequences = sequences.length;
+  const totalPassCount = sequences.reduce(
     (sum, item) => sum + item.Pass_Count,
     0
   );
   const averagePassSequence = totalPassCount / totalSequences;
 
   // Pass length distribution
-  const sequencesOver10 = data.all_sequence.filter(
+  const sequencesOver10 = sequences.filter(
     (item) => item.Pass_Count >= 10
   ).length;
-  const sequences7to9 = data.all_sequence.filter(
+  const sequences7to9 = sequences.filter(
     (item) => item.Pass_Count >= 7 && item.Pass_Count <= 9
   ).length;
-  const sequences4to6 = data.all_sequence.filter(
+  const sequences4to6 = sequences.filter(
     (item) => item.Pass_Count >= 4 && item.Pass_Count <= 6
   ).length;
-  const sequencesBelow3 = data.all_sequence.filter(
+  const sequencesBelow3 = sequences.filter(
     (item) => item.Pass_Count < 4
   ).length;
 
   // Shot analysis
-  const shots = data.all_sequence.filter((seq) =>
+  const shots = sequences.filter((seq) =>
     seq.Next_Event.toLowerCase().includes("shot")
   );
   const shotsOnTarget = shots.filter(
@@ -67,7 +71,7 @@ const SequenceAnalysis = ({ videoData }: SequenceProps) => {
     shots.length > 0 ? (shotsOnTarget / shots.length) * 100 : 0;
 
   // Cross analysis
-  const crosses = data.all_sequence.filter((seq) =>
+  const crosses = sequences.filter((seq) =>
     seq.Next_Event.toLowerCase().includes("cross")
   );
   const crossComplete = crosses.filter(
@@ -79,7 +83,7 @@ const SequenceAnalysis = ({ videoData }: SequenceProps) => {
   const filteredPlayers = useMemo(() => {
     const players = new Set<string>();
 
-    data.all_sequence.forEach((seq) => {
+    sequences.forEach((seq) => {
       const matchesKeyword =
         selectedKeyword === "all" ||
         seq.Next_Event.toLowerCase().includes(selectedKeyword.toLowerCase());
@@ -90,11 +94,11 @@ const SequenceAnalysis = ({ videoData }: SequenceProps) => {
     });
 
     return Array.from(players).sort();
-  }, [data.all_sequence, selectedKeyword]);
+  }, [sequences, selectedKeyword]);
 
   // Filter sequences based on selections
   const filteredSequences = useMemo(() => {
-    return data.all_sequence.filter((seq) => {
+    return sequences.filter((seq) => {
       const keywordMatch =
         selectedKeyword === "all" ||
         seq.Next_Event.toLowerCase().includes(selectedKeyword.toLowerCase());
@@ -104,7 +108,7 @@ const SequenceAnalysis = ({ videoData }: SequenceProps) => {
 
       return keywordMatch && playerMatch;
     });
-  }, [data.all_sequence, selectedKeyword, selectedPlayer]);
+  }, [sequences, selectedKeyword, selectedPlayer]);
 
   // Reset player filter when keyword changes
   const handleKeywordChange = (value: string) => {
@@ -324,10 +328,10 @@ const SequenceAnalysis = ({ videoData }: SequenceProps) => {
                 Passes
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Player
+                Ended With
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Ended With
+                Player
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Time
@@ -346,10 +350,10 @@ const SequenceAnalysis = ({ videoData }: SequenceProps) => {
                   </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {item.Player || "Unknown"}
+                  {item.Next_Event}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {item.Next_Event}
+                  {item.Player || "Unknown"}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {item.Quarter} {item.Minute}:{item.Second}

@@ -1,5 +1,6 @@
 import React from "react";
 
+import { useStore } from "@/store/store";
 import { passSequenceAnalysis } from "@/lib/pass-sequence";
 import { BallWon, GkRestart } from "../football-team-stats";
 import StatsRow from "@/components/shared/charts/stats-row";
@@ -16,7 +17,11 @@ type SimpeProps = {
 };
 
 const SimpleFootball = ({ data, recovery, restart, videoData }: SimpeProps) => {
-  const sequences = passSequenceAnalysis(videoData);
+  const teamId = useStore((state) => state.store.team.id);
+
+  const teamEvents = videoData.filter((item) => item.team === teamId);
+
+  const sequences = passSequenceAnalysis(teamEvents);
 
   // Pass sequence metrics
   // const totalSequences = sequences.all_sequence.length;
@@ -27,16 +32,16 @@ const SimpleFootball = ({ data, recovery, restart, videoData }: SimpeProps) => {
   // const averagePassSequence = totalPassCount / totalSequences;
 
   // Pass length distribution
-  const sequencesOver10 = sequences.all_sequence.filter(
+  const sequencesOver10 = sequences.filter(
     (item) => item.Pass_Count >= 10
   ).length;
-  const sequences7to9 = sequences.all_sequence.filter(
+  const sequences7to9 = sequences.filter(
     (item) => item.Pass_Count >= 7 && item.Pass_Count <= 9
   ).length;
-  const sequences4to6 = sequences.all_sequence.filter(
+  const sequences4to6 = sequences.filter(
     (item) => item.Pass_Count >= 4 && item.Pass_Count <= 6
   ).length;
-  const sequencesBelow3 = sequences.all_sequence.filter(
+  const sequencesBelow3 = sequences.filter(
     (item) => item.Pass_Count < 4
   ).length;
 

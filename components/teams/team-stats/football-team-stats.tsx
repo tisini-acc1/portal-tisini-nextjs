@@ -46,12 +46,14 @@ const FootballTeamStats = ({ data, videoData }: TeamProps) => {
       getSubEvent(home, "142", "307") +
       getSubEvent(home, "68", "77") +
       getSubEvent(home, "167", "428") +
-      getSubEvent(home, "168", "429"),
+      getSubEvent(home, "168", "429") +
+      getSubEvent(home, "216", "522"),
     away:
       getSubEvent(away, "142", "307") +
       getSubEvent(away, "68", "77") +
       getSubEvent(away, "167", "428") +
-      getSubEvent(away, "168", "429"),
+      getSubEvent(away, "168", "429") +
+      getSubEvent(away, "216", "523"),
   };
 
   restart["total"] = {
@@ -67,7 +69,7 @@ const FootballTeamStats = ({ data, videoData }: TeamProps) => {
       getEvent(away, "168"),
   };
 
-  console.log(restart);
+  // console.log(restart);
 
   return (
     <section className="grid gap-4">

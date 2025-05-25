@@ -55,7 +55,7 @@ const SingleResult = ({ fixId }: { fixId: string }) => {
   // const res = passSequenceAnalysis(videoData);
 
   // console.log(videoData);
-  // console.log(res);
+  // console.log(teamData);
 
   if (isLoading || pLoading || vLoading || eLoading) {
     return <Loading />;
