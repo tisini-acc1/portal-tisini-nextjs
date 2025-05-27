@@ -1,6 +1,7 @@
 "use client";
 
 import { useStore } from "@/store/store";
+import RugbyPlayerStats from "./rugby-player";
 import BasketballPlayerStats from "./basketball-player";
 import FootballPlayerStats from "./football-player-stats";
 
@@ -15,6 +16,8 @@ const PlayerStats = ({ tData, pData }: PlayerProps) => {
   const teamId = tData?.fixture[0].team1_id === team.id ? "home" : "away";
   const fixType = tData && tData["fixture"][0].fixture_type;
 
+  console.log(fixType);
+
   return (
     <div>
       {/* Content according to fixture type */}
@@ -23,7 +26,7 @@ const PlayerStats = ({ tData, pData }: PlayerProps) => {
       ) : fixType === "basketball" ? (
         <BasketballPlayerStats team={teamId} data={pData} />
       ) : (
-        <div>No Data!</div>
+        <RugbyPlayerStats team={teamId} data={pData} />
       )}
     </div>
   );

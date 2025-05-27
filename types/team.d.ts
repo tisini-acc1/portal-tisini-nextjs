@@ -567,6 +567,28 @@ type PlayerEvent = {
   [key: string]: string; // Index signature
 };
 
+type RugbyPlayerStat = {
+  tries: number;
+  goal_kicks: string;
+  assist: number;
+  linebreak: number;
+  comp_pass: number;
+  carries: number;
+  offload: number;
+  handling_errors: string;
+  ptackles: string;
+  turnover_won: number;
+  penalties: number;
+  cards: string;
+  plineout_throw: string;
+  lineout_steals: number;
+  pscrum_won: string;
+  retained_kicks: number;
+  Kicking_errors: number;
+  name: string;
+  rating: string;
+};
+
 type BasketballPlayerStats = {
   point: number;
   assist: number;

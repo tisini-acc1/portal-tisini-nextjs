@@ -35,7 +35,7 @@ const FootballPlayerStats = ({ data, team }: StatsProps) => {
   );
 
   // console.log(data);
-  // console.log(playerData);
+  // console.log(players);
 
   return <PlayerStatsTable players={playerData} />;
 };

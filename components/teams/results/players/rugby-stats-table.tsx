@@ -2,31 +2,6 @@ import React from "react";
 
 const StatCategory = {
   ATTACKING: [
-    "goal",
-    "assist",
-    "chances",
-    "offside",
-    "box-touch",
-    "box-carry",
-    "shots",
-    "crosses",
-  ],
-  PASSING: ["pass", "prog-pass"],
-  DEFENSE: [
-    "tackles",
-    "ball-efficiency",
-    "second-ball",
-    "interception",
-    "clearance",
-    "blocks",
-    "aerial",
-  ],
-  GOALKEEPING: ["claims", "distribution", "saves", "runouts", "throwouts"],
-  DISCIPLINE: ["fouls", "cards"],
-};
-
-const CategorizedRugbyStats = {
-  ATTACKING: [
     "tries",
     "goal_kicks",
     "assist",
@@ -46,10 +21,14 @@ const CategorizedRugbyStats = {
   PLAYER: ["name", "rating"],
 };
 
-export const PlayerStatsTable = ({ players }: { players: PlayerEvent[] }) => {
+export const RugbyStatsTable = ({
+  players,
+}: {
+  players: RugbyPlayerStat[];
+}) => {
   const [activeCategory, setActiveCategory] =
     React.useState<string>("ATTACKING");
-  const stats = StatCategory[activeCategory as keyof typeof StatCategory];
+  const stats = [activeCategory as keyof typeof StatCategory];
 
   return (
     <div className="w-full">
@@ -122,7 +101,7 @@ export const PlayerStatsTable = ({ players }: { players: PlayerEvent[] }) => {
                     </div>
                   </td>
                   {/* Scrollable Stat Cells */}
-                  {stats.map((stat) => (
+                  {/* {stats.map((stat) => (
                     <td key={stat} className="px-2 py-2 text-center">
                       <span
                         className={
@@ -134,7 +113,7 @@ export const PlayerStatsTable = ({ players }: { players: PlayerEvent[] }) => {
                         {player[stat as keyof Player]}
                       </span>
                     </td>
-                  ))}
+                  ))} */}
                 </tr>
               ))}
             </tbody>

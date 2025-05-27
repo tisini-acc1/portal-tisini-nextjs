@@ -105,3 +105,191 @@ export const footballRating = (data: Stats) => {
 
   return rating;
 };
+
+export const rugbyRating = (data: Stats) => {
+  const events = Object.values(data);
+
+  // Initialize variables
+  let points = 0;
+
+  const eventPoints: EventPoints = {
+    // Forward pass (no sub-event)
+    "1": -2,
+
+    // Knock on (no sub-event)
+    "2": -2,
+
+    // Tackle
+    "3": {
+      "10": 2, // Positive
+      "11": 1.5, // Negative
+      "12": 2.5, // Held up
+    },
+
+    // Missed tackle (no sub-event)
+    "4": -1,
+
+    // Carries (no sub-event)
+    "5": 1,
+
+    // Turnover (no sub-event)
+    "6": 3,
+
+    // Penalties conceded (no sub-event)
+    "7": -3,
+
+    // Linebreak (no sub-event)
+    "8": 3,
+
+    // Score
+    "9": {
+      "20": -1, // Missed Conversion
+      "21": 3, // Successful Drop Goal
+      "22": 3, // Successful Penalty
+      "23": 2, // Successful Conversion
+      "24": -1, // Missed Penalty
+      "25": 0, // Missed Drop Goal
+      "26": 5, // Try
+      "27": 0, // Penalty Try
+    },
+
+    // Lineout
+    "10": {
+      "30": 1, // Won
+      "31": -1, // Lost
+      "32": 2, // Stolen
+    },
+
+    // Scrum
+    "11": {
+      "33": 0, // Won
+      "34": -2, // Lost
+      "35": 2, // Stolen
+    },
+
+    // Card
+    "12": {
+      "40": -10, // Red
+      "41": -5, // Yellow
+    },
+
+    // Incomplete Pass (no sub-event)
+    "13": -2,
+
+    // Pass (no sub-event)
+    "14": 0.2,
+
+    // Offload (no sub-event)
+    "15": 1,
+
+    // Lost ball in carry (no sub-event)
+    "16": -2,
+
+    // Visit in opponents 22 (no sub-event)
+    "17": 0,
+
+    // Kick for territory
+    "18": {
+      "50": 0, // Caught
+      "51": -2, // Straight out
+      "52": 2, // Retrieved
+      "53": 2, // 50-22
+      "54": 0, // Lineout
+      "55": -2, // Dead Ball
+      "56": 2, // Knocked On
+      "57": -1, // Charged Down
+      "58": 0, // Half time
+      "59": 0, // Full Time
+    },
+
+    // Ruck Won (no sub-event)
+    "19": 0,
+
+    // Penalty Gain (no sub-event)
+    "20": 0,
+
+    // Step out (no sub-event)
+    "21": -1,
+
+    // Charge Down (no sub-event)
+    "22": 1,
+
+    // Restart
+    "23": {
+      "60": 0, // kick off reception won
+      "61": -1, // kick off reception lost
+      "62": 2, // kick off retrieval won
+      "63": 0, // kick off retrieval lost
+      "64": -2, // false kick off
+      "65": 0, // goal line drop out reception won
+      "66": -1, // goal line drop out reception lost
+      "67": 2, // goal line drop out retrieval won
+      "68": 0, // goal line drop out retrieval lost
+      "69": -2, // goal line drop out straight out
+      "70": 0, // 22 drop out reception won
+      "71": -1, // 22 drop out reception lost
+      "72": 2, // 22 drop out retrieval won
+      "73": 0, // 22 drop out retrieval lost
+      "74": -2, // 22 drop out straight out
+    },
+
+    // Maul (no sub-event)
+    "24": 0,
+
+    // Lineout throw
+    "25": {
+      "75": 1, // Front won
+      "76": 1, // Middle won
+      "77": 1, // Back won
+      "78": -2, // Front lost
+      "79": -2, // Middle lost
+      "80": -2, // Back lost
+      "81": 1, // Overthrow Won
+      "82": -2, // Overthrow Lost
+    },
+
+    // Kick Reception (no sub-event)
+    "26": 0,
+
+    // Lineout Pass to Receiver (no sub-event)
+    "27": 0,
+
+    // Assist
+    "28": {
+      "83": 3, // Try Assist
+      "84": 2, // Linebreak Assist
+    },
+
+    // Ruck Lost (no sub-event)
+    "29": -2,
+
+    // Tryline Held Up (no sub-event)
+    "30": -1,
+  };
+
+  events.forEach((event) => {
+    const id = event.event_id;
+    const subId = event["sub-event"][0]?.subeventid;
+
+    const pointValue = eventPoints[id];
+
+    if (pointValue !== undefined) {
+      if (typeof pointValue === "object") {
+        const subValue = pointValue ? pointValue[subId] : undefined;
+
+        if (typeof subValue === "number") {
+          points += getSubEvent(data, id, subId) * subValue;
+        } else if (typeof pointValue === "number") {
+          points += getEvent(data, id) * pointValue;
+        }
+      }
+    }
+  });
+
+  const MAX_POINTS = 25.0;
+  const BASE_RATING = 5.0;
+
+  const rating = ((points / MAX_POINTS) * 5 + BASE_RATING).toFixed(1);
+
+  return rating;
+};
