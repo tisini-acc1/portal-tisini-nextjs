@@ -20,16 +20,21 @@ const RugbyPlayerStats = ({ data, team }: StatsProps) => {
 
     const pStats = playerRugbyStats(events);
 
-    console.log(events);
+    // console.log(events);
 
     pEvent = { ...pStats, name: player.pname, rating: rugbyRating(events) };
 
     pData.push(pEvent);
   });
 
-  //   console.log(pData);
+  const sortedData = pData.sort(
+    (a, b) => parseFloat(b.rating) - parseFloat(a.rating)
+  );
 
-  return <RugbyStatsTable players={pData} />;
+  // const rat = rugbyRating(playerData[9].pnameanddata);
+  // console.log(rat);
+
+  return <RugbyStatsTable players={sortedData} />;
 };
 
 export default RugbyPlayerStats;

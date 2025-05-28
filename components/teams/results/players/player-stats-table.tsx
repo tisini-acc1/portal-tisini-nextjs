@@ -25,27 +25,6 @@ const StatCategory = {
   DISCIPLINE: ["fouls", "cards"],
 };
 
-const CategorizedRugbyStats = {
-  ATTACKING: [
-    "tries",
-    "goal_kicks",
-    "assist",
-    "linebreak",
-    "carries",
-    "offload",
-  ],
-  PASSING: ["comp_pass", "plineout_throw", "lineout_steals", "retained_kicks"],
-  DEFENSE: [
-    "ptackles",
-    "turnover_won",
-    "handling_errors",
-    "pscrum_won",
-    "Kicking_errors",
-  ],
-  DISCIPLINE: ["penalties", "cards"],
-  PLAYER: ["name", "rating"],
-};
-
 export const PlayerStatsTable = ({ players }: { players: PlayerEvent[] }) => {
   const [activeCategory, setActiveCategory] =
     React.useState<string>("ATTACKING");

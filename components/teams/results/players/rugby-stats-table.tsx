@@ -18,7 +18,6 @@ const StatCategory = {
     "Kicking_errors",
   ],
   DISCIPLINE: ["penalties", "cards"],
-  PLAYER: ["name", "rating"],
 };
 
 export const RugbyStatsTable = ({
@@ -28,7 +27,7 @@ export const RugbyStatsTable = ({
 }) => {
   const [activeCategory, setActiveCategory] =
     React.useState<string>("ATTACKING");
-  const stats = [activeCategory as keyof typeof StatCategory];
+  const stats = StatCategory[activeCategory as keyof typeof StatCategory];
 
   return (
     <div className="w-full">
@@ -69,7 +68,7 @@ export const RugbyStatsTable = ({
                 {/* Scrollable Stat Columns */}
                 {stats.map((stat) => (
                   <th key={stat} className="px-2 py-2 text-center min-w-[60px]">
-                    {stat.replace("-", " ")}
+                    {stat.replace("_", " ")}
                   </th>
                 ))}
               </tr>
@@ -101,19 +100,36 @@ export const RugbyStatsTable = ({
                     </div>
                   </td>
                   {/* Scrollable Stat Cells */}
-                  {/* {stats.map((stat) => (
-                    <td key={stat} className="px-2 py-2 text-center">
-                      <span
-                        className={
-                          player[stat as keyof Player].includes("%")
-                            ? "font-medium text-blue-600"
-                            : ""
-                        }
-                      >
-                        {player[stat as keyof Player]}
-                      </span>
-                    </td>
-                  ))} */}
+                  {stats.map((stat) => {
+                    const value = player[stat as keyof RugbyPlayerStat];
+                    const stringValue =
+                      typeof value === "number" ? value.toString() : value;
+
+                    // Check if the value should be displayed as "-"
+                    const displayValue =
+                      value === 0 ||
+                      stringValue === "0 / 0 0%" ||
+                      stringValue === "0 / 0" ||
+                      stringValue === "0 / 0  0%"
+                        ? "-"
+                        : stringValue;
+
+                    return (
+                      <td key={stat} className="px-2 py-2 text-center">
+                        <span
+                          className={
+                            typeof stringValue === "string" &&
+                            stringValue.includes("%") &&
+                            displayValue !== "-"
+                              ? "font-medium text-blue-600"
+                              : ""
+                          }
+                        >
+                          {displayValue}
+                        </span>
+                      </td>
+                    );
+                  })}
                 </tr>
               ))}
             </tbody>

@@ -5,7 +5,7 @@ export const playerRugbyStats = (data: Stats) => {
 
   const conversion = getSubEvent(data, "49", "60");
   const miss_conversion = getSubEvent(data, "49", "42");
-  const succ_conversion = getPercent(conversion + miss_conversion, conversion);
+  // const succ_conversion = getPercent(conversion + miss_conversion, conversion);
   const missed_penalty = getSubEvent(data, "49", "61");
   const penalty = getSubEvent(data, "49", "44");
   const goalkicks = penalty + conversion;
@@ -32,8 +32,8 @@ export const playerRugbyStats = (data: Stats) => {
   const handling = hadling_errors + ball_handling;
   const succ_handling = getPercent(handling, ball_handling);
 
-  const handling_errors = `${handling} / ${hadling_errors}  ${succ_handling}`;
-  const goal_kicks = `${total_goalkicks} / ${goalkicks}  ${succ_goalkicks}`;
+  const handling_errors = `${handling} / ${hadling_errors}  ${succ_handling}%`;
+  const goal_kicks = `${total_goalkicks} / ${goalkicks}  ${succ_goalkicks}%`;
 
   const missed_tackle = getEvent(data, "43");
   const tackles = getEvent(data, "42");
@@ -75,8 +75,8 @@ export const playerRugbyStats = (data: Stats) => {
 
   const ptackles = `${all_tackles} / ${tackles}  ${tackle_succ}%`;
   const cards = `${y_card} / ${r_card}`;
-  const plineout_throw = `${lineout_throw} / ${lineout_won}  ${lineout_succ}`;
-  const pscrum_won = `${scrums} / ${scrum_won}  ${scrum_succ}`;
+  const plineout_throw = `${lineout_throw} / ${lineout_won}  ${lineout_succ}%`;
+  const pscrum_won = `${scrums} / ${scrum_won}  ${scrum_succ}%`;
 
   return {
     tries,
