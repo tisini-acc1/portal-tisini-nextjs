@@ -16,7 +16,7 @@ const PlayerStats = ({ tData, pData }: PlayerProps) => {
   const teamId = tData?.fixture[0].team1_id === team.id ? "home" : "away";
   const fixType = tData && tData["fixture"][0].fixture_type;
 
-  console.log(fixType);
+  // console.log(fixType);
 
   return (
     <div>
@@ -26,7 +26,7 @@ const PlayerStats = ({ tData, pData }: PlayerProps) => {
       ) : fixType === "basketball" ? (
         <BasketballPlayerStats team={teamId} data={pData} />
       ) : (
-        <RugbyPlayerStats team={teamId} data={pData} />
+        <RugbyPlayerStats team={teamId} data={pData} fixType={fixType} />
       )}
     </div>
   );

@@ -152,6 +152,32 @@ export const createFixture = async (data: CreateFix) => {
   }
 };
 
+// Create Fixtures
+export const updateFixture = async (data: UpdateFixture) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      ...data,
+      action: "updatefixture",
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      // console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to update fixture: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while updating fixture."
+    );
+  }
+};
+
 // Create Fixture Event by Ref
 export const createFixtureEvent = async (data: CreateFixEvent) => {
   const token = await getToken();

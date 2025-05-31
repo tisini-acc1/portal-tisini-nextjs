@@ -179,6 +179,15 @@ type CreateFix = {
   playeradd: string;
 };
 
+type UpdateFixture = {
+  team1: string;
+  team2: string;
+  gamedate: string;
+  matchday: string;
+  matchtime: string;
+  fixtureid: string;
+};
+
 type CreatePlayer = {
   idno: string;
   phone: string;

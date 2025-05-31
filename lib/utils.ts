@@ -87,6 +87,24 @@ export const calcRugbyPosession = (homeArry: Stats, awayArry: Stats) => {
   return { home, away };
 };
 
+export const calcRugbyPosession7s = (homeArry: Stats, awayArry: Stats) => {
+  const hPass = getEvent(homeArry, "91");
+  const aPass = getEvent(awayArry, "91");
+
+  const hCarry = getEvent(homeArry, "82");
+  const aCarry = getEvent(awayArry, "82");
+
+  const homePasses = hPass + hCarry;
+  const awayPasses = aPass + aCarry;
+
+  const total = homePasses + awayPasses;
+
+  const home = Math.round((homePasses / total) * 100);
+  const away = Math.round((awayPasses / total) * 100);
+
+  return { home, away };
+};
+
 export const calcRugbyTerritory = (homeArry: Stats, awayArry: Stats) => {
   const hCarries =
     getSubEvent(homeArry, "44", "359") +
@@ -100,6 +118,26 @@ export const calcRugbyTerritory = (homeArry: Stats, awayArry: Stats) => {
     getSubEvent(homeArry, "44", "358");
 
   const total = getEvent(homeArry, "44") + getEvent(awayArry, "44");
+
+  const home = Math.round((hCarries / total) * 100);
+  const away = Math.round((aCarries / total) * 100);
+
+  return { home, away };
+};
+
+export const calcRugbyTerritory7s = (homeArry: Stats, awayArry: Stats) => {
+  const hCarries =
+    getSubEvent(homeArry, "58", "364") +
+    getSubEvent(homeArry, "58", "365") +
+    getSubEvent(awayArry, "58", "362") +
+    getSubEvent(awayArry, "58", "363");
+  const aCarries =
+    getSubEvent(awayArry, "58", "364") +
+    getSubEvent(awayArry, "58", "365") +
+    getSubEvent(homeArry, "58", "362") +
+    getSubEvent(homeArry, "58", "363");
+
+  const total = getEvent(homeArry, "58") + getEvent(awayArry, "58");
 
   const home = Math.round((hCarries / total) * 100);
   const away = Math.round((aCarries / total) * 100);
@@ -441,6 +479,39 @@ export const rugbyDefense = (home: Stats, away: Stats) => {
   return defense;
 };
 
+export const rugbyDefense7s = (home: Stats, away: Stats) => {
+  const defense = {} as RugbyDefense;
+
+  defense["negTackle"] = {
+    home: getSubEvent(home, "56", "64"),
+    away: getSubEvent(away, "56", "64"),
+  };
+  defense["posTackle"] = {
+    home: getSubEvent(home, "56", "63"),
+    away: getSubEvent(away, "56", "63"),
+  };
+  defense["missedTackle"] = {
+    home: getEvent(home, "57"),
+    away: getEvent(away, "57"),
+  };
+  defense["turnoversWon"] = {
+    home: getEvent(home, "59"),
+    away: getEvent(away, "59"),
+  };
+  defense["succTackle"] = {
+    home: {
+      value: getEvent(home, "56"),
+      total: getEvent(home, "56") + getEvent(home, "57"),
+    },
+    away: {
+      value: getEvent(away, "56"),
+      total: getEvent(away, "56") + getEvent(away, "57"),
+    },
+  };
+
+  return defense;
+};
+
 export const rugbyAttack = (home: Stats, away: Stats) => {
   const attack = {} as RugbyAttack;
 
@@ -494,6 +565,65 @@ export const rugbyAttack = (home: Stats, away: Stats) => {
     away: {
       value: getEvent(away, "40"),
       total: getEvent(away, "40"),
+    },
+  };
+
+  return attack;
+};
+
+export const rugbyAttack7s = (home: Stats, away: Stats) => {
+  const attack = {} as RugbyAttack;
+
+  attack["tries"] = {
+    home: getSubEvent(home, "33", "51"),
+    away: getSubEvent(away, "33", "51"),
+  };
+  attack["carries"] = {
+    home: getEvent(home, "58"),
+    away: getEvent(away, "58"),
+  };
+  attack["handlingErrors"] = {
+    home:
+      getEvent(home, "36") +
+      getEvent(home, "86") +
+      getEvent(home, "35") +
+      getEvent(home, "149"),
+    away:
+      getEvent(away, "36") +
+      getEvent(away, "86") +
+      getEvent(away, "35") +
+      getEvent(away, "149"),
+  };
+  attack["linebreaks"] = {
+    home: getEvent(home, "37"),
+    away: getEvent(away, "37"),
+  };
+  attack["offloads"] = {
+    home: getEvent(home, "83"),
+    away: getEvent(away, "83"),
+  };
+  attack["oppVisit22"] = {
+    home: getEvent(home, "122"),
+    away: getEvent(away, "122"),
+  };
+  attack["passAcc"] = {
+    home: {
+      value: getEvent(home, "82"),
+      total: getEvent(home, "82") + getEvent(home, "36") + getEvent(home, "86"),
+    },
+    away: {
+      value: getEvent(away, "82"),
+      total: getEvent(away, "82") + getEvent(away, "36") + getEvent(away, "86"),
+    },
+  };
+  attack["conversion"] = {
+    home: {
+      value: getEvent(home, "36"),
+      total: getEvent(home, "36"),
+    },
+    away: {
+      value: getEvent(away, "36"),
+      total: getEvent(away, "36"),
     },
   };
 
@@ -567,6 +697,73 @@ export const rugbySetPiece = (home: Stats, away: Stats) => {
   return setPiece;
 };
 
+export const rugbySetPiece7s = (home: Stats, away: Stats) => {
+  const setPiece = {} as RugbySetPiece;
+
+  setPiece["setPieceWon"] = {
+    home:
+      getSubEvent(home, "62", "49") +
+      getSubEvent(home, "62", "68") +
+      getSubEvent(home, "63", "47") +
+      getSubEvent(home, "63", "67"),
+    away:
+      getSubEvent(away, "62", "49") +
+      getSubEvent(away, "62", "68") +
+      getSubEvent(away, "63", "47") +
+      getSubEvent(home, "63", "67"),
+  };
+  setPiece["scrumPenalty"] = {
+    home: getSubEvent(home, "60", "104"),
+    away: getSubEvent(away, "60", "104"),
+  };
+  setPiece["scrumSteal"] = {
+    home: getSubEvent(home, "63", "67"),
+    away: getSubEvent(away, "63", "67"),
+  };
+  setPiece["lineoutSteal"] = {
+    home: getSubEvent(home, "62", "68"),
+    away: getSubEvent(away, "62", "68"),
+  };
+  setPiece["successfulMaul"] = {
+    home: getSubEvent(home, "147", "330"),
+    away: getSubEvent(away, "147", "330"),
+  };
+  setPiece["unsuccessfulMaul"] = {
+    home: getSubEvent(home, "147", "331"),
+    away: getSubEvent(away, "147", "331"),
+  };
+  setPiece["lineoutRetention"] = {
+    home: {
+      value:
+        getSubEvent(home, "150", "371") +
+        getSubEvent(home, "150", "372") +
+        getSubEvent(home, "150", "373") +
+        getSubEvent(home, "150", "389"),
+      total: getEvent(home, "150"),
+    },
+    away: {
+      value:
+        getSubEvent(away, "150", "371") +
+        getSubEvent(away, "150", "372") +
+        getSubEvent(away, "150", "373") +
+        getSubEvent(away, "150", "389"),
+      total: getEvent(away, "150"),
+    },
+  };
+  setPiece["scrumRetention"] = {
+    home: {
+      value: getSubEvent(home, "63", "47"),
+      total: getSubEvent(home, "63", "47") + getSubEvent(home, "63", "47"),
+    },
+    away: {
+      value: getSubEvent(away, "63", "47"),
+      total: getSubEvent(away, "63", "47") + getSubEvent(away, "63", "47"),
+    },
+  };
+
+  return setPiece;
+};
+
 export const rugbyDiscipline = (home: Stats, away: Stats) => {
   const discipline = {} as RugbyDiscipline;
 
@@ -579,6 +776,23 @@ export const rugbyDiscipline = (home: Stats, away: Stats) => {
     Awayyellow: getSubEvent(away, "55", "46"),
     Homered: getSubEvent(home, "55", "45"),
     Awayred: getSubEvent(away, "55", "45"),
+  };
+
+  return discipline;
+};
+
+export const rugbyDiscipline7s = (home: Stats, away: Stats) => {
+  const discipline = {} as RugbyDiscipline;
+
+  discipline["penalty"] = {
+    home: getEvent(home, "60"),
+    away: getEvent(away, "60"),
+  };
+  discipline["cards"] = {
+    Homeyellow: getSubEvent(home, "66", "54"),
+    Awayyellow: getSubEvent(away, "66", "54"),
+    Homered: getSubEvent(home, "66", "54"),
+    Awayred: getSubEvent(away, "66", "54"),
   };
 
   return discipline;
@@ -629,6 +843,51 @@ export const rugbyRestarts = (home: Stats, away: Stats) => {
   return restarts;
 };
 
+export const rugbyRestarts7s = (home: Stats, away: Stats) => {
+  const restarts = {} as RugbyRestarts;
+
+  restarts["restarts"] = {
+    home:
+      getSubEvent(home, "134", "262") +
+      getSubEvent(home, "134", "264") +
+      getSubEvent(home, "134", "267") +
+      getSubEvent(home, "134", "269") +
+      getSubEvent(home, "134", "272") +
+      getSubEvent(home, "134", "274"),
+    away:
+      getSubEvent(away, "134", "262") +
+      getSubEvent(away, "134", "264") +
+      getSubEvent(away, "134", "267") +
+      getSubEvent(away, "134", "269") +
+      getSubEvent(away, "134", "272") +
+      getSubEvent(away, "134", "274"),
+  };
+  restarts["restartsRetention"] = {
+    home: {
+      value:
+        getSubEvent(home, "134", "262") +
+        getSubEvent(home, "134", "264") +
+        getSubEvent(home, "134", "267") +
+        getSubEvent(home, "134", "269") +
+        getSubEvent(home, "134", "272") +
+        getSubEvent(home, "134", "274"),
+      total: getEvent(home, "134"),
+    },
+    away: {
+      value:
+        getSubEvent(away, "134", "262") +
+        getSubEvent(away, "134", "264") +
+        getSubEvent(away, "134", "267") +
+        getSubEvent(away, "134", "269") +
+        getSubEvent(away, "134", "272") +
+        getSubEvent(away, "134", "274"),
+      total: getEvent(away, "134"),
+    },
+  };
+
+  return restarts;
+};
+
 export const rugbyZones = (home: Stats, away: Stats) => {
   const zones = {} as RugbyZones;
 
@@ -652,6 +911,29 @@ export const rugbyZones = (home: Stats, away: Stats) => {
   return zones;
 };
 
+export const rugbyZones7s = (home: Stats, away: Stats) => {
+  const zones = {} as RugbyZones;
+
+  zones["own22"] = {
+    home: getSubEvent(home, "58", "362"),
+    away: getSubEvent(away, "58", "362"),
+  };
+  zones["own50"] = {
+    home: getSubEvent(home, "58", "363"),
+    away: getSubEvent(away, "58", "363"),
+  };
+  zones["opp50"] = {
+    home: getSubEvent(home, "58", "364"),
+    away: getSubEvent(away, "58", "364"),
+  };
+  zones["opp22"] = {
+    home: getSubEvent(home, "58", "365"),
+    away: getSubEvent(away, "58", "365"),
+  };
+
+  return zones;
+};
+
 export const rugbyDetails = (
   home: Stats,
   away: Stats,
@@ -662,6 +944,33 @@ export const rugbyDetails = (
 
   const possession = calcRugbyPosession(home, away);
   // const territory = calcRugbyTerritory(home, away);
+
+  fixture["homeId"] = details.team1_id;
+  fixture["awayId"] = details.team2_id;
+  fixture["home"] = details.team1_name;
+  fixture["away"] = details.team2_name;
+  fixture["homeScore"] = scores.Home;
+  fixture["awayScore"] = scores.Away;
+  fixture["league"] = details.league;
+  fixture["round"] = details.matchday;
+  fixture["status"] = details.game_status;
+  fixture["minute"] = details.minute;
+  fixture["hPossession"] = possession.home;
+  fixture["aPossession"] = possession.away;
+
+  return fixture;
+};
+
+export const rugbyDetails7s = (
+  home: Stats,
+  away: Stats,
+  details: FixtureDetails,
+  scores: Scores
+) => {
+  const fixture = {} as Details;
+
+  // const possession = calcRugbyPosession(home, away);
+  const possession = calcRugbyPosession7s(home, away);
 
   fixture["homeId"] = details.team1_id;
   fixture["awayId"] = details.team2_id;

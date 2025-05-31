@@ -7,15 +7,24 @@ import RugbyTeamDefense from "./rugby/rugby-defense";
 import RugbyTeamRestarts from "./rugby/rugby-restart";
 import RugbyTeamSetPiece from "./rugby/rugby-set-piece";
 import RugbyTeamDiscipline from "./rugby/rugby-discipline";
-import { calcRugbyTerritory } from "@/lib/utils";
-import { rugbyData } from "@/actions/fix-data";
+import { calcRugbyTerritory, calcRugbyTerritory7s } from "@/lib/utils";
+import { rugbyData, rugbyData7s } from "@/actions/fix-data";
 
-const RugbyTeamStats = ({ data }: { data: FixtureData }) => {
-  const rData = rugbyData(data);
+const RugbyTeamStats = ({
+  data,
+  fixType,
+}: {
+  data: FixtureData;
+  fixType: string;
+}) => {
+  const rData = fixType === "rugby7" ? rugbyData7s(data) : rugbyData(data);
 
-  const territory = calcRugbyTerritory(data["home"], data["away"]);
+  const territory =
+    fixType === "rugby7"
+      ? calcRugbyTerritory7s(data["home"], data["away"])
+      : calcRugbyTerritory(data["home"], data["away"]);
 
-  // console.log(data);
+  // console.log(fixType);
   // console.log(rData);
   // console.log(territory);
   return (

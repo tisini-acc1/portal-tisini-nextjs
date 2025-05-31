@@ -2,6 +2,22 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+// import EditPlayerModal from "@/components/teams/manage-player/edit-player-modal";
+import { useState } from "react";
+// import { getCountry } from "@/actions/php-actions";
+// import { useQuery } from "@tanstack/react-query";
+import { Button } from "@/components/ui/button";
+import { Edit3Icon } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+// import { useStore } from "@/store/store";
+import EditPlayerForm from "@/components/teams/manage-player/edit-player-modal";
 // import { Button } from "@/components/ui/button";
 // import { useRouter } from "next/navigation";
 
@@ -65,27 +81,59 @@ export const columns: ColumnDef<TeamPlayer>[] = [
       return <div>{formattedDate.replace(",", " ")}</div>;
     },
   },
-  //   {
-  //     id: "actions",
-  //     cell: ({ row }) => {
-  //       const fixture = row.original;
+  {
+    id: "actions",
+    cell: ({ row }) => {
+      const player = row.original;
 
-  //       return <NavigateButton fixture={fixture} />;
-  //     },
-  //   },
+      return <EditPlayer player={player} />;
+    },
+  },
 ];
 
-// const NavigateButton = (fixture: { fixture: AgentFixture }) => {
-//   const router = useRouter();
+const EditPlayer = ({ player }: { player: TeamPlayer }) => {
+  const [open, setOpen] = useState(false);
 
-//   return (
-//     <Button
-//       size={"sm"}
-//       onClick={() =>
-//         router.push(`/home/super-agent/review-data/${fixture.fixture.fixture}`)
-//       }
-//     >
-//       Review
-//     </Button>
-//   );
-// };
+  // const { data, isLoading } = useQuery({
+  //   queryKey: ["countries"],
+  //   queryFn: () => getCountry(),
+  // });
+
+  const onOpenChangeWrapper = (value: boolean) => {
+    setOpen(value);
+  };
+
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChangeWrapper}>
+      <DialogTrigger asChild>
+        <Button
+          size={"sm"}
+          variant={"outline"}
+          className="text-[#12f202] hover:text-[#12f202] hover:border-[#12f202]"
+        >
+          <Edit3Icon className="w-4 h-4" color="#12f202" /> Edit
+        </Button>
+      </DialogTrigger>
+
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Edit Player Details</DialogTitle>
+          <DialogDescription>
+            You are in the process of editing {player.pname}&apos;s details.
+          </DialogDescription>
+        </DialogHeader>
+
+        <EditPlayerForm
+        // open={open}
+        // setOpen={setOpen}
+        // player={player}
+        // countries={data as Country[]}
+        />
+      </DialogContent>
+    </Dialog>
+  );
+};

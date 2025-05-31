@@ -20,7 +20,7 @@ const TeamStats = ({ data, videoData }: TeamProps) => {
   return (
     <>
       {fixType === "rugby15" || fixType === "rugby7" ? (
-        <RugbyTeamStats data={data as FixtureData} />
+        <RugbyTeamStats data={data as FixtureData} fixType={fixType} />
       ) : fixType === "football" ? (
         <FootballTeamStats data={data as FixtureData} videoData={videoData} />
       ) : fixType === "basketball" ? (

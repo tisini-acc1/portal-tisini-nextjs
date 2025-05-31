@@ -1,6 +1,8 @@
 import { getEvent, getSubEvent } from "./utils";
 
-type EventPoints = { [eventId: string]: number | { [subId: string]: number } };
+export type EventPoints = {
+  [eventId: string]: number | { [subId: string]: number };
+};
 
 export const footballRating = (data: Stats) => {
   const events = Object.values(data);
@@ -106,166 +108,15 @@ export const footballRating = (data: Stats) => {
   return rating;
 };
 
-export const rugbyRating = (data: Stats) => {
+export const rugbyRating = (
+  data: Stats,
+  maxPoints: number,
+  eventPoints: EventPoints
+) => {
   const events = Object.values(data);
 
   // Initialize variables
   let points = 0;
-
-  const eventPoints: EventPoints = {
-    // Forward pass (no sub-event)
-    "40": -2,
-
-    // Knock on (no sub-event)
-    "41": -2,
-
-    // Tackle
-    "42": {
-      "56": 2, // Positive
-      "57": 1.5, // Negative
-      "139": 2.5, // Held up
-    },
-
-    // Missed tackle (no sub-event)
-    "43": -1,
-
-    // Carries (no sub-event)
-    "44": 1,
-
-    // Turnover (no sub-event)
-    "45": 3,
-
-    // Penalties conceded (no sub-event)
-    "46": -3,
-
-    // Linebreak (no sub-event)
-    "47": 3,
-
-    // Score
-    "49": {
-      "42": -1, // Missed Conversion
-      "43": 3, // Successful Drop Goal
-      "44": 3, // Successful Penalty
-      "60": 2, // Successful Conversion
-      "61": -1, // Missed Penalty
-      "62": 0, // Missed Drop Goal
-      "66": 5, // Try
-      "200": 0, // Penalty Try
-    },
-
-    // Lineout
-    "50": {
-      "40": 1, // Won
-      "41": -1, // Lost
-      "65": 2, // Stolen
-    },
-
-    // Scrum
-    "51": {
-      "38": 0, // Won
-      "39": -2, // Lost
-      "58": 2, // Stolen
-    },
-
-    // Card
-    "55": {
-      "45": -10, // Red
-      "46": -5, // Yellow
-    },
-
-    // Incomplete Pass (no sub-event)
-    "87": -2,
-
-    // Pass (no sub-event)
-    "91": 0.2,
-
-    // Offload (no sub-event)
-    "92": 1,
-
-    // Lost ball in carry (no sub-event)
-    "103": -2,
-
-    // Visit in opponents 22 (no sub-event)
-    "104": 0,
-
-    // Kick for territory
-    "105": {
-      "158": 0, // Caught
-      "159": -2, // Straight out
-      "164": 2, // Retrieved
-      "165": 2, // 50-22
-      "166": 0, // Lineout
-      "185": -2, // Dead Ball
-      "186": 2, // Knocked On
-      "202": -1, // Charged Down
-      "340": 0, // Half time
-      "341": 0, // Full Time
-    },
-
-    // Ruck Won (no sub-event)
-    "108": 0,
-
-    // Penalty Gain (no sub-event)
-    "124": 0,
-
-    // Step out (no sub-event)
-    "129": -1,
-
-    // Charge Down (no sub-event)
-    "130": 1,
-
-    // Restart
-    "133": {
-      "247": 0, // kick off reception won
-      "248": -1, // kick off reception lost
-      "249": 2, // kick off retrieval won
-      "250": 0, // kick off retrieval lost
-      "251": -2, // false kick off
-      "252": 0, // goal line drop out reception won
-      "253": -1, // goal line drop out reception lost
-      "254": 2, // goal line drop out retrieval won
-      "255": 0, // goal line drop out retrieval lost
-      "256": -2, // goal line drop out straight out
-      "257": 0, // 22 drop out reception won
-      "258": -1, // 22 drop out reception lost
-      "259": 2, // 22 drop out retrieval won
-      "260": 0, // 22 drop out retrieval lost
-      "261": -2, // 22 drop out straight out
-    },
-
-    // Maul (no sub-event)
-    "146": 0,
-
-    // Lineout throw
-    "151": {
-      "377": 1, // Front won
-      "378": 1, // Middle won
-      "379": 1, // Back won
-      "380": -2, // Front lost
-      "381": -2, // Middle lost
-      "382": -2, // Back lost
-      "391": 1, // Overthrow Won
-      "392": -2, // Overthrow Lost
-    },
-
-    // Kick Reception (no sub-event)
-    "158": 0,
-
-    // Lineout Pass to Receiver (no sub-event)
-    "162": 0,
-
-    // Assist
-    "179": {
-      "451": 3, // Try Assist
-      "452": 2, // Linebreak Assist
-    },
-
-    // Ruck Lost (no sub-event)
-    "206": -2,
-
-    // Tryline Held Up (no sub-event)
-    "215": -1,
-  };
 
   events.forEach((event) => {
     const id = event.event_id;
@@ -286,10 +137,9 @@ export const rugbyRating = (data: Stats) => {
     }
   });
 
-  const MAX_POINTS = 25.0;
   const BASE_RATING = 5.0;
 
-  const rating = ((points / MAX_POINTS) * 5 + BASE_RATING).toFixed(1);
-  // console.log(points);
+  const rating = ((points / maxPoints) * 5 + BASE_RATING).toFixed(1);
+
   return rating;
 };

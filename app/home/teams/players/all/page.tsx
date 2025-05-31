@@ -10,7 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useStore } from "@/store/store";
 // import { Button } from "@/components/ui/button";
 import { calculateYearsOld } from "@/lib/utils";
-import EditPlayerModal from "@/components/teams/manage-player/edit-player-modal";
+// import EditPlayerModal from "@/components/teams/manage-player/edit-player-modal";
 import UploadImagesDialog from "@/components/teams/manage-player/upload-images-dialog";
 import {
   getAllPlayers,
@@ -38,7 +38,7 @@ import Loading from "@/app/home/loading";
 
 const AllPlayersPage = () => {
   const { store } = useStore((state) => state);
-  const [openEdit, setOpenEdit] = useState(false);
+  // const [openEdit, setOpenEdit] = useState(false);
   const [openUpload, setOpenUpload] = useState(false);
   const [openTransfer, setOpenTransfer] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState<TeamPlayer | null>(null);
@@ -161,14 +161,14 @@ const AllPlayersPage = () => {
                           >
                             Upload
                           </DropdownMenuItem>
-                          <DropdownMenuItem
+                          {/* <DropdownMenuItem
                             onClick={() => {
                               setOpenEdit(true);
                               setSelectedPlayer(player);
                             }}
                           >
                             Edit
-                          </DropdownMenuItem>
+                          </DropdownMenuItem> */}
                           <DropdownMenuItem
                             onClick={() => console.log("delete")}
                           >
@@ -211,12 +211,12 @@ const AllPlayersPage = () => {
           player={selectedPlayer as TeamPlayer}
         />
 
-        <EditPlayerModal
+        {/* <EditPlayerModal
           open={openEdit}
           setOpen={setOpenEdit}
           player={selectedPlayer as TeamPlayer}
           countries={[]}
-        />
+        /> */}
       </main>
     </>
   );

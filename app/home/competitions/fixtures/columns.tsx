@@ -149,6 +149,7 @@ const OfficialButton = ({ fixture }: { fixture: AgentFixture }) => {
   const [openAdd, setOpenAdd] = useState(false);
   const [openUpdate, setOpenUpdate] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
   const router = useRouter();
 
   const updateSheetFix = useStore((state) => state.updateSheetFix);
@@ -209,7 +210,7 @@ const OfficialButton = ({ fixture }: { fixture: AgentFixture }) => {
             Match sheet
           </DropdownMenuItem>
 
-          <DropdownMenuItem onClick={() => console.log("edit")}>
+          <DropdownMenuItem onClick={() => setOpenEdit(true)}>
             Edit
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpenDelete(true)}>
@@ -223,7 +224,12 @@ const OfficialButton = ({ fixture }: { fixture: AgentFixture }) => {
         open={openAdd}
         setOpen={setOpenAdd}
       />
-      <EditFixtureModal fixId={fixId} />
+
+      <EditFixtureModal
+        fixture={fixture}
+        open={openEdit}
+        setOpen={setOpenEdit}
+      />
 
       <DeleteFixtureModal
         fixture={fixture}

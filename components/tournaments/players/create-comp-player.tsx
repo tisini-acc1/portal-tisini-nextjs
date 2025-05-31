@@ -102,8 +102,8 @@ const CreateCompPlayerModal = ({ countries }: { countries: Country[] }) => {
       firstName: "",
       lastName: "",
       dob: new Date(),
-      nationality: "",
-      position: "",
+      nationality: "404",
+      position: "Midfielder",
       idNumber: "",
       jersey: "",
       signed: new Date(),
@@ -224,7 +224,7 @@ const CreateCompPlayerModal = ({ countries }: { countries: Country[] }) => {
                     ID number or Birth Certificate number or UP number
                   </FormLabel>
                   <FormControl>
-                    <Input type="text" placeholder="John" {...field} />
+                    <Input type="text" placeholder="FKF00000" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -239,7 +239,7 @@ const CreateCompPlayerModal = ({ countries }: { countries: Country[] }) => {
                   <FormItem>
                     <FormLabel>Phone Number</FormLabel>
                     <FormControl>
-                      <Input type="text" placeholder="John" {...field} />
+                      <Input type="text" placeholder="0700000000" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -269,7 +269,7 @@ const CreateCompPlayerModal = ({ countries }: { countries: Country[] }) => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Country</FormLabel>
-                      <Select onValueChange={field.onChange}>
+                      <Select onValueChange={field.onChange} defaultValue="404">
                         <SelectTrigger>
                           <SelectValue placeholder="select type" />
                         </SelectTrigger>
@@ -296,7 +296,10 @@ const CreateCompPlayerModal = ({ countries }: { countries: Country[] }) => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Position</FormLabel>
-                      <Select onValueChange={field.onChange}>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue="Midfielder"
+                      >
                         <SelectTrigger>
                           <SelectValue placeholder="select type" />
                         </SelectTrigger>
