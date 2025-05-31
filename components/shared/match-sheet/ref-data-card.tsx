@@ -4,10 +4,14 @@ import { Edit, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import DeleteRefEvent from "./delete-refData";
+import { useState } from "react";
 
 type CardProps = { data: RefEvents; homeId: string };
 
 export const RefDataCard = ({ data, homeId }: CardProps) => {
+  const [open, setOpen] = useState(false);
+
   const isHomeTeam = data.teamid === homeId;
 
   const img =
@@ -28,73 +32,79 @@ export const RefDataCard = ({ data, homeId }: CardProps) => {
       : "/homeLogo.png";
 
   return (
-    <Card
-      className={cn(
-        "relative overflow-hidden",
-        isHomeTeam
-          ? "border-l-4 border-l-blue-600"
-          : "border-r-4 border-r-red-600"
-      )}
-    >
-      <CardContent className="p-3">
-        <div
-          className={cn(
-            "flex items-center gap-2",
-            isHomeTeam ? "justify-start" : "justify-end"
-          )}
-        >
-          {isHomeTeam && (
-            <span className="font-medium">{data.minute}&apos;</span>
-          )}
-
+    <>
+      <Card
+        className={cn(
+          "relative overflow-hidden",
+          isHomeTeam
+            ? "border-l-4 border-l-blue-600"
+            : "border-r-4 border-r-red-600"
+        )}
+      >
+        <CardContent className="p-3">
           <div
             className={cn(
               "flex items-center gap-2",
-              isHomeTeam ? "flex-row" : "flex-row-reverse"
+              isHomeTeam ? "justify-start" : "justify-end"
             )}
           >
-            <span className="text-xl">
-              <Image src={img} alt={data.eventname} width={25} height={25} />
-            </span>
-            <div className="flex flex-col">
-              <span className="font-medium">{data.playername}</span>
-              <span className="text-xs text-muted-foreground">
-                {data.eventid === "52"
-                  ? data.eventname
-                  : data.subeventname || data.eventname}
+            {isHomeTeam && (
+              <span className="font-medium">{data.minute}&apos;</span>
+            )}
+
+            <div
+              className={cn(
+                "flex items-center gap-2",
+                isHomeTeam ? "flex-row" : "flex-row-reverse"
+              )}
+            >
+              <span className="text-xl">
+                <Image src={img} alt={data.eventname} width={25} height={25} />
               </span>
+              <div className="flex flex-col">
+                <span className="font-medium">{data.playername}</span>
+                <span className="text-xs text-muted-foreground">
+                  {data.eventid === "52"
+                    ? data.eventname
+                    : data.subeventname || data.eventname}
+                </span>
+              </div>
             </div>
+
+            {!isHomeTeam && (
+              <span className="font-medium">{data.minute}&apos;</span>
+            )}
           </div>
 
-          {!isHomeTeam && (
-            <span className="font-medium">{data.minute}&apos;</span>
-          )}
-        </div>
+          <div
+            className={
+              isHomeTeam
+                ? "absolute top-2 right-2 flex gap-1"
+                : "absolute top-2"
+            }
+          >
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-6 w-6"
+              onClick={() => console.log("edit")}
+            >
+              <Edit className="h-3 w-3" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-6 w-6 text-destructive"
+              onClick={() => setOpen(!open)}
+            >
+              <Trash2 className="h-3 w-3" />
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
 
-        <div
-          className={
-            isHomeTeam ? "absolute top-2 right-2 flex gap-1" : "absolute top-2"
-          }
-        >
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-6 w-6"
-            onClick={() => console.log("edit")}
-          >
-            <Edit className="h-3 w-3" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-6 w-6 text-destructive"
-            onClick={() => console.log("delete")}
-          >
-            <Trash2 className="h-3 w-3" />
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
+      <DeleteRefEvent fixId={data.id} open={open} setOpen={setOpen} />
+    </>
   );
 };
 

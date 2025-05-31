@@ -1519,3 +1519,28 @@ export const DeleteFixture = async (id: string) => {
     );
   }
 };
+
+export const DeleteRefData = async (id: string) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "deleteevent",
+      refdataevent: id,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log(res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to modify fixture online status: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while modifing fixture status."
+    );
+  }
+};
