@@ -1,7 +1,7 @@
 import React from "react";
 import { rugbyRating } from "@/lib/rating";
 import { RugbyStatsTable } from "./rugby-stats-table";
-import { playerRugbyStats } from "@/lib/rugby-player-stats";
+import { playerRugbyStats, playerRugbyStats7s } from "@/lib/rugby-player-stats";
 import { eventPoint15s, eventPoint7s } from "@/lib/event-points";
 
 type StatsProps = {
@@ -23,7 +23,10 @@ const RugbyPlayerStats = ({ data, team, fixType }: StatsProps) => {
 
     const events = player.pnameanddata;
 
-    const pStats = playerRugbyStats(events);
+    const pStats =
+      fixType === "rugby7"
+        ? playerRugbyStats7s(events)
+        : playerRugbyStats(events);
 
     // console.log(events);
 
