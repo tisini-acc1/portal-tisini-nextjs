@@ -75,9 +75,7 @@ export const playerSchema = z.object({
     .string()
     .min(6, "Provide a ID number or birth cert number")
     .max(15, "Provide a ID number or birth cert number"),
-  dob: z.date({
-    required_error: "Match date is required.",
-  }),
+  dob: z.string().min(8, "Date of Birth is required."),
   nationality: z.string().min(1, { message: "Nationality is required" }),
   position: z.string().min(1, { message: "Position is required" }),
   // team: z.string().min(1, { message: "Matchday is required" }),
@@ -101,7 +99,7 @@ const CreateCompPlayerModal = ({ countries }: { countries: Country[] }) => {
       phone: "",
       firstName: "",
       lastName: "",
-      dob: new Date(),
+      dob: "2000-01-01",
       nationality: "404",
       position: "Midfielder",
       idNumber: "",
@@ -159,6 +157,8 @@ const CreateCompPlayerModal = ({ countries }: { countries: Country[] }) => {
       jersey: data.jersey,
       contract: format(data.signed, "yyyy-M-d"),
     };
+
+    // console.log(player);
 
     mutation.mutate(player);
   };
@@ -326,40 +326,17 @@ const CreateCompPlayerModal = ({ countries }: { countries: Country[] }) => {
                   control={form.control}
                   name="dob"
                   render={({ field }) => (
-                    <FormItem className="flex flex-col">
-                      <FormLabel className="mb-3">Date of Birth</FormLabel>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <FormControl>
-                            <Button
-                              variant={"outline"}
-                              className={cn(
-                                "w-full pl-3 text-left font-normal",
-                                !field.value && "text-muted-foreground"
-                              )}
-                            >
-                              {field.value ? (
-                                format(field.value, "PPP")
-                              ) : (
-                                <span>Pick a date</span>
-                              )}
-                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                            </Button>
-                          </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                          <Calendar
-                            mode="single"
-                            selected={field.value}
-                            onSelect={field.onChange}
-                            disabled={(date) =>
-                              date > new Date() || date < new Date("1900-01-01")
-                            }
-                            initialFocus
-                          />
-                        </PopoverContent>
-                      </Popover>
-
+                    <FormItem className="flex flex-col space-y-5">
+                      <FormLabel>Date of Birth</FormLabel>
+                      <FormControl>
+                        <input
+                          type="date"
+                          value={field.value}
+                          onChange={field.onChange}
+                          max={format(new Date(), "yyyy-MM-dd")} // Optional: prevent future dates
+                          className="w-full border p-1 rounded-sm text-muted-foreground outline-primary"
+                        />
+                      </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
