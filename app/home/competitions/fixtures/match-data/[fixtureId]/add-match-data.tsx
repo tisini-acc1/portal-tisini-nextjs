@@ -65,7 +65,7 @@ const AddMatchData = ({ sheetData, homeId }: DataProps) => {
     return <div>Loading...</div>;
   }
 
-  // console.log(groupEvents());
+  // console.log(sheetData);
 
   return (
     <main>

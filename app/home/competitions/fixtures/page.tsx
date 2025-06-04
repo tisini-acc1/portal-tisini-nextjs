@@ -51,7 +51,7 @@ const FixturesPage = () => {
     if (data) {
       const fix = data.filter((item) => item.league === store.tournament);
 
-      setFixtures(fix.reverse());
+      setFixtures(fix);
     }
   }, [store.tournament, data]);
 
@@ -83,21 +83,103 @@ const FixturesPage = () => {
     return <div>Error...</div>;
   }
 
-  // const roundFixtures = fixtures.filter(
-  //   (fixture) => fixture.matchday === round
-  // );
+  const abandoned = fixtures.filter(
+    (fix) => fix.matchplay_status === "1"
+  ).length;
+  const played = fixtures.filter((fix) => fix.matchplay_status === "2").length;
+  const postponed = fixtures.filter(
+    (fix) => fix.matchplay_status === "3"
+  ).length;
+  const doubleBook = fixtures.filter(
+    (fix) => fix.matchplay_status === "4"
+  ).length;
+  const notPlayed = fixtures.filter(
+    (fix) => fix.matchplay_status === "5"
+  ).length;
+  const forfeit = fixtures.filter((fix) => fix.matchplay_status === "6").length;
+  const appealed = fixtures.filter(
+    (fix) => fix.matchplay_status === "7"
+  ).length;
+
+  // Status labels with optional colors
+  const statusLabels = [
+    {
+      id: "played",
+      label: "Played",
+      count: played,
+      color: "bg-green-500",
+    },
+    {
+      id: "notPlayed",
+      label: "Not Played",
+      count: notPlayed,
+      color: "bg-gray-400",
+    },
+    {
+      id: "postponed",
+      label: "Postponed",
+      count: postponed,
+      color: "bg-yellow-500",
+    },
+    {
+      id: "abandoned",
+      label: "Abandoned",
+      count: abandoned,
+      color: "bg-orange-500",
+    },
+    {
+      id: "forfeit",
+      label: "Forfeit",
+      count: forfeit,
+      color: "bg-red-500",
+    },
+    {
+      id: "appealed",
+      label: "Appealed",
+      count: appealed,
+      color: "bg-blue-500",
+    },
+    {
+      id: "doubleBook",
+      label: "Double Booked",
+      count: doubleBook,
+      color: "bg-purple-500",
+    },
+    {
+      id: "total",
+      label: "Total",
+      count: fixtures.length,
+      color: "bg-indigo-600",
+    },
+  ];
 
   // console.log(roundFixtures);
   // console.log(fixtures);
-  // console.log(store.matchStatus);
-  // console.log(tournaments);
-  // console.log(store.tournament);
 
   return (
     <main>
-      <div className="flex justify-end">
-        <CreateFixtureModal tournament={tournament} />
-      </div>
+      <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 p-4 bg-secondary shadow-sm rounded-lg">
+        <div className="w-full md:w-auto">
+          {/* <h2 className="text-lg font-semibold mb-2">Match Status Summary</h2> */}
+          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-8 gap-2">
+            {statusLabels.map((status) => (
+              <div
+                key={status.id}
+                className={`flex flex-col items-center p-2 ${status.color} rounded-md`}
+              >
+                <span className="text-xs font-medium text-gray-700">
+                  {status.label}
+                </span>
+                <span className="text-sm font-bold">{status.count}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="w-full md:w-auto flex justify-end">
+          <CreateFixtureModal tournament={tournament} />
+        </div>
+      </header>
 
       <FixturesTable columns={columns} data={fixtures} />
     </main>

@@ -119,7 +119,23 @@ const NavigateButton = ({ fixture }: { fixture: AgentFixture }) => {
 
   return (
     <>
-      {status === "notstarted" || matchResult !== refreeScores ? (
+      {fixture.matchplay_status === "6" ? (
+        <Button
+          variant={"outline"}
+          size={"sm"}
+          className={"border-orange-300 text-orange-300 hover:text-orange-500"}
+        >
+          {"Forfeit"}
+        </Button>
+      ) : fixture.matchplay_status === "7" ? (
+        <Button
+          variant={"outline"}
+          size={"sm"}
+          className={"border-blue-300 text-blue-300 hover:text-blue-500"}
+        >
+          {"Appeal"}
+        </Button>
+      ) : status === "notstarted" || matchResult !== refreeScores ? (
         <Button
           variant={"outline"}
           size={"sm"}
@@ -184,7 +200,12 @@ const OfficialButton = ({ fixture }: { fixture: AgentFixture }) => {
             Add officials
           </DropdownMenuItem>
 
-          <DropdownMenuItem onClick={() => setOpenUpdate(true)}>
+          <DropdownMenuItem
+            onClick={() => {
+              updateSheetFix(sheetFix);
+              setOpenUpdate(true);
+            }}
+          >
             Update scores
           </DropdownMenuItem>
 
