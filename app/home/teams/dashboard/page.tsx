@@ -1,9 +1,11 @@
 // import { getTournaments } from "@/actions/php-actions";
 
-const DashboardPage = async () => {
-  // const data = await getTournaments();
+import { getTeamHistory } from "@/actions/php-actions";
 
-  // console.log(data);
+const DashboardPage = async () => {
+  const data = await getTeamHistory("1867");
+
+  console.log(data);
 
   return <div>DashboardPage</div>;
 };

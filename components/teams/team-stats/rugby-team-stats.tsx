@@ -10,13 +10,12 @@ import RugbyTeamDiscipline from "./rugby/rugby-discipline";
 import { calcRugbyTerritory, calcRugbyTerritory7s } from "@/lib/utils";
 import { rugbyData, rugbyData7s } from "@/actions/fix-data";
 
-const RugbyTeamStats = ({
-  data,
-  fixType,
-}: {
+type RugbyProps = {
   data: FixtureData;
   fixType: string;
-}) => {
+};
+
+const RugbyTeamStats = ({ data, fixType }: RugbyProps) => {
   const rData = fixType === "rugby7" ? rugbyData7s(data) : rugbyData(data);
 
   const territory =
@@ -25,7 +24,7 @@ const RugbyTeamStats = ({
       : calcRugbyTerritory(data["home"], data["away"]);
 
   // console.log(fixType);
-  // console.log(rData);
+  // console.log(data);
   // console.log(territory);
   return (
     <section className="grid gap-4">

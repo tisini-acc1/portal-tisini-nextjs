@@ -3,28 +3,36 @@ import React from "react";
 const StatCategory = {
   ATTACKING: [
     "tries",
+    "assists",
     "goal_kicks",
-    "assist",
-    "linebreak",
+    "linebreaks",
     "carries",
-    "offload",
+    "offloads",
+    "passes",
+    "handling_efficiency",
   ],
-  PASSING: ["comp_pass", "plineout_throw", "lineout_steals", "retained_kicks"],
-  DEFENSE: [
-    "ptackles",
-    "turnover_won",
-    "handling_errors",
-    "pscrum_won",
+  DEFENSE: ["tackle_success", "tackle_dominance", "turnover_won"],
+  SETPIECE: [
+    "lineout_throws",
+    "lineout_steals",
+    "scrums_won",
+    "scrum_steals",
+    "ruck_contest",
+  ],
+  RESTARTS: [
+    "restart_retrievals",
+    "restart_reception",
+    "retained_kicks",
     "Kicking_errors",
   ],
   DISCIPLINE: ["penalties", "cards"],
 };
 
-export const RugbyStatsTable = ({
-  players,
-}: {
+type StatsProps = {
   players: RugbyPlayerStat[];
-}) => {
+};
+
+export const RugbyStatsTable = ({ players }: StatsProps) => {
   const [activeCategory, setActiveCategory] =
     React.useState<string>("ATTACKING");
   const stats = StatCategory[activeCategory as keyof typeof StatCategory];

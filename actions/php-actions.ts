@@ -1062,6 +1062,31 @@ export const getFixConditions = async (
   }
 };
 
+export const getTeamHistory = async (id: string) => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "teamhistory",
+      teamid: id,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(`Failed to fetch pitch condition: ${res.status}`);
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while fetching pitch conditions."
+    );
+  }
+};
+
 export const getPitchCond = async (): Promise<Condition[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;

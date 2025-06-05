@@ -569,24 +569,29 @@ type PlayerEvent = {
 
 type RugbyPlayerStat = {
   tries: number;
-  goal_kicks: string;
-  assist: number;
-  linebreak: number;
-  comp_pass: number;
+  assists: number;
+  linebreaks: number;
+  passes: number;
   carries: number;
-  offload: number;
-  handling_errors: string;
-  ptackles: string;
+  offloads: number;
+  goal_kicks: string;
+  handling_efficiency: string;
+  tackle_success: string;
+  tackle_dominance: string;
   turnover_won: number;
-  penalties: number;
-  cards: string;
-  plineout_throw: string;
+  lineout_throws: string;
   lineout_steals: number;
-  pscrum_won: string;
+  scrums_won: string;
+  scrum_steals: number;
+  ruck_contest: string;
+  restart_retrievals: number;
+  restart_reception: number;
   retained_kicks: number;
   Kicking_errors: number;
-  name: string;
+  penalties: number;
+  cards: string;
   rating: string;
+  name: string;
 };
 
 type BasketballPlayerStats = {

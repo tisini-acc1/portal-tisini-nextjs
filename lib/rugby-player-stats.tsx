@@ -13,31 +13,33 @@ export const playerRugbyStats = (data: Stats) => {
     penalty + conversion + missed_penalty + miss_conversion;
   const succ_goalkicks = getPercent(total_goalkicks, goalkicks);
 
-  const assist = getEvent(data, "179");
+  const assists = getEvent(data, "179");
 
   const carries = getEvent(data, "44");
 
-  const linebreak = getEvent(data, "47");
+  const linebreaks = getEvent(data, "47");
 
-  const offload = getEvent(data, "92");
+  const offloads = getEvent(data, "92");
 
-  const comp_pass = getEvent(data, "91");
+  const passes = getEvent(data, "91");
   const incom_pass = getEvent(data, "87");
   const forward_pass = getEvent(data, "40");
   const knock_on = getEvent(data, "41");
   const lost_in_carry = getEvent(data, "103");
 
-  const hadling_errors = incom_pass + forward_pass + knock_on + lost_in_carry;
-  const ball_handling = comp_pass + offload + carries;
-  const handling = hadling_errors + ball_handling;
+  const handling_errors = incom_pass + forward_pass + knock_on + lost_in_carry;
+  const ball_handling = passes + offloads + carries;
+  const handling = handling_errors + ball_handling;
   const succ_handling = getPercent(handling, ball_handling);
 
-  const handling_errors = `${handling} / ${hadling_errors}  ${succ_handling}%`;
+  const handling_efficiency = `${handling} / ${handling_errors}  ${succ_handling}%`;
   const goal_kicks = `${total_goalkicks} / ${goalkicks}  ${succ_goalkicks}%`;
 
   const missed_tackle = getEvent(data, "43");
   const tackles = getEvent(data, "42");
   const all_tackles = tackles + missed_tackle;
+  const pos_tackle = getSubEvent(data, "42", "56");
+  const tackle_dom = getPercent(tackles, pos_tackle);
   const tackle_succ = getPercent(all_tackles, tackles);
 
   const turnover_won = getEvent(data, "45");
@@ -61,6 +63,7 @@ export const playerRugbyStats = (data: Stats) => {
   const scrums = getEvent(data, "51");
   const scrum_won = getSubEvent(data, "51", "38");
   const scrum_succ = getPercent(scrums, scrum_won);
+  const scrum_steals = getSubEvent(data, "51", "58");
 
   const retained_kicks =
     getSubEvent(data, "105", "164") +
@@ -73,127 +76,52 @@ export const playerRugbyStats = (data: Stats) => {
     getSubEvent(data, "105", "185");
   const Kicking_errors = kick_for_territory + getSubEvent(data, "133", "251");
 
-  const ptackles = `${all_tackles} / ${tackles}  ${tackle_succ}%`;
+  const restart_reception =
+    getSubEvent(data, "133", "247") +
+    getSubEvent(data, "133", "252") +
+    getSubEvent(data, "133", "257");
+  const restart_retrievals =
+    getSubEvent(data, "133", "249") +
+    getSubEvent(data, "133", "254") +
+    getSubEvent(data, "133", "259");
+
+  const rucks = getEvent(data, "206");
+  const ruck_won = getSubEvent(data, "206", "524");
+  const ruck_succ = getPercent(rucks, ruck_won);
+
+  const tackle_success = `${tackles} / ${all_tackles}  ${tackle_succ}%`;
+  const tackle_dominance = `${pos_tackle} / ${tackles}  ${tackle_dom}%`;
   const cards = `${y_card} / ${r_card}`;
-  const plineout_throw = `${lineout_throw} / ${lineout_won}  ${lineout_succ}%`;
-  const pscrum_won = `${scrums} / ${scrum_won}  ${scrum_succ}%`;
+  const lineout_throws = `${lineout_throw} / ${lineout_won}  ${lineout_succ}%`;
+  const scrums_won = `${scrums} / ${scrum_won}  ${scrum_succ}%`;
+  const ruck_contest = `${ruck_won} / ${rucks}  ${ruck_succ}%`;
 
   return {
     tries,
+    assists,
+    linebreaks,
     goal_kicks,
-    assist,
-    linebreak,
-    comp_pass,
+    passes,
     carries,
-    offload,
-    handling_errors,
-    ptackles,
+    offloads,
+    handling_efficiency,
+
+    tackle_success,
+    tackle_dominance,
     turnover_won,
-    penalties,
-    cards,
-    plineout_throw,
+
+    lineout_throws,
     lineout_steals,
-    pscrum_won,
+    scrums_won,
+    scrum_steals,
+    ruck_contest,
+
+    restart_retrievals,
+    restart_reception,
     retained_kicks,
     Kicking_errors,
-  };
-};
 
-export const playerRugbyStats7s = (data: Stats) => {
-  const tries = getSubEvent(data, "33", "51") + getSubEvent(data, "33", "142");
-
-  const conversion = getSubEvent(data, "33", "52");
-  const miss_conversion = getSubEvent(data, "33", "69");
-  // const succ_conversion = getPercent(conversion + miss_conversion, conversion);
-  const missed_penalty = getSubEvent(data, "33", "70");
-  const penalty = getSubEvent(data, "33", "53");
-  const goalkicks = penalty + conversion;
-  const total_goalkicks =
-    penalty + conversion + missed_penalty + miss_conversion;
-  const succ_goalkicks = getPercent(total_goalkicks, goalkicks);
-
-  const assist = getEvent(data, "180");
-
-  const carries = getEvent(data, "58");
-
-  const linebreak = getEvent(data, "37");
-
-  const offload = getEvent(data, "83");
-
-  const comp_pass = getEvent(data, "82");
-  const incom_pass = getEvent(data, "86");
-  const forward_pass = getEvent(data, "36");
-  const knock_on = getEvent(data, "35");
-  const lost_in_carry = getEvent(data, "149");
-
-  const hadling_errors = incom_pass + forward_pass + knock_on + lost_in_carry;
-  const ball_handling = comp_pass + offload + carries;
-  const handling = hadling_errors + ball_handling;
-  const succ_handling = getPercent(handling, ball_handling);
-
-  const handling_errors = `${handling} / ${hadling_errors}  ${succ_handling}%`;
-  const goal_kicks = `${total_goalkicks} / ${goalkicks}  ${succ_goalkicks}%`;
-
-  const missed_tackle = getEvent(data, "57");
-  const tackles = getEvent(data, "56");
-  const all_tackles = tackles + missed_tackle;
-  const tackle_succ = getPercent(all_tackles, tackles);
-
-  const turnover_won = getEvent(data, "59");
-
-  const penalties = getEvent(data, "60");
-
-  const y_card = getSubEvent(data, "66", "54");
-  const r_card = getSubEvent(data, "66", "55");
-
-  const lineout_throw = getEvent(data, "150");
-  const lineout_won =
-    getSubEvent(data, "150", "371") +
-    getSubEvent(data, "150", "372") +
-    getSubEvent(data, "150", "373") +
-    getSubEvent(data, "150", "389");
-
-  const lineout_succ = getPercent(lineout_throw, lineout_won);
-
-  const lineout_steals = getSubEvent(data, "62", "68");
-
-  const scrums = getEvent(data, "63");
-  const scrum_won = getSubEvent(data, "63", "47");
-  const scrum_succ = getPercent(scrums, scrum_won);
-
-  const retained_kicks =
-    getSubEvent(data, "106", "167") +
-    getSubEvent(data, "106", "168") +
-    getSubEvent(data, "106", "188");
-
-  const kick_for_territory =
-    getSubEvent(data, "106", "161") +
-    getSubEvent(data, "106", "203") +
-    getSubEvent(data, "106", "187");
-  const Kicking_errors = kick_for_territory + getSubEvent(data, "134", "266");
-
-  const ptackles = `${all_tackles} / ${tackles}  ${tackle_succ}%`;
-  const cards = `${y_card} / ${r_card}`;
-  const plineout_throw = `${lineout_throw} / ${lineout_won}  ${lineout_succ}%`;
-  const pscrum_won = `${scrums} / ${scrum_won}  ${scrum_succ}%`;
-
-  return {
-    tries,
-    goal_kicks,
-    assist,
-    linebreak,
-    comp_pass,
-    carries,
-    offload,
-    handling_errors,
-    ptackles,
-    turnover_won,
     penalties,
     cards,
-    plineout_throw,
-    lineout_steals,
-    pscrum_won,
-    retained_kicks,
-    Kicking_errors,
   };
 };

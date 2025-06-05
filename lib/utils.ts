@@ -88,11 +88,11 @@ export const calcRugbyPosession = (homeArry: Stats, awayArry: Stats) => {
 };
 
 export const calcRugbyPosession7s = (homeArry: Stats, awayArry: Stats) => {
-  const hPass = getEvent(homeArry, "91");
-  const aPass = getEvent(awayArry, "91");
+  const hPass = getEvent(homeArry, "82");
+  const aPass = getEvent(awayArry, "82");
 
-  const hCarry = getEvent(homeArry, "82");
-  const aCarry = getEvent(awayArry, "82");
+  const hCarry = getEvent(homeArry, "58");
+  const aCarry = getEvent(awayArry, "58");
 
   const homePasses = hPass + hCarry;
   const awayPasses = aPass + aCarry;
@@ -559,12 +559,12 @@ export const rugbyAttack = (home: Stats, away: Stats) => {
   };
   attack["conversion"] = {
     home: {
-      value: getEvent(home, "40"),
-      total: getEvent(home, "40"),
+      value: getSubEvent(home, "49", "60"),
+      total: getSubEvent(home, "49", "60") + getSubEvent(home, "49", "42"),
     },
     away: {
-      value: getEvent(away, "40"),
-      total: getEvent(away, "40"),
+      value: getSubEvent(away, "49", "60"),
+      total: getSubEvent(away, "49", "60") + getSubEvent(away, "49", "42"),
     },
   };
 
@@ -618,12 +618,12 @@ export const rugbyAttack7s = (home: Stats, away: Stats) => {
   };
   attack["conversion"] = {
     home: {
-      value: getEvent(home, "36"),
-      total: getEvent(home, "36"),
+      value: getSubEvent(home, "33", "52"),
+      total: getSubEvent(home, "33", "69") + getSubEvent(home, "33", "52"),
     },
     away: {
-      value: getEvent(away, "36"),
-      total: getEvent(away, "36"),
+      value: getSubEvent(away, "33", "52"),
+      total: getSubEvent(away, "33", "52") + getSubEvent(away, "33", "69"),
     },
   };
 

@@ -32,9 +32,9 @@ export const eventPoint15s: EventPoints = {
   // Score
   "49": {
     "42": -1, // Missed Conversion
-    "43": 3, // Successful Drop Goal
-    "44": 3, // Successful Penalty
-    "60": 2, // Successful Conversion
+    "43": 1, // Successful Drop Goal
+    "44": 1, // Successful Penalty
+    "60": 1, // Successful Conversion
     "61": -1, // Missed Penalty
     "62": 0, // Missed Drop Goal
     "66": 5, // Try
@@ -187,9 +187,9 @@ export const eventPoint7s: EventPoints = {
   // Score
   "33": {
     "69": -1, // Missed Conversion
-    "71": 3, // Successful Drop Goal
-    "53": 3, // Successful Penalty
-    "52": 2, // Successful Conversion
+    "71": 1, // Successful Drop Goal
+    "53": 1, // Successful Penalty
+    "52": 1, // Successful Conversion
     "70": -1, // Missed Penalty
     "72": 0, // Missed Drop Goal
     "51": 5, // Try
