@@ -44,7 +44,7 @@ const FilterTournTeams = () => {
   useEffect(() => {
     if (value) {
       const team = teams.filter((t) => t.id === value);
-      updateTeam({ id: team[0].id, name: team[0].name });
+      updateTeam({ id: team[0].id, name: team[0].name, teamType: "" });
     }
   }, [updateTeam, value]);
 

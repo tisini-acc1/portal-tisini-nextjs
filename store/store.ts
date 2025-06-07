@@ -30,6 +30,7 @@ export type Store = {
   sheetFix: SheetFix;
   playerFix: PlayerFixture;
   matchStatus: MatchPlayStatus[];
+  reviewFixtures: AgentFixture[];
 };
 
 export type State = {
@@ -52,6 +53,7 @@ export type Actions = {
   updateSheetFix: (type: SheetFix) => void;
   updatePlayerFix: (type: PlayerFixture) => void;
   updateMatchStatus: (status: MatchPlayStatus[]) => void;
+  updateReviewFixtures: (fixture: AgentFixture[]) => void;
 };
 
 const initialState: Store = {
@@ -70,6 +72,7 @@ const initialState: Store = {
   sheetFix: {} as SheetFix,
   playerFix: {} as PlayerFixture,
   matchStatus: [],
+  reviewFixtures: [],
 };
 
 export const useStore = create<State & Actions>()(
@@ -112,6 +115,10 @@ export const useStore = create<State & Actions>()(
       updateMatchStatus: (status: MatchPlayStatus[]) =>
         set((state) => ({
           store: { ...state.store, matchStatus: status },
+        })),
+      updateReviewFixtures: (fixture: AgentFixture[]) =>
+        set((state) => ({
+          store: { ...state.store, reviewFixtures: fixture },
         })),
       updateBalance: (balance: number) =>
         set((state) => ({

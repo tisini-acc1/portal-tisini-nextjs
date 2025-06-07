@@ -1,11 +1,11 @@
+import React, { Suspense } from "react";
+
+import Loading from "../../loading";
+import { reviewColumns } from "./review-columns";
+import { FixturesTable } from "../fixtures-table";
 import { getSuperAgentFixtures } from "@/actions/php-actions";
 
-import { FixturesTable } from "../fixtures-table";
-import { reviewColumns } from "./review-columns";
-import { Suspense } from "react";
-import Loading from "../../loading";
-
-const ReviewFixturesPage = async () => {
+const ReviewDataPage = async () => {
   const data: Promise<AgentFixture[]> = getSuperAgentFixtures();
   const fixtures = await data;
 
@@ -18,4 +18,4 @@ const ReviewFixturesPage = async () => {
   );
 };
 
-export default ReviewFixturesPage;
+export default ReviewDataPage;

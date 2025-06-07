@@ -14,7 +14,7 @@ const DashboardPage = () => {
     queryFn: () => getTeamHistory(team.id),
   });
 
-  const { data: events, isLoading: eLoading } = useQuery({
+  const { data: events } = useQuery({
     queryKey: ["fixtureEvents", fixType],
     queryFn: () => getEvents(fixType as string),
   });

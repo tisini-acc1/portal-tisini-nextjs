@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import { FixturesTable } from "./fixtures-table";
-import { reviewColumns } from "./review-data/review-columns";
 import { getSuperAgentFixtures } from "@/actions/php-actions";
 import Loading from "../loading";
 import { columns } from "./columns";

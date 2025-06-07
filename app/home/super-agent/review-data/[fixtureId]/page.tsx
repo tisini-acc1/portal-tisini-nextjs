@@ -1,20 +1,8 @@
 import EventCard from "@/components/super-agent/event-card";
+import { fetchFixData } from "@/lib/api";
 
 type Props = {
   params: Promise<{ fixtureId: string }>;
-};
-
-const fetchFixData = async (id: string) => {
-  const res = await fetch(
-    `https://apis.tisini.co.ke/apiagent7.php?event=${id}`,
-    { method: "GET" }
-  );
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch fixture data");
-  }
-
-  return res.json();
 };
 
 const ReviewDataPage = async ({ params }: Props) => {

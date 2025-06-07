@@ -103,7 +103,6 @@ const NavigateButton = ({ fixture }: { fixture: AgentFixture }) => {
 
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-
           <DropdownMenuItem
             onClick={() =>
               router.push(`/home/super-agent/clean-data/${fixture.fixture}`)
@@ -111,9 +110,8 @@ const NavigateButton = ({ fixture }: { fixture: AgentFixture }) => {
           >
             Clean/Merge
           </DropdownMenuItem>
-
+          {/* set serie */}
           <DropdownMenuItem>Edit</DropdownMenuItem>
-
           <DropdownMenuItem onClick={() => setOpen(!openDel)}>
             Delete
           </DropdownMenuItem>

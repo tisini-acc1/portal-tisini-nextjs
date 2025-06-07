@@ -2,29 +2,38 @@
 
 import { useRouter } from "next/navigation";
 import { ColumnDef } from "@tanstack/react-table";
-import { useMutation } from "@tanstack/react-query";
 
-import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
-import { ModifyOnlineFixture } from "@/actions/php-actions";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+import { Checkbox } from "@/components/ui/checkbox";
 import { OnlineButton } from "@/components/super-agent/online-button";
 
 export const reviewColumns: ColumnDef<AgentFixture>[] = [
   {
-    accessorKey: "fixture",
-    header: "#",
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
   },
+  // {
+  //   accessorKey: "fixture",
+  //   header: "#",
+  // },
   {
     accessorKey: "team1_name",
     header: () => <div className="text-right">Home</div>,

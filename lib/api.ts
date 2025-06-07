@@ -56,3 +56,16 @@ export const apiGet = async () => {
     handleApiError(error);
   }
 };
+
+export const fetchFixData = async (id: string) => {
+  const res = await fetch(
+    `https://apis.tisini.co.ke/apiagent7.php?event=${id}`,
+    { method: "GET", next: { revalidate: 60 } }
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch fixture data");
+  }
+
+  return res.json();
+};

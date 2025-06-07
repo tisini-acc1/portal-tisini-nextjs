@@ -85,6 +85,7 @@ const TeamsPage = () => {
       const team = {
         id: teamId,
         name: selectedTeam?.name as string,
+        teamType: "",
       };
 
       updateTeam(team);

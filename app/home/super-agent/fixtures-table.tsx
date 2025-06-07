@@ -1,11 +1,13 @@
 "use client";
 
+import { useState } from "react";
+
+import { Input } from "@/components/ui/input";
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
-  ColumnFiltersState,
   getFilteredRowModel,
 } from "@tanstack/react-table";
 
@@ -17,100 +19,69 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useState } from "react";
-import { Input } from "@/components/ui/input";
-// import {
-//   Select,
-//   SelectContent,
-//   SelectItem,
-//   SelectTrigger,
-// } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { useStore } from "@/store/store";
+import { useRouter } from "next/navigation";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-// const fixtypes = ["football", "rugby15", "rugby7", "hockey", "basketball"];
-
 export function FixturesTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  // const [fixtureType, setFixtureType] = useState("football");
+  const [globalFilter, setGlobalFilter] = useState<string>("");
+  const [rowSelection, setRowSelection] = useState({});
 
-  // const [fixData, setFixData] = useState<AgentFixture[]>([]);
-
-  console.log(data);
+  const updateReviewFixtures = useStore((state) => state.updateReviewFixtures);
+  const router = useRouter();
 
   const table = useReactTable({
     data,
     columns,
-    onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    state: { columnFilters },
+    state: {
+      globalFilter,
+      rowSelection,
+    },
+    onGlobalFilterChange: setGlobalFilter,
+    onRowSelectionChange: setRowSelection,
+    // Enable global filtering for all columns
+    globalFilterFn: "includesString",
+    enableRowSelection: true,
   });
 
-  // useEffect(() => {
-  //   if (data.length > 0) {
-  //     const fixtures = data.filter(
-  //       (fixture) => fixture.fixture_type === fixtureType
-  //     );
+  const getSelectedFixtures = () => {
+    return table.getSelectedRowModel().flatRows.map((row) => row.original);
+  };
 
-  //     setFixData(fixtures);
-  //   }
-  // }, [data, fixtureType]);
-
-  // console.log(fixData);
+  // Example usage - you can call this wherever needed
+  const handleSubmit = () => {
+    const selectedFixtures = getSelectedFixtures();
+    updateReviewFixtures(selectedFixtures as AgentFixture[]);
+    // console.log("Selected fixtures:", selectedFixtures);
+    router.push("/home/super-agent/review-data/trainees");
+  };
 
   return (
     <div>
-      {/* <div>
-        <Select
-          value={
-            (table.getColumn("fixture_type")?.getFilterValue() as string) ?? ""
-          }
-          onValueChange={(event) => {
-            table.getColumn("fixture_type")?.setFilterValue(event.target.value);
-          }}
-        >
-          <SelectTrigger>{"filter by fixture"}</SelectTrigger>
-          <SelectContent>
-            {fixtypes.map((fix, idx) => (
-              <SelectItem key={idx} value={fix}>
-                {fix}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div> */}
-
       <div className="flex items-center py-4 gap-4">
-        {/* Filter for team1_name */}
         <Input
-          placeholder="Filter home team..."
-          value={
-            (table.getColumn("team1_name")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("team1_name")?.setFilterValue(event.target.value)
-          }
+          value={globalFilter ?? ""}
+          onChange={(e) => setGlobalFilter(String(e.target.value))}
+          placeholder="Search all columns..."
           className="max-w-sm"
         />
 
-        {/* Filter for team2_name */}
-        <Input
-          placeholder="Filter away team..."
-          value={
-            (table.getColumn("team2_name")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("team2_name")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
+        <Button
+          onClick={handleSubmit}
+          disabled={Object.keys(rowSelection).length <= 0}
+        >
+          Review Selected
+        </Button>
       </div>
 
       <div className="rounded-md border">
