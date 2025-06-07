@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { useStore } from "@/store/store";
 import FilterLoader from "./filter-loader";
+import { useRouter } from "next/navigation";
 import { getUserTeams } from "@/actions/php-actions";
 import {
   Select,
@@ -14,7 +15,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../ui/select";
-import { useRouter } from "next/navigation";
 
 const TeamFilter = () => {
   const [teams, setTeams] = useState<Team[]>([]);
@@ -32,13 +32,27 @@ const TeamFilter = () => {
   useEffect(() => {
     if (data?.length) {
       setTeams(data);
+
+      // If there's a persisted team in the store, find it in the data
+      if (store.team?.id) {
+        const persistedTeam = data.find((t) => t.team_id === store.team.id);
+        if (persistedTeam) {
+          setTeam(persistedTeam);
+          // No need to call updateTeam here as it's already in the store
+          return;
+        }
+      }
       setTeam(data[0]);
     }
-  }, [data]);
+  }, [store.team.id, data]);
 
   useEffect(() => {
     if (team) {
-      updateTeam({ id: team.team_id, name: team.teamname });
+      updateTeam({
+        id: team.team_id,
+        name: team.teamname,
+        teamType: team.teamtypename,
+      });
     }
   }, [updateTeam, team]);
 

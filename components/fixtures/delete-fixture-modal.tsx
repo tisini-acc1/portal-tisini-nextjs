@@ -27,6 +27,8 @@ const DeleteFixtureModal = ({ fixture, open, setOpen }: DeleteProps) => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
+  console.log("Delete clicked");
+
   const onSubmit = async () => {
     try {
       const res = await DeleteFixture(fixture.fixture);

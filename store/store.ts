@@ -10,7 +10,7 @@ type User = {
   account: string;
 };
 
-type Team = { id: string; name: string };
+type Team = { id: string; name: string; teamType: string };
 // type Serie = { id: string; name: string };
 // type Tournament = { id: string };
 
@@ -62,7 +62,7 @@ const initialState: Store = {
   fixType: "",
   tournament: "",
   teamId: "",
-  team: { id: "", name: "" },
+  team: { id: "", name: "", teamType: "" },
   user: { id: "", name: "", role: "", phone: "", profileurl: "", account: "" },
   overview: {} as TeamOverview,
   refFix: {} as RefreeFix,

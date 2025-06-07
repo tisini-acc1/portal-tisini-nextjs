@@ -121,7 +121,7 @@ const EditFixtureModal = ({ fixture, open, setOpen }: EditProps) => {
       fixtureid: fixture.fixture,
     };
 
-    console.log(fixData);
+    // console.log(fixData);
     mutation.mutate(fixData);
   }
 
@@ -130,7 +130,7 @@ const EditFixtureModal = ({ fixture, open, setOpen }: EditProps) => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="hidden">Loading...</div>;
   }
 
   return (
@@ -151,63 +151,67 @@ const EditFixtureModal = ({ fixture, open, setOpen }: EditProps) => {
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <FormField
-              control={form.control}
-              name="home"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Home Team</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder={"Select team"} />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {data?.map((team) => (
-                        <SelectItem key={team.teamid} value={team.teamid}>
-                          {team.teamname}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+            {!isLoading && (
+              <FormField
+                control={form.control}
+                name="home"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Home Team</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder={"Select team"} />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {data?.map((team) => (
+                          <SelectItem key={team.teamid} value={team.teamid}>
+                            {team.teamname}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
 
-            <FormField
-              control={form.control}
-              name="away"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Away Team</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder={"Select team"} />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {data?.map((team) => (
-                        <SelectItem key={team.teamid} value={team.teamid}>
-                          {team.teamname}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+            {!isLoading && (
+              <FormField
+                control={form.control}
+                name="away"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Away Team</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder={"Select team"} />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {data?.map((team) => (
+                          <SelectItem key={team.teamid} value={team.teamid}>
+                            {team.teamname}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
 
             <FormField
               control={form.control}

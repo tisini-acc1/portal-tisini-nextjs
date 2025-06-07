@@ -1,8 +1,20 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { ColumnDef } from "@tanstack/react-table";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { ColumnDef } from "@tanstack/react-table";
+
+import { Button } from "@/components/ui/button";
+import { OnlineButton } from "@/components/super-agent/online-button";
+import EditFixtureModal from "@/components/fixtures/edit-fixture-modal";
+import DeleteFixtureModal from "@/components/fixtures/delete-fixture-modal";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export const columns: ColumnDef<AgentFixture>[] = [
   {
@@ -57,30 +69,64 @@ export const columns: ColumnDef<AgentFixture>[] = [
     header: "Round",
   },
   {
-    accessorKey: "series",
-    header: "Review",
+    accessorKey: "fixture_type",
+    header: "Type",
   },
   {
     id: "actions",
+    header: "Actions",
     cell: ({ row }) => {
       const fixture = row.original;
 
-      return <NavigateButton fixture={fixture} />;
+      return (
+        <div className="flex gap-2">
+          <OnlineButton fixture={fixture} />
+          <NavigateButton fixture={fixture} />
+        </div>
+      );
     },
   },
 ];
 
-const NavigateButton = (fixture: { fixture: AgentFixture }) => {
+const NavigateButton = ({ fixture }: { fixture: AgentFixture }) => {
+  const [open, setOpen] = useState(false);
+  const [openDel, setOpenDel] = useState(false);
+
   const router = useRouter();
 
   return (
-    <Button
-      size={"sm"}
-      onClick={() =>
-        router.push(`/home/super-agent/review-data/${fixture.fixture.fixture}`)
-      }
-    >
-      Review
-    </Button>
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button size={"sm"}>More</Button>
+        </DropdownMenuTrigger>
+
+        <DropdownMenuContent align="end">
+          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+
+          <DropdownMenuItem
+            onClick={() =>
+              router.push(`/home/super-agent/clean-data/${fixture.fixture}`)
+            }
+          >
+            Clean/Merge
+          </DropdownMenuItem>
+
+          <DropdownMenuItem>Edit</DropdownMenuItem>
+
+          <DropdownMenuItem onClick={() => setOpen(!openDel)}>
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <EditFixtureModal fixture={fixture} open={open} setOpen={setOpen} />
+
+      <DeleteFixtureModal
+        fixture={fixture}
+        open={openDel}
+        setOpen={setOpenDel}
+      />
+    </>
   );
 };
