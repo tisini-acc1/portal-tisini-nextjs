@@ -1,5 +1,6 @@
-import EventCard from "@/components/super-agent/event-card";
 import { fetchFixData } from "@/lib/api";
+import EventCard from "@/components/super-agent/event-card";
+import AddCommentModal from "@/components/super-agent/comment-modal";
 
 type Props = {
   params: Promise<{ fixtureId: string }>;
@@ -15,10 +16,10 @@ const ReviewDataPage = async ({ params }: Props) => {
   const awayEvents = fixData.away;
   const fixture = fixData.fixture[0];
 
-  // console.log(fixData.fixture);
+  // console.log(fixData);
 
   return (
-    <main className="relative">
+    <main className="">
       <header className="sticky top-0 z-50 bg-white shadow-md">
         <div className="bg-gray-800 text-white p-2">
           <h1 className="text-lg font-semibold text-center">Match Review</h1>
@@ -58,8 +59,8 @@ const ReviewDataPage = async ({ params }: Props) => {
       </header>
 
       <section>
-        <div className="max-w-3xl mx-auto p-4">
-          <div className="space-y-6">
+        <div className="grid md:grid-cols-12 gap-4 p-4">
+          <div className="space-y-6 col-span-6">
             {eventOrder.map((eventName) => {
               const homeEvent = homeEvents[eventName];
               const awayEvent = awayEvents[eventName];
@@ -76,6 +77,56 @@ const ReviewDataPage = async ({ params }: Props) => {
               }
               return null;
             })}
+          </div>
+
+          <div className="col-span-6 space-y-6">
+            {/* Agent 1 Card */}
+            <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+              <div className="flex justify-between items-center p-4 bg-gray-50 border-b border-gray-200">
+                <h3 className="font-medium text-gray-900">Agent 1</h3>
+
+                <AddCommentModal />
+              </div>
+
+              <div className="p-4 space-y-3 text-gray-700">
+                <p>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Molestiae, laborum?
+                </p>
+                <p>
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Vitae, possimus!
+                </p>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae,
+                  blanditiis.
+                </p>
+              </div>
+            </div>
+
+            {/* Agent 2 Card */}
+            <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+              <div className="flex justify-between items-center p-4 bg-gray-50 border-b border-gray-200">
+                <h3 className="font-medium text-gray-900">Agent 2</h3>
+
+                <AddCommentModal />
+              </div>
+
+              <div className="p-4 space-y-3 text-gray-700">
+                <p>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Molestiae, laborum?
+                </p>
+                <p>
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Vitae, possimus!
+                </p>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae,
+                  blanditiis.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

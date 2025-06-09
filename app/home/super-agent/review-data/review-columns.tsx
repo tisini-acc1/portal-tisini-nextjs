@@ -54,14 +54,20 @@ export const reviewColumns: ColumnDef<AgentFixture>[] = [
       const fixture = row.original;
 
       return (
-        <div className="flex justify-between items-center sm:gap-1">
-          <div className="p-2 bg-slate-100 rounded-md">
-            {fixture.tisiniscores.Home}
-          </div>
-          <div className="p-2 bg-slate-100 rounded-md">
-            {fixture.tisiniscores.Away}
-          </div>
-        </div>
+        <>
+          {fixture.game_status === "notstarted" ? (
+            <div className="text-center">vs</div>
+          ) : (
+            <div className="flex justify-between items-center sm:gap-1">
+              <div className="p-2 bg-slate-100 rounded-md">
+                {fixture.tisiniscores.Home}
+              </div>
+              <div className="p-2 bg-slate-100 rounded-md">
+                {fixture.tisiniscores.Away}
+              </div>
+            </div>
+          )}
+        </>
       );
     },
   },

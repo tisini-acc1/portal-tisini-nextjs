@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { useStore } from "@/store/store";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -37,6 +37,7 @@ export function FixturesTable<TData, TValue>({
 
   const updateReviewFixtures = useStore((state) => state.updateReviewFixtures);
   const router = useRouter();
+  const pathname = usePathname();
 
   const table = useReactTable({
     data,
@@ -68,7 +69,7 @@ export function FixturesTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4 gap-4">
+      <div className="flex items-center justify-between py-4 gap-4">
         <Input
           value={globalFilter ?? ""}
           onChange={(e) => setGlobalFilter(String(e.target.value))}
@@ -76,12 +77,14 @@ export function FixturesTable<TData, TValue>({
           className="max-w-sm"
         />
 
-        <Button
-          onClick={handleSubmit}
-          disabled={Object.keys(rowSelection).length <= 0}
-        >
-          Review Selected
-        </Button>
+        {pathname.includes("review-data") && (
+          <Button
+            onClick={handleSubmit}
+            disabled={Object.keys(rowSelection).length <= 0}
+          >
+            Review Selected
+          </Button>
+        )}
       </div>
 
       <div className="rounded-md border">

@@ -41,14 +41,20 @@ export const columns: ColumnDef<AgentFixture>[] = [
       const fixture = row.original;
 
       return (
-        <div className="flex justify-between items-center sm:gap-1">
-          <div className="p-2 bg-slate-100 rounded-md">
-            {fixture.tisiniscores.Home}
-          </div>
-          <div className="p-2 bg-slate-100 rounded-md">
-            {fixture.tisiniscores.Away}
-          </div>
-        </div>
+        <>
+          {fixture.game_status === "notstarted" ? (
+            <div className="text-center">vs</div>
+          ) : (
+            <div className="flex justify-between items-center sm:gap-1">
+              <div className="p-2 bg-slate-100 rounded-md">
+                {fixture.tisiniscores.Home}
+              </div>
+              <div className="p-2 bg-slate-100 rounded-md">
+                {fixture.tisiniscores.Away}
+              </div>
+            </div>
+          )}
+        </>
       );
     },
   },
@@ -98,7 +104,9 @@ const NavigateButton = ({ fixture }: { fixture: AgentFixture }) => {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button size={"sm"}>More</Button>
+          <Button size={"sm"} variant={"outline"}>
+            More
+          </Button>
         </DropdownMenuTrigger>
 
         <DropdownMenuContent align="end">
