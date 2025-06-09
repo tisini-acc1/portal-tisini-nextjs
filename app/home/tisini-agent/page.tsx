@@ -1,11 +1,15 @@
-"use client";
+// "use client";
 
-import { useStore } from "@/store/store";
+import { getSuperAgentFixtures } from "@/actions/php-actions";
 
-const AgentsPage = () => {
-  const { store } = useStore((state) => state);
+// import { useStore } from "@/store/store";
 
-  console.log(store);
+const AgentsPage = async () => {
+  const data: Promise<AgentFixture[]> = getSuperAgentFixtures();
+  const fixtures = await data;
+  // const { store } = useStore((state) => state);
+
+  console.log(fixtures);
 
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">

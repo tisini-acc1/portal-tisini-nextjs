@@ -21,7 +21,6 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Label } from "../ui/label";
-import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 
 const AddCommentModal = () => {
@@ -56,7 +55,10 @@ const AddCommentModal = () => {
                   <Label>Comment</Label>
 
                   <FormControl>
-                    <Textarea placeholder="comment about agents performance on the match..." />
+                    <Textarea
+                      placeholder="comment about agents performance on the match..."
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

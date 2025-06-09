@@ -134,7 +134,7 @@ const ReviewDataPage = async ({ params }: Props) => {
   );
 };
 
-const eventOrder = [
+export const eventOrder = [
   "Goal",
   "Goal Conceded",
   "Assists",

@@ -198,3 +198,21 @@ export const SUPERAGENT_ITEMS = [
   //   icon: Wallet,
   // },
 ];
+
+export const AGENT_ITEMS = [
+  {
+    title: "Home",
+    url: "/home/tisini-agent",
+    icon: Home,
+  },
+  {
+    title: "My Fixtures",
+    url: "/home/tisini-agent/fixtures",
+    icon: Workflow,
+  },
+  {
+    title: "Wallet",
+    url: "/home/wallet",
+    icon: Wallet,
+  },
+];

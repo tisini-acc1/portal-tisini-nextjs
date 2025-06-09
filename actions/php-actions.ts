@@ -1374,7 +1374,7 @@ export const getSuperAgentFixtures = async (): Promise<AgentFixture[]> => {
     });
 
     if (res.status === 200) {
-      console.log("server", res.data);
+      // console.log("server", res.data);
       return res.data;
     } else {
       throw new Error(`Failed to fetch tournaments for team: ${res.status}`);

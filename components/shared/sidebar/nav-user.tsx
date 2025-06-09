@@ -55,6 +55,8 @@ export function NavUser() {
       ? "Match Official"
       : user.role === "7"
       ? "Super Agent"
+      : user.role === "1"
+      ? "Tisini Agent"
       : "System User";
 
   return (

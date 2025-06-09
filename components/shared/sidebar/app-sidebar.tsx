@@ -15,6 +15,7 @@ import {
 import { useStore } from "@/store/store";
 // import { NavProjects } from "@/components/nav-projects";
 import {
+  AGENT_ITEMS,
   COMPS_ITEMS,
   PLAYER_ITEMS,
   REFREE_ITEMS,
@@ -99,6 +100,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       ? REFREE_ITEMS
       : userRole === "7"
       ? SUPERAGENT_ITEMS
+      : userRole === "1"
+      ? AGENT_ITEMS
       : [];
 
   return (
