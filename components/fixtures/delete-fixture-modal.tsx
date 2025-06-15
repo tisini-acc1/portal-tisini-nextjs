@@ -31,7 +31,7 @@ const DeleteFixtureModal = ({ fixture, open, setOpen }: DeleteProps) => {
     try {
       const res = await DeleteFixture(fixture.fixture);
 
-      console.log(res);
+      // console.log(res);
       if (res.error === "0") {
         setOpen(false);
         queryClient.invalidateQueries({ queryKey: ["fixtures", serie] });

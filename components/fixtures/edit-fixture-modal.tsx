@@ -112,14 +112,12 @@ const EditFixtureModal = ({ fixture, open, setOpen }: EditProps) => {
 
   async function onSubmit(values: z.infer<typeof fixtureSchema>) {
     const date = format(values.gameDate, "yyyy-M-d");
-    const fixData = {
-      team1: values.home,
-      team2: values.away,
-      gamedate: date,
-      matchday: values.matchday,
-      matchtime: values.gameTime,
-      fixtureid: fixture.fixture,
-    };
+    const fixData: AgentFixture = { ...fixture };
+    fixData.team1_id = values.home;
+    fixData.team2_id = values.away;
+    fixData.game_date = date;
+    fixData.matchday = values.matchday;
+    fixData.matchtime = values.gameTime;
 
     // console.log(fixData);
     mutation.mutate(fixData);

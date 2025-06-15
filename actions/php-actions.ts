@@ -153,7 +153,7 @@ export const createFixture = async (data: CreateFix) => {
 };
 
 // Create Fixtures
-export const updateFixture = async (data: UpdateFixture) => {
+export const updateFixture = async (data: AgentFixture) => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
 
@@ -1535,12 +1535,12 @@ export const DeleteFixture = async (id: string) => {
     if (res.status === 200) {
       return res.data;
     } else {
-      throw new Error(`Failed to modify fixture online status: ${res.status}`);
+      throw new Error(`Failed to delete fixture: ${res.status}`);
     }
   } catch (error: any) {
     console.log(error);
     throw new Error(
-      error.message || "An error occurred while modifing fixture status."
+      error.message || "An error occurred while deleting fixture."
     );
   }
 };

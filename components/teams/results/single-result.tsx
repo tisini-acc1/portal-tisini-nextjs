@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
+// import html2pdf from "html2pdf.js";
 
 import Loading from "@/app/home/loading";
 import TeamStats from "./teams/team-stats";
@@ -15,6 +16,8 @@ import {
   getPlayersData,
   getVideoEvents,
 } from "@/actions/php-actions";
+import { Download } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const SingleResult = ({ fixId }: { fixId: string }) => {
   const {
@@ -57,6 +60,15 @@ const SingleResult = ({ fixId }: { fixId: string }) => {
   // console.log(teamData);
   // console.log(playersData);
 
+  const handleClick = () => {
+    // Inside a .ts file
+    const html2pdf = require("html2pdf.js"); // Type: any
+
+    const element = document.getElementById("teamstats");
+
+    html2pdf(element);
+  };
+
   if (isLoading || pLoading || vLoading || eLoading) {
     return <Loading />;
   }
@@ -66,7 +78,7 @@ const SingleResult = ({ fixId }: { fixId: string }) => {
   }
 
   return (
-    <main className="max-w-full">
+    <main className="max-w-full" id="teamstats">
       <Tabs defaultValue="team">
         <header className="h-32 bg-header rounded-md w-full">
           <div className="h-24 flex flex-col gap-1 text-white font-bold font-mono">
@@ -116,7 +128,10 @@ const SingleResult = ({ fixId }: { fixId: string }) => {
               <TabsTrigger value="sequence">Sequence</TabsTrigger>
             </TabsList>
 
-            <div>filter component</div>
+            {/* <div>filter component</div> */}
+            <Button size={"sm"} variant={"outline"} onClick={handleClick}>
+              <Download /> Download
+            </Button>
           </div>
         </header>
 
