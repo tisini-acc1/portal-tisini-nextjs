@@ -62,11 +62,9 @@ const SingleResult = ({ fixId }: { fixId: string }) => {
 
   const handleClick = () => {
     // Inside a .ts file
-    const html2pdf = require("html2pdf.js"); // Type: any
-
-    const element = document.getElementById("teamstats");
-
-    html2pdf(element);
+    // const html2pdf = require("html2pdf.js"); // Type: any
+    // const element = document.getElementById("teamstats");
+    // html2pdf(element);
   };
 
   if (isLoading || pLoading || vLoading || eLoading) {
