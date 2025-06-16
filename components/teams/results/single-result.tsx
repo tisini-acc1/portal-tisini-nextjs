@@ -127,7 +127,12 @@ const SingleResult = ({ fixId }: { fixId: string }) => {
             </TabsList>
 
             {/* <div>filter component</div> */}
-            <Button size={"sm"} variant={"outline"} onClick={handleClick}>
+            <Button
+              size={"sm"}
+              variant={"outline"}
+              onClick={handleClick}
+              className="hidden"
+            >
               <Download /> Download
             </Button>
           </div>
