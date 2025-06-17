@@ -136,7 +136,7 @@ type Fixture = {
   series: string;
 };
 
-type FixtureDetails = {
+type FixtureDetail = {
   fixture_type: string;
   game_date: string;
   game_moment: string;
@@ -167,6 +167,10 @@ type FixtureDetails = {
   groupid: string;
   matchtime: string;
   tmvplayer: string;
+};
+
+type TeamHistory = {
+  [fixId: string]: FixtureDetail;
 };
 
 type SubEvent = {

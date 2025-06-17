@@ -139,7 +139,10 @@ const SingleResult = ({ fixId }: { fixId: string }) => {
         </header>
 
         <TabsContent value="team">
-          <TeamStats data={teamData as FixtureData} videoData={videoData} />
+          <TeamStats
+            data={teamData as FixtureData}
+            videoData={videoData as VideoEvent[]}
+          />
         </TabsContent>
         <TabsContent value="player">
           <PlayerStats
@@ -150,13 +153,13 @@ const SingleResult = ({ fixId }: { fixId: string }) => {
 
         <TabsContent value="video">
           <VideoAnalysis
-            videoData={videoData}
+            videoData={videoData as VideoEvent[]}
             fixEvents={events as EventType[]}
           />
         </TabsContent>
 
         <TabsContent value="sequence">
-          <SequenceAnalysis videoData={videoData} />
+          <SequenceAnalysis videoData={videoData as VideoEvent[]} />
         </TabsContent>
       </Tabs>
     </main>

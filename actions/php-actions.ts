@@ -375,7 +375,7 @@ export const getFixtureStats = async (fixId: string): Promise<FixtureData> => {
 };
 
 // Create Fixtures
-export const getVideoEvents = async (fixId: string) => {
+export const getVideoEvents = async (fixId: string): Promise<VideoEvent[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
 
@@ -1062,7 +1062,7 @@ export const getFixConditions = async (
   }
 };
 
-export const getTeamHistory = async (id: string) => {
+export const getTeamHistory = async (id: string): Promise<TeamHistory[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
 
