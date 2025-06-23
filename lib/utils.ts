@@ -45,10 +45,10 @@ export const getSubEvent = (
   );
 
   const stat = event[0]["sub-event"].filter(
-    (item) => item.subevent_id === subEventId
+    (item) => item.subeventid === subEventId
   );
 
-  return stat[0].subTotal;
+  return parseInt(stat[0].totalsubevent);
 };
 
 export const calcBallPosession = (homeArry: Stats, awayArry: Stats) => {

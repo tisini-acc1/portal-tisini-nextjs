@@ -69,7 +69,7 @@ export const footballRating = (data: Stats) => {
 
   events.forEach((event) => {
     const id = event.event_id;
-    const subId = event["sub-event"][0]?.subevent_id;
+    const subId = event["sub-event"][0]?.subeventid;
 
     const pointValue = eventPoints[id];
 
@@ -120,7 +120,7 @@ export const rugbyRating = (
 
   events.forEach((event) => {
     const id = event.event_id;
-    const subId = event["sub-event"][0]?.subevent_id;
+    const subId = event["sub-event"][0]?.subeventid;
 
     const pointValue = eventPoints[id];
 

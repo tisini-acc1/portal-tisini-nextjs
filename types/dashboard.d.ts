@@ -2,10 +2,10 @@ type GroupedEvent = {
   eventId: string;
   eventName: string;
   total: number;
-  subEvents: SubEvent[] | [];
+  subEvents: TSubEvent[] | [];
 };
 
-type SubEvent = {
+type TSubEvent = {
   subevent_id: string;
   subeventName: string;
   subTotal: number;

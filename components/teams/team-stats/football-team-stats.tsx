@@ -24,6 +24,7 @@ const FootballTeamStats = ({ data, videoData }: TeamProps) => {
   const simple = ["210", "211"];
 
   const fData = footballData(data);
+  console.log(fData);
 
   const ballWon = {} as BallWon;
   const restart = {} as GkRestart;
