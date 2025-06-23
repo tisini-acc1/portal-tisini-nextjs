@@ -124,11 +124,34 @@ const ResultsPage = () => {
                   </div>
 
                   <div className="flex justify-between items-center text-xs text-gray-500 whitespace-nowrap">
-                    <p
-                      className="w-9/12 overflow-hidden text-ellipsis
-                "
-                    >
-                      {fixture.scores.Home} - {fixture.scores.Away}
+                    <p className="w-9/12 overflow-hidden text-ellipsis italic">
+                      {store.team.name === fixture.team1_name &&
+                      fixture.scores.Home > fixture.scores.Away ? (
+                        <span className="text-green-700">
+                          {`Won ${fixture.scores.Home} - ${fixture.scores.Away}`}
+                        </span>
+                      ) : store.team.name === fixture.team2_name &&
+                        fixture.scores.Home < fixture.scores.Away ? (
+                        <span className="text-green-700">
+                          {`Won ${fixture.scores.Home} - ${fixture.scores.Away}`}
+                        </span>
+                      ) : store.team.name === fixture.team1_name &&
+                        fixture.scores.Away > fixture.scores.Home ? (
+                        <span className="text-red-700">
+                          {`Lost ${fixture.scores.Home} - ${fixture.scores.Away}`}
+                        </span>
+                      ) : store.team.name === fixture.team2_name &&
+                        fixture.scores.Home > fixture.scores.Away ? (
+                        <span className="text-red-700">
+                          {`Lost ${fixture.scores.Home} - ${fixture.scores.Away}`}
+                        </span>
+                      ) : fixture.scores.Home === fixture.scores.Away ? (
+                        `Drew ${fixture.scores.Home} - ${fixture.scores.Away}`
+                      ) : (
+                        <span>
+                          {`${fixture.scores.Home} - ${fixture.scores.Away}`}
+                        </span>
+                      )}
                     </p>{" "}
                     <Button
                       size={"sm"}
@@ -140,7 +163,7 @@ const ResultsPage = () => {
                         )
                       }
                     >
-                      match sheet
+                      Match Sheet
                     </Button>
                     {fixture.pay_status === 0 ? (
                       <FixPaymentModal fixture={fixture} />

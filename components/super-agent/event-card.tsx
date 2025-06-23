@@ -14,12 +14,12 @@ const EventCard = ({ homeEvent, awayEvent }: Props) => {
   // Get all unique sub-event names that actually have values
   const homeSubEvents =
     homeEvent?.["sub-event"]
-      ?.filter((s) => s.totalsubevent !== "0")
-      .map((s) => s.subeventname) || [];
+      ?.filter((s) => s.subTotal !== 0)
+      .map((s) => s.subeventName) || [];
   const awaySubEvents =
     awayEvent?.["sub-event"]
-      ?.filter((s) => s.totalsubevent !== "0")
-      .map((s) => s.subeventname) || [];
+      ?.filter((s) => s.subTotal !== 0)
+      .map((s) => s.subeventName) || [];
   const subEvents = Array.from(new Set([...homeSubEvents, ...awaySubEvents]));
 
   const hasSubEvents = subEvents.length > 0;
@@ -75,11 +75,11 @@ const EventCard = ({ homeEvent, awayEvent }: Props) => {
         <div className="mt-2 space-y-1 animate-fadeIn">
           {subEvents.map((subEventName) => {
             const homeSubValue = homeEvent?.["sub-event"]?.find(
-              (s) => s.subeventname === subEventName
-            )?.totalsubevent;
+              (s) => s.subeventName === subEventName
+            )?.subTotal;
             const awaySubValue = awayEvent?.["sub-event"]?.find(
-              (s) => s.subeventname === subEventName
-            )?.totalsubevent;
+              (s) => s.subeventName === subEventName
+            )?.subTotal;
 
             return (
               <div

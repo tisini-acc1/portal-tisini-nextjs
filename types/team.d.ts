@@ -255,7 +255,7 @@ type GameHighlights = {
 };
 
 type FixtureData = {
-  fixture: FixtureDetails[];
+  fixture: FixtureDetail[];
   home: Stats;
   away: Stats;
   scores: Scores;

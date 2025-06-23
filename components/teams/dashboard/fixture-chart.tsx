@@ -31,13 +31,18 @@ interface FixtureChartProps {
   onToggleView: () => void;
 }
 
+interface ChartDataItem {
+  fixture: string;
+  [eventName: string]: string | number;
+}
+
 export const FixtureChart: React.FC<FixtureChartProps> = ({
   data,
   selectedEventIds,
   onToggleView,
 }) => {
   // Get all fixture IDs (team/player keys)
-  const getFixtureKeys = () => {
+  const getFixtureKeys = (): string[] => {
     const keys = new Set<string>();
     data.forEach((event) => {
       Object.keys(event).forEach((key) => {
@@ -60,9 +65,9 @@ export const FixtureChart: React.FC<FixtureChartProps> = ({
   ];
 
   // Prepare chart data - each fixture is a data point
-  const chartData = React.useMemo(() => {
+  const chartData: ChartDataItem[] = React.useMemo(() => {
     return fixtureKeys.map((fixture) => {
-      const fixtureData: any = { fixture };
+      const fixtureData: ChartDataItem = { fixture };
 
       selectedEventIds.forEach((eventId) => {
         const event = data.find((e) => e.event_id === eventId);

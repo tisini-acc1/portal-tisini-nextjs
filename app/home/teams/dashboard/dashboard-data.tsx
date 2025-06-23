@@ -6,7 +6,6 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "../../loading";
 import { useStore } from "@/store/store";
 import { getVideoEvents } from "@/actions/php-actions";
-import { Table, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import TeamDashboard from "@/components/teams/dashboard/team-dashboard";
 
 type DashProps = {
@@ -49,7 +48,7 @@ const DashboardData = ({ fixtures }: DashProps) => {
     }
   }, [team.id, data]);
 
-  // console.log(teamData);
+  // console.log(data);
 
   if (isLoading) {
     return <Loading />;
@@ -201,7 +200,8 @@ function transformToTableData(
     });
 
     // Process subevents for this event
-    eventInfo.subEvents.forEach((subEventName, subEventId) => {
+    eventInfo.subEvents.forEach((subEventName) => {
+      // Removed unused subEventId parameter
       const subEventRow: TableSubevent = {
         name: subEventName,
       };

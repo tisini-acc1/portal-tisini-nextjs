@@ -220,14 +220,13 @@ const mergeAgentData = (data: FixtureData[], home: boolean): TableData[] => {
 
       if (Array.isArray(eventData["sub-event"])) {
         eventData["sub-event"].forEach((sub) => {
-          const subKey = sub.subeventname;
+          const subKey = sub.subeventName;
           if (!merged[key].subEvents[subKey]) {
             merged[key].subEvents[subKey] = {
-              name: sub.subeventname,
+              name: sub.subeventName,
             };
           }
-          merged[key].subEvents[subKey][fixtureKey] =
-            parseInt(sub.totalsubevent, 10) || 0;
+          merged[key].subEvents[subKey][fixtureKey] = sub.subTotal || 0;
         });
       }
     });

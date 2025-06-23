@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { FixtureChart } from "./fixture-chart";
+import { EventSelector } from "./Event-selector";
+import { SubEventsTable } from "./sub-events-table";
 
 const TeamDashboard = ({ teamData }: { teamData: TableData[] }) => {
   const [selectedEventIds, setSelectedEventIds] = useState<string[]>(["134"]);
@@ -13,7 +15,7 @@ const TeamDashboard = ({ teamData }: { teamData: TableData[] }) => {
     setShowSubEvents(!showSubEvents);
   };
 
-  console.log(teamData);
+  // console.log(teamData);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
@@ -22,19 +24,13 @@ const TeamDashboard = ({ teamData }: { teamData: TableData[] }) => {
           <h1 className="text-3xl font-bold">Sports Analytics Dashboard</h1>
         </div>
 
-        {/* <EventSelector
-          events={sampleData}
+        <EventSelector
+          events={teamData}
           selectedEventIds={selectedEventIds}
           onSelectionChange={handleEventSelection}
-        /> */}
-
-        <FixtureChart
-          data={teamData}
-          selectedEventIds={selectedEventIds}
-          onToggleView={handleToggleView}
         />
 
-        {/* {!showSubEvents ? (
+        {!showSubEvents ? (
           <FixtureChart
             data={teamData}
             selectedEventIds={selectedEventIds}
@@ -42,11 +38,11 @@ const TeamDashboard = ({ teamData }: { teamData: TableData[] }) => {
           />
         ) : (
           <SubEventsTable
-            data={sampleData}
+            data={teamData}
             selectedEventIds={selectedEventIds}
             onToggleView={handleToggleView}
           />
-        )} */}
+        )}
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import Loading from "../../loading";
 import { useStore } from "@/store/store";
-import { getEvents, getTeamTournaments } from "@/actions/php-actions";
+import { getTeamTournaments } from "@/actions/php-actions";
 import ResultsHeader from "@/components/teams/results/results-header";
 import DashboardData from "./dashboard-data";
 
@@ -13,20 +13,18 @@ const DashboardPage = () => {
   const [series, setSeries] = useState<TeamSeason[]>([]);
   const [fixtures, setFixtures] = useState<TeamFixture[]>([]);
 
-  const { store, updateTournament, updateSerie, updateFixture } = useStore(
-    (state) => state
-  );
-  const fixType = store.team.teamType.toLowerCase();
+  const { store, updateTournament, updateSerie } = useStore((state) => state);
+  // const fixType = store.team.teamType.toLowerCase();
 
   const { data, isError, isLoading, error } = useQuery({
     queryKey: ["teamTournaments", store.team.id],
     queryFn: () => getTeamTournaments(store.team.id, ""),
   });
 
-  const { data: events } = useQuery({
-    queryKey: ["fixtureEvents", fixType],
-    queryFn: () => getEvents(fixType as string),
-  });
+  // const { data: events } = useQuery({
+  //   queryKey: ["fixtureEvents", fixType],
+  //   queryFn: () => getEvents(fixType as string),
+  // });
 
   useEffect(() => {
     if (data && data[0] && data[0].season && data[0].season.length > 0) {
@@ -58,7 +56,7 @@ const DashboardPage = () => {
     }
   }, [data, store.tournament, store.serie]);
 
-  console.log(events);
+  // console.log(events);
 
   if (isLoading) {
     return <Loading />;

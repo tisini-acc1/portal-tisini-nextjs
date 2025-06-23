@@ -45,33 +45,11 @@ const SimpleFootball = ({ data, recovery, restart, videoData }: SimpeProps) => {
     (item) => item.Pass_Count < 4
   ).length;
 
-  // console.log(sequences);
-
   return (
     <div className="space-y-4">
       <div className="w-full">
         <Card className="shadow-lg border-0">
           <CardContent className="p-6 space-y-4">
-            {/* <div className="col-span-1 md:col-span-2 lg:col-span-2 space-y-6">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-gray-50 rounded-lg p-4">
-                  <p className="text-sm text-gray-500 font-medium">
-                    Total Sequences
-                  </p>
-                  <p className="text-3xl font-bold">{totalSequences}</p>
-                </div>
-
-                <div className="bg-gray-50 rounded-lg p-4">
-                  <p className="text-sm text-gray-500 font-medium">
-                    Average Pass Sequence
-                  </p>
-                  <p className="text-3xl font-bold">
-                    {averagePassSequence.toFixed(1)}
-                  </p>
-                </div>
-              </div>
-            </div> */}
-
             <div className="col-span-1 md:col-span-4 lg:col-span-3 space-y-6">
               <div className="grid grid-cols-4 gap-4">
                 <div className="bg-gray-50 rounded-lg p-4">

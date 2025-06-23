@@ -1,14 +1,18 @@
 "use client";
 
 import Image from "next/image";
+import { Download } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-// import html2pdf from "html2pdf.js";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
 import Loading from "@/app/home/loading";
+import { useStore } from "@/store/store";
 import TeamStats from "./teams/team-stats";
+import { Button } from "@/components/ui/button";
 import PlayerStats from "./players/player-stats";
 import VideoAnalysis from "./video/video-analysis";
 import SequenceAnalysis from "./video/sequence-analysis";
+import GenFootballPDF from "@/components/pdfs/generate-pdf";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   getEvents,
@@ -16,10 +20,10 @@ import {
   getPlayersData,
   getVideoEvents,
 } from "@/actions/php-actions";
-import { Download } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const SingleResult = ({ fixId }: { fixId: string }) => {
+  const teamName = useStore((state) => state.store.team.name);
+
   const {
     data: teamData,
     isLoading,
@@ -49,23 +53,13 @@ const SingleResult = ({ fixId }: { fixId: string }) => {
     queryFn: () => getEvents(fixType as string),
   });
 
-  // const { data: sequence, isLoading: sLoading } = useQuery({
-  //   queryKey: ["sequences", fixId],
-  //   queryFn: () => getSequenceAnalysis(fixId, fixType as string),
-  // });
+  const fixDetail = teamData && teamData?.fixture[0];
+  const pdfName =
+    teamName === fixDetail?.team1_name
+      ? `${teamName} vs ${fixDetail.team2_name}`
+      : `${fixDetail?.team2_name}-vs-${teamName}`;
 
-  // console.log(sequence);
-  // const res = passSequenceAnalysis(videoData);
-
-  // console.log(teamData);
-  // console.log(playersData);
-
-  const handleClick = () => {
-    // Inside a .ts file
-    // const html2pdf = require("html2pdf.js"); // Type: any
-    // const element = document.getElementById("teamstats");
-    // html2pdf(element);
-  };
+  console.log(fixDetail?.fixture_type);
 
   if (isLoading || pLoading || vLoading || eLoading) {
     return <Loading />;
@@ -120,6 +114,7 @@ const SingleResult = ({ fixId }: { fixId: string }) => {
 
           <div className="flex justify-between items-center bg-slate-50 rounded-md w-full">
             <TabsList className="text-sm">
+              {/* <TabsTrigger value="pdf">pdf</TabsTrigger> */}
               <TabsTrigger value="team">Team</TabsTrigger>
               <TabsTrigger value="player">Player</TabsTrigger>
               <TabsTrigger value="video">Video</TabsTrigger>
@@ -127,14 +122,27 @@ const SingleResult = ({ fixId }: { fixId: string }) => {
             </TabsList>
 
             {/* <div>filter component</div> */}
-            <Button
-              size={"sm"}
-              variant={"outline"}
-              onClick={handleClick}
-              className="hidden"
-            >
-              <Download /> Download
-            </Button>
+            {fixDetail?.fixture_type === "football" && (
+              <PDFDownloadLink
+                document={
+                  <GenFootballPDF
+                    data={teamData as FixtureData}
+                    videoData={videoData as VideoEvent[]}
+                  />
+                }
+                fileName={`${pdfName}report.pdf`}
+                style={{ textDecoration: "none" }} // Removes default link styling
+              >
+                {({ loading }) => (
+                  <Button asChild size="sm" disabled={loading}>
+                    <div className="flex items-center gap-2">
+                      <Download size={16} />
+                      {loading ? "Generating..." : "Download PDF"}
+                    </div>
+                  </Button>
+                )}
+              </PDFDownloadLink>
+            )}
           </div>
         </header>
 
@@ -144,6 +152,14 @@ const SingleResult = ({ fixId }: { fixId: string }) => {
             videoData={videoData as VideoEvent[]}
           />
         </TabsContent>
+
+        <TabsContent value="pdf">
+          {/* <GenFootballPDF
+            data={teamData as FixtureData}
+            videoData={videoData as VideoEvent[]}
+          /> */}
+        </TabsContent>
+
         <TabsContent value="player">
           <PlayerStats
             pData={playersData as TeamPlayerData}

@@ -45,10 +45,10 @@ export const getSubEvent = (
   );
 
   const stat = event[0]["sub-event"].filter(
-    (item) => item.subeventid === subEventId
+    (item) => item.subevent_id === subEventId
   );
 
-  return parseInt(stat[0].totalsubevent);
+  return stat[0].subTotal;
 };
 
 export const calcBallPosession = (homeArry: Stats, awayArry: Stats) => {
@@ -148,7 +148,7 @@ export const calcRugbyTerritory7s = (homeArry: Stats, awayArry: Stats) => {
 export const footballDetails = (
   home: Stats,
   away: Stats,
-  details: FixtureDetails,
+  details: FixtureDetail,
   scores: Scores
 ) => {
   const fixture = {} as Details;
@@ -937,7 +937,7 @@ export const rugbyZones7s = (home: Stats, away: Stats) => {
 export const rugbyDetails = (
   home: Stats,
   away: Stats,
-  details: FixtureDetails,
+  details: FixtureDetail,
   scores: Scores
 ) => {
   const fixture = {} as Details;
@@ -964,7 +964,7 @@ export const rugbyDetails = (
 export const rugbyDetails7s = (
   home: Stats,
   away: Stats,
-  details: FixtureDetails,
+  details: FixtureDetail,
   scores: Scores
 ) => {
   const fixture = {} as Details;
