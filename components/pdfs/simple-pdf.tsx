@@ -159,8 +159,8 @@ const SimpleBallPDF = ({
                 {data.attack.shotOutBox.home.value} /{" "}
                 {data.attack.shotOutBox.home.total}{" "}
                 {calcPerc(
-                  data.attack.shotInBox.away.value,
-                  data.attack.shotInBox.away.total
+                  data.attack.shotInBox.home.value,
+                  data.attack.shotInBox.home.total
                 )}
                 %
               </TD>
