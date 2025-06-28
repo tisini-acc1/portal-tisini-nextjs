@@ -154,7 +154,7 @@ const FixturesPage = () => {
   ];
 
   // console.log(roundFixtures);
-  // console.log(fixtures);
+  console.log(fixtures);
 
   return (
     <main>

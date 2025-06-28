@@ -97,17 +97,18 @@ type SheetFix = {
 };
 
 type UpdateFix = {
-  gamedate: string;
-  fieldid: string;
-  gamestatus: string;
-  homescore: string;
-  awayscore: string;
+  game_date: string;
+  field_id: string;
+  game_status: string;
+  home_score: string;
+  away_score: string;
   matchday: string;
   matchtime: string;
-  commcomments: string | null;
-  othercomments: string | null;
-  playstatus: string;
-  videoURL: string | null;
-  vfixid: string | null;
+  commisioner_comment: string | null;
+  other_comment: string | null;
+  matchplay_status: string;
+  videourl: string | null;
+  videofixtid: string | null;
   fixture: string;
+  reason: values.reason;
 };

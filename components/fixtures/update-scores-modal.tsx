@@ -72,7 +72,7 @@ const UpdateScoresModal = ({ fixture, open, setOpen }: UpdateProps) => {
   const mutation = useMutation({
     mutationFn: ModifyFixture,
     onSuccess: (data) => {
-      console.log(data);
+      // console.log(data);
       if (data.error === "0") {
         setOpen(false);
         queryClient.invalidateQueries({ queryKey: ["fixtures", serie] });
@@ -98,18 +98,18 @@ const UpdateScoresModal = ({ fixture, open, setOpen }: UpdateProps) => {
 
   const onSubmit = async (values: z.infer<typeof statusSchema>) => {
     const fixData = {
-      gamedate: fixture.game_date,
-      fieldid: fixture.field_id,
-      gamestatus: fixture.game_status,
-      homescore: values.home_score,
-      awayscore: values.away_score,
+      game_date: fixture.game_date,
+      field_id: fixture.field_id,
+      game_status: fixture.game_status,
+      home_score: values.home_score,
+      away_score: values.away_score,
       matchday: fixture.matchday,
       matchtime: fixture.matchtime,
-      commcomments: fixture.commisioner_comment,
-      othercomments: fixture.other_comment,
-      playstatus: values.matchplay_status,
-      videoURL: fixture.videourl,
-      vfixid: fixture.videofixtid,
+      commisioner_comment: fixture.commisioner_comment,
+      other_comment: fixture.other_comment,
+      matchplay_status: values.matchplay_status,
+      videourl: fixture.videourl,
+      videofixtid: fixture.videofixtid,
       fixture: fixture.fixture,
       reason: values.reason,
     };
