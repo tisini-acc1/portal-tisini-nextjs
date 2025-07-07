@@ -48,7 +48,10 @@ const LoginPage = () => {
       <Separator />
 
       <CardFooter className="flex items-center justify-center p-3">
-        <Link href="" className="text-sm hover:underline text-ring">
+        <Link
+          href="/auth/request-password"
+          className="text-sm hover:underline text-ring"
+        >
           Forgot password?
         </Link>
       </CardFooter>

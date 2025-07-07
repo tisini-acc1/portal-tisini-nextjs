@@ -60,9 +60,12 @@ const UsernameForm = () => {
 
       const res = await axios.post(`${process.env.NEXT_PUBLIC_API_HOST}`, user);
 
-      // console.log(res);
+      console.log(res);
 
-      if (res.data.success === "1") {
+      if (res.data.change === "1") {
+        localStorage.setItem("code", res.data.code);
+        router.replace("/auth/reset-password");
+      } else if (res.data.success === "1") {
         updateUser({
           name: res.data.name,
           id: res.data.userid,
