@@ -108,6 +108,7 @@ export const COMPS_ITEMS = [
       { title: "leagues", url: "/home/competitions/leagues" },
       { title: "Teams", url: "/home/competitions/teams" },
       { title: "Fixtures", url: "/home/competitions/fixtures" },
+      { title: "Stats", url: "/home/competitions/stats" },
       { title: "Transfers", url: "/home/competitions/transfers" },
     ],
   },
