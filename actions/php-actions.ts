@@ -1439,6 +1439,70 @@ export const getMainEvents = async () => {
   }
 };
 
+// fetch season top scorers
+export const getSeasonScorers = async (
+  id: number,
+  type: string
+): Promise<TopScorer[]> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "topPointRefData",
+      fixturetype: type,
+      seriesid: id,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      // console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(
+        `Failed to fetch topscorers for tournament: ${res.status}`
+      );
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while fetching tournament topscorers."
+    );
+  }
+};
+
+// fetch season top cards
+export const getSeasonCards = async (
+  id: number,
+  type: string
+): Promise<TopCards[]> => {
+  const token = await getToken();
+  const baseURL = process.env.NEXT_PUBLIC_API_HOST;
+
+  try {
+    const res = await axios.post(`${baseURL}`, {
+      action: "topCardRefData",
+      fixturetype: type,
+      seriesid: id,
+      gettoken: token,
+    });
+
+    if (res.status === 200) {
+      // console.log("server", res.data);
+      return res.data;
+    } else {
+      throw new Error(
+        `Failed to fetch top cards for tournament: ${res.status}`
+      );
+    }
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(
+      error.message || "An error occurred while fetching tournament top cards."
+    );
+  }
+};
+
 //  {"action":"fixtures","fixtureid":1}
 export const ModifyOnlineFixture = async (data: {
   fixtureid: string;

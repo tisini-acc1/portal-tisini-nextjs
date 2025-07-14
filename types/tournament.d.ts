@@ -190,3 +190,30 @@ type CreateGroup = {
   gname: string;
   categoryid: string;
 };
+
+type TopScorer = {
+  playerid: string;
+  seasonid: string;
+  eventid: string;
+  subeventid: string;
+  teamid: string;
+  trys: string;
+  conversion: number;
+  penalty: number;
+  dropgoal: number;
+  totalpoints: string;
+  playername: string;
+  teamname: string;
+};
+
+type TopCards = {
+  eventid: string;
+  playerid: string;
+  playername: string;
+  red: number;
+  seasonid: string;
+  subeventid: string;
+  teamid: string;
+  teamname: string;
+  yellow: number;
+};
