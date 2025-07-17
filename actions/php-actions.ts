@@ -1334,14 +1334,14 @@ export const fixturePayment = async (data: FixPay) => {
 };
 
 // fixture payment
-export const PlayerFixtures = async () => {
+export const PlayerFixtures = async (id: number) => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_API_HOST;
 
   try {
     const res = await axios.post(`${baseURL}`, {
       action: "fixtures",
-      playerid: 6857,
+      playerid: id,
       gettoken: token,
     });
 

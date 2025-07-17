@@ -60,7 +60,7 @@ const UsernameForm = () => {
 
       const res = await axios.post(`${process.env.NEXT_PUBLIC_API_HOST}`, user);
 
-      console.log(res);
+      // console.log(res);
 
       if (res.data.change === "1") {
         localStorage.setItem("code", res.data.code);

@@ -13,6 +13,8 @@ const FixtureCard = ({ fixture }: { fixture: PlayerFixture }) => {
 
   const { updateFixture, updatePlayerFix } = useStore((state) => state);
 
+  // console.log(user);
+
   return (
     <Card
       key={fixture.id}

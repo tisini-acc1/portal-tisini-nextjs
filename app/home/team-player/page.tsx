@@ -4,7 +4,7 @@ import { PlayerFixtures } from "@/actions/php-actions";
 import FixtureCard from "@/components/players/fixture-card";
 
 const PlayersPage = async () => {
-  const data: Promise<PlayerFixture[]> = PlayerFixtures();
+  const data: Promise<PlayerFixture[]> = PlayerFixtures(6857);
   const fData = await data;
 
   const fixtures = fData?.slice().reverse();
@@ -16,13 +16,17 @@ const PlayersPage = async () => {
 
   return (
     <main>
-      <section className="grid gap-4 lg:grid-cols-2">
+      <section className="gap-4 lg:grid-cols-2 hidden">
         {fixtures?.map((fixture) => (
           <div key={fixture.id}>
             <FixtureCard fixture={fixture} />
           </div>
         ))}
       </section>
+
+      <h1 className="h-96 flex items-center justify-center">
+        Player Data Comming Soon
+      </h1>
     </main>
   );
 };
