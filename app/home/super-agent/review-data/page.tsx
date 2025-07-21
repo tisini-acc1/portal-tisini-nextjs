@@ -3,7 +3,7 @@ import React, { Suspense } from "react";
 import Loading from "../../loading";
 import { reviewColumns } from "./review-columns";
 import { FixturesTable } from "../fixtures-table";
-import { getSuperAgentFixtures } from "@/actions/php-actions";
+import { getSuperAgentFixtures } from "@/data/fixtures/get-super-agent-fixtures";
 
 const ReviewDataPage = async () => {
   const data: Promise<AgentFixture[]> = getSuperAgentFixtures();

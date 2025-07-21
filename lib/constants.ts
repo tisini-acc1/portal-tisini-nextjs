@@ -6,6 +6,7 @@ import {
   // File,
   Gamepad,
   Home,
+  Merge,
   // LifeBuoy,
   // Map,
   PersonStanding,
@@ -193,11 +194,16 @@ export const SUPERAGENT_ITEMS = [
   //   url: "/home/super-agent/clean-data",
   //   icon: Wallet,
   // },
-  // {
-  //   title: "Merge Data",
-  //   url: "/home/super-agent/merge-data",
-  //   icon: Wallet,
-  // },
+  {
+    title: "Merge",
+    url: "#",
+    icon: Merge,
+    isActive: true,
+    items: [
+      // { title: "Data", url: "/home/super-agent/merge-data" },
+      { title: "Player", url: "/home/super-agent/merge-players" },
+    ],
+  },
 ];
 
 export const AGENT_ITEMS = [

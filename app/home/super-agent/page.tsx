@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import { FixturesTable } from "./fixtures-table";
-import { getSuperAgentFixtures } from "@/actions/php-actions";
 import Loading from "../loading";
 import { columns } from "./columns";
+import { getSuperAgentFixtures } from "@/data/fixtures/get-super-agent-fixtures";
 
 const TisiniAdminPage = async () => {
   const data: Promise<AgentFixture[]> = getSuperAgentFixtures();

@@ -1,3 +1,17 @@
+type AllTeam = {
+  date_created: string;
+  id: string;
+  name: string;
+  organisation_id: string;
+  password: string;
+  pricing: string;
+  referral: string;
+  system_user_id: string;
+  team_type: string;
+  teamlogo: string;
+  username: string;
+};
+
 type TeamOverview = {
   team_id: string;
   team_name: string;
