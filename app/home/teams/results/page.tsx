@@ -7,9 +7,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useStore } from "@/store/store";
 import { Button } from "@/components/ui/button";
 import { getTeamTournaments } from "@/actions/php-actions";
-import ResultsHeader from "@/components/teams/results/results-header";
-import { formattedDate } from "@/components/teams/fixtures/team-fixtures";
-import FixPaymentModal from "@/components/teams/results/fix-payment-modal";
+import ResultsHeader from "@/app/(home)/teams/components/teams/results/results-header";
+import { formattedDate } from "@/app/(home)/teams/components/teams/fixtures/team-fixtures";
+import FixPaymentModal from "@/app/(home)/teams/components/teams/results/fix-payment-modal";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const ResultsPage = () => {

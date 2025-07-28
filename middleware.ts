@@ -39,7 +39,7 @@ export default async function middleware(req: NextRequest) {
     if (userRole === "1") {
       return NextResponse.redirect(new URL("/home/agents", req.nextUrl));
     } else if (userRole === "2") {
-      return NextResponse.redirect(new URL("/home/teams", req.nextUrl));
+      return NextResponse.redirect(new URL("/teams", req.nextUrl));
     } else if (userRole === "5") {
       return NextResponse.redirect(new URL("/home/players", req.nextUrl));
     } else if (userRole === "6") {

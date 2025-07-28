@@ -11,15 +11,15 @@ import { useStore } from "@/store/store";
 // import { Button } from "@/components/ui/button";
 import { calculateYearsOld } from "@/lib/utils";
 // import EditPlayerModal from "@/components/teams/manage-player/edit-player-modal";
-import UploadImagesDialog from "@/components/teams/manage-player/upload-images-dialog";
+import UploadImagesDialog from "@/app/(home)/teams/components/teams/manage-player/upload-images-dialog";
 import {
   getAllPlayers,
   getCountry,
   getTeamTournaments,
   // getUserTeams,
 } from "@/actions/php-actions";
-import TransferDialog from "@/components/teams/manage-player/transfer-dialog";
-import CreatePlayerModal from "@/components/teams/manage-player/create-player-modal";
+import TransferDialog from "@/app/(home)/teams/components/teams/manage-player/transfer-dialog";
+import CreatePlayerModal from "@/app/(home)/teams/components/teams/manage-player/create-player-modal";
 import {
   Card,
   CardContent,

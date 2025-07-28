@@ -8,9 +8,9 @@ import { useStore } from "@/store/store";
 import Loading from "@/app/home/loading";
 import { Button } from "@/components/ui/button";
 import { getAllPlayers, getTeamLineup } from "@/actions/php-actions";
-import EditJerseyModal from "@/components/teams/lineups/edit-jersey-modal";
-import ReplacePlayerModal from "@/components/teams/lineups/replace-player-modal";
-import SwapPlayerModal from "@/components/teams/lineups/swap-player-modal";
+import EditJerseyModal from "@/app/(home)/teams/components/teams/lineups/edit-jersey-modal";
+import ReplacePlayerModal from "@/app/(home)/teams/components/teams/lineups/replace-player-modal";
+import SwapPlayerModal from "@/app/(home)/teams/components/teams/lineups/swap-player-modal";
 
 const LineupsPage = () => {
   const { store } = useStore((state) => state);

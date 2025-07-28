@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 import { Button } from "../ui/button";
 import { useStore } from "@/store/store";
-import { formattedDate } from "../teams/fixtures/team-fixtures";
+import { formattedDate } from "../../app/(home)/teams/components/teams/fixtures/team-fixtures";
 import { ArrowRightIcon, CalendarDaysIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 

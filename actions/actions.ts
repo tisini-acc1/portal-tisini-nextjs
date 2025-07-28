@@ -1,6 +1,9 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { getTeamOverview } from "./django-actions";
+import { redirect } from "next/navigation";
+import { getUserTeams } from "@/data/teams/user-teams";
 
 export async function handleLogin(
   accessToken: string,
@@ -28,7 +31,7 @@ export async function handleLogin(
     case "1":
       return "/home/tisini-agent";
     case "2":
-      return "/home/teams";
+      return "/teams";
     case "5":
       return "/home/team-player";
     case "6":

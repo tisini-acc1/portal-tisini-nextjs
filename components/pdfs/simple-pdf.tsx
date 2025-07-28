@@ -3,7 +3,10 @@ import { format } from "date-fns";
 import { Table, TD, TR, TH } from "@ag-media/react-pdf-table";
 
 import { useStore } from "@/store/store";
-import { BallWon, GkRestart } from "../teams/team-stats/football-team-stats";
+import {
+  BallWon,
+  GkRestart,
+} from "../../app/(home)/teams/components/teams/team-stats/football-team-stats";
 import {
   Document,
   Image,

@@ -1,21 +1,17 @@
-// import { getTeamOverview } from "@/actions/django-actions";
-// import { getMainEvents, getVideoEvents } from "@/actions/php-actions";
-// import { getTeamTournaments } from "@/actions/php-actions";
-import TeamOverview from "@/components/teams/overview/team-overview";
+import { Suspense } from "react";
 
-const TeamsPage = async () => {
-  // console.time("teams");
-  // const data = await getTeamOverview();
-  // console.timeEnd("teams");
+import Loading from "../loading";
+import { getTeamOverview } from "@/data/overview/overview";
+import TeamOverview from "@/app/(home)/teams/components/teams/overview/team-overview";
 
-  // console.log("overview: ", data);
-  // const data = await getVideoEvents("7475");
+const TeamsPage = () => {
+  const data = getTeamOverview();
 
-  // const data = await getTeamTournaments("", "3032");
-
-  // console.log(data);
-
-  return <TeamOverview />;
+  return (
+    <Suspense fallback={<Loading />}>
+      <TeamOverview overviewData={data} />
+    </Suspense>
+  );
 };
 
 export default TeamsPage;

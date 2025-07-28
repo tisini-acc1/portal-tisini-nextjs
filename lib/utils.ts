@@ -5,6 +5,20 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export function createSlug(teamName: string | undefined): string {
+  if (typeof teamName !== "string" || !teamName.trim()) {
+    return "";
+  }
+
+  return teamName
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w\-]+/g, "")
+    .replace(/\-\-+/g, "-")
+    .replace(/^-+/, "")
+    .replace(/-+$/, "");
+}
+
 export function calculateYearsOld(dateString: string): number {
   // Convert the given date string into a Date object
   const givenDate = new Date(dateString);

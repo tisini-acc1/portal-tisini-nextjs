@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "../../loading";
 import { useStore } from "@/store/store";
 import { getVideoEvents } from "@/actions/php-actions";
-import TeamDashboard from "@/components/teams/dashboard/team-dashboard";
+import TeamDashboard from "@/app/(home)/teams/components/teams/dashboard/team-dashboard";
 
 type DashProps = {
   fixtures: TeamFixture[];

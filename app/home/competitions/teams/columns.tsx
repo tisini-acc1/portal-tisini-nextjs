@@ -17,7 +17,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 // import { useStore } from "@/store/store";
-import EditPlayerForm from "@/components/teams/manage-player/edit-player-modal";
+import EditPlayerForm from "@/app/(home)/teams/components/teams/manage-player/edit-player-modal";
 // import { Button } from "@/components/ui/button";
 // import { useRouter } from "next/navigation";
 

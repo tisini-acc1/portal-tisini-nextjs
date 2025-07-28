@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 import SimpleBallPDF from "./simple-pdf";
@@ -5,7 +7,10 @@ import { useStore } from "@/store/store";
 import { footballData } from "@/actions/fix-data";
 import { getEvent, getSubEvent } from "@/lib/utils";
 import { passSequenceAnalysis } from "@/lib/pass-sequence";
-import { BallWon, GkRestart } from "../teams/team-stats/football-team-stats";
+import {
+  BallWon,
+  GkRestart,
+} from "../../app/(home)/teams/components/teams/team-stats/football-team-stats";
 
 type TeamProps = {
   data: FixtureData;

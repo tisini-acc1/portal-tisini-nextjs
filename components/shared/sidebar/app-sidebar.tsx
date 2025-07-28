@@ -12,16 +12,7 @@ import {
   Send,
 } from "lucide-react";
 
-import { useStore } from "@/store/store";
 // import { NavProjects } from "@/components/nav-projects";
-import {
-  AGENT_ITEMS,
-  COMPS_ITEMS,
-  PLAYER_ITEMS,
-  REFREE_ITEMS,
-  SUPERAGENT_ITEMS,
-  TEAMS_ITEMS,
-} from "@/lib/constants";
 // import { NavSecondary } from "@/components/sidebar/nav-secondary";
 import {
   Sidebar,
@@ -34,6 +25,7 @@ import {
 } from "@/components/ui/sidebar";
 import { NavMain } from "./nav-main";
 import { NavUser } from "./nav-user";
+import { GenerateSidebarItems } from "@/lib/constants";
 // import SelectTournament from "./select-tournament";
 
 // interface NavItem {
@@ -85,24 +77,24 @@ const data: SidebarData = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { store } = useStore((state) => state);
+  // const { store } = useStore((state) => state);
 
-  const userRole = store.user.role;
+  // const userRole = store.user.role;
 
-  data.navMain =
-    userRole === "2"
-      ? TEAMS_ITEMS
-      : userRole === "6"
-      ? COMPS_ITEMS
-      : userRole === "5"
-      ? PLAYER_ITEMS
-      : userRole === "9" || userRole === "17"
-      ? REFREE_ITEMS
-      : userRole === "7"
-      ? SUPERAGENT_ITEMS
-      : userRole === "1"
-      ? AGENT_ITEMS
-      : [];
+  data.navMain = GenerateSidebarItems();
+  // userRole === "2"
+  //   ? TEAMS_ITEMS
+  //   : userRole === "6"
+  //   ? COMPS_ITEMS
+  //   : userRole === "5"
+  //   ? PLAYER_ITEMS
+  //   : userRole === "9" || userRole === "17"
+  //   ? REFREE_ITEMS
+  //   : userRole === "7"
+  //   ? SUPERAGENT_ITEMS
+  //   : userRole === "1"
+  //   ? AGENT_ITEMS
+  //   : [];
 
   return (
     <Sidebar variant="inset" {...props}>

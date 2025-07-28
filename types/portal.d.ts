@@ -123,6 +123,9 @@ type Team = {
   date_updated: string;
   status: string;
   teamtypename: string;
+  organisation_id: string;
+  teamlogo: string | null;
+  teamtypeid: string;
 };
 
 type Serie = {

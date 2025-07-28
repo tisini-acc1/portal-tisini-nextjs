@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { columns } from "./columns";
 import { useStore } from "@/store/store";
 import { TeamPlayersTable } from "./team-players-table";
-import TeamSelectHeader from "@/components/teams/team-select-header";
+import TeamSelectHeader from "@/app/(home)/teams/components/teams/team-select-header";
 import { getTeamPlayers, getTeamTournaments } from "@/actions/php-actions";
 import Loading from "@/app/home/loading";
 

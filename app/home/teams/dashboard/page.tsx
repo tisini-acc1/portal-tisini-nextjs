@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "../../loading";
 import { useStore } from "@/store/store";
 import { getTeamTournaments } from "@/actions/php-actions";
-import ResultsHeader from "@/components/teams/results/results-header";
+import ResultsHeader from "@/app/(home)/teams/components/teams/results/results-header";
 import DashboardData from "./dashboard-data";
 
 const DashboardPage = () => {
