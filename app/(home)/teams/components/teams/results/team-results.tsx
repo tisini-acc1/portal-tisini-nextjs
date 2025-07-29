@@ -19,7 +19,7 @@ const TeamResults = ({ tournaData }: ResultProps) => {
 
   const [series, setSeries] = useState<TeamSeason[]>([]);
   const [fixtures, setFixtures] = useState<TeamFixture[]>([]);
-  const [fixType, setFixType] = useState<String | null>(null);
+  const [fixType, setFixType] = useState<string | null>(null);
 
   const router = useRouter();
   const pathname = usePathname();

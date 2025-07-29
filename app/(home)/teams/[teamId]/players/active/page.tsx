@@ -4,12 +4,11 @@ import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { columns } from "./columns";
-import { useStore } from "@/store/store";
-import { TeamPlayersTable } from "./team-players-table";
-import TeamSelectHeader from "@/app/(home)/teams/components/teams/team-select-header";
-import { getTeamPlayers, getTeamTournaments } from "@/actions/php-actions";
 import Loading from "@/app/home/loading";
 import { useTeamStore } from "@/store/team.store";
+import { TeamPlayersTable } from "./team-players-table";
+import { getTeamPlayers, getTeamTournaments } from "@/actions/php-actions";
+import TeamSelectHeader from "@/app/(home)/teams/components/teams/team-select-header";
 
 const ActivePlayersPage = () => {
   const { store, updateTournament, updateSerie } = useTeamStore(

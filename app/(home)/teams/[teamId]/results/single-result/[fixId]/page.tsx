@@ -42,6 +42,8 @@ const SingleResultPage = async ({ params }: SingleProps) => {
       ? `${fixDetail.team1_name} vs ${fixDetail.team2_name}`
       : `${fixDetail?.team2_name}-vs-${fixDetail.team1_name}`;
 
+  console.log(pdfName);
+
   return (
     <Suspense fallback={<Loading />}>
       <Tabs defaultValue="team">
