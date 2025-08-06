@@ -1,9 +1,9 @@
 "use client";
 
-import { useStore } from "@/store/store";
 import RugbyPlayerStats from "./rugby-player";
 import BasketballPlayerStats from "./basketball-player";
 import FootballPlayerStats from "./football-player-stats";
+import { useTeamStore } from "@/store/team.store";
 
 type PlayerProps = {
   tData: FixtureData;
@@ -11,9 +11,9 @@ type PlayerProps = {
 };
 
 const PlayerStats = ({ tData, pData }: PlayerProps) => {
-  const team = useStore((state) => state.store.team);
+  const team = useTeamStore((state) => state.store.userTeam);
 
-  const teamId = tData?.fixture[0].team1_id === team.id ? "home" : "away";
+  const teamId = tData?.fixture[0].team1_id === team.team_id ? "home" : "away";
   const fixType = tData && tData["fixture"][0].fixture_type;
 
   // console.log(fixType);

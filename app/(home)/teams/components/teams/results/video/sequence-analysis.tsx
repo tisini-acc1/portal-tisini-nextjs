@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useStore } from "@/store/store";
+import { useTeamStore } from "@/store/team.store";
 
 type SequenceProps = {
   videoData: VideoEvent[];
@@ -33,7 +33,7 @@ const SequenceAnalysis = ({ videoData }: SequenceProps) => {
   const [selectedKeyword, setSelectedKeyword] = useState<string>("all");
   const [selectedPlayer, setSelectedPlayer] = useState<string>("all");
 
-  const teamId = useStore((state) => state.store.team.id);
+  const teamId = useTeamStore((state) => state.store.userTeam.team_id);
   const teamEvents = videoData.filter((item) => item.team === teamId);
 
   const sequences = passSequenceAnalysis(teamEvents);
