@@ -3,9 +3,8 @@
 import { Filter } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import VideoPlayer from "./video-player";
 import EventsList from "./events-list";
-import { useStore } from "@/store/store";
+import VideoPlayer from "./video-player";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -15,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useTeamStore } from "@/store/team.store";
 
 type VideoProps = {
   videoData: VideoEvent[];
@@ -30,7 +30,7 @@ const VideoAnalysis = ({ videoData = [], fixEvents = [] }: VideoProps) => {
     videoData[0]?.videourl?.split("&t=")[0] || ""
   );
 
-  const team = useStore((state) => state.store.team);
+  const team = useTeamStore((state) => state.store.userTeam);
 
   const resetFilters = () => {
     setSelectedEvent("all-events");
@@ -70,7 +70,7 @@ const VideoAnalysis = ({ videoData = [], fixEvents = [] }: VideoProps) => {
     const eventsMap = new Map();
     const playersMap = new Map();
 
-    const teamData = videoData.filter((event) => event.team === team.id);
+    const teamData = videoData.filter((event) => event.team === team.team_id);
 
     // First filter events based on current selections
     const filtered = teamData.filter((event) => {
