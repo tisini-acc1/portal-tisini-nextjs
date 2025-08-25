@@ -22,12 +22,9 @@ const TeamOverview = ({ overviewData }: OverviewProps) => {
   const teamId = useTeamStore((state) => state.store.userTeam.team_id);
 
   useEffect(() => {
-    if (data && teamId) {
-      const overviewData = data.filter(
-        (overview) => overview.team_id === teamId
-      );
-
-      setOverview(overviewData[0]);
+    if (Array.isArray(data) && teamId) {
+      const filtered = data.filter((overview) => overview.team_id === teamId);
+      setOverview(filtered[0] ?? null);
     }
   }, [data, teamId]);
 
