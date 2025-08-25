@@ -15,6 +15,8 @@ type OverviewProps = {
 const TeamOverview = ({ overviewData }: OverviewProps) => {
   const data = use(overviewData);
 
+  console.log(data);
+
   const [overview, setOverview] = useState<TeamOverview>({} as TeamOverview);
 
   const teamId = useTeamStore((state) => state.store.userTeam.team_id);
