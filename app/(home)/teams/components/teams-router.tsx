@@ -1,15 +1,13 @@
 "use client";
 
-import { use, useEffect } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import { createSlug } from "@/lib/utils";
 import Loading from "../../../home/loading";
 import { useTeamStore } from "@/store/team.store";
 
-const TeamsRouter = ({ data }: { data: Promise<Team[]> }) => {
-  const teams = use(data);
-
+const TeamsRouter = ({ teams }: { teams: Team[] }) => {
   const userTeam = useTeamStore((state) => state.store.userTeam);
   const router = useRouter();
 

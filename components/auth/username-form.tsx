@@ -81,8 +81,8 @@ const UsernameForm = () => {
           res.data.userid
         );
 
-        console.log(res.data.role);
-        console.log(redirectUrl);
+        // console.log(res.data.role);
+        // console.log(redirectUrl);
         router.replace(redirectUrl);
       } else {
         if (res.data.error) {
