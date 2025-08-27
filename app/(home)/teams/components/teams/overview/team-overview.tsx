@@ -1,6 +1,6 @@
 "use client";
 
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { CurrentForm } from "./current-form";
 import { UpcomingMatch } from "./upcoming-match";
@@ -9,24 +9,22 @@ import { SeasonSnapshot } from "./season-snapshot";
 import { useTeamStore } from "@/store/team.store";
 
 type OverviewProps = {
-  overviewData: Promise<TeamOverview[]>;
+  overviewData: TeamOverview[];
 };
 
 const TeamOverview = ({ overviewData }: OverviewProps) => {
-  const data = use(overviewData);
-
-  console.log(data);
-
   const [overview, setOverview] = useState<TeamOverview>({} as TeamOverview);
 
   const teamId = useTeamStore((state) => state.store.userTeam.team_id);
 
   useEffect(() => {
-    if (Array.isArray(data) && teamId) {
-      const filtered = data.filter((overview) => overview.team_id === teamId);
+    if (Array.isArray(overviewData) && teamId) {
+      const filtered = overviewData.filter(
+        (overview) => overview.team_id === teamId
+      );
       setOverview(filtered[0] ?? null);
     }
-  }, [data, teamId]);
+  }, [overviewData, teamId]);
 
   const tournament = overview?.tournaments?.[0];
   const season = tournament?.season?.[0];
@@ -35,7 +33,7 @@ const TeamOverview = ({ overviewData }: OverviewProps) => {
   const previousFix = fixtues && fixtues[fixtues.length - 1];
 
   // console.log(season);
-  // console.log(data);
+  // console.log(overviewData);
   // console.log(overview);
   // console.log(teamId);
 

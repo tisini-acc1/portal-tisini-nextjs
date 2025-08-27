@@ -46,7 +46,7 @@ const FilterTournTeams = () => {
       const team = teams.filter((t) => t.id === value);
       updateTeam({ id: team[0].id, name: team[0].name, teamType: "" });
     }
-  }, [updateTeam, value]);
+  }, [updateTeam, value, teams]);
 
   if (isLoading) {
     return <div>Loading...</div>;

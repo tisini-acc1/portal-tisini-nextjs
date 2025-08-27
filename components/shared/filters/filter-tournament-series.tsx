@@ -49,7 +49,7 @@ const FilterTournamentSeries = ({
     updateTournament(value);
 
     updateFixType(tournament[0]?.fixture_type as string);
-  }, [updateTournament, value, tournaments]);
+  }, [updateTournament, updateFixType, value, tournaments]);
 
   useEffect(() => {
     if (value) {

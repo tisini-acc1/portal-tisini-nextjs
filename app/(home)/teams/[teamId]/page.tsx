@@ -1,17 +1,10 @@
-import { Suspense } from "react";
-
-import Loading from "../../loading";
 import { getTeamOverview } from "@/data/overview/overview";
 import TeamOverview from "@/app/(home)/teams/components/teams/overview/team-overview";
 
-const TeamsPage = () => {
-  const data = getTeamOverview();
+const TeamsPage = async () => {
+  const data = await getTeamOverview();
 
-  return (
-    <Suspense fallback={<Loading />}>
-      <TeamOverview overviewData={data} />
-    </Suspense>
-  );
+  return <TeamOverview overviewData={data} />;
 };
 
 export default TeamsPage;
