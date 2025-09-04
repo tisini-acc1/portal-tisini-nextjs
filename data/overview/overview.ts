@@ -6,6 +6,9 @@ export const getTeamOverview = async (): Promise<TeamOverview[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_DJANGO_BASE_URL;
 
+  console.log("token: ", token);
+  console.log(baseURL);
+
   try {
     const res = await fetch(`${baseURL}/api/team_overview/${token}/`, {
       next: { revalidate: 60, tags: ["team-overview"] },
