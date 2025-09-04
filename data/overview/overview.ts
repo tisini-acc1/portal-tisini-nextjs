@@ -1,9 +1,8 @@
 "use server";
 
-import { cache } from "react";
 import { getToken } from "@/actions/actions";
 
-export const getTeamOverview = cache(async (): Promise<TeamOverview[]> => {
+export const getTeamOverview = async (): Promise<TeamOverview[]> => {
   const token = await getToken();
   const baseURL = process.env.NEXT_PUBLIC_DJANGO_BASE_URL;
 
@@ -22,4 +21,4 @@ export const getTeamOverview = cache(async (): Promise<TeamOverview[]> => {
       error.message || "An error occurred while fetching team overview."
     );
   }
-});
+};
