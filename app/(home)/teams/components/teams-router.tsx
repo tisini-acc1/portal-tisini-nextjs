@@ -18,6 +18,9 @@ const TeamsRouter = ({ teams }: { teams: Team[] }) => {
           (team) => team.team_id === userTeam.team_id
         );
 
+        console.log(teams);
+        console.log(persistedTeam);
+
         if (persistedTeam) {
           const url = createSlug(userTeam.teamname);
           router.push(`/teams/${url}-${userTeam.team_id}`);
