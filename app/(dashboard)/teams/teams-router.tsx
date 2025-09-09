@@ -12,6 +12,8 @@ const TeamsRouter = ({ teams }: { teams: Team[] }) => {
   const router = useRouter();
 
   useEffect(() => {
+    if (!Array.isArray(teams) || teams.length === 0) return;
+
     if (teams.length > 0) {
       if (userTeam.team_id) {
         const persistedTeam = teams.find(
