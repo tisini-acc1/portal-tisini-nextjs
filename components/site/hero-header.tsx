@@ -76,6 +76,7 @@ export const HeroHeader = () => {
                     <li key={index}>
                       <Link
                         href={item.href}
+                        prefetch
                         className="text-muted-foreground hover:text-accent-foreground block duration-150"
                       >
                         <span>{item.name}</span>
@@ -93,6 +94,7 @@ export const HeroHeader = () => {
                     <li key={index}>
                       <Link
                         href={item.href}
+                        prefetch
                         className="text-muted-foreground hover:text-accent-foreground block duration-150"
                       >
                         <span>{item.name}</span>
@@ -103,12 +105,12 @@ export const HeroHeader = () => {
               </div>
               <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
                 <Button asChild variant="outline" size="sm">
-                  <Link href="#">
+                  <Link href="/auth/login" prefetch>
                     <span>Login</span>
                   </Link>
                 </Button>
                 <Button asChild size="sm">
-                  <Link href="#">
+                  <Link href="/auth/register" prefetch>
                     <span>Sign Up</span>
                   </Link>
                 </Button>
